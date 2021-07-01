@@ -62,7 +62,7 @@ public class RisikoGUI extends JFrame {
 		return mainPanel;
 	}
 	
-	// Action listeners for riskView
+	// ActionListeners für GUI
 	protected void risikoGUIActionListeners(ActionListener e)
 	{
 		startButton.addActionListener(e);

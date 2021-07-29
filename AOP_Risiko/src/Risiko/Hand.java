@@ -1,5 +1,10 @@
 package Risiko;
 
-public class Hand {
+public class Hand 
+extends Spieler
+{
+	public Hand() {
+		
+	}
 
 }

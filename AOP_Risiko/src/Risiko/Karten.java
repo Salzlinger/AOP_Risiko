@@ -2,7 +2,7 @@ package Risiko;
 
 public class Karten {
 
-	private String [] Gebietskarten;
+	private String [] Gebietskarten = {"Alaska","Alberta","...."};
 	private String [] Jokerkarten;
 	private String [] Missionskarten;
 	

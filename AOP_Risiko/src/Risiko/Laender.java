@@ -5,12 +5,22 @@ import java.util.ArrayList;
 public class Laender {
 	
 	String name;
-	public String getName() {
-		return name;
+	Boolean istBekannt = true;
+	
+	public Boolean getIstBekannt() {
+		return istBekannt;
 	}
 
-	public void setName(String name) {
+	public void setIstBekannt(Boolean istBekannt) {
+		this.istBekannt = istBekannt;
+	}
+
+	public Laender (String name) {
 		this.name = name;
+	}
+	
+	public String getName() {
+		return name;
 	}
 
 	ArrayList<Laender> nachbarn = new ArrayList<Laender>();

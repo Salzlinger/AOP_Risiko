@@ -5,6 +5,9 @@ extends Spieler
 {
 	public Hand() {
 		
+		
+		was geeeht?
+		
 	}
 
 }

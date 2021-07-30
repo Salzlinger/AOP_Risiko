@@ -7,7 +7,7 @@ public class Spieler {
 
 	private String colour;
 	private String [] cards;
-	private String [] countrys;
+	private String [] countrys = {"Quebec","Peru","Venezuela","Brasilien","Argentinien","..."};
 	private int numberCountrys =  countrys.length;
 	private int troups;
 	
@@ -20,20 +20,22 @@ public class Spieler {
 		troups = numberCountrys/3 + gotContinent(countrys);
 		return troups;
 	}
+
+	
 	
 	public int gotContinent(String [] countrys) {
 		List <String> liste = Arrays.asList(countrys);
 		int KontinentTruppen = 0;
 		
 		//Nordamerika
-		if (liste.contains(Quebec)) // rest ergänzen!!!!!!!!!!!!!!1
+		if (liste.contains("Quebec")) // rest ergänzen!!!!!!!!!!!!!!1
 		{
 			KontinentTruppen += 5;
 		}
 		
 		//Südamerika
-		if (liste.contains(Peru) && liste.contains(Venezuela) 
-				&& liste.contains(Brasilien) && liste.contains(Argentinien))
+		if (liste.contains("Peru") && liste.contains("Venezuela") 
+				&& liste.contains("Brasilien") && liste.contains("Argentinien"))
 		{
 			KontinentTruppen += 2;
 		}
@@ -48,6 +50,9 @@ public class Spieler {
 		
 		return KontinentTruppen;
 	}
+	
+	//dies sind test texte
+	
 	
 
 }

@@ -4,7 +4,9 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class RisikoGUI extends JFrame {
@@ -67,6 +69,75 @@ public class RisikoGUI extends JFrame {
 	{
 		startButton.addActionListener(e);
 		exitButton.addActionListener(e);
+	}
+}
+
+class SpielerAnzahl extends JDialog {
+	
+	private static final long serialVersionUID = 1L;
+	
+	private JPanel spielerAnzahlPanel;
+	private GridLayout spielerAnzahlLayout;
+	private JLabel spielerAnzahlLabel;
+	
+	private JButton dreiSpielerBtn;
+	private JButton vierSpielerBtn;
+	private JButton fuenfSpielerBtn;
+	private JButton zurueckBtn;
+	
+	private String dreiSpielerBtnName = "dreiSpielerBtn";
+	private String vierSpielerBtnName = "vierSpielerBtn";
+	private String fuenfSpielerBtnName = "fuenfSpielerBtn";
+	private String zurueckBtnName = "zurueckBtn";
+	
+	protected SpielerAnzahl() 
+	{
+		
+		setTitle("Risiko");
+		setPreferredSize(new Dimension(150, 300));
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
+		
+		add(spielerAnzahlPanel());
+		
+		pack();
+		setLocationRelativeTo(null);
+	}
+	
+	private JPanel spielerAnzahlPanel()
+	{
+		spielerAnzahlPanel = new JPanel();
+		
+		spielerAnzahlLayout = new GridLayout(5, 1, 5, 5);
+		spielerAnzahlPanel.setLayout(spielerAnzahlLayout);
+		
+		spielerAnzahlLabel = new JLabel("Anzahl der Spieler:");
+		
+		dreiSpielerBtn = new JButton("Drei");
+		vierSpielerBtn = new JButton("Vier");
+		fuenfSpielerBtn = new JButton("Fünf");
+		zurueckBtn = new JButton("Zurück");
+		
+		dreiSpielerBtn.setActionCommand(dreiSpielerBtnName);
+		vierSpielerBtn.setActionCommand(vierSpielerBtnName);
+		fuenfSpielerBtn.setActionCommand(fuenfSpielerBtnName);
+		zurueckBtn.setActionCommand(zurueckBtnName);
+		
+		spielerAnzahlPanel.add(spielerAnzahlLabel);
+		spielerAnzahlPanel.add(dreiSpielerBtn);
+		spielerAnzahlPanel.add(vierSpielerBtn);
+		spielerAnzahlPanel.add(fuenfSpielerBtn);
+		spielerAnzahlPanel.add(zurueckBtn);
+		
+		return spielerAnzahlPanel;
+	}
+	
+	protected void addActionListeners(ActionListener e)
+	{
+		dreiSpielerBtn.addActionListener(e);
+		vierSpielerBtn.addActionListener(e);
+		fuenfSpielerBtn.addActionListener(e);
+		zurueckBtn.addActionListener(e);
 	}
 }
 

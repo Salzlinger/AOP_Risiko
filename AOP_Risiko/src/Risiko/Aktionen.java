@@ -7,6 +7,8 @@ public class Aktionen implements ActionListener{
 
 	private RisikoGUI gui;
 	
+	private SpielerAnzahl spielerAnzahl;
+	
 	public Aktionen(RisikoGUI gui) {
 
 		this.gui = gui;
@@ -21,6 +23,8 @@ public class Aktionen implements ActionListener{
 		
 		if (Klick.equals("startBtn")) {
 			System.out.println("Spiel wird gestartet ...");
+			spielerAnzahl = new SpielerAnzahl();
+			spielerAnzahl.setVisible(true);
 		} 
 		 else if (Klick.equals("exitBtn")){
 				System.exit(0);

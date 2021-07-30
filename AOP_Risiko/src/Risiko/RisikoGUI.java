@@ -90,12 +90,12 @@ class SpielerAnzahl extends JDialog {
 	private String fuenfSpielerBtnName = "fuenfSpielerBtn";
 	private String zurueckBtnName = "zurueckBtn";
 	
-	protected SpielerAnzahl() 
+	protected SpielerAnzahl(RisikoGUI bla, boolean blub) 
 	{
-		
+		super(bla, blub);
 		setTitle("Risiko");
 		setPreferredSize(new Dimension(150, 300));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setResizable(false);
 		
 		add(spielerAnzahlPanel());

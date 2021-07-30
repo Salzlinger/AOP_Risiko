@@ -9,4 +9,8 @@ public class Karten {
 	public void KarteZiehen() {
 		
 	}
+	
+	public void KartenGenerieren () {
+		
+	}
 }

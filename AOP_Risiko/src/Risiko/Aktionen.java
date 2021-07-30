@@ -1,8 +1,8 @@
 package Risiko;
 
-import java.awt.Desktop.Action;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class Aktionen implements ActionListener{
 
@@ -11,7 +11,7 @@ public class Aktionen implements ActionListener{
 	
 	private SpielerAnzahl spielerAnzahl;
 	
-	public Aktionen(RisikoGUI gui) {
+	public Aktionen(Graphen gra, RisikoGUI gui) {
 
 		this.gui = gui;
 		this.gra = gra;
@@ -43,6 +43,8 @@ class SpielerZahl implements ActionListener {
 	private Graphen gra;
 	private SpielerAnzahl gui;
 	
+	private SpielereinstellungGUI einstellung;
+	
 	public SpielerZahl(Graphen gra, SpielerAnzahl gui)
 	{
 		this.gra = gra;
@@ -56,16 +58,27 @@ class SpielerZahl implements ActionListener {
 		
 		if(actionEvent.equals("dreiSpielerBtn")) 
 		{
-			gra.setzeSpielerAnzahl(3);
+			gra.setSpielerAnzahl(3);
+			
+			einstellung = new SpielereinstellungGUI(gui, true, gra.getSpielerAnzahl());
+			einstellung.addActionListeners(new Spielereinstellungen(gra, einstellung));
+			einstellung.setVisible(true);
+			
 		}
 		
 		else if(actionEvent.equals("vierSpielerBtn"))
 		{
-			gra.setzeSpielerAnzahl(4);
+			gra.setSpielerAnzahl(4);
+			einstellung = new SpielereinstellungGUI(gui, true, gra.getSpielerAnzahl());
+			einstellung.addActionListeners(new Spielereinstellungen(gra, einstellung));
+			einstellung.setVisible(true);
 		}
 		else if(actionEvent.equals("fuenfSpielerBtn"))
 		{
-			gra.setzeSpielerAnzahl(5);
+			gra.setSpielerAnzahl(5);
+			einstellung = new SpielereinstellungGUI(gui, true, gra.getSpielerAnzahl());
+			einstellung.addActionListeners(new Spielereinstellungen(gra, einstellung));
+			einstellung.setVisible(true);
 		}
 		else if(actionEvent.equals("zurueckBtn"))
 		{
@@ -73,5 +86,48 @@ class SpielerZahl implements ActionListener {
 		}
 	}
 
+}
+
+class Spielereinstellungen implements ActionListener {
+
+	private ArrayList<String> spielerNamen;
+
+	private Graphen gra;
+	private SpielereinstellungGUI gui;
+
+	public Spielereinstellungen(Graphen gra, SpielereinstellungGUI gui)
+	{
+		this.gra = gra;
+		this.gui = gui;
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+
+		String actionEvent = e.getActionCommand();
+		spielerNamen = new ArrayList<String>();
+		
+		if(actionEvent.equals("startBtn"))
+		{
+			spielerNamen.add(gui.getSpielerTextField(1));
+			spielerNamen.add(gui.getSpielerTextField(2));
+			spielerNamen.add(gui.getSpielerTextField(3));
+
+			if(gra.getSpielerAnzahl() == 4) 
+			{
+				spielerNamen.add(gui.getSpielerTextField(4));
+			}
+			
+			if(gra.getSpielerAnzahl() == 5) 
+			{
+				spielerNamen.add(gui.getSpielerTextField(5));
+			}
+		}
+		else if(actionEvent.equals("zurueckBtn"))
+		{
+			gui.dispose();
+		}
+		
+	}
+	
 }
 

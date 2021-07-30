@@ -8,6 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class RisikoGUI extends JFrame {
 	
@@ -90,9 +91,9 @@ class SpielerAnzahl extends JDialog {
 	private String fuenfSpielerBtnName = "fuenfSpielerBtn";
 	private String zurueckBtnName = "zurueckBtn";
 	
-	protected SpielerAnzahl(RisikoGUI bla, boolean blub) 
+	protected SpielerAnzahl(RisikoGUI bla, boolean blubb) 
 	{
-		super(bla, blub);
+		super(bla, blubb);
 		setTitle("Risiko");
 		setPreferredSize(new Dimension(150, 300));
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -141,3 +142,114 @@ class SpielerAnzahl extends JDialog {
 	}
 }
 
+class SpielereinstellungGUI extends JDialog {
+	
+	private static final long serialVersionUID = 1L;
+
+	private JPanel spielerNamePanel;
+	
+	private GridLayout mainLayout;
+	private GridLayout spielerLayout;
+	
+	private JButton startBtn;
+	private JButton zurueckBtn;
+	
+	private String startBtnName = "startBtn";
+	private String zurueckBtnName = "zurueckBtn";
+	
+	private JTextField spieler1TextField;
+	private JTextField spieler2TextField;
+	private JTextField spieler3TextField;
+	private JTextField spieler4TextField;
+	private JTextField spieler5TextField;
+	
+	private int spielerZahl;
+	
+	public SpielereinstellungGUI(SpielerAnzahl bla, boolean blubb, int spielerZahl)
+	{
+		super(bla,blubb);
+		setTitle("Risiko");
+		setPreferredSize(new Dimension(300, 300));
+		
+		this.spielerZahl = spielerZahl;
+		
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setResizable(false);
+		
+		mainLayout = new GridLayout(1, 1, 5, 5);
+		setLayout(mainLayout);
+		
+		add(spielerNamePanel());
+		
+		pack();
+		setLocationRelativeTo(null);
+	}
+	
+	private JPanel spielerNamePanel()
+	{
+		spielerNamePanel = new JPanel();
+		
+		spielerNamePanel.setPreferredSize(new Dimension(400, spielerZahl * 80 + 40));
+		
+		spielerLayout = new GridLayout(spielerZahl + 1, 1, 5, 5);
+		spielerNamePanel.setLayout(spielerLayout);
+		
+		spieler1TextField = new JTextField("Peter");
+		spieler2TextField = new JTextField("Hans");
+		spieler3TextField = new JTextField("Werner");
+		
+		spielerNamePanel.add(spieler1TextField);
+		spielerNamePanel.add(spieler2TextField);
+		spielerNamePanel.add(spieler3TextField);
+		
+		if (spielerZahl == 4)
+		{
+			spieler4TextField = new JTextField("Joachim");
+			spielerNamePanel.add(spieler4TextField);
+		}
+		if (spielerZahl == 5)
+		{
+			spieler5TextField = new JTextField("Klaus");
+			spielerNamePanel.add(spieler5TextField);
+		}
+		
+		zurueckBtn = new JButton("Zurück");
+		zurueckBtn.setActionCommand(zurueckBtnName);
+		spielerNamePanel.add(zurueckBtn);
+		startBtn = new JButton("Starte Spiel");
+		startBtn.setActionCommand(startBtnName);
+		spielerNamePanel.add(startBtn);
+		
+		return spielerNamePanel;
+	}
+	
+	public void addActionListeners(ActionListener e)
+	{
+		startBtn.addActionListener(e);
+		zurueckBtn.addActionListener(e);
+	}
+	
+	protected String getSpielerTextField(int spielerNummer)
+	{
+		if(spielerNummer == 1)
+		{
+			return spieler1TextField.getText();
+		}
+		else if(spielerNummer == 2)
+		{
+			return spieler2TextField.getText();
+		}
+		else if(spielerNummer == 3)
+		{
+			return spieler3TextField.getText();
+		}
+		else if(spielerNummer == 4)
+		{
+			return spieler4TextField.getText();
+		}
+		else
+		{
+			return spieler5TextField.getText();
+		}
+	}
+}

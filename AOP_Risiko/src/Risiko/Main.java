@@ -7,7 +7,7 @@ public class Main {
 		
 		Graphen gra = new Graphen();
 		RisikoGUI gui = new RisikoGUI();
-		Aktionen akt = new Aktionen(gui);
+		Aktionen akt = new Aktionen(gra, gui);
 	}
 
 }

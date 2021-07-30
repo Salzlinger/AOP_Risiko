@@ -8,8 +8,13 @@ private int spielerAnzahl;
 	{
 	}
 	
-	protected void setzeSpielerAnzahl(int spielerAnzahl) 
+	protected void setSpielerAnzahl(int spielerAnzahl) 
 	{
 		this.spielerAnzahl = spielerAnzahl;
+	}
+	
+	protected int getSpielerAnzahl() 
+	{
+		return spielerAnzahl;
 	}
 }

@@ -12,25 +12,26 @@ extends Karten
 		this.setName(name);
 	}
 
-
 	public String getName() {
 		return name;
 	}
-
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
-
 	public String getTyp() {
 		return typ;
 	}
-
 
 	public void setTyp(String typ) {
 		this.typ = typ;
 	} 
 
+	@Override
+	public String toString () //Werte werden als String ausgegeben
+		{
+		return name + " " + typ;
+		}
 
 }

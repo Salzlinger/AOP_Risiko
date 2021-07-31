@@ -6,13 +6,15 @@ import java.util.List;
 public class Spieler {
 
 	private String farbe;
+	private String name;
 	private String [] karten;
 	private String [] laender;
+	private static Gebietskarte [] hand;
 	private int truppen;
 	
-	public Spieler (String farbe, String [] laender) {
+	public Spieler (String farbe, String name) {
 		this.farbe = farbe;
-		this.laender = laender;
+		this.name= name;
 	}
 	
 	
@@ -42,6 +44,19 @@ public class Spieler {
 	
 	public void TruppenBewegen() {
 		// beliebig viele Truppen aus einem Land in ein verbundenes Land verlagern
+	}
+	
+	public static void KarteZiehen(Gebietskarte [] deck){
+		if (deck.length >= 0)
+		{
+			int d = deck.length;
+			Gebietskarte gezogen = deck[d];
+			int i = 0;
+			hand [i] = gezogen;
+			i++;
+			d--;
+		}
+		
 	}
 	
 	public void KartenBenutzen() {

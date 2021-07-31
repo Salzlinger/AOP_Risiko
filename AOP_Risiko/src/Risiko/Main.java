@@ -8,9 +8,11 @@ import java.util.Scanner;
 
 public class Main {
 
+	public static Scanner input = new Scanner (System.in);
+	
 	public static void main(String[] args) {
 		
-		RisikoGUI GUI = new RisikoGUI();
+		//RisikoGUI GUI = new RisikoGUI();
 		
 		/*
 		 * Kartendeck als Hashmap generieren
@@ -30,8 +32,19 @@ public class Main {
 		Karten.DeckAnzeigen(Deck);
 		ArrayList <Gebietskarte> DeckListe = new ArrayList<Gebietskarte>(Arrays.asList(Deck));
 		
+		/*
+		System.out.println("Welche Farbe möchtest du? ");
+		String farbe = input.nextLine();
+		System.out.println("Wie lautet dein Name?");
+		String username =input.nextLine();
+		Spieler Horst = new Spieler(farbe, username);
+		*/
+		
+		
 		Spieler Horst = new Spieler("blau", "Horst");
 		Spieler Anna = new Spieler ("rot", "Anna");
+		Horst.KarteZiehen(DeckListe);
+		Horst.KarteZiehen(DeckListe);
 		Horst.KarteZiehen(DeckListe);
 		Horst.KarteZiehen(DeckListe);
 		
@@ -47,14 +60,34 @@ public class Main {
 		System.out.println("Spielerhand Horst: " + Horst.getHand());
 		System.out.println("Spielerhand Anna: " + Anna.getHand());
 		
+		
+		
 		if (Horst.SetKomplett() == true)
 		{
 			System.out.println("Horst hat ein komplettes Set");
+			System.out.println("Möchtest du es einlösen?");
+			
+			if (input.nextLine() == "ja")
+			{
+				Horst.SetEinloesen(DeckListe);
+				//Deck Mischen
+			}
+			
 		}	else {System.out.println("Horst hat noch kein komplettes Set"); }
+		
+		System.out.println("Spielerhand Horst: " + Horst.getHand());
+		System.out.println("Das Deck enthält nun nur noch: " + DeckListe);
+		
+		
+		/*
 		if (Anna.SetKomplett() == true)
 		{
 			System.out.println("Anna hat ein komplettes Set");
 		}	else {System.out.println("Anna hat noch kein komplettes Set"); }
+		
+		Horst.KartenBenutzen();
+		Anna.KartenBenutzen();
+		*/
 	}
 
 }

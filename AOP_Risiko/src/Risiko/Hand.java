@@ -1,13 +1,11 @@
 package Risiko;
 
 public class Hand 
-extends Spieler
 {
-
-	public Hand(String farbe, String name) {
-		super(farbe, name);
-		// TODO Auto-generated constructor stub
-	}
+	private int i = 0;	//Infanterie
+	private int k = 0;	//Kavallerie
+	private int a = 0;	//Artillerie
+	private int j = 0;	//Joker
 
 	
 

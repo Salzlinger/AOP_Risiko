@@ -67,10 +67,157 @@ public class Spieler {
 	}	
 	
 	public void KartenBenutzen() {
-		// if (Spieler.karten > 5)
-		// { Spieler muss Set einlösen}
-		// else { Spieler kann Set einlösen}
+		if (hand.size() > 5)
+		{
+			System.out.println("Spieler " + name + " muss ein Set einlösen, da er mehr als 5 Gebietskarten besitzt!");
+			//Spieler muss Set einlösen
+		}
+		else if (SetKomplett() == true)
+			{
+			System.out.println(name + " hat die Möglichkeit ein Set einzulösen. Möchtest du?");
+			// else { Spieler kann Set einlösen}
+			
+			}
 	}
+	
+	
+	public void SetEinloesen (ArrayList <Gebietskarte> DeckListe) {
+		
+		//Einfach einlösen nach bester Option?
+		System.out.println( "Spieler " + name + "\nWir wählen für dich das bestmögliche Set aus!");
+		
+		//Karten zählen
+		int i = 0;
+		int k = 0;
+		int a = 0;
+		int j = 0;
+		
+		for (int z = 0; z < hand.size(); z++)
+		{
+			if (hand.get(z).getTyp() == "Infanterie") { i++; }
+			if (hand.get(z).getTyp() == "Kavallerie") { k++; }
+			if (hand.get(z).getTyp() == "Artillerie") { a++; }
+			if (hand.get(z).getTyp() == "Joker")	{ j++; }
+		}
+		
+		//bestes Set auswählen
+		if (i >= 1 && k >= 1 && a >= 1)	//Set aus 3 verschiedenen
+		{
+			for (int z = 0; z < hand.size(); z++)
+			{
+				if (hand.get(z).getTyp() == "Infanterie" && i != 0 ) 
+					{  	
+					DeckListe.add(hand.get(z));
+					hand.remove(z); 
+					i = 0;
+					}
+				if (hand.get(z).getTyp() == "Kavallerie" && k != 0) 
+					{ 
+					DeckListe.add(hand.get(z));
+					hand.remove(z); 
+					k = 0; 
+					}
+				if (hand.get(z).getTyp() == "Artillerie" && a != 0) 
+					{ 
+					DeckListe.add(hand.get(z));
+					hand.remove(z); 
+					a = 0; 
+					}
+			}
+			
+		} else 	if (i >= 3 || k >= 3 || a >= 3)	// Set aus 3 Gleichen
+				{
+					if (i >= 3)
+					{
+						int p = 0;
+						for (int z = 0; z < hand.size(); z++)
+						{
+							if (hand.get(z).getTyp() == "Infanterie" && p < 3 ) 
+								{  	
+								DeckListe.add(hand.get(z));
+								hand.remove(z);
+								p++;
+								}
+						}
+					}
+					
+					if (k >= 3)
+					{
+						int p = 0;
+						for (int z = 0; z < hand.size(); z++)
+						{
+							if (hand.get(z).getTyp() == "Infanterie" && p < 3 ) 
+								{  	
+								DeckListe.add(hand.get(z));
+								hand.remove(z);
+								p++;
+								}
+						}
+					}
+					if (a >= 3)
+					{
+						int p = 0;
+						for (int z = 0; z < hand.size(); z++)
+						{
+							if (hand.get(z).getTyp() == "Infanterie" && p < 3 ) 
+								{  	
+								DeckListe.add(hand.get(z));
+								hand.remove(z);
+								p++;
+								}
+						}
+					}
+					
+			
+				} else 	if (j>=1 && (a>=1||k>=1||a>=1) && (a>=1||k>=1||a>=1)) // Set mit Joker
+						{
+							if (hand.size() == 3)
+							{
+								for (int z = 0; z < hand.size(); z++)
+								{
+								DeckListe.add(hand.get(z));
+								hand.remove(z);
+								}
+							}
+							if (hand.size() >= 4)
+							{
+								for (int z = 0; z < hand.size(); z++)
+								{
+								if (hand.get(z).getTyp() == "Joker" && j != 0 ) 
+								{  	
+								DeckListe.add(hand.get(z));
+								hand.remove(z); 
+								j = 0;
+								}
+								}
+								int p = 0;
+								for (int z = 0; z < hand.size(); z++)
+								{
+								if (hand.get(z).getTyp() == "Infanterie" && p < 2) 
+								{  	
+								DeckListe.add(hand.get(z));
+								hand.remove(z); 
+								p++;
+								}
+								if (hand.get(z).getTyp() == "Kavallerie" && p < 2) 
+								{ 
+								DeckListe.add(hand.get(z));
+								hand.remove(z); 
+								p++; 
+								}
+								if (hand.get(z).getTyp() == "Artillerie" && p < 2) 
+								{ 
+								DeckListe.add(hand.get(z));
+								hand.remove(z); 
+								p++; 
+								}
+								}
+							}
+						}	
+	}							
+	
+	
+	
 	
 	
 	//auf Aktionen auslagern?

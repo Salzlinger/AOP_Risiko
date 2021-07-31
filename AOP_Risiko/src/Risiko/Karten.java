@@ -1,5 +1,6 @@
 package Risiko;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -8,6 +9,7 @@ public class Karten {
 	private static String [] Laender = {"Alaska","Alberta","Ontario","Nordwest-Territorium","Weststaaten","Oststaaten","Mittelamerika","Quebec","Grönland","Venezuela","Peru","Brasilien","Argentinien","Island","Skandinavien","Großbritannien","Westeuropa","Mitteleuropa","Südeuropa","Ukraine","Nordwest-Afrika","Ägypten","Ost-Afrika","Kongo","Süd-Afrika","Madagaskar","Mittlerer Osten","Afghanistan","Indien","Ural","Serbien","Jakutien","Kamtschatka","Irkutsk","Mongolei","Japan","China","Siam","Indonesien","Neu-Guinea","West-Australien","Ost-Australien","Joker","Joker"};	//42 Stück
 	//private String [] Jokerkarten;	//2 Stück
 	//private String [] Missionskarten;
+	
 	
 ////////// Deck als Array aus Gebietskarten erzeugen
 	public static void DeckGenerieren(Gebietskarte [] deck) {

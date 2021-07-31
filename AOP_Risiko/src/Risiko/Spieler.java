@@ -1,5 +1,6 @@
 package Risiko;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -9,7 +10,7 @@ public class Spieler {
 	private String name;
 	private String [] karten;
 	private String [] laender;
-	private static Gebietskarte [] hand;
+	private ArrayList <Gebietskarte> hand = new ArrayList <Gebietskarte>();
 	private int truppen;
 	
 	public Spieler (String farbe, String name) {
@@ -23,10 +24,52 @@ public class Spieler {
 		return truppen;
 	}
 	
-	public void GebietskartenErhalten() {
+	public void GebietskartenErhalten(ArrayList <Gebietskarte> DeckListe) {
 		// if (Angreifen() == sieg)
 		// Spieler erhält 1 Karte vom Stapel
-		// Spieler.karten += KarteZiehen();
+		//Spieler.KarteZiehen(DeckListe);
+	}
+	
+	public void KarteZiehen(ArrayList <Gebietskarte> DeckListe){
+			hand.add(DeckListe.get(DeckListe.size()-1));
+			DeckListe.remove(DeckListe.get(DeckListe.size()-1));
+	}
+	
+	public ArrayList <Gebietskarte> getHand() {
+		return hand;
+	}
+
+	public void setHand(ArrayList <Gebietskarte> hand) {
+		this.hand = hand;
+	}
+	
+	public boolean SetKomplett () {
+		
+		int i = 0;
+		int k = 0;
+		int a = 0;
+		int j = 0;
+		
+		for (int z = 0; z < hand.size(); z++)
+		{
+			if (hand.get(z).getTyp() == "Infanterie") { i++; }
+			if (hand.get(z).getTyp() == "Kavallerie") { k++; }
+			if (hand.get(z).getTyp() == "Artillerie") { a++; }
+			if (hand.get(z).getTyp() == "Joker")	{ j++; }
+		}
+		
+		if (i >= 3 || k >= 3 || a >= 3 || (i >= 1 && k >= 1 && a >= 1))
+		{ return true; } 	
+		else if ((j==1 && (a>=1||k>=1||a>=1) && (a>=1||k>=1||a>=1)) || (j==2 && (a>=1||k>=1||a>=1))) 
+			{ return true; }
+				else 
+				{ return false; }
+	}	
+	
+	public void KartenBenutzen() {
+		// if (Spieler.karten > 5)
+		// { Spieler muss Set einlösen}
+		// else { Spieler kann Set einlösen}
 	}
 	
 	
@@ -46,24 +89,9 @@ public class Spieler {
 		// beliebig viele Truppen aus einem Land in ein verbundenes Land verlagern
 	}
 	
-	public static void KarteZiehen(Gebietskarte [] deck){
-		if (deck.length >= 0)
-		{
-			int d = deck.length;
-			Gebietskarte gezogen = deck[d];
-			int i = 0;
-			hand [i] = gezogen;
-			i++;
-			d--;
-		}
-		
-	}
 	
-	public void KartenBenutzen() {
-		// if (Spieler.karten > 5)
-		// { Spieler muss Set einlösen}
-		// else { Spieler kann Set einlösen}
-	}
+	
+	
 	
 	
 	
@@ -96,6 +124,9 @@ public class Spieler {
 		
 		return KontinentTruppen;
 	}
+
+
+	
 	
 
 }

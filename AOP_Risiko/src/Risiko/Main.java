@@ -42,7 +42,7 @@ public class Main {
 		//System.out.println(laender.entrySet());
 		
 		Graphen graphen = new Graphen();
-		graphen.verbunden(laender, ostAustralien, westAustralien);
+		System.out.println(graphen.verbunden(laender, ostAustralien, westAustralien));
 		
 		
 	} 

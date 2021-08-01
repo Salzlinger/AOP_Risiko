@@ -45,8 +45,7 @@ public class Main {
 		Spieler Anna = new Spieler ("rot", "Anna");
 		Horst.KarteZiehen(DeckListe);
 		Horst.KarteZiehen(DeckListe);
-		Horst.KarteZiehen(DeckListe);
-		Horst.KarteZiehen(DeckListe);
+		
 		
 		System.out.println("Das Deck enthält nun nur noch: " + DeckListe);
 		//System.out.println("Spielerhand: " + Spieler.getHand());
@@ -64,12 +63,15 @@ public class Main {
 		
 		if (Horst.SetKomplett() == true)
 		{
+			String eingabe = "";
 			System.out.println("Horst hat ein komplettes Set");
 			System.out.println("Möchtest du es einlösen?");
-			
-			if (input.nextLine() == "ja")
+			eingabe = input.next();
+			if (eingabe.equals("ja")  )
 			{
-				Horst.SetEinloesen(DeckListe);
+				int eingeloesteSets= 0;
+				Horst.SetEinloesen(DeckListe);				
+				eingeloesteSets++;
 				//Deck Mischen
 			}
 			
@@ -77,6 +79,8 @@ public class Main {
 		
 		System.out.println("Spielerhand Horst: " + Horst.getHand());
 		System.out.println("Das Deck enthält nun nur noch: " + DeckListe);
+		
+		
 		
 		
 		/*

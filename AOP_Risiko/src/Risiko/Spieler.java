@@ -8,10 +8,15 @@ public class Spieler {
 
 	private String farbe;
 	private String name;
-	private String [] karten;
 	private String [] laender;
 	private ArrayList <Gebietskarte> hand = new ArrayList <Gebietskarte>();
-	private int truppen;
+	private boolean infanterieSet = false;
+	private boolean kavallerieSet = false;
+	private boolean artillerieSet = false;
+	private boolean gemischtesSet = false;
+	private boolean jokerSet = false;
+	private int truppen = 0;
+	private int eingeloesteSets = 0;
 	
 	public Spieler (String farbe, String name) {
 		this.farbe = farbe;
@@ -45,6 +50,7 @@ public class Spieler {
 	
 	public boolean SetKomplett () {
 		
+		
 		int i = 0;
 		int k = 0;
 		int a = 0;
@@ -59,12 +65,27 @@ public class Spieler {
 		}
 		
 		if (i >= 3 || k >= 3 || a >= 3 || (i >= 1 && k >= 1 && a >= 1))
-		{ return true; } 	
+		{ 
+			if (i >= 3)
+			{ this.infanterieSet = true; }
+			if (k >= 3)
+			{ this.kavallerieSet = true; }
+			if (a >= 3)
+			{ this.artillerieSet = true; }
+			if (i >= 1 && k >= 1 && a >= 1)
+			{ this.gemischtesSet = true; }
+			
+			return true; 
+		} 	
 		else if ((j==1 && (a>=1||k>=1||a>=1) && (a>=1||k>=1||a>=1)) || (j==2 && (a>=1||k>=1||a>=1))) 
-			{ return true; }
+			{ 
+				this.jokerSet = true;
+				return true; 
+			}
 				else 
 				{ return false; }
 	}	
+	
 	
 	public void KartenBenutzen() {
 		if (hand.size() > 5)
@@ -81,144 +102,114 @@ public class Spieler {
 	}
 	
 	
-	public void SetEinloesen (ArrayList <Gebietskarte> DeckListe) {
-		
-		//Einfach einlösen nach bester Option?
+	// hand.add(DeckListe.get(DeckListe.size()-1));
+	// DeckListe.remove(DeckListe.get(DeckListe.size()-1));
+	
+	public boolean SetEinloesen (ArrayList <Gebietskarte> DeckListe) {
+
 		System.out.println( "Spieler " + name + "\nWir wählen für dich das bestmögliche Set aus!");
 		
-		//Karten zählen
-		int i = 0;
-		int k = 0;
-		int a = 0;
-		int j = 0;
-		
-		for (int z = 0; z < hand.size(); z++)
-		{
-			if (hand.get(z).getTyp() == "Infanterie") { i++; }
-			if (hand.get(z).getTyp() == "Kavallerie") { k++; }
-			if (hand.get(z).getTyp() == "Artillerie") { a++; }
-			if (hand.get(z).getTyp() == "Joker")	{ j++; }
+		int p = 0;
+		int size = hand.size()-1;
+		if (infanterieSet == true)
+		{ 
+			System.out.println( name + " hat " + hand.size() + " Karten und ein vollständiges Infanterie Set"); 
+			for (int z = size; z>=0; z-- )
+			{
+				if (hand.get(z).getTyp() == "Infanterie" && p < 3 ) 
+				{  	
+				DeckListe.add(hand.get(z));
+				hand.remove(z);
+				p++;
+				}	
+			}
+		}
+		if (kavallerieSet == true)
+		{ 
+			System.out.println( name + " hat " + hand.size() + " Karten und ein vollständiges Kavallerie Set"); 
+			for (int z = size; z>=0; z-- )
+			{	
+				if (hand.get(z).getTyp() == "Kavallerie" && p < 3 ) 
+				{  	
+				DeckListe.add(hand.get(z));
+				hand.remove(z);
+				p++;
+				}	
+			}
+		}
+		if (artillerieSet == true)
+		{ 
+			System.out.println( name + " hat " + hand.size() + " Karten und ein vollständiges Artillerie Set");
+			for (int z = size; z>=0; z-- )
+			{
+				if (hand.get(z).getTyp() == "Artillerie" && p < 3 ) 
+				{  
+				DeckListe.add(hand.get(z));
+				hand.remove(z);
+				p++;
+				}
+			}
 		}
 		
-		//bestes Set auswählen
-		if (i >= 1 && k >= 1 && a >= 1)	//Set aus 3 verschiedenen
-		{
-			for (int z = 0; z < hand.size(); z++)
+		
+		if (gemischtesSet == true)
+		{ System.out.println( name + " hat " + hand.size() + " Karten und ein vollständiges gemischtes Set"); 
+		boolean infaEntnommen = false;
+		boolean kavaEntnommen = false;
+		boolean artiEntnommen = false;
+		
+		for (int z = size; z >= 0; z--)
 			{
-				if (hand.get(z).getTyp() == "Infanterie" && i != 0 ) 
-					{  	
-					DeckListe.add(hand.get(z));
-					hand.remove(z); 
-					i = 0;
-					}
-				if (hand.get(z).getTyp() == "Kavallerie" && k != 0) 
-					{ 
-					DeckListe.add(hand.get(z));
-					hand.remove(z); 
-					k = 0; 
-					}
-				if (hand.get(z).getTyp() == "Artillerie" && a != 0) 
-					{ 
-					DeckListe.add(hand.get(z));
-					hand.remove(z); 
-					a = 0; 
-					}
-			}
-			
-		} else 	if (i >= 3 || k >= 3 || a >= 3)	// Set aus 3 Gleichen
+				switch (hand.get(z).getTyp()) 
 				{
-					if (i >= 3)
-					{
-						int p = 0;
-						for (int z = 0; z < hand.size(); z++)
+				case "Infanterie": if (infaEntnommen == false) 
+										{
+										DeckListe.add(hand.get(z));
+										hand.remove(z); 
+										infaEntnommen = true;
+										break;
+										}
+				case "Kavallerie": if (kavaEntnommen == false) 
+										{
+										DeckListe.add(hand.get(z));
+										hand.remove(z); 
+										kavaEntnommen = true;
+										break;
+										}
+				case "Artillerie": if (artiEntnommen == false) 
+										{
+										DeckListe.add(hand.get(z));
+										hand.remove(z); 
+										artiEntnommen = true;
+										break;
+										}
+				}
+			} 
+		} 
+		
+		if (jokerSet == true)
+		{ System.out.println( name + " hat ein vollständiges Joker Set"); 
+		boolean jokerEntnommen = false;
+		for (int z = size; z >= 0; z--)
+			{ 	if (hand.get(z).getTyp() == "Joker" && jokerEntnommen == false)	
+				{
+				DeckListe.add(hand.get(z));
+				hand.remove(z); 
+				jokerEntnommen = true;
+				}
+				else if (hand.get(z).getTyp() != "Joker" && p < 2)
 						{
-							if (hand.get(z).getTyp() == "Infanterie" && p < 3 ) 
-								{  	
-								DeckListe.add(hand.get(z));
-								hand.remove(z);
-								p++;
-								}
-						}
-					}
-					
-					if (k >= 3)
-					{
-						int p = 0;
-						for (int z = 0; z < hand.size(); z++)
-						{
-							if (hand.get(z).getTyp() == "Infanterie" && p < 3 ) 
-								{  	
-								DeckListe.add(hand.get(z));
-								hand.remove(z);
-								p++;
-								}
-						}
-					}
-					if (a >= 3)
-					{
-						int p = 0;
-						for (int z = 0; z < hand.size(); z++)
-						{
-							if (hand.get(z).getTyp() == "Infanterie" && p < 3 ) 
-								{  	
-								DeckListe.add(hand.get(z));
-								hand.remove(z);
-								p++;
-								}
-						}
-					}
-					
+						DeckListe.add(hand.get(z));
+						hand.remove(z);
+						p++;
+						} 
+			}
+		}
+	eingeloesteSets++;
+	return true;	
+	//eingelöste Sets hoch zählen
+	}
 			
-				} else 	if (j>=1 && (a>=1||k>=1||a>=1) && (a>=1||k>=1||a>=1)) // Set mit Joker
-						{
-							if (hand.size() == 3)
-							{
-								for (int z = 0; z < hand.size(); z++)
-								{
-								DeckListe.add(hand.get(z));
-								hand.remove(z);
-								}
-							}
-							if (hand.size() >= 4)
-							{
-								for (int z = 0; z < hand.size(); z++)
-								{
-								if (hand.get(z).getTyp() == "Joker" && j != 0 ) 
-								{  	
-								DeckListe.add(hand.get(z));
-								hand.remove(z); 
-								j = 0;
-								}
-								}
-								int p = 0;
-								for (int z = 0; z < hand.size(); z++)
-								{
-								if (hand.get(z).getTyp() == "Infanterie" && p < 2) 
-								{  	
-								DeckListe.add(hand.get(z));
-								hand.remove(z); 
-								p++;
-								}
-								if (hand.get(z).getTyp() == "Kavallerie" && p < 2) 
-								{ 
-								DeckListe.add(hand.get(z));
-								hand.remove(z); 
-								p++; 
-								}
-								if (hand.get(z).getTyp() == "Artillerie" && p < 2) 
-								{ 
-								DeckListe.add(hand.get(z));
-								hand.remove(z); 
-								p++; 
-								}
-								}
-							}
-						}	
-	}							
-	
-	
-	
-	
 	
 	//auf Aktionen auslagern?
 	public void TruppenVerteilen(int truppen) {

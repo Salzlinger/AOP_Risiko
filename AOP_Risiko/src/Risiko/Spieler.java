@@ -33,7 +33,7 @@ public class Spieler {
 		truppen = 3  + setBonus + besitztKontinent();
 		return truppen;
 		} else  {
-				truppen = getLaender().size()/3 + setBonus + besitztKontinent();
+				truppen = laender.size()/3 + setBonus + besitztKontinent();
 				return truppen;
 				}
 		
@@ -261,7 +261,7 @@ public class Spieler {
 	//eventuell in Länder/Kontinent überführen?
 	public int besitztKontinent() {
 		
-		int KontinentTruppen = 0;
+		int kontinentTruppen = 0;
 				
 	//Nordamerika
 		boolean ala=false, alb=false, nwter=false, ont=false, que=false, groe=false, ostst=false, westst=false, mita=false;
@@ -281,78 +281,79 @@ public class Spieler {
 			switch (laender.get(i).getLand()) 
 			{
 		//Nordamerika ala, alb, nwter, ont, que, groe, ostst, westst, mita
-			case "Alaska": ala = true;
-			case "Alberta": alb = true; 
-			case "Ontario": ont = true;
-			case "Nordwest-Territorium": nwter = true;
-			case "Weststaaten": westst = true; 
-			case "Oststaaten": ostst = true;
-			case "Mittelamerika": mita = true;
-			case "Quebec": que = true;
-			case "Grönland": groe = true;
+			case "Alaska": ala = true; break;
+			case "Alberta": alb = true; break;
+			case "Ontario": ont = true; break;
+			case "Nordwest-Territorium": nwter = true; break;
+			case "Weststaaten": westst = true; break;
+			case "Oststaaten": ostst = true; break;
+			case "Mittelamerika": mita = true; break;
+			case "Quebec": que = true; break;
+			case "Grönland": groe = true; break;
 		//Südamerika arg, bra, per, ven
-			case "Argentinien": arg = true;
-			case "Brasilien": bra = true;
-			case "Peru": per = true;
-			case "Venezuela": ven = true;
+			case "Argentinien": arg = true; break;
+			case "Brasilien": bra = true; break;
+			case "Peru": per = true; break;
+			case "Venezuela": ven = true; break;
 		//Europa isl, gbr, weu, meu, seu, ska, ukr
-			case "Island": isl = true; 
-			case "Skandinavien": ska = true;
-			case "Großbritannien": gbr = true;
-			case "Westeuropa": weu = true;
-			case "Mitteleuropa": meu = true;
-			case "Südeuropa": seu = true;
-			case "Ukraine": ukr = true;
+			case "Island": isl = true; break;
+			case "Skandinavien": ska = true; break;
+			case "Großbritannien": gbr = true; break;
+			case "Westeuropa": weu = true; break;
+			case "Mitteleuropa": meu = true; break;
+			case "Südeuropa": seu = true; break;
+			case "Ukraine": ukr = true; break;
 		//Afrika nwa, aeg, oaf, kon, saf, mada
-			case "Nordwest-Afrika": nwa = true;
-			case "Ägypten": aeg = true; 
-			case "Ost-Afrika": oaf = true;
-			case "Kongo": kon = true;
-			case "Süd-Afrika": saf = true;
-			case "Madagaskar": mada = true;
+			case "Nordwest-Afrika": nwa = true; break;
+			case "Ägypten": aeg = true; break;
+			case "Ost-Afrika": oaf = true; break;
+			case "Kongo": kon = true; break;
+			case "Süd-Afrika": saf = true; break;
+			case "Madagaskar": mada = true; break;
 		//Asien mito, afg, ura, ser, jak, kam, irk, mon, jap, chi, sia, indi
-			case "Mittlerer Osten": mito = true;
-			case "Afghanistan": afg = true;
-			case "Indien": indi = true;
-			case "Ural": ura = true;
-			case "Serbien": ser = true;
-			case "Jakutien": jak = true;
-			case "Kamtschatka": kam = true;
-			case "Irkutsk": irk = true;
-			case "Mongolei": mon = true;
-			case "Japan": jap = true;
-			case "China": chi = true;
-			case "Siam":sia = true;
+			case "Mittlerer Osten": mito = true; break;
+			case "Afghanistan": afg = true; break;
+			case "Indien": indi = true; break;
+			case "Ural": ura = true; break;
+			case "Serbien": ser = true; break;
+			case "Jakutien": jak = true; break;
+			case "Kamtschatka": kam = true; break;
+			case "Irkutsk": irk = true; break;
+			case "Mongolei": mon = true; break;
+			case "Japan": jap = true; break;
+			case "China": chi = true; break;
+			case "Siam":sia = true; break;
 		//Australien indo, ngui, waus, oaus
-			case "Indonesien": indo = true;
-			case "Neu-Guinea": ngui = true;
-			case "West-Australien": waus = true;
-			case "Ost-Australien": oaus = true;
+			case "Indonesien": indo = true; break;
+			case "Neu-Guinea": ngui = true; break;
+			case "West-Australien": waus = true; break;
+			case "Ost-Australien": oaus = true; break;
 			
 			default: 
 			}
 		}	
 		
 	//Nordamerika +5
-		if (ala == alb == nwter == ont == que == groe == ostst == westst == mita == true)
-		{ KontinentTruppen += 5; }
+		if (ala && alb && nwter && ont && que && groe && ostst && westst && mita)
+		{ kontinentTruppen += 5; }
 	//Südamerika +2
-		if ( arg == bra == per == ven == true)
-		{ KontinentTruppen =+ 2; }
+		if ( arg && bra && per && ven)
+		{ kontinentTruppen += 2; }
 	//Europa +5
-		if (isl == gbr == weu == meu == seu == ska == ukr == true)
-		{ KontinentTruppen =+ 5; }
+		if (isl && gbr && weu && meu && seu && ska && ukr)
+		{ kontinentTruppen += 5; }
 	//Afrika +3
-		if (nwa == aeg == oaf == kon == saf == mada == true)
-		{ KontinentTruppen =+ 3; }
+		if (nwa && aeg && oaf && kon && saf && mada)
+		{ kontinentTruppen += 3; }
 	//Asien +7
-		if (mito == afg == ura == ser == jak == kam == irk == mon == jap == chi == sia == indi == true)
-		{ KontinentTruppen =+ 7; }
+		if (mito && afg && ura && ser && jak && kam && irk && mon && jap && chi && sia && indi)
+		{ kontinentTruppen += 7; }
 	//Australien +2
-		if (indo == ngui == waus == oaus == true)
-		{ KontinentTruppen =+ 2; }
+		if (indo && ngui && waus && oaus)
+		{ kontinentTruppen += 2; }
 		
-		return KontinentTruppen;
+		System.out.println("Spieler xy erhält " + kontinentTruppen + " Truppen für Kontinente");
+		return kontinentTruppen;
 	}
 
 

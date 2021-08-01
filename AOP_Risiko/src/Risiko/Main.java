@@ -47,7 +47,7 @@ public class Main {
 		Spieler Anna = new Spieler ("rot", "Anna");
 		
 		//Laender zuweisen
-		String [] laender =  {"Peru", "Argentinien", "Venezuela", "Brasilien", "Mittelamerika", "Nordwest-Afrika"};
+		String [] laender =  {"Peru", "Argentinien", "Venezuela", "Brasilien", "Island", "Nordwest-Afrika"};
 		ArrayList <Laender> lands = new ArrayList <Laender>();
 		for (int i = 0; i < laender.length; i++)
 		{
@@ -99,14 +99,25 @@ public class Main {
 			
 		}	else {System.out.println("Horst hat noch kein komplettes Set"); }
 		
-		
-		
-		
 		System.out.println("Spielerhand Horst: " + Horst.getHand());
 		System.out.println("Das Deck enthält nun nur noch: " + DeckListe);
+		Horst.getLaender().add(new Laender ("Alaska"));
+		Horst.getLaender().add(new Laender ("Alberta"));
+		Horst.getLaender().add(new Laender ("Ontario"));
+		Horst.getLaender().add(new Laender ("Nordwest-Territorium"));
+		Horst.getLaender().add(new Laender ("Weststaaten"));
+		Horst.getLaender().add(new Laender ("Oststaaten"));
+		Horst.getLaender().add(new Laender ("Mittelamerika"));
+		Horst.getLaender().add(new Laender ("Quebec"));
+		Horst.getLaender().add(new Laender ("Grönland"));
 		
+		Horst.getLaender().add(new Laender ("Indonesien"));
+		Horst.getLaender().add(new Laender ("Neu-Guinea"));
+		Horst.getLaender().add(new Laender ("West-Australien"));
+		Horst.getLaender().add(new Laender ("Ost-Australien"));
 		
-		
+		Horst.getLaender().remove(0);
+		System.out.println("Horst besitzt folgende " +Horst.getLaender().size() + " Länder: " + Horst.getLaender() );
 		System.out.println("Horst bekommt " + Horst.TruppenErhalten() + " Truppen");
 		
 		

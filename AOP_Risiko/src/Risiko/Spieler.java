@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
 public class Spieler {
 
 	private String farbe;
 	private String name;
-	private String [] laender;
+	private ArrayList <Laender> laender = new ArrayList <Laender>();
 	private ArrayList <Gebietskarte> hand = new ArrayList <Gebietskarte>();
 	private boolean infanterieSet = false;
 	private boolean kavallerieSet = false;
@@ -17,6 +18,7 @@ public class Spieler {
 	private boolean jokerSet = false;
 	private int truppen = 0;
 	private int eingeloesteSets = 0;
+	private int setBonus = 0;
 	
 	public Spieler (String farbe, String name) {
 		this.farbe = farbe;
@@ -25,12 +27,20 @@ public class Spieler {
 	
 	
 	public int TruppenErhalten() {
-		truppen = laender.length/3 + gotContinent(laender);
+		berechneSetBonus();
+		if (laender.size() < 9)
+		{
+		truppen = 3  + setBonus + besitztKontinent();
 		return truppen;
+		} else  {
+				truppen = getLaender().size()/3 + setBonus + besitztKontinent();
+				return truppen;
+				}
+		
 	}
 	
 	public void GebietskartenErhalten(ArrayList <Gebietskarte> DeckListe) {
-		// if (Angreifen() == sieg)
+		// if (Angreifen() == sieg) 
 		// Spieler erhält 1 Karte vom Stapel
 		//Spieler.KarteZiehen(DeckListe);
 	}
@@ -46,6 +56,15 @@ public class Spieler {
 
 	public void setHand(ArrayList <Gebietskarte> hand) {
 		this.hand = hand;
+	}
+	
+	public ArrayList <Laender> getLaender() {
+		return laender;
+	}
+
+
+	public void setLaender(ArrayList<Laender> land) {
+		this.laender = land;
 	}
 	
 	public boolean SetKomplett () {
@@ -210,6 +229,15 @@ public class Spieler {
 	//eingelöste Sets hoch zählen
 	}
 			
+	public void berechneSetBonus() {
+		int a = Risiko.Main.eingeloesteSets;
+		if (a == 0)
+		{this.setBonus = 0;}
+		if (a > 0 && a < 6 )
+		{ this.setBonus = 4 + (a-1)*2; }
+		if (a>= 6)
+		{ this.setBonus = 10 + 5*(a-5); }
+	}
 	
 	//auf Aktionen auslagern?
 	public void TruppenVerteilen(int truppen) {
@@ -226,45 +254,112 @@ public class Spieler {
 	public void TruppenBewegen() {
 		// beliebig viele Truppen aus einem Land in ein verbundenes Land verlagern
 	}
-	
-	
-	
-	
-	
+
 	
 	
 	
 	//eventuell in Länder/Kontinent überführen?
-	public int gotContinent(String [] laender) {
-		List <String> liste = Arrays.asList(laender);
+	public int besitztKontinent() {
+		
 		int KontinentTruppen = 0;
+				
+	//Nordamerika
+		boolean ala=false, alb=false, nwter=false, ont=false, que=false, groe=false, ostst=false, westst=false, mita=false;
+	//Südamerika
+		boolean arg=false, bra=false, per=false, ven=false;
+	//Europa
+		boolean isl=false, gbr=false, weu=false, meu=false, seu=false, ska=false, ukr=false;
+	//Afrika
+		boolean nwa=false, aeg=false, oaf=false, kon=false, saf=false, mada=false; 
+	//Asien
+		boolean mito=false, afg=false, ura=false, ser=false, jak=false, kam=false, irk=false, mon=false, jap=false, chi=false, sia=false, indi=false; 
+	//Australien
+		boolean indo=false, ngui=false, waus=false, oaus=false;
 		
-		//Nordamerika
-		if (liste.contains("Quebec")) // rest ergänzen!!!!!!!!!!!!!!1
-		{
-			KontinentTruppen += 5;
-		}
+		for (int i = 0; i<laender.size(); i++)
+		{	
+			switch (laender.get(i).getLand()) 
+			{
+		//Nordamerika ala, alb, nwter, ont, que, groe, ostst, westst, mita
+			case "Alaska": ala = true;
+			case "Alberta": alb = true; 
+			case "Ontario": ont = true;
+			case "Nordwest-Territorium": nwter = true;
+			case "Weststaaten": westst = true; 
+			case "Oststaaten": ostst = true;
+			case "Mittelamerika": mita = true;
+			case "Quebec": que = true;
+			case "Grönland": groe = true;
+		//Südamerika arg, bra, per, ven
+			case "Argentinien": arg = true;
+			case "Brasilien": bra = true;
+			case "Peru": per = true;
+			case "Venezuela": ven = true;
+		//Europa isl, gbr, weu, meu, seu, ska, ukr
+			case "Island": isl = true; 
+			case "Skandinavien": ska = true;
+			case "Großbritannien": gbr = true;
+			case "Westeuropa": weu = true;
+			case "Mitteleuropa": meu = true;
+			case "Südeuropa": seu = true;
+			case "Ukraine": ukr = true;
+		//Afrika nwa, aeg, oaf, kon, saf, mada
+			case "Nordwest-Afrika": nwa = true;
+			case "Ägypten": aeg = true; 
+			case "Ost-Afrika": oaf = true;
+			case "Kongo": kon = true;
+			case "Süd-Afrika": saf = true;
+			case "Madagaskar": mada = true;
+		//Asien mito, afg, ura, ser, jak, kam, irk, mon, jap, chi, sia, indi
+			case "Mittlerer Osten": mito = true;
+			case "Afghanistan": afg = true;
+			case "Indien": indi = true;
+			case "Ural": ura = true;
+			case "Serbien": ser = true;
+			case "Jakutien": jak = true;
+			case "Kamtschatka": kam = true;
+			case "Irkutsk": irk = true;
+			case "Mongolei": mon = true;
+			case "Japan": jap = true;
+			case "China": chi = true;
+			case "Siam":sia = true;
+		//Australien indo, ngui, waus, oaus
+			case "Indonesien": indo = true;
+			case "Neu-Guinea": ngui = true;
+			case "West-Australien": waus = true;
+			case "Ost-Australien": oaus = true;
+			
+			default: 
+			}
+		}	
 		
-		//Südamerika
-		if (liste.contains("Peru") && liste.contains("Venezuela") 
-				&& liste.contains("Brasilien") && liste.contains("Argentinien"))
-		{
-			KontinentTruppen += 2;
-		}
-		
-		//Europa
-		
-		//Afrika
-		
-		//Asien
-		
-		//Australien
+	//Nordamerika +5
+		if (ala == alb == nwter == ont == que == groe == ostst == westst == mita == true)
+		{ KontinentTruppen += 5; }
+	//Südamerika +2
+		if ( arg == bra == per == ven == true)
+		{ KontinentTruppen =+ 2; }
+	//Europa +5
+		if (isl == gbr == weu == meu == seu == ska == ukr == true)
+		{ KontinentTruppen =+ 5; }
+	//Afrika +3
+		if (nwa == aeg == oaf == kon == saf == mada == true)
+		{ KontinentTruppen =+ 3; }
+	//Asien +7
+		if (mito == afg == ura == ser == jak == kam == irk == mon == jap == chi == sia == indi == true)
+		{ KontinentTruppen =+ 7; }
+	//Australien +2
+		if (indo == ngui == waus == oaus == true)
+		{ KontinentTruppen =+ 2; }
 		
 		return KontinentTruppen;
 	}
 
 
 	
-	
+
+
+
+
 
 }

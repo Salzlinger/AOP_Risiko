@@ -9,7 +9,9 @@ import java.util.Scanner;
 public class Main {
 
 	public static Scanner input = new Scanner (System.in);
+	public static int eingeloesteSets = 0;
 	
+	@SuppressWarnings("unlikely-arg-type")
 	public static void main(String[] args) {
 		
 		//RisikoGUI GUI = new RisikoGUI();
@@ -43,6 +45,21 @@ public class Main {
 		
 		Spieler Horst = new Spieler("blau", "Horst");
 		Spieler Anna = new Spieler ("rot", "Anna");
+		
+		//Laender zuweisen
+		String [] laender =  {"Peru", "Argentinien", "Venezuela", "Brasilien", "Mittelamerika", "Nordwest-Afrika"};
+		ArrayList <Laender> lands = new ArrayList <Laender>();
+		for (int i = 0; i < laender.length; i++)
+		{
+			lands.add(new Laender (laender[i]));
+		}
+		Horst.setLaender(lands);
+		
+		System.out.println("Horst besitzt folgende Länder: " + Horst.getLaender() );
+		System.out.println("Horst hat " + Horst.getLaender().get(0).getLand().contains("Peru"));
+		
+		
+		
 		Horst.KarteZiehen(DeckListe);
 		Horst.KarteZiehen(DeckListe);
 		
@@ -59,26 +76,46 @@ public class Main {
 		System.out.println("Spielerhand Horst: " + Horst.getHand());
 		System.out.println("Spielerhand Anna: " + Anna.getHand());
 		
+		System.out.println("Horst bekommt " + Horst.TruppenErhalten() + " Truppen");
 		
 		
+		//Set einlösen
 		if (Horst.SetKomplett() == true)
 		{
 			String eingabe = "";
 			System.out.println("Horst hat ein komplettes Set");
 			System.out.println("Möchtest du es einlösen?");
-			eingabe = input.next();
-			if (eingabe.equals("ja")  )
+			//eingabe = input.next();
+			//if (eingabe.equals("ja")  )
 			{
-				int eingeloesteSets= 0;
+				
 				Horst.SetEinloesen(DeckListe);				
 				eingeloesteSets++;
+				Karten.DeckListeMischen(DeckListe);
+				System.out.println("Das Deck enthält nun wieder: " + DeckListe);
+				
 				//Deck Mischen
 			}
 			
 		}	else {System.out.println("Horst hat noch kein komplettes Set"); }
 		
+		
+		
+		
 		System.out.println("Spielerhand Horst: " + Horst.getHand());
 		System.out.println("Das Deck enthält nun nur noch: " + DeckListe);
+		
+		
+		
+		System.out.println("Horst bekommt " + Horst.TruppenErhalten() + " Truppen");
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		

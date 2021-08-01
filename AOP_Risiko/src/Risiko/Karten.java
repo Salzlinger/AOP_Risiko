@@ -47,6 +47,17 @@ public class Karten {
 			}
 	}
 	
+	public static void DeckListeMischen(ArrayList <Gebietskarte> DeckListe) {
+		
+		Random zufall = new Random();
+		
+		for(int i=0; i < 1000 ; i++)
+			{
+			int a = zufall.nextInt(DeckListe.size()-1);
+			DeckListe.add(DeckListe.get(a));
+			DeckListe.remove(DeckListe.get(a));
+			}
+	}
 }
 
 

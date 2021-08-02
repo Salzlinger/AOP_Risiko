@@ -3,10 +3,13 @@ package Risiko;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 
 public class Spieler {
 
+	public static Scanner input = new Scanner (System.in);
+	
 	private String farbe;
 	private String name;
 	private ArrayList <Laender> laender = new ArrayList <Laender>();
@@ -17,7 +20,6 @@ public class Spieler {
 	private boolean gemischtesSet = false;
 	private boolean jokerSet = false;
 	private int truppen = 0;
-	private int eingeloesteSets = 0;
 	private int setBonus = 0;
 	
 	public Spieler (String farbe, String name) {
@@ -105,24 +107,6 @@ public class Spieler {
 				{ return false; }
 	}	
 	
-	
-	public void KartenBenutzen() {
-		if (hand.size() > 5)
-		{
-			System.out.println("Spieler " + name + " muss ein Set einlösen, da er mehr als 5 Gebietskarten besitzt!");
-			//Spieler muss Set einlösen
-		}
-		else if (SetKomplett() == true)
-			{
-			System.out.println(name + " hat die Möglichkeit ein Set einzulösen. Möchtest du?");
-			// else { Spieler kann Set einlösen}
-			
-			}
-	}
-	
-	
-	// hand.add(DeckListe.get(DeckListe.size()-1));
-	// DeckListe.remove(DeckListe.get(DeckListe.size()-1));
 	
 	public boolean SetEinloesen (ArrayList <Gebietskarte> DeckListe) {
 
@@ -224,7 +208,7 @@ public class Spieler {
 						} 
 			}
 		}
-	eingeloesteSets++;
+	Karten.DeckListeMischen(DeckListe);
 	return true;	
 	//eingelöste Sets hoch zählen
 	}
@@ -244,15 +228,43 @@ public class Spieler {
 		//auf GUI truppen verteilen bis 0
 	}
 	
-	public void Angreifen() {
-		// Eingabe Truppen Angreifer
-		// ziehen wieviele Truppen Verteidiger hat
-		// Würfelkampf!
-		// Ergebnis speichern
+	public void Angreifen(Laender a, Laender b) {
+		System.out.println("Mit wie vielen Truppen möchtest du angreifen? ");
+		int angriffszahl = input.nextInt();
+		/*
+		if (a.getNachbarn() = b)
+		{
+			int ang = a.getAnzahlTruppen();
+			int ver = b.getAnzahlTruppen();
+			if (angriffszahl > ang)
+			{ System.out.println("du hast nur " + + " Truppen zum Angreifen. Bitte wähle eine gültige Anzahl"); }
+				else if (angriffszahl < 2)
+					{ System.out.println("du musst mit mindestens 2 Truppen angreifen"); }
+						else 
+						{ 	if (Wuerfelkampf(angriffszahl, ver) = true) 
+								{ 	KarteZiehen();
+									TruppenBewegen(Land von, Land nach);
+								}
+						}
+		} else { System.out.println( Land b + " ist kein Nachbarland von " + Land a + ". Bitte wähle ein gültiges Nachbarland als Ziel!");}			
+		*/
 	}
 	
-	public void TruppenBewegen() {
+	public void TruppenBewegen(Laender von, Laender nach) {
 		// beliebig viele Truppen aus einem Land in ein verbundenes Land verlagern
+		/*
+		if (LaenderVerbunden(laenderSpieler,von,nach) = true)
+		{ System.out.println("Wie viele Truppen möchtest du im neuen Land platzieren?");
+		  int verschiebeTruppen = input.nextInt();
+		  if(verschiebeTruppen > von.getTruppen())
+		  { System.out.println("Du kannst nur maximal " + nach.getTruppen()-1 + " Truppen verschieben"); }
+		  else {
+		  		nach.setTruppen(verschiebeTruppen);
+		  		von.setTruppen(von.getTruppen()-verschiebeTruppen);
+				}
+		}
+		
+		 */
 	}
 
 	
@@ -272,7 +284,7 @@ public class Spieler {
 	//Afrika
 		boolean nwa=false, aeg=false, oaf=false, kon=false, saf=false, mada=false; 
 	//Asien
-		boolean mito=false, afg=false, ura=false, ser=false, jak=false, kam=false, irk=false, mon=false, jap=false, chi=false, sia=false, indi=false; 
+		boolean mito=false, afg=false, ura=false, sib=false, jak=false, kam=false, irk=false, mon=false, jap=false, chi=false, sia=false, indi=false; 
 	//Australien
 		boolean indo=false, ngui=false, waus=false, oaus=false;
 		
@@ -315,7 +327,7 @@ public class Spieler {
 			case "Afghanistan": afg = true; break;
 			case "Indien": indi = true; break;
 			case "Ural": ura = true; break;
-			case "Serbien": ser = true; break;
+			case "Sibirien": sib = true; break;
 			case "Jakutien": jak = true; break;
 			case "Kamtschatka": kam = true; break;
 			case "Irkutsk": irk = true; break;
@@ -346,7 +358,7 @@ public class Spieler {
 		if (nwa && aeg && oaf && kon && saf && mada)
 		{ kontinentTruppen += 3; }
 	//Asien +7
-		if (mito && afg && ura && ser && jak && kam && irk && mon && jap && chi && sia && indi)
+		if (mito && afg && ura && sib && jak && kam && irk && mon && jap && chi && sia && indi)
 		{ kontinentTruppen += 7; }
 	//Australien +2
 		if (indo && ngui && waus && oaus)
@@ -355,12 +367,5 @@ public class Spieler {
 		System.out.println("Spieler xy erhält " + kontinentTruppen + " Truppen für Kontinente");
 		return kontinentTruppen;
 	}
-
-
-	
-
-
-
-
 
 }

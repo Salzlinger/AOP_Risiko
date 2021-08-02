@@ -12,8 +12,6 @@ public class Graphen {
 		while (keyIterator.hasNext()) {
 			Object zeiger =  keyIterator.next();
 			laender.get(zeiger).setIstBekannt(false);
-			System.out.println(laender.get(zeiger).getName());
-			System.out.println(laender.get(zeiger).getIstBekannt());
 		}
 		start.istBekannt = true;
 		// initialisiere warteschlange
@@ -28,7 +26,7 @@ public class Graphen {
 			for (int i = 0; i < u.getNachbarn().size(); i++) {
 				if (u.getNachbarn().get(i) == gesucht) {
 					return true;
-				} else {
+				} else if (!u.getNachbarn().get(i).istBekannt) {
 				u.getNachbarn().get(i).istBekannt = true;
 				warteschlange.add(u.getNachbarn().get(i));
 				}

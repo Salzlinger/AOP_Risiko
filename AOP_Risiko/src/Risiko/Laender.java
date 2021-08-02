@@ -21,6 +21,5 @@ public class Laender {
 		{
 		return land;
 		}
-		
 
 }

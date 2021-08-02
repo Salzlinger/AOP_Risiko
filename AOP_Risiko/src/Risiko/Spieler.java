@@ -236,9 +236,9 @@ public class Spieler {
 		{
 			int ang = a.getAnzahlTruppen();
 			int ver = b.getAnzahlTruppen();
-			if (angriffszahl > ang)
-			{ System.out.println("du hast nur " + + " Truppen zum Angreifen. Bitte wähle eine gültige Anzahl"); }
-				else if (angriffszahl < 2)
+			if (angriffszahl > ang-1)
+			{ System.out.println("du hast nur max " + ang-1 + " Truppen zum Angreifen. Bitte wähle eine gültige Anzahl"); }
+				else if (angriffszahl < ang -(ang-1))
 					{ System.out.println("du musst mit mindestens 2 Truppen angreifen"); }
 						else 
 						{ 	if (Wuerfelkampf(angriffszahl, ver) = true) 

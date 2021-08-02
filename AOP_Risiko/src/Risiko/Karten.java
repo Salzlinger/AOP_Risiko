@@ -1,17 +1,15 @@
 package Risiko;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Random;
 
 public class Karten {
 
+	private static Random zufall = new Random();
 	private static String [] Laender = {"Alaska","Alberta","Ontario","Nordwest-Territorium","Weststaaten","Oststaaten","Mittelamerika","Quebec","Grönland","Venezuela","Peru","Brasilien","Argentinien","Island","Skandinavien","Großbritannien","Westeuropa","Mitteleuropa","Südeuropa","Ukraine","Nordwest-Afrika","Ägypten","Ost-Afrika","Kongo","Süd-Afrika","Madagaskar","Mittlerer Osten","Afghanistan","Indien","Ural","Sibirien","Jakutien","Kamtschatka","Irkutsk","Mongolei","Japan","China","Siam","Indonesien","Neu-Guinea","West-Australien","Ost-Australien","Joker","Joker"};	//42 Stück
-	//private String [] Jokerkarten;	//2 Stück
 	//private String [] Missionskarten;
-	
-	
-////////// Deck als Array aus Gebietskarten erzeugen
+		
+	// Deck als Array aus Gebietskarten erzeugen
 	public static void DeckGenerieren(Gebietskarte [] deck) {
 		
 		for (int i = 0; i < deck.length; i++)
@@ -27,15 +25,15 @@ public class Karten {
 		}
 	}
 	
+	//Deck ausgeben
 	public static void DeckAnzeigen (Gebietskarte [] deck)
 	{
 		for (Gebietskarte k : deck)
 		{ System.out.println(k); }
 	}
 	
+	//Deck Mischen
 	public static void DeckMischen(Gebietskarte [] deck) {
-		
-		Random zufall = new Random();
 		
 		for(int i=0; i < 100 ; i++)
 			{
@@ -47,9 +45,8 @@ public class Karten {
 			}
 	}
 	
+	// Deck (als ArrayList) mischen
 	public static void DeckListeMischen(ArrayList <Gebietskarte> DeckListe) {
-		
-		Random zufall = new Random();
 		
 		for(int i=0; i < 1000 ; i++)
 			{

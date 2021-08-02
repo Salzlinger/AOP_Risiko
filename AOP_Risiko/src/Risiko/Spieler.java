@@ -2,9 +2,9 @@ package Risiko;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
-
 
 public class Spieler {
 
@@ -13,7 +13,9 @@ public class Spieler {
 	
 	private String farbe;
 	private String name;
-	private ArrayList <Laender> laender = new ArrayList <Laender>();
+	private Graphen laenderVerbunden = new Graphen();
+	private HashMap <String, Laender> laenderHash = new HashMap <String, Laender>();
+	private ArrayList <Laender> laenderArray = new ArrayList <Laender>();
 	private ArrayList <Gebietskarte> hand = new ArrayList <Gebietskarte>();
 	private boolean infanterieSet = false;
 	private boolean kavallerieSet = false;
@@ -32,12 +34,12 @@ public class Spieler {
 	
 	public int TruppenErhalten() {
 		berechneSetBonus();
-		if (laender.size() < 9)
+		if (laenderArray.size() < 9)
 		{
 		truppen = 3  + setBonus + besitztKontinent();
 		return truppen;
 		} else  {
-				truppen = laender.size()/3 + setBonus + besitztKontinent();
+				truppen = laenderArray.size()/3 + setBonus + besitztKontinent();
 				return truppen;
 				}		
 	}
@@ -64,11 +66,16 @@ public class Spieler {
 	
 	//Spieler Länder getter/setter
 	public ArrayList <Laender> getLaender() {
-		return laender;
+		return laenderArray;
 	}
 	public void setLaender(ArrayList<Laender> land) {
-		this.laender = land;
+		this.laenderArray = land;
+		for (int i = 0; i < land.size();i++)
+		{
+			laenderHash.put(land.get(i).getName(), land.get(i));
+		}
 	}
+
 	
 	public boolean SetKomplett () {
 		
@@ -236,44 +243,67 @@ public class Spieler {
 	
 	public void Angreifen(Laender a, Laender b) {
 		System.out.println("Mit wie vielen Truppen möchtest du angreifen? ");
-		int angriffszahl = input.nextInt();
+		int angriffszahl = 8; //input.nextInt();
 		
-		//if (a.getNachbarn())
-		//{}
-		/*
-		if (a.getNachbarn() == b)
+		setLaender(laenderArray); //Länder werden in Hashmap umgeschrieben
+		//System.out.println("angreifbare Länder von " + a.getName() + " aus:");
+		//System.out.println(laenderHash.get(a.getName()).getNachbarn());
+		
+		if (laenderHash.get(a.getName()).getNachbarn().contains(b))
 		{
-			int ang = a.getAnzahlTruppen();
-			int ver = b.getAnzahlTruppen();
+			System.out.println("Ein Angriff ist möglich, da die angegebenen Länder Nachbarn sind");
+			//a.setTruppen(10);
+			//b.setTruppen(1);
+				
+			int ang = a.getTruppen();
+			int ver = b.getTruppen();
 			if (angriffszahl > ang-1)
-			{ System.out.println("du hast nur max " + ang-1 + " Truppen zum Angreifen. Bitte wähle eine gültige Anzahl"); }
-				else if (angriffszahl < ang -(ang-1))
-					{ System.out.println("du musst mit mindestens 2 Truppen angreifen"); }
-						else 
-						{ 	if (Wuerfelkampf(angriffszahl, ver) = true) 
-								{ 	KarteZiehen();
-									TruppenBewegen(Land von, Land nach);
+			{ System.out.println("du hast nur max " + (ang-1) + " Truppen zum Angreifen. Bitte gültige Zahl auswählen");}
+				else if (angriffszahl < 1)
+						{ System.out.println("du musst mit mindestens 1 Truppe angreifen"); }
+						else 	{
+								if (Wuerfel.Wuerfelkampf(a,b)== true)
+									{
+									KarteZiehen(Main.DeckListe);
+									System.out.println("Das Deck enthält nun nur noch: " + Main.DeckListe);
+									System.out.println("Spielerhand Horst: " + hand);
+									System.out.println(a.getName() + ": " + a.getTruppen());
+									System.out.println(b.getName() + ": " +b.getTruppen());
+									TruppenBewegen(a,b);
+									System.out.println(a.getName() + ": " +a.getTruppen());
+									System.out.println(b.getName() + ": " +b.getTruppen());
+									}
 								}
-						}
-		} else { System.out.println( Land b + " ist kein Nachbarland von " + Land a + ". Bitte wähle ein gültiges Nachbarland als Ziel!");}			
-		*/
+		} else { System.out.println("Angriff nicht möglich, da keine Nachbarn. Bitte anderes Land auswählen!"); }
 	}
 	
 	public void TruppenBewegen(Laender von, Laender nach) {
 		// beliebig viele Truppen aus einem Land in ein verbundenes Land verlagern
-		/*
-		if (LaenderVerbunden(laenderSpieler,von,nach) = true)
-		{ System.out.println("Wie viele Truppen möchtest du im neuen Land platzieren?");
-		  int verschiebeTruppen = input.nextInt();
-		  if(verschiebeTruppen > von.getTruppen())
-		  { System.out.println("Du kannst nur maximal " + nach.getTruppen()-1 + " Truppen verschieben"); }
-		  else {
-		  		nach.setTruppen(verschiebeTruppen);
-		  		von.setTruppen(von.getTruppen()-verschiebeTruppen);
+		if (laenderArray.contains(von) && laenderArray.contains(nach))
+		{
+			System.out.println("Horst gehören die angebebenen Länder");
+			if (laenderVerbunden.verbunden(laenderHash,von,nach))
+			{ 
+			System.out.println("Die angegebenen Länder sind direkt verbunden oder über Länder, die ebenfalls Horst gehören");
+				boolean nochmal = true;
+				while (nochmal)
+				{
+				System.out.println("Wie viele Truppen möchtest du verschieben?");
+				int eingabe = input.nextInt();
+				if (eingabe > von.getTruppen()-1)
+				{
+				System.out.println("Du kannst nur maximal " + (von.getTruppen()-1) + " Truppen verschieben"); 
+				} else if (eingabe < 1)
+						{
+						System.out.println("Bitte gib eine größere Zahl ein");
+						} else  { 
+								von.setTruppen(von.getTruppen()-eingabe);
+								nach.setTruppen(nach.getTruppen()+eingabe);
+								nochmal = false;
+								}
 				}
-		}
-		
-		 */
+			} else { System.out.println("Horst gehören zwar die Länder, aber sie sind nicht verbunden");}
+		} else { System.out.println("Verschieben nicht möglich, da Horst eines oder beide Länder nicht gehören"); }
 	}
 
 	
@@ -297,9 +327,9 @@ public class Spieler {
 	//Australien
 		boolean indo=false, ngui=false, waus=false, oaus=false;
 		
-		for (int i = 0; i<laender.size(); i++)
+		for (int i = 0; i<laenderArray.size(); i++)
 		{	
-			switch (laender.get(i).getName()) 
+			switch (laenderArray.get(i).getName()) 
 			{
 		//Nordamerika ala, alb, nwter, ont, que, groe, ostst, westst, mita
 			case "Alaska": ala = true; break;

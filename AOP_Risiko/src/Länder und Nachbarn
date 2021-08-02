@@ -1,92 +1,3 @@
-package Risiko;
-
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
-
-import java.util.HashMap;
-
-
-public class Main {
-	
-
-	public static Scanner input = new Scanner (System.in);
-	public static int eingeloesteSets = 0;
-	public static HashMap <String, Laender> laender = new HashMap<String, Laender>();
-	public static Gebietskarte [] Deck = new Gebietskarte [44];
-	public static ArrayList <Gebietskarte> DeckListe;
-	//Beispiel Element in Hashmap laender ("Alberta" , alberta)
-	//								var		  key		value
-	
-	public static void main(String[] args) {
-
-		iniLaender();
-		
-		Gebietskarte [] Deck = new Gebietskarte [44];
-		
-		Karten.DeckGenerieren(Deck);
-		//Karten.DeckAnzeigen(Deck);
-		Karten.DeckMischen(Deck);
-		DeckListe = new ArrayList<Gebietskarte>(Arrays.asList(Deck));
-
-		
-		
-		Spieler Horst = new Spieler("blau", "Horst");
-		
-		//Horst bekommt Laender zugewiesen
-		String [] lands =  {"Peru", "Argentinien", "Venezuela", "Brasilien", "Island","Indonesien"};
-		for (int i = 0; i < lands.length; i++)
-		{
-			Horst.getLaender().add(laender.get(lands[i]));
-		}
-		Horst.getLaender().add(laender.get("Nordwest-Afrika"));
-		Horst.getLaender().add(laender.get("Gross-Britannien"));
-		Horst.getLaender().add(laender.get("West-Europa"));
-		System.out.println("Horst besitzt folgende Länder: " + Horst.getLaender() );
-		
-		System.out.println(	Horst.getLaender().get(1).getNachbarn());
-		System.out.println(	laender.get("Indien").getNachbarn());
-		
-		//Set einlösen?
-				if (Horst.SetKomplett() == true)
-				{
-					System.out.println("Horst hat ein komplettes Set. Möchtest du es einlösen?");
-					//if (input.next().equals("ja")  )
-					{
-						Horst.SetEinloesen(DeckListe);				
-						eingeloesteSets++;
-						System.out.println("Das Deck enthält nun wieder: " + DeckListe);
-					}
-				}	else {System.out.println("Horst hat noch kein komplettes Set"); }
-				
-		System.out.println("Horst bekommt " + Horst.TruppenErhalten() + " Truppen");
-		
-		//Horst greift an
-		laender.get("Argentinien").setTruppen(100);
-		laender.get("Brasilien").setTruppen(10);
-		Horst.Angreifen(laender.get("Argentinien"), laender.get("Brasilien"));		
-		
-		//Horst bewegt Truppen
-		Horst.TruppenBewegen(laender.get("Brasilien"), laender.get("Argentinien"));
-		
-		System.out.println(laender.get("Argentinien").getName() +  ": " +laender.get("Argentinien").getTruppen());
-		System.out.println(laender.get("Brasilien").getName() + ": " +laender.get("Brasilien").getTruppen());
-		
-		
-		
-		
-		System.out.println("ENDE");
-	} 
-
-	
-	
-	
-	
-	
-	private static void iniLaender () {
-		//Laender generieren
-
 				//Australien
 				Laender indonesien = new Laender("Indonesien");
 				Laender ostAustralien = new Laender("Ost-Australien");
@@ -290,7 +201,7 @@ public class Main {
 				venezuela.setNachbarn(mittelAmerika);
 				venezuela.setNachbarn(brasilien);
 				venezuela.setNachbarn(peru);
-				//venezuela.setNachbarn(argentinien);
+				venezuela.setNachbarn(argentinien);
 				
 				brasilien.setNachbarn(nordwestAfrika);
 				brasilien.setNachbarn(venezuela);
@@ -344,28 +255,3 @@ public class Main {
 				mittelAmerika.setNachbarn(weststaaten);
 				mittelAmerika.setNachbarn(oststaaten);
 				mittelAmerika.setNachbarn(venezuela);
-			
-			
-				
-				
-				Laender [] liste = {alaska,alberta,ontario,nordwestTerritorium,weststaaten,oststaaten,mittelAmerika,quebec,groenland,venezuela,peru,brasilien,argentinien,island,skandinavien,grossBritannien,westEuropa,mittelEuropa,suedEuropa,ukraine,nordwestAfrika,aegypten,ostAfrika,kongo,suedAfrika,madagaskar,mittlererOsten,afghanistan,indien,ural,sibirien,jakutien,kamtschatka,irkutsk,mongolei,japan,china,siam,indonesien,neuGuinea,westAustralien,ostAustralien};
-				for (int i = 0; i < 42; i++) {
-					laender.put(new String(liste[i].getName()), liste[i]);
-				}
-				//Hashmap laender ("Alberta" , alberta)
-				
-				/*
-				Graphen graphen = new Graphen();
-				for (int i = 0; i < 42; i++) {
-					for (int k = 0; k < 42; k++) {
-						System.out.println(graphen.verbunden(laender, liste[i], liste[k]));
-					}
-				}
-				*/
-		
-		//RisikoGUI gui = new RisikoGUI();
-		//Aktionen akt = new Aktionen(gui);
-
-	}
-
-}

@@ -9,12 +9,19 @@ public class Wuerfel {
 	
 	
 	
-	public boolean Wuerfelkampf(int angreifer, int verteidiger) 
+	public static boolean Wuerfelkampf(Laender a, Laender b)//int angreifer, int verteidiger) 
 	{
 		Integer [] angreiferwuerfe = new Integer [3];
-		Integer [] verteidigerwuerfe = new Integer [3];
+		Integer [] verteidigerwuerfe = new Integer [3];	
+		int angreifer = a.getTruppen();
+		int verteidiger = b.getTruppen();
 		int runde = 1;
 		boolean weitermachen = true;
+		
+		//while (weitermachen)
+		{
+		//	System.out.println("Mit wie vielen Truppen möchtest du angreifen? ");
+		//	int angreifer1 = 3; //input.nextInt();
 		
 		while (angreifer > 1 && verteidiger != 0 && weitermachen)
 		{	
@@ -52,23 +59,32 @@ public class Wuerfel {
 			System.out.println("\nverbliebene Einheiten");
 			System.out.println("des Angreifers  : " + angreifer); 
 			System.out.println("des Verteidigers: " + verteidiger);
-			System.out.println("Möchtest du weiter angreifen? ");
-			Scanner eingabe = new Scanner (System.in);
-			if (eingabe.equals("ja") )
-			{
-			} else { weitermachen = false;}	
+			/*
+			if ( angreifer > 1 && verteidiger > 0)
+			{	System.out.println("Möchtest du weiter angreifen? ");
+				Scanner input = new Scanner (System.in);
+				String eingabe = input.next();
+				if (eingabe.equals("ja"))
+				{	} else { weitermachen = false;}	
+			} else { weitermachen = false;}
+			*/
 		}
-		//Land1.setTruppen(angreifer);	-im Land die Resttruppen speichern
-		//Land2.setTruppen(verteidiger);
+		}
+		a.setTruppen(angreifer);
+		b.setTruppen(verteidiger);
 		//Bekanntgabe des Siegers
 		System.out.println("---------------------------------");
 		if (angreifer == 1)
 		{	
 			System.out.println("Der Angreifer hat zu wenig Einheiten um angreifen zu können.\nDer Verteidiger siegt.");	
 			return false;
-		}
-			else 	{ System.out.println("Der Angreifer siegt.");
-					  return true;}		
+		} else if (verteidiger != 0 && weitermachen == false) {		
+			System.out.println("Der Angreifer hat den Angriff abgebrochen\nDer Verteidiger siegt.");	
+			return false;
+		} else 	{ 	
+			System.out.println("Der Angreifer siegt.");
+			return true;
+		}		
 	}
 	
 	

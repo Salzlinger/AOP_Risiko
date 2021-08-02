@@ -1,14 +1,28 @@
 package Risiko;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.text.DefaultCaret;
 
 public class RisikoGUI extends JFrame {
 	
@@ -29,7 +43,7 @@ public class RisikoGUI extends JFrame {
 	protected RisikoGUI()
 	{
 		setTitle("Risiko");
-		setPreferredSize(new Dimension(300, 300));
+		setPreferredSize(new Dimension(300, 400));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		
@@ -95,7 +109,7 @@ class SpielerAnzahl extends JDialog {
 	{
 		super(bla, blubb);
 		setTitle("Risiko");
-		setPreferredSize(new Dimension(150, 300));
+		setPreferredSize(new Dimension(300, 400));
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setResizable(false);
 		
@@ -169,7 +183,7 @@ class SpielereinstellungGUI extends JDialog {
 	{
 		super(bla,blubb);
 		setTitle("Risiko");
-		setPreferredSize(new Dimension(300, 300));
+		setPreferredSize(new Dimension(300, 400));
 		
 		this.spielerZahl = spielerZahl;
 		
@@ -191,12 +205,15 @@ class SpielereinstellungGUI extends JDialog {
 		
 		spielerNamePanel.setPreferredSize(new Dimension(400, spielerZahl * 80 + 40));
 		
-		spielerLayout = new GridLayout(spielerZahl + 1, 1, 5, 5);
+		spielerLayout = new GridLayout(spielerZahl + 2, 1, 5, 5);
 		spielerNamePanel.setLayout(spielerLayout);
 		
 		spieler1TextField = new JTextField("Peter");
+		spieler1TextField.setBackground(Color.BLUE);
 		spieler2TextField = new JTextField("Hans");
+		spieler2TextField.setBackground(Color.RED);
 		spieler3TextField = new JTextField("Werner");
+		spieler3TextField.setBackground(Color.YELLOW);
 		
 		spielerNamePanel.add(spieler1TextField);
 		spielerNamePanel.add(spieler2TextField);
@@ -205,11 +222,16 @@ class SpielereinstellungGUI extends JDialog {
 		if (spielerZahl == 4)
 		{
 			spieler4TextField = new JTextField("Joachim");
+			spieler4TextField.setBackground(Color.GREEN);
 			spielerNamePanel.add(spieler4TextField);
 		}
 		if (spielerZahl == 5)
 		{
+			spieler4TextField = new JTextField("Joachim");
+			spieler4TextField.setBackground(Color.GREEN);
 			spieler5TextField = new JTextField("Klaus");
+			spieler5TextField.setBackground(Color.WHITE);
+			spielerNamePanel.add(spieler4TextField);
 			spielerNamePanel.add(spieler5TextField);
 		}
 		
@@ -251,5 +273,34 @@ class SpielereinstellungGUI extends JDialog {
 		{
 			return spieler5TextField.getText();
 		}
+	}
+}
+
+class Spielbrett extends JDialog {
+	
+	private static final long serialVersionUID = 1L;
+		
+	public Spielbrett() {
+		
+		  Runnable r = () -> {
+	            try {
+	                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+	            } catch (Exception ex) {
+	                ex.printStackTrace();
+	            }
+	            Weltkarte o = new Weltkarte();
+
+	            JFrame f = new JFrame(o.getClass().getSimpleName());
+	            f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	            f.setContentPane(o.getUI());
+	            f.setResizable(false);
+	            f.pack();
+	            f.setSize(850, 590);
+	            f.setLocationRelativeTo(null);
+	            f.setVisible(true);
+	            f.setTitle("Risiko");
+	        };
+	        SwingUtilities.invokeLater(r);
+		
 	}
 }

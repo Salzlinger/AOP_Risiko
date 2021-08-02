@@ -17,4 +17,5 @@ private int spielerAnzahl;
 	{
 		return spielerAnzahl;
 	}
+
 }

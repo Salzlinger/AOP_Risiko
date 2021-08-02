@@ -9,7 +9,7 @@ public class Aktionen implements ActionListener{
 	private RisikoGUI gui;
 	private Graphen gra;
 	
-	private SpielerAnzahl spielerAnzahl;
+	static SpielerAnzahl spielerAnzahl;
 	
 	public Aktionen(Graphen gra, RisikoGUI gui) {
 
@@ -29,6 +29,7 @@ public class Aktionen implements ActionListener{
 			spielerAnzahl = new SpielerAnzahl(gui, true);
 			spielerAnzahl.addActionListeners(new SpielerZahl(gra, spielerAnzahl));			
 			spielerAnzahl.setVisible(true);
+			
 		} 
 		 else if (Klick.equals("exitBtn")){
 				System.exit(0);
@@ -43,7 +44,7 @@ class SpielerZahl implements ActionListener {
 	private Graphen gra;
 	private SpielerAnzahl gui;
 	
-	private SpielereinstellungGUI einstellung;
+	static SpielereinstellungGUI einstellung;
 	
 	public SpielerZahl(Graphen gra, SpielerAnzahl gui)
 	{
@@ -72,6 +73,7 @@ class SpielerZahl implements ActionListener {
 			einstellung = new SpielereinstellungGUI(gui, true, gra.getSpielerAnzahl());
 			einstellung.addActionListeners(new Spielereinstellungen(gra, einstellung));
 			einstellung.setVisible(true);
+
 		}
 		else if(actionEvent.equals("fuenfSpielerBtn"))
 		{
@@ -79,6 +81,7 @@ class SpielerZahl implements ActionListener {
 			einstellung = new SpielereinstellungGUI(gui, true, gra.getSpielerAnzahl());
 			einstellung.addActionListeners(new Spielereinstellungen(gra, einstellung));
 			einstellung.setVisible(true);
+
 		}
 		else if(actionEvent.equals("zurueckBtn"))
 		{
@@ -94,6 +97,7 @@ class Spielereinstellungen implements ActionListener {
 
 	private Graphen gra;
 	private SpielereinstellungGUI gui;
+	private Spielbrett spielbrett;
 
 	public Spielereinstellungen(Graphen gra, SpielereinstellungGUI gui)
 	{
@@ -121,6 +125,12 @@ class Spielereinstellungen implements ActionListener {
 			{
 				spielerNamen.add(gui.getSpielerTextField(5));
 			}
+			
+			spielbrett = new Spielbrett();
+			gui.dispose();
+			SpielerZahl.einstellung.dispose();
+			Aktionen.spielerAnzahl.dispose();
+			spielbrett.setVisible(true);
 		}
 		else if(actionEvent.equals("zurueckBtn"))
 		{

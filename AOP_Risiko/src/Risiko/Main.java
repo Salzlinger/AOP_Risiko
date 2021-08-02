@@ -3,6 +3,7 @@ package Risiko;
 import java.util.HashMap;
 
 public class Main {
+	
 
 	public static void main(String[] args) {
 		iniLaender();
@@ -33,29 +34,29 @@ public class Main {
 				
 				//Afrika
 				Laender madagaskar = new Laender("Madagaskar");
-				Laender suedAfrika = new Laender("Süd-Afrika");
+				Laender suedAfrika = new Laender("Sï¿½d-Afrika");
 				Laender kongo = new Laender("Kongo");
 				Laender ostAfrika = new Laender("Ost-Afrika");
-				Laender aegypten = new Laender("Ägypten");
+				Laender aegypten = new Laender("ï¿½gypten");
 				Laender nordwestAfrika = new Laender("Nordwest-Afrika");
 				
 				//Europa
 				Laender ukraine = new Laender("Ukraine");
-				Laender suedEuropa = new Laender("Süd-Europa");
+				Laender suedEuropa = new Laender("Sï¿½d-Europa");
 				Laender mittelEuropa = new Laender("Mittel-Europa");
 				Laender westEuropa = new Laender("West-Europa");
 				Laender grossBritannien = new Laender("Gross-Britannien");
 				Laender skandinavien = new Laender("Skandinavien");
 				Laender island = new Laender("Island");
 				
-				//Südamerika
+				//Sï¿½damerika
 				Laender argentinien = new Laender("Argentinien");
 				Laender brasilien = new Laender("Brasilien");
 				Laender peru = new Laender("Peru");
 				Laender venezuela = new Laender("Venezuela");
 				
 				//Nordamerika
-				Laender groenland = new Laender("Grönland");
+				Laender groenland = new Laender("Grï¿½nland");
 				Laender quebec = new Laender("Quebec");
 				Laender mittelAmerika = new Laender("Mittel-Amerika");
 				Laender oststaaten = new Laender("Oststaaten");
@@ -66,7 +67,7 @@ public class Main {
 				Laender alaska = new Laender("Alaska");
 				
 				
-				//Nachbarn einfügen
+				//Nachbarn einfï¿½gen
 				
 				//Australien
 				indonesien.setNachbarn(neuGuinea);
@@ -210,7 +211,7 @@ public class Main {
 				westEuropa.setNachbarn(grossBritannien);
 				westEuropa.setNachbarn(nordwestAfrika);
 				
-				//Südamerika
+				//Sï¿½damerika
 				venezuela.setNachbarn(mittelAmerika);
 				venezuela.setNachbarn(brasilien);
 				venezuela.setNachbarn(peru);
@@ -284,6 +285,9 @@ public class Main {
 						System.out.println(graphen.verbunden(laender, liste[i], liste[k]));
 					}
 				}
+		
+		RisikoGUI gui = new RisikoGUI();
+		Aktionen akt = new Aktionen(gui);
 	}
 
 }

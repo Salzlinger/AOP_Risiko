@@ -5,10 +5,10 @@ import java.util.HashMap;
 public class Main {
 
 	public static void main(String[] args) {
-		iniLänder();
+		iniLaender();
 	} 
 	
-	private static void iniLänder () {
+	private static void iniLaender () {
 		//Laender generieren
 
 				//Australien

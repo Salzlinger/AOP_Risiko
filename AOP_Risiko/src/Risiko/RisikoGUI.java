@@ -22,7 +22,7 @@ public class RisikoGUI extends JFrame {
 	private String exitButtonName = "exitBtn";
 	
 	
-	 // Menü
+	 	// Menü
 	protected RisikoGUI()
 	{
 		setTitle("Risiko");
@@ -62,7 +62,7 @@ public class RisikoGUI extends JFrame {
 		return mainPanel;
 	}
 	
-	// ActionListeners für GUI
+		// ActionListeners für GUI
 	protected void risikoGUIActionListeners(ActionListener e)
 	{
 		startButton.addActionListener(e);

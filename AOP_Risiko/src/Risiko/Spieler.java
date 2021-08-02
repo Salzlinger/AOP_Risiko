@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 public class Spieler {
 
+
 	public static Scanner input = new Scanner (System.in);
 	
 	private String farbe;
@@ -21,6 +22,7 @@ public class Spieler {
 	private boolean jokerSet = false;
 	private int truppen = 0;
 	private int setBonus = 0;
+
 	
 	public Spieler (String farbe, String name) {
 		this.farbe = farbe;
@@ -51,6 +53,8 @@ public class Spieler {
 			hand.add(DeckListe.get(DeckListe.size()-1));
 			DeckListe.remove(DeckListe.get(DeckListe.size()-1));
 	}
+
+	
 	
 	public ArrayList <Gebietskarte> getHand() {
 		return hand;
@@ -71,6 +75,7 @@ public class Spieler {
 	
 	public boolean SetKomplett () {
 		
+
 		
 		int i = 0;
 		int k = 0;
@@ -78,6 +83,7 @@ public class Spieler {
 		int j = 0;
 		
 		for (int z = 0; z < hand.size(); z++)
+
 		{
 			if (hand.get(z).getTyp() == "Infanterie") { i++; }
 			if (hand.get(z).getTyp() == "Kavallerie") { k++; }
@@ -85,6 +91,7 @@ public class Spieler {
 			if (hand.get(z).getTyp() == "Joker")	{ j++; }
 		}
 		
+
 		if (i >= 3 || k >= 3 || a >= 3 || (i >= 1 && k >= 1 && a >= 1))
 		{ 
 			if (i >= 3)
@@ -152,6 +159,7 @@ public class Spieler {
 				p++;
 				}
 			}
+
 		}
 		
 		
@@ -269,7 +277,7 @@ public class Spieler {
 
 	
 	
-	
+
 	//eventuell in Länder/Kontinent überführen?
 	public int besitztKontinent() {
 		
@@ -367,5 +375,7 @@ public class Spieler {
 		System.out.println("Spieler xy erhält " + kontinentTruppen + " Truppen für Kontinente");
 		return kontinentTruppen;
 	}
+
+
 
 }

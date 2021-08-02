@@ -17,3 +17,8 @@ HashMap <String, Laender> laender = new HashMap<String, Laender>();
 // Übergabe ist Hashmap mit Ländern, start, Ziel			
 				Graphen graphen = new Graphen();
 				graphen.verbunden(laender, start, ziel);
+				
+				
+				
+//Operationen Spieler
+	

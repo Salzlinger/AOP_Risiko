@@ -39,10 +39,9 @@ public class Spieler {
 		} else  {
 				truppen = laender.size()/3 + setBonus + besitztKontinent();
 				return truppen;
-				}
-		
+				}		
 	}
-	
+
 	public void GebietskartenErhalten(ArrayList <Gebietskarte> DeckListe) {
 		// if (Angreifen() == sieg) 
 		// Spieler erhält 1 Karte vom Stapel
@@ -55,20 +54,18 @@ public class Spieler {
 	}
 
 	
-	
+	//Spieler Hand getter/setter
 	public ArrayList <Gebietskarte> getHand() {
 		return hand;
 	}
-
 	public void setHand(ArrayList <Gebietskarte> hand) {
 		this.hand = hand;
 	}
 	
+	//Spieler Länder getter/setter
 	public ArrayList <Laender> getLaender() {
 		return laender;
 	}
-
-
 	public void setLaender(ArrayList<Laender> land) {
 		this.laender = land;
 	}
@@ -231,6 +228,7 @@ public class Spieler {
 		{ this.setBonus = 10 + 5*(a-5); }
 	}
 	
+	
 	//auf Aktionen auslagern?
 	public void TruppenVerteilen(int truppen) {
 		//auf GUI truppen verteilen bis 0
@@ -239,8 +237,11 @@ public class Spieler {
 	public void Angreifen(Laender a, Laender b) {
 		System.out.println("Mit wie vielen Truppen möchtest du angreifen? ");
 		int angriffszahl = input.nextInt();
+		
+		//if (a.getNachbarn())
+		//{}
 		/*
-		if (a.getNachbarn() = b)
+		if (a.getNachbarn() == b)
 		{
 			int ang = a.getAnzahlTruppen();
 			int ver = b.getAnzahlTruppen();
@@ -298,7 +299,7 @@ public class Spieler {
 		
 		for (int i = 0; i<laender.size(); i++)
 		{	
-			switch (laender.get(i).getLand()) 
+			switch (laender.get(i).getName()) 
 			{
 		//Nordamerika ala, alb, nwter, ont, que, groe, ostst, westst, mita
 			case "Alaska": ala = true; break;

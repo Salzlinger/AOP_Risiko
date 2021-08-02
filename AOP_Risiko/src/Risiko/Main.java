@@ -3,7 +3,6 @@ package Risiko;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Random;
 import java.util.Scanner;
 
 import java.util.HashMap;
@@ -18,6 +17,7 @@ public class Main {
 	public static void main(String[] args) {
 
 		
+		iniLaender();
 		
 		Gebietskarte [] Deck = new Gebietskarte [44];
 		Karten.DeckGenerieren(Deck);
@@ -40,7 +40,7 @@ public class Main {
 				if (Horst.SetKomplett() == true)
 				{
 					System.out.println("Horst hat ein komplettes Set. Möchtest du es einlösen?");
-					if (input.next().equals("ja")  )
+					//if (input.next().equals("ja")  )
 					{
 						Horst.SetEinloesen(DeckListe);				
 						eingeloesteSets++;
@@ -53,17 +53,22 @@ public class Main {
 		//Horst greift an
 		Laender a = new Laender ("A");
 		Laender b = new Laender ("B");	
-		Horst.Angreifen(a,b);		
+		//Horst.Angreifen(a,b);		
 		
 		//Horst zieht Karte nach gewonnenem Kampf
 		Horst.KarteZiehen(DeckListe);
 		System.out.println("Das Deck enthält nun nur noch: " + DeckListe);
 		System.out.println("Spielerhand Horst: " + Horst.getHand());
-			
+		
+		
 		
 
-		iniLaender();
 	} 
+
+	
+	
+	
+	
 	
 	private static void iniLaender () {
 		//Laender generieren
@@ -334,16 +339,17 @@ public class Main {
 					laender.put(new String(liste[i].getName()), liste[i]);
 				}
 				
-				
+				/*
 				Graphen graphen = new Graphen();
 				for (int i = 0; i < 42; i++) {
 					for (int k = 0; k < 42; k++) {
 						System.out.println(graphen.verbunden(laender, liste[i], liste[k]));
 					}
 				}
+				*/
 		
-		RisikoGUI gui = new RisikoGUI();
-		Aktionen akt = new Aktionen(gui);
+		//RisikoGUI gui = new RisikoGUI();
+		//Aktionen akt = new Aktionen(gui);
 
 	}
 

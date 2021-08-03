@@ -7,6 +7,22 @@ import java.util.List;
 
 public class Graphen {
 	
+private int spielerAnzahl;
+	
+	protected Graphen()
+	{
+	}
+	
+	protected void setSpielerAnzahl(int spielerAnzahl) 
+	{
+		this.spielerAnzahl = spielerAnzahl;
+	}
+	
+	protected int getSpielerAnzahl() 
+	{
+		return spielerAnzahl;
+	}
+
 	public Boolean verbunden (HashMap<String, Laender> laender, Laender start, Laender gesucht) {
 		// alle knoten auf false
 		Iterator keyIterator = laender.keySet().iterator();
@@ -17,10 +33,10 @@ public class Graphen {
 		start.istBekannt = true;
 		// initialisiere warteschlange
 		List<Laender> warteschlange = new LinkedList<Laender>();
-		// start element einfï¿½gen
+		// start element einfügen
 		warteschlange.add(start);
 		while(warteschlange.size() != 0) {
-			// letztes element merken und lï¿½schen
+			// letztes element merken und löschen
 			Laender u = ((LinkedList<Laender>) warteschlange).getLast();
 			((LinkedList<Laender>) warteschlange).removeLast();
 			// alle nachbarn durchgehen und nach element suchen.
@@ -33,24 +49,7 @@ public class Graphen {
 				}
 			}
 		}
-		}
 
-private int spielerAnzahl;
-
-	protected Graphen()
-	{
-	}
-
-	protected void setSpielerAnzahl(int spielerAnzahl)
-	{
-		this.spielerAnzahl = spielerAnzahl;
-	}
-
-	protected int getSpielerAnzahl()
-	{
-		return spielerAnzahl;
-	}
-	
 		return false;
 	}
 }

@@ -16,6 +16,9 @@ public class Main {
 	public static HashMap <String, Laender> laender = new HashMap<String, Laender>();
 	public static Gebietskarte [] Deck = new Gebietskarte [44];
 	public static ArrayList <Gebietskarte> DeckListe;
+	public static Laender [] liste; 
+
+	
 	//Beispiel Element in Hashmap laender ("Alberta" , alberta)
 	//								var		  key		value
 
@@ -32,11 +35,11 @@ public class Main {
 		
 		
 		//GUI erzuegen/aufrufen
-		/*
+		
 		Graphen gra = new Graphen();
 		RisikoGUI gui = new RisikoGUI();
 		Aktionen akt = new Aktionen(gra, gui);
-		*/
+		
 		
 		
 		//Spieler initialisieren
@@ -83,7 +86,7 @@ public class Main {
 				//spieler greift an
 				laender.get("Venezuela").setTruppen(100);
 				laender.get("Mittel-Amerika").setTruppen(1);
-				spieler.get(i).Angreifen(laender.get("Venezuela"), laender.get("Mittel-Amerika"));
+				//spieler.get(i).Angreifen(laender.get("Venezuela"), laender.get("Mittel-Amerika"));
 				
 				System.out.println(spieler.get(i).getName() + " besitzt nun folgende L�nder: " + spieler.get(i).getLaender() );
 				System.out.println("Truppen in: " + laender.get("Venezuela").getName() +  ": " +laender.get("Venezuela").getTruppen());
@@ -390,11 +393,12 @@ public class Main {
 				mittelAmerika.setNachbarn(weststaaten);
 				mittelAmerika.setNachbarn(oststaaten);
 				mittelAmerika.setNachbarn(venezuela);
-
-
-
-
-				Laender [] liste = {alaska,alberta,ontario,nordwestTerritorium,weststaaten,oststaaten,mittelAmerika,quebec,groenland,venezuela,peru,brasilien,argentinien,island,skandinavien,grossBritannien,westEuropa,mittelEuropa,suedEuropa,ukraine,nordwestAfrika,aegypten,ostAfrika,kongo,suedAfrika,madagaskar,mittlererOsten,afghanistan,indien,ural,sibirien,jakutien,kamtschatka,irkutsk,mongolei,japan,china,siam,indonesien,neuGuinea,westAustralien,ostAustralien};
+				
+				 liste =  new Laender [] {nordwestTerritorium, jakutien, groenland, island, alaska, skandinavien, alberta, irkutsk, quebec, kamtschatka, ontario, sibirien, ural, grossBritannien, mittelEuropa, mongolei, japan, weststaaten,
+						oststaaten, ukraine, afghanistan, suedEuropa, westEuropa, china, mittelAmerika, venezuela, aegypten, siam, mittlererOsten, indien, nordwestAfrika,
+						neuGuinea, peru, indonesien, brasilien, kongo, ostAfrika, madagaskar, westAustralien, ostAustralien, suedAfrika, argentinien};
+				
+				
 				for (int i = 0; i < 42; i++) 
 				{
 					laender.put(new String(liste[i].getName()), liste[i]);

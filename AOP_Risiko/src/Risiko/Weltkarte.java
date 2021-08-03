@@ -20,6 +20,7 @@ public class Weltkarte {
     BufferedImage bild;
     Area area;
     ArrayList<Shape> shapeList;
+    
 
     public Weltkarte() {
         try {
@@ -140,7 +141,7 @@ class MouseClickListener implements MouseListener {
              for (int i = 0; i < shapeList.size();i++) {
             	 Shape shape = shapeList.get(i);
             	 if (shape.contains(e.getPoint())) {
-            		 System.out.println("LinksKlick auf Shape " + i);
+            		 return Main.liste[i];
             	 }
               }
     		}

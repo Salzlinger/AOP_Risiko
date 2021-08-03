@@ -31,7 +31,15 @@ public class Spieler {
 	
 	public Spieler (String farbe, String name) {
 		this.farbe = farbe;
-		this.name= name;
+		this.setName(name);
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	public void KarteZiehen(ArrayList <Gebietskarte> DeckListe){
@@ -117,13 +125,13 @@ public class Spieler {
 	
 	public boolean SetEinloesen (ArrayList <Gebietskarte> DeckListe) {
 
-		System.out.println( "Spieler " + name + "\nWir wählen für dich das bestmögliche Set aus!");
+		System.out.println( "Spieler " + getName() + "\nWir wählen für dich das bestmögliche Set aus!");
 		
 		int p = 0;
 		int size = hand.size()-1;
 		if (infanterieSet == true)
 		{ 
-			System.out.println( name + " hat " + hand.size() + " Karten und ein vollständiges Infanterie Set"); 
+			System.out.println( getName() + " hat " + hand.size() + " Karten und ein vollständiges Infanterie Set"); 
 			for (int z = size; z>=0; z-- )
 			{
 				if (hand.get(z).getTyp() == "Infanterie" && p < 3 ) 
@@ -136,7 +144,7 @@ public class Spieler {
 		}
 		else if (kavallerieSet == true)
 		{ 
-			System.out.println( name + " hat " + hand.size() + " Karten und ein vollständiges Kavallerie Set"); 
+			System.out.println( getName() + " hat " + hand.size() + " Karten und ein vollständiges Kavallerie Set"); 
 			for (int z = size; z>=0; z-- )
 			{	
 				if (hand.get(z).getTyp() == "Kavallerie" && p < 3 ) 
@@ -149,7 +157,7 @@ public class Spieler {
 		}
 		else if (artillerieSet == true)
 		{ 
-			System.out.println( name + " hat " + hand.size() + " Karten und ein vollständiges Artillerie Set");
+			System.out.println( getName() + " hat " + hand.size() + " Karten und ein vollständiges Artillerie Set");
 			for (int z = size; z>=0; z-- )
 			{
 				if (hand.get(z).getTyp() == "Artillerie" && p < 3 ) 
@@ -163,7 +171,7 @@ public class Spieler {
 		}
 		
 		else if (gemischtesSet == true)
-		{ System.out.println( name + " hat " + hand.size() + " Karten und ein vollständiges gemischtes Set"); 
+		{ System.out.println( getName() + " hat " + hand.size() + " Karten und ein vollständiges gemischtes Set"); 
 		boolean infaEntnommen = false;
 		boolean kavaEntnommen = false;
 		boolean artiEntnommen = false;
@@ -198,7 +206,7 @@ public class Spieler {
 		} 
 		
 		else if (jokerSet == true)
-		{ System.out.println( name + " hat ein vollständiges Joker Set"); 
+		{ System.out.println( getName() + " hat ein vollständiges Joker Set"); 
 		boolean jokerEntnommen = false;
 		for (int z = size; z >= 0; z--)
 			{ 	if (hand.get(z).getTyp() == "Joker" && jokerEntnommen == false)	
@@ -235,7 +243,7 @@ public class Spieler {
 	public void TruppenVerteilen() {
 		if (SetKomplett())
 		{
-			System.out.println("Spieler " + name + " hat ein komplettes Set. Möchtest du es einlösen?");
+			System.out.println("Spieler " + getName() + " hat ein komplettes Set. Möchtest du es einlösen?");
 			if (input.next().equals("ja")  )
 			{
 				SetEinloesen(Main.DeckListe);
@@ -244,7 +252,7 @@ public class Spieler {
 			}
 		}
 		TruppenErhalten();
-		System.out.println("Spieler " + name + " hat " + truppen + " Truppen zum verteilen zur Verfügung.");
+		System.out.println("Spieler " + getName() + " hat " + truppen + " Truppen zum verteilen zur Verfügung.");
 		//<<<<<Funktion in GUI zum verteilen der Truppen
 	}
 	
@@ -258,6 +266,7 @@ public class Spieler {
 		{
 			System.out.println("Ein Angriff ist möglich, da die angegebenen Länder Nachbarn sind");
 			
+			
 				
 			int ang = a.getTruppen();
 			int ver = b.getTruppen();
@@ -269,7 +278,7 @@ public class Spieler {
 								if (Wuerfel.Wuerfelkampf(a,b)== true)
 									{
 									KarteZiehen(Main.DeckListe);
-									b.setBesitzer(name);
+									b.setBesitzer(getName());
 									System.out.println("Neuer Besitzer von " + b.name + " ist " + b.getBesitzer());
 									laenderArray.add(b);	// erobertes Land der Liste hinzufügen
 									System.out.println(a.getName() + ": " + a.getTruppen());
@@ -414,6 +423,8 @@ public class Spieler {
 		System.out.println("Spieler xy erhält " + kontinentTruppen + " Truppen für Kontinente");
 		return kontinentTruppen;
 	}
+
+	
 
 
 

@@ -22,7 +22,7 @@ public class Main {
 	public static void main(String[] args) {
 
 		iniLaender();
-
+		
 		//Deck aus Gebietskarten erzeugen
 		Gebietskarte [] Deck = new Gebietskarte [44];
 		Karten.DeckGenerieren(Deck);
@@ -30,8 +30,9 @@ public class Main {
 		Karten.DeckMischen(Deck);
 		DeckListe = new ArrayList<Gebietskarte>(Arrays.asList(Deck)); //Deck als flexible veränderbare ArrayList
 		
-		/*
+		
 		//GUI erzuegen/aufrufen
+		/*
 		Graphen gra = new Graphen();
 		RisikoGUI gui = new RisikoGUI();
 		Aktionen akt = new Aktionen(gra, gui);
@@ -64,8 +65,8 @@ public class Main {
 		Horst.TruppenVerteilen();
 
 		//Horst greift an
-		laender.get("Venezuela").setTruppen(100);
-		laender.get("Mittel-Amerika").setTruppen(1);
+		laender.get("Venezuela").setTruppen(10);
+		laender.get("Mittel-Amerika").setTruppen(10);
 		Horst.Angreifen(laender.get("Venezuela"), laender.get("Mittel-Amerika"));
 		
 		System.out.println("Horst besitzt nun folgende Lï¿½nder: " + Horst.getLaender() );
@@ -86,11 +87,12 @@ public class Main {
 		Horst.TruppenBewegen(laender.get("Brasilien"), laender.get("Jakutien"));
 		System.out.println(laender.get("Brasilien").getName() +  ": " +laender.get("Brasilien").getTruppen());
 		System.out.println(laender.get("Jakutien").getName() + ": " +laender.get("Jakutien").getTruppen());
+		
 
 		//Spielerwechsel
 
-		
-		
+		//Weltkarte.shapeList.toString();
+			
 		//Spieler scheidet aus
 		//if (Spieler.laender == empty)
 			//delete Spieler

@@ -19,7 +19,7 @@ public class Weltkarte {
     public static final int SIZE = 550;
     BufferedImage bild;
     Area area;
-    ArrayList<Shape> shapeList;
+    static ArrayList<Shape> shapeList;
 
     public Weltkarte() {
         try {
@@ -115,7 +115,7 @@ public class Weltkarte {
         }
         regions.remove(6);
         regions.remove(10);
-        regions.remove(21);
+        regions.remove(28);
         regions.remove(32);
         return regions;
     }
@@ -133,7 +133,7 @@ public class Weltkarte {
         }
     }
 class MouseClickListener implements MouseListener {
-      	
+      
     	@Override
     	public void mouseClicked(MouseEvent e) {
     		if (e.getButton() == MouseEvent.BUTTON1) {

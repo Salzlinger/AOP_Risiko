@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
+
 public class Spieler {
 
 
@@ -237,8 +238,20 @@ public class Spieler {
 	
 	
 	//auf Aktionen auslagern?
-	public void TruppenVerteilen(int truppen) {
-		//auf GUI truppen verteilen bis 0
+	public void TruppenVerteilen() {
+		if (SetKomplett())
+		{
+			System.out.println("Spieler " + name + " hat ein komplettes Set. Möchtest du es einlösen?");
+			if (input.next().equals("ja")  )
+			{
+				SetEinloesen(Main.DeckListe);
+				Main.eingeloesteSets++;
+				
+			}
+		}
+		TruppenErhalten();
+		System.out.println("Spieler " + name + " hat " + truppen + " Truppen zum verteilen zur Verfügung.");
+		
 	}
 	
 	public void Angreifen(Laender a, Laender b) {
@@ -252,8 +265,7 @@ public class Spieler {
 		if (laenderHash.get(a.getName()).getNachbarn().contains(b))
 		{
 			System.out.println("Ein Angriff ist möglich, da die angegebenen Länder Nachbarn sind");
-			//a.setTruppen(10);
-			//b.setTruppen(1);
+			
 				
 			int ang = a.getTruppen();
 			int ver = b.getTruppen();
@@ -265,8 +277,9 @@ public class Spieler {
 								if (Wuerfel.Wuerfelkampf(a,b)== true)
 									{
 									KarteZiehen(Main.DeckListe);
-									System.out.println("Das Deck enthält nun nur noch: " + Main.DeckListe);
-									System.out.println("Spielerhand Horst: " + hand);
+									b.setBesitzer(name);
+									System.out.println("Neuer Besitzer von " + b.name + " ist " + b.getBesitzer());
+									laenderArray.add(b);	// erobertes Land dr Liste hinzufügen
 									System.out.println(a.getName() + ": " + a.getTruppen());
 									System.out.println(b.getName() + ": " +b.getTruppen());
 									TruppenBewegen(a,b);
@@ -279,6 +292,7 @@ public class Spieler {
 	
 	public void TruppenBewegen(Laender von, Laender nach) {
 		// beliebig viele Truppen aus einem Land in ein verbundenes Land verlagern
+		setLaender(laenderArray);
 		if (laenderArray.contains(von) && laenderArray.contains(nach))
 		{
 			System.out.println("Horst gehören die angebebenen Länder");

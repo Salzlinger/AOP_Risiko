@@ -5,8 +5,9 @@ import java.util.ArrayList;
 public class Laender {
 	
 	String name;
-	Boolean istBekannt = true;
+	boolean istBekannt = true;
 	int truppen = 0;
+	private static String besitzer= "";
 	
 	public Laender (String name) {
 		this.name = name;
@@ -25,10 +26,10 @@ public class Laender {
 	}
 
 	//ist bekannt
-	public Boolean getIstBekannt() {
+	public boolean getIstBekannt() {
 		return istBekannt;
 	}
-	public void setIstBekannt(Boolean istBekannt) {
+	public void setIstBekannt(boolean istBekannt) {
 		this.istBekannt = istBekannt;
 	}
 	
@@ -46,6 +47,15 @@ public class Laender {
 		{
 		return name;
 		}
+
+	
+	public String getBesitzer() {
+		return besitzer;
+	}
+
+	public void setBesitzer(String besitzer) {
+		Laender.besitzer = besitzer;
+	}
 	
 
 }

@@ -114,7 +114,7 @@ public class Weltkarte {
         }
         regions.remove(6);
         regions.remove(10);
-        regions.remove(21);
+        regions.remove(28);
         regions.remove(32);
         return regions;
     }

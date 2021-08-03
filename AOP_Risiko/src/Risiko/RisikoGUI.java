@@ -348,7 +348,8 @@ class Spielbrett extends JDialog {
 	            f.setContentPane(o.getUI());
 	            f.setResizable(false);
 	            f.pack();
-	            f.setSize(850, 590);
+	            f.setSize(850, 600);
+	            f.getContentPane().setBackground(new Color(0x3f47cc));
 	            f.setLocationRelativeTo(null);
 	            f.setVisible(true);
 	            f.setTitle("Risiko");

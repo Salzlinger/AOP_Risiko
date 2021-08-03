@@ -22,10 +22,6 @@ public class Main {
 	public static void main(String[] args) {
 
 		iniLaender();
-		
-		Graphen gra = new Graphen();
-		RisikoGUI gui = new RisikoGUI();
-		Aktionen akt = new Aktionen(gra, gui);
 
 		Gebietskarte [] Deck = new Gebietskarte [44];
 
@@ -34,7 +30,9 @@ public class Main {
 		Karten.DeckMischen(Deck);
 		DeckListe = new ArrayList<Gebietskarte>(Arrays.asList(Deck));
 
-
+		Graphen gra = new Graphen();
+		RisikoGUI gui = new RisikoGUI();
+		Aktionen akt = new Aktionen(gra, gui);
 
 		Spieler Horst = new Spieler("blau", "Horst");
 

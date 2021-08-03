@@ -30,12 +30,14 @@ public class Main {
 		Karten.DeckMischen(Deck);
 		DeckListe = new ArrayList<Gebietskarte>(Arrays.asList(Deck)); //Deck als flexible veränderbare ArrayList
 		
-		/*
+		
 		//GUI erzuegen/aufrufen
+		/*
 		Graphen gra = new Graphen();
 		RisikoGUI gui = new RisikoGUI();
 		Aktionen akt = new Aktionen(gra, gui);
 		*/
+		
 		
 		//Spieler initialisieren
 		Spieler Horst = new Spieler("blau", "Horst");
@@ -387,22 +389,10 @@ public class Main {
 
 
 				Laender [] liste = {alaska,alberta,ontario,nordwestTerritorium,weststaaten,oststaaten,mittelAmerika,quebec,groenland,venezuela,peru,brasilien,argentinien,island,skandinavien,grossBritannien,westEuropa,mittelEuropa,suedEuropa,ukraine,nordwestAfrika,aegypten,ostAfrika,kongo,suedAfrika,madagaskar,mittlererOsten,afghanistan,indien,ural,sibirien,jakutien,kamtschatka,irkutsk,mongolei,japan,china,siam,indonesien,neuGuinea,westAustralien,ostAustralien};
-				for (int i = 0; i < 42; i++) {
+				for (int i = 0; i < 42; i++) 
+				{
 					laender.put(new String(liste[i].getName()), liste[i]);
 				}
-				//Hashmap laender ("Alberta" , alberta)
-
-				/*
-				Graphen graphen = new Graphen();
-				for (int i = 0; i < 42; i++) {
-					for (int k = 0; k < 42; k++) {
-						System.out.println(graphen.verbunden(laender, liste[i], liste[k]));
-					}
-				}
-				*/
-
-		//RisikoGUI gui = new RisikoGUI();
-		//Aktionen akt = new Aktionen(gui);
 
 	}
 

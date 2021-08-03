@@ -36,7 +36,7 @@ public class Weltkarte {
         String imagePath = "src\\img\\risk.png";
         bild = ImageIO.read(new File(imagePath));
 
-        area = getOutline(Color.WHITE, bild, 12);
+        area = getOutline(Color.WHITE, bild, 60);
 
         shapeList = separateShapeIntoRegions(area);
         ui = new JPanel(new BorderLayout(4, 4));
@@ -124,7 +124,6 @@ public class Weltkarte {
 
         @Override
         public void mouseDragged(MouseEvent e) {
-            // do nothing
         }
 
         @Override
@@ -137,36 +136,38 @@ class MouseClickListener implements MouseListener {
       	
     	@Override
     	public void mouseClicked(MouseEvent e) {
+    		if (e.getButton() == MouseEvent.BUTTON1) {
              for (int i = 0; i < shapeList.size();i++) {
             	 Shape shape = shapeList.get(i);
             	 if (shape.contains(e.getPoint())) {
-            		 System.out.println("Clicked Shape" + i);
+            		 System.out.println("LinksKlick auf Shape " + i);
             	 }
               }
+    		}
+    		else if (e.getButton() == MouseEvent.BUTTON3) {
+             for (int i = 0; i < shapeList.size();i++) {
+            	 Shape shape = shapeList.get(i);
+            	 if (shape.contains(e.getPoint())) {
+            		 System.out.println("RechtsKlick auf Shape " + i);
+            	 }
+              }
+    		}
          }
 
 		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
+		public void mousePressed(MouseEvent e) {		
 		}
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
 		}
 
 		@Override
-		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
+		public void mouseEntered(MouseEvent e) {		
 		}
 
 		@Override
-		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
+		public void mouseExited(MouseEvent e) {		
 		}
 
     }
@@ -193,9 +194,9 @@ class MouseClickListener implements MouseListener {
 
         Graphics2D g = bi.createGraphics();
         g.drawImage(bild, 0, 0, output);
-        g.setColor(Color.ORANGE.darker());
+        g.setColor(Color.WHITE.darker());
         g.fill(area);
-        g.setColor(Color.RED);
+        g.setColor(Color.BLACK);
         g.draw(area);
         try {
             Point p = MouseInfo.getPointerInfo().getLocation();

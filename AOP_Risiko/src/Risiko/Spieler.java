@@ -27,8 +27,12 @@ public class Spieler {
 	private boolean setEingeloest = false;
 	private int truppen = 0;
 	private int setBonus = 0;
-
 	
+	public String getName() {
+		return name;
+	}
+
+
 	public Spieler (String farbe, String name) {
 		this.farbe = farbe;
 		this.name= name;

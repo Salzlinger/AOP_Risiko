@@ -40,69 +40,75 @@ public class Main {
 		
 		
 		//Spieler initialisieren
-		Spieler Horst = new Spieler("blau", "Horst");
+		Spieler spieler1 = new Spieler("blau", "Horst");
+		Spieler spieler2 = new Spieler("blau", "Weicker");
+		Spieler spieler3 = new Spieler("blau", "Hering");
+		Spieler spieler4 = new Spieler("blau", "Krämer");
+		Spieler spieler5 = new Spieler("blau", "Dobner");
+		
+		ArrayList<Spieler> spieler = new ArrayList<Spieler>();
+		
+		spieler.add(spieler1);
+		spieler.add(spieler2);
+		spieler.add(spieler3);
+		spieler.add(spieler4);
+		spieler.add(spieler5);
 
 		//Horst bekommt Laender zugewiesen
-		Horst.getLaender().add(laender.get("Peru"));
-		Horst.getLaender().add(laender.get("Argentinien"));
-		Horst.getLaender().add(laender.get("Venezuela"));
-		Horst.getLaender().add(laender.get("Brasilien"));
-		Horst.getLaender().add(laender.get("Island"));
-		Horst.getLaender().add(laender.get("Indonesien"));
-		Horst.getLaender().add(laender.get("Nordwest-Afrika"));
-		Horst.getLaender().add(laender.get("Gross-Britannien"));
-		Horst.getLaender().add(laender.get("West-Europa"));
-		Horst.getLaender().add(laender.get("Ukraine"));
-		Horst.getLaender().add(laender.get("Skandinavien"));
-		Horst.getLaender().add(laender.get("Weststaaten"));
-		Horst.getLaender().add(laender.get("Alberta"));
-		Horst.getLaender().add(laender.get("Alaska"));
-		Horst.getLaender().add(laender.get("Kamtschatka"));
-		Horst.getLaender().add(laender.get("Jakutien"));
-		System.out.println("Horst besitzt folgende Lï¿½nder: " + Horst.getLaender() );
+		spieler1.getLaender().add(laender.get("Peru"));
+		spieler1.getLaender().add(laender.get("Argentinien"));
+		spieler1.getLaender().add(laender.get("Venezuela"));
+		spieler1.getLaender().add(laender.get("Brasilien"));
+		spieler1.getLaender().add(laender.get("Island"));
+		spieler1.getLaender().add(laender.get("Indonesien"));
+		spieler1.getLaender().add(laender.get("Nordwest-Afrika"));
+		spieler1.getLaender().add(laender.get("Gross-Britannien"));
+		spieler1.getLaender().add(laender.get("West-Europa"));
+		spieler1.getLaender().add(laender.get("Ukraine"));
+		spieler1.getLaender().add(laender.get("Skandinavien"));
+		spieler1.getLaender().add(laender.get("Weststaaten"));
+		spieler1.getLaender().add(laender.get("Alberta"));
+		spieler1.getLaender().add(laender.get("Alaska"));
+		spieler1.getLaender().add(laender.get("Kamtschatka"));
+		spieler1.getLaender().add(laender.get("Jakutien"));
+		System.out.println("Horst besitzt folgende Lï¿½nder: " + spieler1.getLaender() );
 		
 		
-		//Horst verteilt Truppen
-		Horst.TruppenVerteilen();
-
-		//Horst greift an
-		laender.get("Venezuela").setTruppen(100);
-		laender.get("Mittel-Amerika").setTruppen(1);
-		Horst.Angreifen(laender.get("Venezuela"), laender.get("Mittel-Amerika"));
+		while (spieler.size() > 1) {
+			
+			for (int i = 0; i < spieler.size(); i++) {
+				//spieler verteilt Truppen
+				spieler.get(i).TruppenVerteilen();
 		
-		System.out.println("Horst besitzt nun folgende Lï¿½nder: " + Horst.getLaender() );
-		System.out.println("Truppen in: " + laender.get("Venezuela").getName() +  ": " +laender.get("Venezuela").getTruppen());
-		System.out.println("Truppen in: " + laender.get("Mittel-Amerika").getName() + ": " +laender.get("Mittel-Amerika").getTruppen());
-
-		//Horst zieht Karten
-		Horst.KarteZiehen(DeckListe);
-		Horst.KarteZiehen(DeckListe);
-		Horst.KarteZiehen(DeckListe);
+				//spieler greift an
+				laender.get("Venezuela").setTruppen(100);
+				laender.get("Mittel-Amerika").setTruppen(1);
+				spieler.get(i).Angreifen(laender.get("Venezuela"), laender.get("Mittel-Amerika"));
+				
+				System.out.println(spieler.get(i).getName() + " besitzt nun folgende Lï¿½nder: " + spieler.get(i).getLaender() );
+				System.out.println("Truppen in: " + laender.get("Venezuela").getName() +  ": " +laender.get("Venezuela").getTruppen());
+				System.out.println("Truppen in: " + laender.get("Mittel-Amerika").getName() + ": " +laender.get("Mittel-Amerika").getTruppen());
+				
+				//Prüfung ob ein Spieler ausgelöscht wurde
+				//Gegebenenfalls Gebietskarten an spieler überschreiben und erneut TruppenVerteilen + Angreifen
+				
+				//Spieler scheidet aus
+				for (int k = 0; k < spieler.size(); k++) {
+					if (spieler.get(k).getLaender().isEmpty()) {
+						spieler.remove(k);
+					}
+				}
+				//spieler bewegt Truppen
+				laender.get("Brasilien").setTruppen(100);
+				laender.get("Jakutien").setTruppen(10);
+				spieler.get(i).TruppenBewegen(laender.get("Brasilien"), laender.get("Jakutien"));
+				System.out.println(laender.get("Brasilien").getName() +  ": " +laender.get("Brasilien").getTruppen());
+				System.out.println(laender.get("Jakutien").getName() + ": " +laender.get("Jakutien").getTruppen());
 		
-		//Prüfung ob ein Spieler ausgelöscht wurde
-		//Gegebenenfalls Gebietskarten an Horst überschreiben und erneut TruppenVerteilen + Angreifen
-		
-		//Horst bewegt Truppen
-		laender.get("Brasilien").setTruppen(100);
-		laender.get("Jakutien").setTruppen(10);
-		Horst.TruppenBewegen(laender.get("Brasilien"), laender.get("Jakutien"));
-		System.out.println(laender.get("Brasilien").getName() +  ": " +laender.get("Brasilien").getTruppen());
-		System.out.println(laender.get("Jakutien").getName() + ": " +laender.get("Jakutien").getTruppen());
-
-		//Spielerwechsel
-
-		
-		
-		//Spieler scheidet aus
-		//if (Spieler.laender == empty)
-			//delete Spieler
-
-		//Spiel endet
-		//if Spieleranzahl == 1
-
-
+			}
+		}
 		System.out.println("ENDE");
-	}
+	}				
 
 
 

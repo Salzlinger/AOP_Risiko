@@ -31,12 +31,12 @@ public class Main {
 		DeckListe = new ArrayList<Gebietskarte>(Arrays.asList(Deck)); //Deck als flexible ver�nderbare ArrayList
 
 
-		//GUI erzuegen/aufrufen
-		/*
+		//GUI
+		
 		Graphen gra = new Graphen();
 		RisikoGUI gui = new RisikoGUI();
 		Aktionen akt = new Aktionen(gra, gui);
-		*/
+		
 
 
 		//Spieler initialisieren

@@ -63,20 +63,21 @@ public class Spieler {
 		if(setEingeloest)
 		{
 		berechneSetBonus();
+		System.out.println("Spieler xy erhält " + setBonus + " Truppen für eingeloeste Sets");
+		setEingeloest = false;
 		}
 		if (laenderArray.size() < 9)
 		{
+		System.out.println("Spieler xy erhält " + 3 + " Truppen für besetzte Länder");
 		truppen = 3  + setBonus + besitztKontinent();
 		return truppen;
 		} else  {
+				System.out.println("Spieler xy erhält " + (laenderArray.size()/3) + " Truppen für besetzte Länder");
 				truppen = laenderArray.size()/3 + setBonus + besitztKontinent();
 				return truppen;
 				}		
 	}
-	
-	
 
-	
 	public boolean SetKomplett () {
 		
 		int i = 0;
@@ -85,7 +86,6 @@ public class Spieler {
 		int j = 0;
 		
 		for (int z = 0; z < hand.size(); z++)
-
 		{
 			if (hand.get(z).getTyp() == "Infanterie") { i++; }
 			if (hand.get(z).getTyp() == "Kavallerie") { k++; }
@@ -93,7 +93,6 @@ public class Spieler {
 			if (hand.get(z).getTyp() == "Joker")	{ j++; }
 		}
 		
-
 		if (i >= 3 || k >= 3 || a >= 3 || (i >= 1 && k >= 1 && a >= 1))
 		{ 
 			if (i >= 3)
@@ -104,7 +103,6 @@ public class Spieler {
 			{ this.artillerieSet = true; }
 			if (i >= 1 && k >= 1 && a >= 1)
 			{ this.gemischtesSet = true; }
-			
 			return true; 
 		} 	
 		else if ((j==1 && (a>=1||k>=1||a>=1) && (a>=1||k>=1||a>=1)) || (j==2 && (a>=1||k>=1||a>=1))) 
@@ -163,7 +161,6 @@ public class Spieler {
 			}
 
 		}
-		
 		
 		else if (gemischtesSet == true)
 		{ System.out.println( name + " hat " + hand.size() + " Karten und ein vollständiges gemischtes Set"); 
@@ -253,12 +250,10 @@ public class Spieler {
 	
 	public void Angreifen(Laender a, Laender b) {
 		System.out.println("Mit wie vielen Truppen möchtest du angreifen? ");
-		int angriffszahl = 8; //input.nextInt();
+		int angriffszahl = 3; //input.nextInt();
 		
 		setLaender(laenderArray); //Länder werden in Hashmap umgeschrieben
-		//System.out.println("angreifbare Länder von " + a.getName() + " aus:");
-		//System.out.println(laenderHash.get(a.getName()).getNachbarn());
-		
+			
 		if (laenderHash.get(a.getName()).getNachbarn().contains(b))
 		{
 			System.out.println("Ein Angriff ist möglich, da die angegebenen Länder Nachbarn sind");
@@ -276,7 +271,7 @@ public class Spieler {
 									KarteZiehen(Main.DeckListe);
 									b.setBesitzer(name);
 									System.out.println("Neuer Besitzer von " + b.name + " ist " + b.getBesitzer());
-									laenderArray.add(b);	// erobertes Land dr Liste hinzufügen
+									laenderArray.add(b);	// erobertes Land der Liste hinzufügen
 									System.out.println(a.getName() + ": " + a.getTruppen());
 									System.out.println(b.getName() + ": " +b.getTruppen());
 									TruppenBewegen(a,b);
@@ -300,17 +295,6 @@ public class Spieler {
 				while (nochmal)
 				{
 				System.out.println("Wie viele Truppen möchtest du verschieben?");			
-				/*
-				try {
-					int eingabe1 = input.nextInt(); 
-					nochmal = false;
-					}
-					//Fehler bei eingabe Buchstabe
-				catch(InputMismatchException e) 
-				{ 	
-					nochmal = true;
-					System.out.println("Bitte gib eine ganze Zahl ein");}
-				*/
 				
 				int eingabe = input.nextInt();
 				if (eingabe > von.getTruppen()-1)

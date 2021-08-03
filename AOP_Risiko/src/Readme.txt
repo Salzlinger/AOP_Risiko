@@ -21,4 +21,5 @@ HashMap <String, Laender> laender = new HashMap<String, Laender>();
 				
 				
 //Operationen Spieler
-	
+	Zugriff auf Länder des Spielers
+	Spieler.getLaender();

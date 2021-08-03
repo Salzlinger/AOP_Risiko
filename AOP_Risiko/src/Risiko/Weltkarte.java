@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
 import javax.imageio.ImageIO;
 
 public class Weltkarte {
@@ -42,6 +43,7 @@ public class Weltkarte {
         ui.setBorder(new EmptyBorder(4, 4, 4, 4));
 
         output.addMouseMotionListener(new MousePositionListener());
+        output.addMouseListener(new MouseClickListener());
 
         ui.add(output);
 
@@ -128,19 +130,57 @@ public class Weltkarte {
         @Override
         public void mouseMoved(MouseEvent e) {
             refresh();
+        
         }
     }
+class MouseClickListener implements MouseListener {
+      	
+    	@Override
+    	public void mouseClicked(MouseEvent e) {
+             for (int i = 0; i < shapeList.size();i++) {
+            	 Shape shape = shapeList.get(i);
+            	 if (shape.contains(e.getPoint())) {
+            		 System.out.println("Clicked Shape" + i);
+            	 }
+              }
+         }
 
-    public static boolean isIncluded(Color target, Color pixel, int tolerance) {
-        int rT = target.getRed();
-        int gT = target.getGreen();
-        int bT = target.getBlue();
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+    }
+
+    public static boolean isIncluded(Color ziel, Color pixel, int toleranz) {
+        int rT = ziel.getRed();
+        int gT = ziel.getGreen();
+        int bT = ziel.getBlue();
         int rP = pixel.getRed();
         int gP = pixel.getGreen();
         int bP = pixel.getBlue();
-        return ((rP - tolerance <= rT) && (rT <= rP + tolerance)
-                && (gP - tolerance <= gT) && (gT <= gP + tolerance)
-                && (bP - tolerance <= bT) && (bT <= bP + tolerance));
+        return ((rP - toleranz <= rT) && (rT <= rP + toleranz)
+                && (gP - toleranz <= gT) && (gT <= gP + toleranz)
+                && (bP - toleranz <= bT) && (bT <= bP + toleranz));
     }
 
     private void refresh() {
@@ -168,6 +208,7 @@ public class Weltkarte {
                     g.setColor(Color.GREEN.darker());
                     g.fill(shape);
                     break;
+               
                 }
             }
         } catch (Exception doNothing) {

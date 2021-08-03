@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Graphen {
+	
 	public Boolean verbunden (HashMap<String, Laender> laender, Laender start, Laender gesucht) {
 		// alle knoten auf false
 		Iterator keyIterator = laender.keySet().iterator();
@@ -32,6 +33,7 @@ public class Graphen {
 				}
 			}
 		}
+		}
 
 private int spielerAnzahl;
 
@@ -48,7 +50,8 @@ private int spielerAnzahl;
 	{
 		return spielerAnzahl;
 	}
-
+	
 		return false;
 	}
 }
+

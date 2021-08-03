@@ -79,6 +79,52 @@ public class Main {
 
 
 
+		Horst.getLaender().add(laender.get("Ukraine"));
+		Horst.getLaender().add(laender.get("Skandinavien"));
+		Horst.getLaender().add(laender.get("Weststaaten"));
+		Horst.getLaender().add(laender.get("Alberta"));
+		Horst.getLaender().add(laender.get("Alaska"));
+		Horst.getLaender().add(laender.get("Kamtschatka"));
+		Horst.getLaender().add(laender.get("Jakutien"));
+		System.out.println("Horst besitzt folgende L�nder: " + Horst.getLaender() );
+
+
+
+		//Horst verteilt Truppen
+		Horst.KarteZiehen(DeckListe);
+		Horst.KarteZiehen(DeckListe);
+		Horst.KarteZiehen(DeckListe);
+		Horst.KarteZiehen(DeckListe);
+		eingeloesteSets += 5;
+		System.out.println("Horst hat folgende Karten: " + Horst.getHand());
+		Horst.TruppenVerteilen();
+
+
+		//Horst greift an
+		laender.get("Venezuela").setTruppen(100);
+		laender.get("Mittel-Amerika").setTruppen(10);
+		Horst.Angreifen(laender.get("Venezuela"), laender.get("Mittel-Amerika"));
+		System.out.println("Horst besitzt nun folgende L�nder: " + Horst.getLaender() );
+		System.out.println(laender.get("Truppen in Venezuela").getName() +  ": " +laender.get("Venezuela").getTruppen());
+		System.out.println(laender.get("Truppen in Mittel-Amerika").getName() + ": " +laender.get("Mittel-Amerika").getTruppen());
+
+		//Horst bewegt Truppen
+		laender.get("Brasilien").setTruppen(100);
+		laender.get("Jakutien").setTruppen(10);
+		Horst.TruppenBewegen(laender.get("Brasilien"), laender.get("Jakutien"));
+		System.out.println(laender.get("Truppen in Brasilien").getName() +  ": " +laender.get("Brasilien").getTruppen());
+		System.out.println(laender.get("Truppen in Jakutien").getName() + ": " +laender.get("Jakutien").getTruppen());
+
+		//Spielerwechsel
+
+		//Spieler scheidet aus
+		//if (Spieler.laender == empty)
+			//delete Spieler
+
+		//Spiel endet
+		//if Spieleranzahl == 1
+
+
 		System.out.println("ENDE");
 	}
 
@@ -158,6 +204,7 @@ public class Main {
 				neuGuinea.setNachbarn(indonesien);
 				neuGuinea.setNachbarn(ostAustralien);
 				neuGuinea.setNachbarn(westAustralien);
+
 				westAustralien.setNachbarn(indonesien);
 				westAustralien.setNachbarn(ostAustralien);
 				westAustralien.setNachbarn(neuGuinea);
@@ -181,12 +228,14 @@ public class Main {
 				mongolei.setNachbarn(sibirien);
 
 				japan.setNachbarn(mongolei);
-				japan.setNachbarn(irkutsk);
+				japan.setNachbarn(kamtschatka);
+
 
 				kamtschatka.setNachbarn(alaska);
 				kamtschatka.setNachbarn(jakutien);
 				kamtschatka.setNachbarn(irkutsk);
 				kamtschatka.setNachbarn(mongolei);
+				kamtschatka.setNachbarn(japan);
 
 				irkutsk.setNachbarn(kamtschatka);
 				irkutsk.setNachbarn(mongolei);
@@ -227,7 +276,7 @@ public class Main {
 				mittlererOsten.setNachbarn(suedEuropa);
 
 				//Afrika
-				aegypten.setNachbarn(mittelEuropa);
+				aegypten.setNachbarn(mittlererOsten);
 				aegypten.setNachbarn(ostAfrika);
 				aegypten.setNachbarn(suedEuropa);
 				aegypten.setNachbarn(nordwestAfrika);
@@ -239,10 +288,11 @@ public class Main {
 				nordwestAfrika.setNachbarn(kongo);
 				nordwestAfrika.setNachbarn(brasilien);
 
-				ostAfrika.setNachbarn(mittelEuropa);
+				ostAfrika.setNachbarn(mittlererOsten);
 				ostAfrika.setNachbarn(aegypten);
 				ostAfrika.setNachbarn(kongo);
 				ostAfrika.setNachbarn(suedAfrika);
+				ostAfrika.setNachbarn(nordwestAfrika);
 				ostAfrika.setNachbarn(madagaskar);
 
 				kongo.setNachbarn(nordwestAfrika);
@@ -289,6 +339,13 @@ public class Main {
 				westEuropa.setNachbarn(grossBritannien);
 				westEuropa.setNachbarn(nordwestAfrika);
 
+				suedEuropa.setNachbarn(mittelEuropa);
+				suedEuropa.setNachbarn(westEuropa);
+				suedEuropa.setNachbarn(ukraine);
+				suedEuropa.setNachbarn(nordwestAfrika);
+				suedEuropa.setNachbarn(aegypten);
+				suedEuropa.setNachbarn(mittlererOsten);
+
 				//S�damerika
 				venezuela.setNachbarn(mittelAmerika);
 				venezuela.setNachbarn(brasilien);
@@ -310,6 +367,8 @@ public class Main {
 				//Nordamerika
 				groenland.setNachbarn(island);
 				groenland.setNachbarn(quebec);
+				groenland.setNachbarn(ontario);
+				groenland.setNachbarn(nordwestTerritorium);
 
 				quebec.setNachbarn(groenland);
 				quebec.setNachbarn(ontario);
@@ -322,6 +381,7 @@ public class Main {
 				nordwestTerritorium.setNachbarn(alaska);
 				nordwestTerritorium.setNachbarn(alberta);
 				nordwestTerritorium.setNachbarn(ontario);
+				nordwestTerritorium.setNachbarn(groenland);
 
 				alberta.setNachbarn(alaska);
 				alberta.setNachbarn(nordwestTerritorium);
@@ -338,6 +398,7 @@ public class Main {
 				ontario.setNachbarn(quebec);
 				ontario.setNachbarn(oststaaten);
 				ontario.setNachbarn(weststaaten);
+				ontario.setNachbarn(groenland);
 
 				oststaaten.setNachbarn(quebec);
 				oststaaten.setNachbarn(ontario);

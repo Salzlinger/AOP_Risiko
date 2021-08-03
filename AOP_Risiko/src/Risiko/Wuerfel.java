@@ -18,10 +18,10 @@ public class Wuerfel {
 		int runde = 1;
 		boolean weitermachen = true;
 		
-		//while (weitermachen)
+		while (weitermachen)
 		{
-		//	System.out.println("Mit wie vielen Truppen möchtest du angreifen? ");
-		//	int angreifer1 = 3; //input.nextInt();
+		//System.out.println("Mit wie vielen Truppen möchtest du angreifen? ");
+		//int angreifer1 = 3; //input.nextInt();
 		
 		while (angreifer > 1 && verteidiger != 0 && weitermachen)
 		{	
@@ -59,7 +59,7 @@ public class Wuerfel {
 			System.out.println("\nverbliebene Einheiten");
 			System.out.println("des Angreifers  : " + angreifer); 
 			System.out.println("des Verteidigers: " + verteidiger);
-			/*
+			
 			if ( angreifer > 1 && verteidiger > 0)
 			{	System.out.println("Möchtest du weiter angreifen? ");
 				Scanner input = new Scanner (System.in);
@@ -67,7 +67,7 @@ public class Wuerfel {
 				if (eingabe.equals("ja"))
 				{	} else { weitermachen = false;}	
 			} else { weitermachen = false;}
-			*/
+			
 		}
 		}
 		a.setTruppen(angreifer);

@@ -22,6 +22,10 @@ public class Main {
 	public static void main(String[] args) {
 
 		iniLaender();
+		
+		Graphen gra = new Graphen();
+		RisikoGUI gui = new RisikoGUI();
+		Aktionen akt = new Aktionen(gra, gui);
 
 		Gebietskarte [] Deck = new Gebietskarte [44];
 
@@ -67,9 +71,6 @@ public class Main {
 		laender.get("Brasilien").setTruppen(10);
 		Horst.Angreifen(laender.get("Argentinien"), laender.get("Brasilien"));
 
-		Graphen gra = new Graphen();
-		RisikoGUI gui = new RisikoGUI();
-		Aktionen akt = new Aktionen(gra, gui);
 		//Horst bewegt Truppen
 		Horst.TruppenBewegen(laender.get("Brasilien"), laender.get("Argentinien"));
 

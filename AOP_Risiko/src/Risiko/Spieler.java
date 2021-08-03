@@ -3,6 +3,7 @@ package Risiko;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -23,6 +24,7 @@ public class Spieler {
 	private boolean artillerieSet = false;
 	private boolean gemischtesSet = false;
 	private boolean jokerSet = false;
+	private boolean setEingeloest = false;
 	private int truppen = 0;
 	private int setBonus = 0;
 
@@ -32,9 +34,36 @@ public class Spieler {
 		this.name= name;
 	}
 	
+	public void KarteZiehen(ArrayList <Gebietskarte> DeckListe){
+		hand.add(DeckListe.get(DeckListe.size()-1));
+		DeckListe.remove(DeckListe.get(DeckListe.size()-1));		}
+
+
+	//Spieler Hand getter/setter
+	public ArrayList <Gebietskarte> getHand() {
+		return hand;
+	}
+	public void setHand(ArrayList <Gebietskarte> hand) {
+		this.hand = hand;
+	}
+
+	//Spieler Länder getter/setter
+	public ArrayList <Laender> getLaender() {
+		return laenderArray;
+	}
+	public void setLaender(ArrayList<Laender> land) {
+		this.laenderArray = land;
+		for (int i = 0; i < land.size();i++)
+		{
+		laenderHash.put(land.get(i).getName(), land.get(i));
+		}
+	}
 	
 	public int TruppenErhalten() {
+		if(setEingeloest)
+		{
 		berechneSetBonus();
+		}
 		if (laenderArray.size() < 9)
 		{
 		truppen = 3  + setBonus + besitztKontinent();
@@ -44,43 +73,11 @@ public class Spieler {
 				return truppen;
 				}		
 	}
-
-	public void GebietskartenErhalten(ArrayList <Gebietskarte> DeckListe) {
-		// if (Angreifen() == sieg) 
-		// Spieler erhält 1 Karte vom Stapel
-		//Spieler.KarteZiehen(DeckListe);
-	}
 	
-	public void KarteZiehen(ArrayList <Gebietskarte> DeckListe){
-			hand.add(DeckListe.get(DeckListe.size()-1));
-			DeckListe.remove(DeckListe.get(DeckListe.size()-1));
-	}
-
 	
-	//Spieler Hand getter/setter
-	public ArrayList <Gebietskarte> getHand() {
-		return hand;
-	}
-	public void setHand(ArrayList <Gebietskarte> hand) {
-		this.hand = hand;
-	}
-	
-	//Spieler Länder getter/setter
-	public ArrayList <Laender> getLaender() {
-		return laenderArray;
-	}
-	public void setLaender(ArrayList<Laender> land) {
-		this.laenderArray = land;
-		for (int i = 0; i < land.size();i++)
-		{
-			laenderHash.put(land.get(i).getName(), land.get(i));
-		}
-	}
 
 	
 	public boolean SetKomplett () {
-		
-
 		
 		int i = 0;
 		int k = 0;
@@ -139,7 +136,7 @@ public class Spieler {
 				}	
 			}
 		}
-		if (kavallerieSet == true)
+		else if (kavallerieSet == true)
 		{ 
 			System.out.println( name + " hat " + hand.size() + " Karten und ein vollständiges Kavallerie Set"); 
 			for (int z = size; z>=0; z-- )
@@ -152,7 +149,7 @@ public class Spieler {
 				}	
 			}
 		}
-		if (artillerieSet == true)
+		else if (artillerieSet == true)
 		{ 
 			System.out.println( name + " hat " + hand.size() + " Karten und ein vollständiges Artillerie Set");
 			for (int z = size; z>=0; z-- )
@@ -168,7 +165,7 @@ public class Spieler {
 		}
 		
 		
-		if (gemischtesSet == true)
+		else if (gemischtesSet == true)
 		{ System.out.println( name + " hat " + hand.size() + " Karten und ein vollständiges gemischtes Set"); 
 		boolean infaEntnommen = false;
 		boolean kavaEntnommen = false;
@@ -203,7 +200,7 @@ public class Spieler {
 			} 
 		} 
 		
-		if (jokerSet == true)
+		else if (jokerSet == true)
 		{ System.out.println( name + " hat ein vollständiges Joker Set"); 
 		boolean jokerEntnommen = false;
 		for (int z = size; z >= 0; z--)
@@ -245,13 +242,13 @@ public class Spieler {
 			if (input.next().equals("ja")  )
 			{
 				SetEinloesen(Main.DeckListe);
+				setEingeloest=true;
 				Main.eingeloesteSets++;
-				
 			}
 		}
 		TruppenErhalten();
 		System.out.println("Spieler " + name + " hat " + truppen + " Truppen zum verteilen zur Verfügung.");
-		
+		//<<<<<Funktion in GUI zum verteilen der Truppen
 	}
 	
 	public void Angreifen(Laender a, Laender b) {
@@ -302,19 +299,32 @@ public class Spieler {
 				boolean nochmal = true;
 				while (nochmal)
 				{
-				System.out.println("Wie viele Truppen möchtest du verschieben?");
+				System.out.println("Wie viele Truppen möchtest du verschieben?");			
+				/*
+				try {
+					int eingabe1 = input.nextInt(); 
+					nochmal = false;
+					}
+					//Fehler bei eingabe Buchstabe
+				catch(InputMismatchException e) 
+				{ 	
+					nochmal = true;
+					System.out.println("Bitte gib eine ganze Zahl ein");}
+				*/
+				
 				int eingabe = input.nextInt();
 				if (eingabe > von.getTruppen()-1)
 				{
 				System.out.println("Du kannst nur maximal " + (von.getTruppen()-1) + " Truppen verschieben"); 
-				} else if (eingabe < 1)
-						{
-						System.out.println("Bitte gib eine größere Zahl ein");
-						} else  { 
-								von.setTruppen(von.getTruppen()-eingabe);
-								nach.setTruppen(nach.getTruppen()+eingabe);
-								nochmal = false;
-								}
+				} 
+				else if (eingabe < 1)
+				{
+				System.out.println("Bitte gib eine größere Zahl ein");
+				} else  { 
+						von.setTruppen(von.getTruppen()-eingabe);
+						nach.setTruppen(nach.getTruppen()+eingabe);
+						nochmal = false;
+						}
 				}
 			} else { System.out.println("Horst gehören zwar die Länder, aber sie sind nicht verbunden");}
 		} else { System.out.println("Verschieben nicht möglich, da Horst eines oder beide Länder nicht gehören"); }

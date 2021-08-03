@@ -1,3 +1,46 @@
+ 0 - Nordwest Territorium
+ 1 - Jakutien
+ 2 - Grönland
+ 3 - Island
+ 4 - Alaska
+ 5 - Skandinavien
+ 6 - Alberta
+ 7 - Irkutsk
+ 8 - Quebec
+ 9 - Kamtschatka
+ 10 - Ontario
+ 11 - Sibirien
+ 12 - Ural
+ 13 - Großbritannien
+ 14 - Mitteleuropa
+ 15 - Mongolei
+ 16 - Japan
+ 17 - Weststaaten
+ 18 - Oststaaten
+ 19 - Ukraine
+ 20 - Afghanistan
+ 21 - Südeuropa
+ 22 - Westeuropa
+ 23 - China
+ 24 - Mittelamerika
+ 25 - Venezuela
+ 26 - Ägypten
+ 27 - Siam
+ 28 - Mittlerer Osten
+ 29 - Indien
+ 30 - Nordwest Afrika
+ 31 - Neu-Guinea
+ 32 - Peru
+ 33 - Indonesien
+ 34 - Brasilien
+ 35 - Kongo
+ 36 - Ostafrika
+ 37 - Madagaskar
+ 38 - Westaustralien
+ 39 - Ostaustralien
+ 40 - Südafrika
+ 41 - Argentinien
+				
 				//Australien
 				Laender indonesien = new Laender("Indonesien");
 				Laender ostAustralien = new Laender("Ost-Australien");

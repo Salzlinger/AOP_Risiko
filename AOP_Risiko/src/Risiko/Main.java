@@ -30,15 +30,18 @@ public class Main {
 		Karten.DeckMischen(Deck);
 		DeckListe = new ArrayList<Gebietskarte>(Arrays.asList(Deck));
 		
-		/**
+		
 		Graphen gra = new Graphen();
 		RisikoGUI gui = new RisikoGUI();
 		Aktionen akt = new Aktionen(gra, gui);
-		 */
+		
 		
 		Spieler Horst = new Spieler("blau", "Horst");
 
 		//Horst bekommt Laender zugewiesen
+		
+		
+		
 		String [] lands =  {"Peru", "Argentinien", "Venezuela", "Brasilien", "Island","Indonesien"};
 		for (int i = 0; i < lands.length; i++)
 		{

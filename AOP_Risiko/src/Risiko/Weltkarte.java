@@ -5,7 +5,6 @@ import java.awt.event.*;
 import java.awt.geom.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.net.URL;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -15,7 +14,45 @@ import javax.imageio.ImageIO;
 public class Weltkarte {
 
     private JComponent ui = null;
-    JLabel output = new JLabel();
+    private JLabel output;
+    private JLabel phase;
+    private JLabel w1;
+    private JLabel w2;
+    private JLabel w3;
+    private JLabel w4;
+    private JLabel w5;
+    private JLabel w6;
+    
+    private JPanel btnPanel;
+    private JPanel spielerPanel;
+    private JPanel wPanel;
+    
+    private JButton truppenBtn;
+    private JButton nextBtn;
+    
+    private String truppenBtnName = "TruppenBtn";
+    private String nextBtnName = "nextBtn";
+    
+    private Image image1;
+    private Image newimage1;
+    private Image image2;
+    private Image newimage2;
+    private Image image3;
+    private Image newimage3;
+    private Image image4;
+    private Image newimage4;
+    private Image image5;
+    private Image newimage5;
+    private Image image6;
+    private Image newimage6;
+    
+    private ImageIcon wuerfel1;
+    private ImageIcon wuerfel2;
+    private ImageIcon wuerfel3;
+    private ImageIcon wuerfel4;
+    private ImageIcon wuerfel5;
+    private ImageIcon wuerfel6;
+    
     public static final int SIZE = 550;
     BufferedImage bild;
     Area area;
@@ -35,19 +72,125 @@ public class Weltkarte {
         }
         String imagePath = "src\\img\\risk.png";
         bild = ImageIO.read(new File(imagePath));
-
+        
+        
+        for(int i=1; i < 6 ; i++)
+        {
+        	
+        }
+        wuerfel1 = new ImageIcon("src\\img\\Würfel1.png");
+        image1 = wuerfel1.getImage();
+        newimage1 = image1.getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
+        wuerfel1 = new ImageIcon(newimage1);
+        
+        wuerfel2 = new ImageIcon("src\\img\\Würfel2.png");
+        image2 = wuerfel2.getImage();
+        newimage2 = image2.getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
+        wuerfel2 = new ImageIcon(newimage2);
+        
+        wuerfel3 = new ImageIcon("src\\img\\Würfel3.png");
+        image3 = wuerfel3.getImage();
+        newimage3 = image3.getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
+        wuerfel3 = new ImageIcon(newimage3);
+        
+        wuerfel4 = new ImageIcon("src\\img\\Würfel4.png");
+        image4 = wuerfel4.getImage();
+        newimage4 = image4.getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
+        wuerfel4 = new ImageIcon(newimage4);
+        
+        wuerfel5 = new ImageIcon("src\\img\\Würfel5.png");
+        image5 = wuerfel5.getImage();
+        newimage5 = image5.getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
+        wuerfel5 = new ImageIcon(newimage5);
+        
+        wuerfel6 = new ImageIcon("src\\img\\Würfel6.png");
+        image6 = wuerfel6.getImage();
+        newimage6 = image6.getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
+        wuerfel6 = new ImageIcon(newimage6);
+        
         area = getOutline(Color.WHITE, bild, 60);
 
         shapeList = separateShapeIntoRegions(area);
-        ui = new JPanel(new BorderLayout(4, 4));
+        ui = new JPanel(new BorderLayout(4, 0));
         ui.setBorder(new EmptyBorder(4, 4, 4, 4));
 
+        output = new JLabel();
         output.addMouseMotionListener(new MousePositionListener());
         output.addMouseListener(new MouseClickListener());
-
+        
+        btnPanel = new JPanel(); 
+        btnPanel.setBackground(new Color(0x3f47cc));
+        btnPanel.setLayout(new BorderLayout(10,4));
+        btnPanel.setBorder(new EmptyBorder(10,10,10,10));
+        btnPanel.setPreferredSize(new Dimension(0,100));
+        
+        wPanel = new JPanel();
+        wPanel.setLayout(new GridLayout(1,6));
+        wPanel.setBackground(new Color(0x3f47cc));
+        
+        
+        spielerPanel = new JPanel();
+        spielerPanel.setBackground(new Color(0x3f47cc));
+        spielerPanel.setLayout(new BorderLayout(0,0));
+        spielerPanel.setPreferredSize(new Dimension(0,20));
+        
+        
+        truppenBtn = new JButton("Gebietskarten");
+        truppenBtn.setFont(new Font("Calibri", Font.PLAIN,20));
+        truppenBtn.setBackground(new Color(0x2dce98));
+        truppenBtn.setForeground(Color.white);
+        truppenBtn.setUI(new ButtonDesign());
+        
+        nextBtn = new JButton("Zug beenden");
+        nextBtn.setFont(new Font("Calibri", Font.PLAIN,20));
+        nextBtn.setBackground(new Color(0x2dce98));
+        nextBtn.setForeground(Color.white);
+        nextBtn.setUI(new ButtonDesign());
+        
+        phase = new JLabel("Spieler 1 ist am Zug!", SwingConstants.CENTER);
+        phase.setFont(new Font("Calibri",Font.PLAIN,20));
+        phase.setForeground(Color.white);
+        
+        w1 = new JLabel();
+        w1.setIcon(wuerfel1);
+        
+        w2 = new JLabel();
+        w2.setIcon(wuerfel2);
+        
+        w3 = new JLabel();
+        w3.setIcon(wuerfel3);
+        
+        w4 = new JLabel();
+        w4.setIcon(wuerfel4);
+        
+        w5 = new JLabel();
+        w5.setIcon(wuerfel5);
+        
+        w6 = new JLabel();
+        w6.setIcon(wuerfel6);
+        
+        spielerPanel.add(phase);
+        btnPanel.add((truppenBtn),BorderLayout.WEST);
+        btnPanel.add((nextBtn),BorderLayout.EAST);
+        btnPanel.add((spielerPanel),BorderLayout.NORTH);
+        wPanel.add(w1);
+        wPanel.add(w2);
+        wPanel.add(w3);
+        wPanel.add(Box.createRigidArea(new Dimension(30,0)));
+        wPanel.add(w4);
+        wPanel.add(w5);
+        wPanel.add(w6);
+        
+        btnPanel.add(wPanel);
         ui.add(output);
+        ui.add((btnPanel),BorderLayout.SOUTH);
+
 
         refresh();
+    }
+    
+    public static ArrayList<Shape> getShapes() {
+    	return shapeList;
     }
 
     public Area getOutline(Color ziel, BufferedImage bi, int toleranz) {
@@ -115,7 +258,7 @@ public class Weltkarte {
         }
         regions.remove(6);
         regions.remove(10);
-        regions.remove(21);
+        regions.remove(28);
         regions.remove(32);
         return regions;
     }

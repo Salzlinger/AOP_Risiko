@@ -8,6 +8,8 @@ public class Laender {
 	boolean istBekannt = true;
 	int truppen = 0;
 	private static String besitzer= "";
+	private static int shape = 0;
+	
 	
 	public Laender (String name) {
 		this.name = name;
@@ -16,6 +18,16 @@ public class Laender {
 	public String getName() {
 		return name;
 	}
+	
+	//shape getter/setter
+	public static int getShape() {
+		return shape;
+	}
+
+	public static void setShape(int shape) {
+		Laender.shape = shape;
+	}
+	
 	
 	//truppen set/get
 	public int getTruppen() {
@@ -56,6 +68,8 @@ public class Laender {
 	public void setBesitzer(String besitzer) {
 		Laender.besitzer = besitzer;
 	}
+
+	
 	
 
 }

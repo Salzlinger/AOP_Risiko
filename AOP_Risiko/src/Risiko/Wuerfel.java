@@ -29,27 +29,26 @@ public class Wuerfel {
 		if (input.next().equals("blitz")) // hier button einfügen
 		{blitzKampf = true; 	System.out.println("Blitzkampf startet");}
 		else { normalKampf = true; 		System.out.println("Normalkampf startet");}
-				
-		//System.out.println("Mit wie vielen Truppen möchtest du angreifen? ");
-		//int angreifer1 = 3; //input.nextInt();
 		
 		while (angreifer > 1 && verteidiger != 0 && weitermachen)
 		{	
-			if (normalKampf)
+			if (normalKampf)	//Wenn ein NormalKampf ausgewählt wird, kann vor jeder Runde entschieden werden ob mit 1,2, oder 3 Truppen angegriffen wird
 			{
 				while (ungueltigeEingabe)
 				{
 				System.out.println("Wähle aus ob du mit 1,2 oder 3 Truppen angreifen möchtest");
 				System.out.println("3 ist standard mäßig ausgewählt");
 				
-				angreifer = input.nextInt();
-				if (angreiferGesamt == 3 && angreifer > 2)
-						{System.out.println("Du kannst nur noch mit max 2 Truppen angreifen");}
+				angreifer = Fehlersuche.eingabePruefenInt();
+				
+				if (angreifer > 3)
+					{System.out.println("Du kannst nur mit max 3 Truppen angreifen");}
+				else if (angreiferGesamt == 3 && angreifer > 2)
+					{System.out.println("Du kannst nur noch mit max 2 Truppen angreifen");}
 				else if (angreiferGesamt == 2 && angreifer > 1)
-						{System.out.println("Du kannst nur noch mit max 1 Truppe angreifen");}
-				else {ungueltigeEingabe = false;}
-			
-
+					{System.out.println("Du kannst nur noch mit max 1 Truppe angreifen");}
+				else	
+					{ungueltigeEingabe = false;}
 				}
 			}
 			System.out.println("---------------------------------\nRunde: " + runde);
@@ -95,8 +94,9 @@ public class Wuerfel {
 			if ( angreifer > 1 && verteidiger > 0)
 			{ if (normalKampf)
 				{	System.out.println("Möchtest du weiter angreifen? ");
-					if (input.next().equals("ja"))
-					{ ungueltigeEingabe = true;	} 	else { weitermachen = false;}
+					if (Fehlersuche.eingabeJaNein().equals("ja"))
+					{ ungueltigeEingabe = true;	} 	
+					else { weitermachen = false;}
 				}  	
 			} else { weitermachen = false;}
 		}

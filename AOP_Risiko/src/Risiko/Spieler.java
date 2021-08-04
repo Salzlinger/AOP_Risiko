@@ -312,7 +312,7 @@ public class Spieler {
 				} 
 				else if (eingabe < 1)
 				{
-				System.out.println("Bitte gib eine größere Zahl ein");
+				System.out.println("Du musst mindestens 1 Truppe verschieben");
 				} else  { 
 						von.setTruppen(von.getTruppen()-eingabe);
 						nach.setTruppen(nach.getTruppen()+eingabe);

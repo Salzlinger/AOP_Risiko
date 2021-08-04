@@ -1,6 +1,7 @@
 package Risiko;
 
 
+import java.awt.Shape;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -11,9 +12,12 @@ import java.util.HashMap;
 public class Main {
 
 
+	//private static final Shape shapeList = null;
 	public static Scanner input = new Scanner (System.in);
 	public static int eingeloesteSets = 0;
+	public static Laender [] liste;
 	public static HashMap <String, Laender> laender = new HashMap<String, Laender>();
+	public static HashMap <Shape, Laender> laenderShapes = new HashMap<Shape, Laender>();
 	public static Gebietskarte [] Deck = new Gebietskarte [44];
 	public static ArrayList <Gebietskarte> DeckListe;
 	//Beispiel Element in Hashmap laender ("Alberta" , alberta)
@@ -21,7 +25,7 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		iniLaender();
+		
 		
 		//Deck aus Gebietskarten erzeugen
 		Gebietskarte [] Deck = new Gebietskarte [44];
@@ -32,11 +36,27 @@ public class Main {
 		
 		
 		//GUI erzuegen/aufrufen
-		/*
+		
 		Graphen gra = new Graphen();
 		RisikoGUI gui = new RisikoGUI();
 		Aktionen akt = new Aktionen(gra, gui);
-		*/
+		
+		//iniLaender();
+		
+		
+		//System.out.println(Spielbrett.erde.shapeList.get(0));
+		
+		//int a = Spielbrett.erde.getShapeList().size();
+		//for (int i = 0; i < a; i++)
+		{
+			//laenderShapes.put(Spielbrett.erde.getShapeList().get(i), laender.get(i));
+		}
+		System.out.println(laenderShapes);
+		
+	
+		
+		
+		
 		
 		//Spieler initialisieren
 		Spieler Horst = new Spieler("blau", "Horst");
@@ -66,8 +86,8 @@ public class Main {
 
 		//Horst greift an
 		laender.get("Venezuela").setTruppen(10);
-		laender.get("Mittel-Amerika").setTruppen(10);
-		Horst.Angreifen(laender.get("Venezuela"), laender.get("Mittel-Amerika"));
+		laender.get("Mittel-Amerika").setTruppen(1);
+	//Horst.Angreifen(laender.get("Venezuela"), laender.get("Mittel-Amerika"));
 		
 		System.out.println("Horst besitzt nun folgende Lï¿½nder: " + Horst.getLaender() );
 		System.out.println("Truppen in: " + laender.get("Venezuela").getName() +  ": " +laender.get("Venezuela").getTruppen());
@@ -84,9 +104,12 @@ public class Main {
 		//Horst bewegt Truppen
 		laender.get("Brasilien").setTruppen(100);
 		laender.get("Jakutien").setTruppen(10);
-		Horst.TruppenBewegen(laender.get("Brasilien"), laender.get("Jakutien"));
+	//Horst.TruppenBewegen(laender.get("Brasilien"), laender.get("Jakutien"));
 		System.out.println(laender.get("Brasilien").getName() +  ": " +laender.get("Brasilien").getTruppen());
 		System.out.println(laender.get("Jakutien").getName() + ": " +laender.get("Jakutien").getTruppen());
+		
+	//System.out.println(Weltkarte.shapeList.toArray());
+	//Hashmap mit Shapes und den Ländern!
 		
 
 		//Spielerwechsel
@@ -109,7 +132,7 @@ public class Main {
 
 
 
-	private static void iniLaender () {
+	public static void iniLaender () {
 		//Laender generieren
 
 				//Australien
@@ -385,10 +408,16 @@ public class Main {
 				mittelAmerika.setNachbarn(oststaaten);
 				mittelAmerika.setNachbarn(venezuela);
 
+				liste =  new Laender [] {nordwestTerritorium, jakutien, groenland, island, alaska, skandinavien, alberta, irkutsk, quebec, kamtschatka, ontario, sibirien, ural, grossBritannien, mittelEuropa, mongolei, japan, weststaaten,
+                        oststaaten, ukraine, afghanistan, suedEuropa, westEuropa, china, mittelAmerika, venezuela, aegypten, siam, mittlererOsten, indien, nordwestAfrika,
+                        neuGuinea, peru, indonesien, brasilien, kongo, ostAfrika, madagaskar, westAustralien, ostAustralien, suedAfrika, argentinien};
 
+				for (int i = 0; i < 42; i++)
+				{
+				//laenderShapes.put(Spielbrett.erde.getShapeList().get(i), liste[i]);	
+				}
 
-
-				Laender [] liste = {alaska,alberta,ontario,nordwestTerritorium,weststaaten,oststaaten,mittelAmerika,quebec,groenland,venezuela,peru,brasilien,argentinien,island,skandinavien,grossBritannien,westEuropa,mittelEuropa,suedEuropa,ukraine,nordwestAfrika,aegypten,ostAfrika,kongo,suedAfrika,madagaskar,mittlererOsten,afghanistan,indien,ural,sibirien,jakutien,kamtschatka,irkutsk,mongolei,japan,china,siam,indonesien,neuGuinea,westAustralien,ostAustralien};
+				//Laender [] liste = {alaska,alberta,ontario,nordwestTerritorium,weststaaten,oststaaten,mittelAmerika,quebec,groenland,venezuela,peru,brasilien,argentinien,island,skandinavien,grossBritannien,westEuropa,mittelEuropa,suedEuropa,ukraine,nordwestAfrika,aegypten,ostAfrika,kongo,suedAfrika,madagaskar,mittlererOsten,afghanistan,indien,ural,sibirien,jakutien,kamtschatka,irkutsk,mongolei,japan,china,siam,indonesien,neuGuinea,westAustralien,ostAustralien};
 				for (int i = 0; i < 42; i++) {
 					laender.put(new String(liste[i].getName()), liste[i]);
 				}

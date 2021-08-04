@@ -20,16 +20,26 @@ public class Weltkarte {
     BufferedImage bild;
     Area area;
     ArrayList<Shape> shapeList;
+    private static int pointer;
+    private static int z = 0;
+	private static Laender start;
+	private static Laender ziel;
     
 
-    public Weltkarte() {
+    public static int getPointer() {
+		return pointer;
+	}
+
+	public Weltkarte() {
         try {
             initUI();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        
+        
     }
-
+	
     public final void initUI() throws Exception {
         if (ui != null) {
             return;
@@ -42,6 +52,8 @@ public class Weltkarte {
         shapeList = separateShapeIntoRegions(area);
         ui = new JPanel(new BorderLayout(4, 4));
         ui.setBorder(new EmptyBorder(4, 4, 4, 4));
+        
+        
 
         output.addMouseMotionListener(new MousePositionListener());
         output.addMouseListener(new MouseClickListener());
@@ -141,7 +153,7 @@ class MouseClickListener implements MouseListener {
              for (int i = 0; i < shapeList.size();i++) {
             	 Shape shape = shapeList.get(i);
             	 if (shape.contains(e.getPoint())) {
-            		 return Main.liste[i];
+            		 laendHandler(i);
             	 }
               }
     		}
@@ -224,4 +236,60 @@ class MouseClickListener implements MouseListener {
     public JComponent getUI() {
         return ui;
     }
+    
+    public static void laendHandler (int i) {
+    	int si = 0;
+    	for (int j = 0; j < Main.spieler.size(); j++) {
+    		if (Main.spieler.get(j).istDrann) {
+    			si = j;
+    		}
+    	}
+    	// Truppen verteilen
+    	if (Main.spieler1.getTruppen() > 0) {
+    		ziel = Main.liste[i];
+    		Main.spieler.get(si).TruppenVerteilen(ziel);
+    	} else {
+			switch (z) {
+			// Angriff
+			case 0:
+				int a = 0;
+				switch (a) {
+				case 0:
+					start = Main.liste [i];
+					a++;
+					break;
+				case 1:
+					ziel = Main.liste [i];
+					Main.spieler.get(si).Angreifen(start, ziel);
+					// Spieler besiegt?
+					if(ziel.getBesitzer().getLaender().size() == 0) {
+						Main.spieler.remove(ziel.getBesitzer());
+					} else if (start.getBesitzer().getLaender().size() == 0) {
+						Main.spieler.remove(start.getBesitzer());
+					}
+					// notification: attack again?
+				}
+				if (false) {
+					return;
+				} else {
+					z++;
+				}
+				break;
+			case 1:
+				start = Main.liste [i];
+				z++;
+				break;
+			case 2:
+				// Truppen versetzten
+				ziel = Main.liste [i];
+				Main.spieler.get(si).TruppenBewegen(start, ziel);
+				z = 0;
+			}
+			Main.spieler.get(si).istDrann = false;
+			Main.spieler.get(si + 1).istDrann = true;
+			Main.spieler.get(si + 1).TruppenErhalten();
+    	}
+    }
+    
+    
 }

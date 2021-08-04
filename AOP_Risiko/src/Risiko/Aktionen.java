@@ -113,17 +113,27 @@ class Spielereinstellungen implements ActionListener {
 		if(actionEvent.equals("startBtn"))
 		{
 			spielerNamen.add(gui.getSpielerTextField(1));
+			Main.spieler1 = new Spieler (spielerNamen.get(0), "Blau");
+			Main.spieler.add(Main.spieler1);
 			spielerNamen.add(gui.getSpielerTextField(2));
+			Main.spieler2 = new Spieler (spielerNamen.get(1), "Rot");
+			Main.spieler.add(Main.spieler2);
 			spielerNamen.add(gui.getSpielerTextField(3));
+			Main.spieler3 = new Spieler (spielerNamen.get(2), "Gelb");
+			Main.spieler.add(Main.spieler3);
 
 			if(gra.getSpielerAnzahl() == 4) 
 			{
 				spielerNamen.add(gui.getSpielerTextField(4));
+				Main.spieler4 = new Spieler (spielerNamen.get(3), "Grün");
+				Main.spieler.add(Main.spieler4);
 			}
 			
 			if(gra.getSpielerAnzahl() == 5) 
 			{
 				spielerNamen.add(gui.getSpielerTextField(5));
+				Main.spieler5 = new Spieler (spielerNamen.get(0), "Weiß");
+				Main.spieler.add(Main.spieler5);
 			}
 			
 			spielbrett = new Spielbrett();

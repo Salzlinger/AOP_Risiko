@@ -25,8 +25,28 @@ public class Spieler {
 	private boolean gemischtesSet = false;
 	private boolean jokerSet = false;
 	private boolean setEingeloest = false;
+	private boolean wait = false;
 	private int truppen = 0;
+	public boolean istDrann = false;
+	
+	
+	public int getTruppen() {
+		return truppen;
+	}
+
+
+
+
 	private int setBonus = 0;
+	
+	public boolean isWait() {
+		return wait;
+	}
+
+
+	public void setWait(boolean wait) {
+		this.wait = wait;
+	}
 	
 	public String getName() {
 		return name;
@@ -63,7 +83,7 @@ public class Spieler {
 		}
 	}
 	
-	public int TruppenErhalten() {
+	public void TruppenErhalten() {
 		if(setEingeloest)
 		{
 		berechneSetBonus();
@@ -74,11 +94,9 @@ public class Spieler {
 		{
 		System.out.println("Spieler xy erhält " + 3 + " Truppen für besetzte Länder");
 		truppen = 3  + setBonus + besitztKontinent();
-		return truppen;
 		} else  {
 				System.out.println("Spieler xy erhält " + (laenderArray.size()/3) + " Truppen für besetzte Länder");
 				truppen = laenderArray.size()/3 + setBonus + besitztKontinent();
-				return truppen;
 				}		
 	}
 
@@ -236,7 +254,7 @@ public class Spieler {
 	
 	
 	//auf Aktionen auslagern?
-	public void TruppenVerteilen() {
+	public void TruppenVerteilen(Laender land) {
 		if (SetKomplett())
 		{
 			System.out.println("Spieler " + name + " hat ein komplettes Set. Möchtest du es einlösen?");
@@ -288,12 +306,14 @@ public class Spieler {
 	
 	public void TruppenBewegen(Laender von, Laender nach) {
 		// beliebig viele Truppen aus einem Land in ein verbundenes Land verlagern
+		wait = false;
 		setLaender(laenderArray);
 		if (laenderArray.contains(von) && laenderArray.contains(nach))
 		{
 			System.out.println("Horst gehören die angebebenen Länder");
 			if (laenderVerbunden.verbunden(laenderHash,von,nach))
-			{ 
+			{
+				wait = true;
 			System.out.println("Die angegebenen Länder sind direkt verbunden oder über Länder, die ebenfalls Horst gehören");
 				boolean nochmal = true;
 				while (nochmal)

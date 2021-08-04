@@ -139,5 +139,23 @@ class Spielereinstellungen implements ActionListener {
 		
 	}
 	
+	/*
+	@Override
+	
+	
+	//Angriffsphase
+	public void actionPerformed(ActionEvent e) {
+		String actionEvent = e.getActionCommand();
+		
+		if(actionEvent.equals("angreifen"))
+		
+		if(actionEvent.equals("angreifen"))
+		{
+			
+		}
+		
+		
+	}
+	*/
 }
 

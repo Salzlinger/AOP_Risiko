@@ -6,7 +6,9 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.Shape;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -279,7 +281,10 @@ class SpielereinstellungGUI extends JDialog {
 class Spielbrett extends JDialog {
 	
 	private static final long serialVersionUID = 1L;
-		
+	
+	public static Weltkarte erde;
+	public static HashMap <Shape, Laender> laenderShapes = new HashMap<Shape, Laender>();
+	
 	public Spielbrett() {
 		
 		  Runnable r = () -> {
@@ -288,11 +293,21 @@ class Spielbrett extends JDialog {
 	            } catch (Exception ex) {
 	                ex.printStackTrace();
 	            }
-	            Weltkarte o = new Weltkarte();
-
-	            JFrame f = new JFrame(o.getClass().getSimpleName());
+	            erde = new Weltkarte();
+	            Main.iniLaender();
+	            
+	            int a = erde.shapeList.size();
+	    		for (int i = 0; i < a; i++)
+	    		{
+	    			laenderShapes.put(Spielbrett.erde.shapeList.get(i), Main.liste[i]);
+	    		}
+	            
+	            System.out.println("Eine neue Karte mit folgenden Shapes wurde erzeugt: " + erde.shapeList);
+	            System.out.println("Die Shapes entsprechen folgenden Ländern: " + laenderShapes.values());
+	            
+	            JFrame f = new JFrame(erde.getClass().getSimpleName());
 	            f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-	            f.setContentPane(o.getUI());
+	            f.setContentPane(erde.getUI());
 	            f.setResizable(false);
 	            f.pack();
 	            f.setSize(850, 590);

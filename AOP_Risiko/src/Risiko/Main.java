@@ -17,7 +17,7 @@ public class Main {
 	public static int eingeloesteSets = 0;
 	public static Laender [] liste;
 	public static HashMap <String, Laender> laender = new HashMap<String, Laender>();
-	public static HashMap <Shape, Laender> laenderShapes = new HashMap<Shape, Laender>();
+	
 	public static Gebietskarte [] Deck = new Gebietskarte [44];
 	public static ArrayList <Gebietskarte> DeckListe;
 	//Beispiel Element in Hashmap laender ("Alberta" , alberta)
@@ -41,17 +41,17 @@ public class Main {
 		RisikoGUI gui = new RisikoGUI();
 		Aktionen akt = new Aktionen(gra, gui);
 		
-		//iniLaender();
+		iniLaender();
 		
 		
-		//System.out.println(Spielbrett.erde.shapeList.get(0));
+		
 		
 		//int a = Spielbrett.erde.getShapeList().size();
 		//for (int i = 0; i < a; i++)
 		{
 			//laenderShapes.put(Spielbrett.erde.getShapeList().get(i), laender.get(i));
 		}
-		System.out.println(laenderShapes);
+		System.out.println(Spielbrett.laenderShapes);
 		
 	
 		
@@ -412,28 +412,13 @@ public class Main {
                         oststaaten, ukraine, afghanistan, suedEuropa, westEuropa, china, mittelAmerika, venezuela, aegypten, siam, mittlererOsten, indien, nordwestAfrika,
                         neuGuinea, peru, indonesien, brasilien, kongo, ostAfrika, madagaskar, westAustralien, ostAustralien, suedAfrika, argentinien};
 
-				for (int i = 0; i < 42; i++)
-				{
-				//laenderShapes.put(Spielbrett.erde.getShapeList().get(i), liste[i]);	
-				}
-
+				
 				//Laender [] liste = {alaska,alberta,ontario,nordwestTerritorium,weststaaten,oststaaten,mittelAmerika,quebec,groenland,venezuela,peru,brasilien,argentinien,island,skandinavien,grossBritannien,westEuropa,mittelEuropa,suedEuropa,ukraine,nordwestAfrika,aegypten,ostAfrika,kongo,suedAfrika,madagaskar,mittlererOsten,afghanistan,indien,ural,sibirien,jakutien,kamtschatka,irkutsk,mongolei,japan,china,siam,indonesien,neuGuinea,westAustralien,ostAustralien};
 				for (int i = 0; i < 42; i++) {
 					laender.put(new String(liste[i].getName()), liste[i]);
 				}
 				//Hashmap laender ("Alberta" , alberta)
 
-				/*
-				Graphen graphen = new Graphen();
-				for (int i = 0; i < 42; i++) {
-					for (int k = 0; k < 42; k++) {
-						System.out.println(graphen.verbunden(laender, liste[i], liste[k]));
-					}
-				}
-				*/
-
-		//RisikoGUI gui = new RisikoGUI();
-		//Aktionen akt = new Aktionen(gui);
 
 	}
 

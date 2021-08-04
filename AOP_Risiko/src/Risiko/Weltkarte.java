@@ -115,7 +115,7 @@ public class Weltkarte {
         }
         regions.remove(6);
         regions.remove(10);
-        regions.remove(28);
+        regions.remove(21);
         regions.remove(32);
         return regions;
     }
@@ -140,7 +140,7 @@ class MouseClickListener implements MouseListener {
              for (int i = 0; i < shapeList.size();i++) {
             	 Shape shape = shapeList.get(i);
             	 if (shape.contains(e.getPoint())) {
-            		 System.out.println("LinksKlick auf Shape " + i);
+            		 System.out.println("LinksKlick auf Shape " + Spielbrett.laenderShapes.get(shapeList.get(i)));
             	 }
               }
     		}

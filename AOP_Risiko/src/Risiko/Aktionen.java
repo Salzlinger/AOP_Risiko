@@ -130,6 +130,7 @@ class Spielereinstellungen implements ActionListener {
 			gui.dispose();
 			Aktionen.spielerAnzahl.dispose();
 			spielbrett.setVisible(true);
+			
 		}
 		else if(actionEvent.equals("zurueckBtn"))
 		{

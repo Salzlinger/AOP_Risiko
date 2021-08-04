@@ -16,6 +16,7 @@ public class Main {
 	public static HashMap <String, Laender> laender = new HashMap<String, Laender>();
 	public static Gebietskarte [] Deck = new Gebietskarte [44];
 	public static ArrayList <Gebietskarte> DeckListe;
+	public static Laender [] liste;
 	//Beispiel Element in Hashmap laender ("Alberta" , alberta)
 	//								var		  key		value
 
@@ -36,8 +37,6 @@ public class Main {
 		Graphen gra = new Graphen();
 		RisikoGUI gui = new RisikoGUI();
 		Aktionen akt = new Aktionen(gra, gui);
-		
-
 
 		//Spieler initialisieren
 		Spieler spieler1 = new Spieler("blau", "Horst");
@@ -72,7 +71,6 @@ public class Main {
 		spieler1.getLaender().add(laender.get("Kamtschatka"));
 		spieler1.getLaender().add(laender.get("Jakutien"));
 		System.out.println("Horst besitzt folgende L�nder: " + spieler1.getLaender() );
-
 
 		while (spieler.size() > 1) {
 
@@ -394,7 +392,7 @@ public class Main {
 
 
 
-				Laender [] liste = {alaska,alberta,ontario,nordwestTerritorium,weststaaten,oststaaten,mittelAmerika,quebec,groenland,venezuela,peru,brasilien,argentinien,island,skandinavien,grossBritannien,westEuropa,mittelEuropa,suedEuropa,ukraine,nordwestAfrika,aegypten,ostAfrika,kongo,suedAfrika,madagaskar,mittlererOsten,afghanistan,indien,ural,sibirien,jakutien,kamtschatka,irkutsk,mongolei,japan,china,siam,indonesien,neuGuinea,westAustralien,ostAustralien};
+				liste = new Laender[] {alaska,alberta,ontario,nordwestTerritorium,weststaaten,oststaaten,mittelAmerika,quebec,groenland,venezuela,peru,brasilien,argentinien,island,skandinavien,grossBritannien,westEuropa,mittelEuropa,suedEuropa,ukraine,nordwestAfrika,aegypten,ostAfrika,kongo,suedAfrika,madagaskar,mittlererOsten,afghanistan,indien,ural,sibirien,jakutien,kamtschatka,irkutsk,mongolei,japan,china,siam,indonesien,neuGuinea,westAustralien,ostAustralien};
 				for (int i = 0; i < 42; i++)
 				{
 					laender.put(new String(liste[i].getName()), liste[i]);

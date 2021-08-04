@@ -6,7 +6,6 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GridLayout;
 import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.event.ActionListener;
@@ -25,7 +24,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicButtonUI;
-import javax.swing.plaf.basic.BasicTextFieldUI;
+
 
 public class RisikoGUI extends JFrame {
 	
@@ -199,9 +198,6 @@ class SpielereinstellungGUI extends JDialog {
 
 	private JPanel spielerNamePanel;
 	
-	private GridLayout mainLayout;
-	private GridLayout spielerLayout;
-	
 	private JButton startBtn;
 	private JButton zurueckBtn;
 	
@@ -348,7 +344,7 @@ class Spielbrett extends JDialog {
 	            f.setContentPane(o.getUI());
 	            f.setResizable(false);
 	            f.pack();
-	            f.setSize(850, 600);
+	            f.setSize(850, 700);
 	            f.getContentPane().setBackground(new Color(0x3f47cc));
 	            f.setLocationRelativeTo(null);
 	            f.setVisible(true);

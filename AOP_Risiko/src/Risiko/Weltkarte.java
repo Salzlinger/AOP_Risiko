@@ -14,11 +14,21 @@ import javax.imageio.ImageIO;
 public class Weltkarte {
 
     private JComponent ui = null;
-    JLabel output = new JLabel();
+    private JLabel output;
+    private JLabel phase;
+    
+    private JPanel btnPanel;
+    private JPanel spielerPanel;
+    private JButton truppenBtn;
+    private JButton nextBtn;
+    
+    private String truppenBtnName = "TruppenBtn";
+    private String nextBtnName = "nextBtn";
+    
     public static final int SIZE = 550;
     BufferedImage bild;
     Area area;
-    ArrayList<Shape> shapeList;
+    static ArrayList<Shape> shapeList;
 
     public Weltkarte() {
         try {
@@ -38,15 +48,56 @@ public class Weltkarte {
         area = getOutline(Color.WHITE, bild, 60);
 
         shapeList = separateShapeIntoRegions(area);
-        ui = new JPanel(new BorderLayout(4, 4));
+        ui = new JPanel(new BorderLayout(4, 0));
         ui.setBorder(new EmptyBorder(4, 4, 4, 4));
 
+        output = new JLabel();
         output.addMouseMotionListener(new MousePositionListener());
         output.addMouseListener(new MouseClickListener());
+        
+        btnPanel = new JPanel(); 
+        btnPanel.setBackground(new Color(0x3f47cc));
+        btnPanel.setLayout(new BorderLayout(170,4));
+        btnPanel.setBorder(new EmptyBorder(10,10,10,10));
+        btnPanel.setPreferredSize(new Dimension(0,100));
+        
+        spielerPanel = new JPanel();
+        spielerPanel.setBackground(new Color(0x3f47cc));
+        spielerPanel.setLayout(new BorderLayout(0,0));
+        spielerPanel.setPreferredSize(new Dimension(0,20));
+        
+        
+        truppenBtn = new JButton("Gebietskarten");
+        truppenBtn.setFont(new Font("Calibri", Font.PLAIN,20));
+        truppenBtn.setBackground(new Color(0x2dce98));
+        truppenBtn.setForeground(Color.white);
+        truppenBtn.setUI(new ButtonDesign());
+        
+        nextBtn = new JButton("Zug beenden");
+        nextBtn.setFont(new Font("Calibri", Font.PLAIN,20));
+        nextBtn.setBackground(new Color(0x2dce98));
+        nextBtn.setForeground(Color.white);
+        nextBtn.setUI(new ButtonDesign());
+        
+        phase = new JLabel("Spieler 1 ist am Zug!", SwingConstants.CENTER);
+        phase.setFont(new Font("Calibri",Font.PLAIN,20));
+        phase.setForeground(Color.white);
+        
 
+        spielerPanel.add(phase);
+        btnPanel.add((truppenBtn),BorderLayout.WEST);
+        btnPanel.add((nextBtn),BorderLayout.EAST);
+        btnPanel.add((spielerPanel),BorderLayout.NORTH);
+        
         ui.add(output);
+        ui.add((btnPanel),BorderLayout.SOUTH);
+
 
         refresh();
+    }
+    
+    public static ArrayList<Shape> getShapes() {
+    	return shapeList;
     }
 
     public Area getOutline(Color ziel, BufferedImage bi, int toleranz) {

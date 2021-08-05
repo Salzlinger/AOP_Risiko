@@ -38,20 +38,20 @@ public class Main {
 		
 		
 		//Testlauf gekürzter Funktionen
-		Spieler spieler1 = new Spieler("pink", "Petra");
-		spieler1.KarteZiehen(Deck);
-		spieler1.KarteZiehen(Deck);
-		spieler1.KarteZiehen(Deck);
-		spieler1.KarteZiehen(Deck);
-		spieler1.KarteZiehen(Deck);
-		spieler1.KarteZiehen(Deck);
-		System.out.println(spieler1.getHand());
-		spieler1.TruppenErhalten();
-		
-		laender.get("Venezuela").setTruppen(10);
-		laender.get("Brasilien").setTruppen(5);
-		spieler1.getLaender().add(laender.get("Venezuela"));
-		spieler1.Angreifen(laender.get("Venezuela"), laender.get("Brasilien"));
+//		Spieler spieler1 = new Spieler("pink", "Petra");
+//		spieler1.KarteZiehen(Deck);
+//		spieler1.KarteZiehen(Deck);
+//		spieler1.KarteZiehen(Deck);
+//		spieler1.KarteZiehen(Deck);
+//		spieler1.KarteZiehen(Deck);
+//		spieler1.KarteZiehen(Deck);
+//		System.out.println(spieler1.getHand());
+//		spieler1.TruppenErhalten();
+//		
+//		laender.get("Venezuela").setTruppen(10);
+//		laender.get("Brasilien").setTruppen(5);
+//		spieler1.getLaender().add(laender.get("Venezuela"));
+//		spieler1.Angreifen(laender.get("Venezuela"), laender.get("Brasilien"));
 		
 		
 		

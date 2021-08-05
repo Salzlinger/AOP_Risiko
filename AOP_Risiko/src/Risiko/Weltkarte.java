@@ -22,6 +22,7 @@ public class Weltkarte {
     ArrayList<Shape> shapeList;
     private static int pointer;
     private static int z = 0;
+	private static int a = 0;
 	private static Laender start;
 	private static Laender ziel;
 	private static Boolean erstercyclus = true;
@@ -239,35 +240,61 @@ class MouseClickListener implements MouseListener {
     }
     
     public static void laendHandler (int i) {
-    	if (erstercyclus) {
-    		Main.spieler1.TruppenErhalten();
-    		Main.spieler1.istDrann = true;
-    		erstercyclus = false;
-    	}
     	int si = 0;
+    	//Spielstart phase
+    	if (erstercyclus) {
+    		for (int j = 0; j < Main.spieler.size(); j++) {
+        		if (Main.spieler.get(j).istDrann) {
+        			si = j;
+        		}
+        		if (Main.spieler.get(si).getTruppen() > 0) {
+            		System.out.println(Main.spieler.get(si).getName() + " hat " + Main.spieler.get(si).getTruppen() + " übrig");
+            		ziel = Main.liste[i];
+            		Main.spieler.get(si).TruppenVerteilen(ziel);
+            		if(Main.spieler.get(si).getTruppen() == 0) {
+            			return;
+            		} else {
+            			Main.spieler.get(si).istDrann = false;
+            			Main.spieler.get(si + 1).istDrann = true;
+            		}
+        		}
+            	if (Main.spieler.get(Main.spieler.size() -1).getTruppen() == 0) {
+            		Main.spieler.get(0).TruppenErhalten();
+            		Main.spieler.get(0).istDrann = true;
+            		erstercyclus = false;
+            		return;
+            	}
+    		}
+    	}
+
     	for (int j = 0; j < Main.spieler.size(); j++) {
     		if (Main.spieler.get(j).istDrann) {
     			si = j;
     		}
     	}
+    	
     	// Truppen verteilen
     	if (Main.spieler.get(si).getTruppen() > 0) {
-    		System.out.println(Main.spieler.get(si).getName() + "hat" + Main.spieler.get(si).getTruppen() + "übrig");
+    		System.out.println(Main.spieler.get(si).getName() + " hat " + Main.spieler.get(si).getTruppen() + " übrig");
     		ziel = Main.liste[i];
     		Main.spieler.get(si).TruppenVerteilen(ziel);
+    		if(Main.spieler.get(si).getTruppen() == 0) {
+    			return;
+    		}
     	} else {
 			switch (z) {
 			// Angriff
 			case 0:
 				System.out.println("Angriff!");
-				int a = 0;
 				switch (a) {
 				case 0:
 					start = Main.liste [i];
+					System.out.println("erstes land ist " + start);
 					a++;
-					break;
+					return;
 				case 1:
 					ziel = Main.liste [i];
+					System.out.println("zweites land ist " + ziel);
 					Main.spieler.get(si).Angreifen(start, ziel);
 					// Spieler besiegt?
 					if(ziel.getBesitzer().getLaender().size() == 0) {
@@ -281,16 +308,18 @@ class MouseClickListener implements MouseListener {
 					return;
 				} else {
 					z++;
+					return;
 				}
-				break;
 			case 1:
+				System.out.println("Truppen versetzten");
 				start = Main.liste [i];
+				System.out.println("erstes land ist " + start);
 				z++;
-				break;
+				return;
 			case 2:
 				// Truppen versetzten
-				System.out.println("Truppen versetzten");
 				ziel = Main.liste [i];
+				System.out.println("zweites land ist " + ziel);
 				Main.spieler.get(si).TruppenBewegen(start, ziel);
 				z = 0;
 			}

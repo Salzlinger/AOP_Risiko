@@ -155,6 +155,31 @@ class Spielereinstellungen implements ActionListener {
 			}
 			System.out.println("Folgende Spielerreihenfolge wurde ausgewürfelt: " +Main.spieler);
 
+			switch (gra.getSpielerAnzahl()) {
+			case 3:			
+				//Länder werden verteilt
+				int k = 0;
+				for (int i = 0; i < 42; i++) {
+					Main.spieler.get(k).getLaender().add(Main.liste[i]);
+					k++;
+					if(k == 3) {
+						k = 0;
+					}
+				}
+				for (int i = 0; i < Main.spieler.size(); i++) {
+					for (int j = 0; j < Main.spieler.get(i).getLaender().size(); j++) {
+						System.out.println("Länder von spieler " + Main.spieler.get(i) + " : " + Main.spieler.get(i).getLaender().get(j));
+					}
+				}
+				//Truppen werden verteilt
+				for (int i = 0; i < Main.spieler.size(); i++) {
+					Main.spieler.get(i).startTruppen(35);
+				}
+				Main.spieler.get(0).istDrann = true;
+				
+			}
+			
+			
 			
 			
 			spielbrett = new Spielbrett();

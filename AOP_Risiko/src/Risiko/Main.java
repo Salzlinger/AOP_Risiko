@@ -14,8 +14,7 @@ public class Main {
 	public static Scanner input = new Scanner (System.in);
 	public static int eingeloesteSets = 0;
 	public static HashMap <String, Laender> laender = new HashMap<String, Laender>();
-	public static Gebietskarte [] Deck = new Gebietskarte [44];
-	public static ArrayList <Gebietskarte> DeckListe;
+	public static ArrayList <Gebietskarte> Deck = new ArrayList <Gebietskarte>();;
 	public static Laender [] liste;
 	public static Spieler spieler1;
 	public static Spieler spieler2;
@@ -32,12 +31,11 @@ public class Main {
 		iniLaender();
 		
 		//Deck aus Gebietskarten erzeugen
-		Gebietskarte [] Deck = new Gebietskarte [44];
-		Karten.DeckGenerieren(Deck);
-		//Karten.DeckAnzeigen(Deck);
-		Karten.DeckMischen(Deck);
-		DeckListe = new ArrayList<Gebietskarte>(Arrays.asList(Deck)); //Deck als flexible veränderbare ArrayList
-			
+		Karten.DeckListeGenerieren(Deck);
+		Karten.DeckListeMischen(Deck);
+		//Karten.DeckListeAnzeigen(Deck);
+		
+		
 		//GUI erzuegen/aufrufen
 		
 		Graphen gra = new Graphen();

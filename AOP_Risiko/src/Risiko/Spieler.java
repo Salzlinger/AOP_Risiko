@@ -58,9 +58,10 @@ public class Spieler {
 		this.name= name;
 	}
 	
-	public void KarteZiehen(ArrayList <Gebietskarte> DeckListe){
-		hand.add(DeckListe.get(DeckListe.size()-1));
-		DeckListe.remove(DeckListe.get(DeckListe.size()-1));		}
+	public void KarteZiehen(ArrayList <Gebietskarte> Deck){
+		hand.add(Deck.get(Deck.size()-1));
+		Deck.remove(Deck.get(Deck.size()-1));		
+		}
 
 
 	//Spieler Hand getter/setter
@@ -89,7 +90,7 @@ public class Spieler {
 			System.out.println("Spieler " + name + " hat ein komplettes Set. Möchtest du es einlösen?");
 			if (input.next().equals("ja")  )
 			{
-				SetEinloesen(Main.DeckListe);
+				SetEinloesen(Main.Deck);
 				setEingeloest=true;
 				Main.eingeloesteSets++;
 			}
@@ -147,7 +148,7 @@ public class Spieler {
 	}	
 	
 	
-	public boolean SetEinloesen (ArrayList <Gebietskarte> DeckListe) {
+	public boolean SetEinloesen (ArrayList <Gebietskarte> Deck) {
 
 		System.out.println( "Spieler " + name + "\nWir wählen für dich das bestmögliche Set aus!");
 		
@@ -160,7 +161,7 @@ public class Spieler {
 			{
 				if (hand.get(z).getTyp() == "Infanterie" && p < 3 ) 
 				{  	
-				DeckListe.add(hand.get(z));
+				Deck.add(hand.get(z));
 				hand.remove(z);
 				p++;
 				}	
@@ -173,7 +174,7 @@ public class Spieler {
 			{	
 				if (hand.get(z).getTyp() == "Kavallerie" && p < 3 ) 
 				{  	
-				DeckListe.add(hand.get(z));
+				Deck.add(hand.get(z));
 				hand.remove(z);
 				p++;
 				}	
@@ -186,7 +187,7 @@ public class Spieler {
 			{
 				if (hand.get(z).getTyp() == "Artillerie" && p < 3 ) 
 				{  
-				DeckListe.add(hand.get(z));
+				Deck.add(hand.get(z));
 				hand.remove(z);
 				p++;
 				}
@@ -206,21 +207,21 @@ public class Spieler {
 				{
 				case "Infanterie": if (infaEntnommen == false) 
 										{
-										DeckListe.add(hand.get(z));
+										Deck.add(hand.get(z));
 										hand.remove(z); 
 										infaEntnommen = true;
 										break;
 										}
 				case "Kavallerie": if (kavaEntnommen == false) 
 										{
-										DeckListe.add(hand.get(z));
+										Deck.add(hand.get(z));
 										hand.remove(z); 
 										kavaEntnommen = true;
 										break;
 										}
 				case "Artillerie": if (artiEntnommen == false) 
 										{
-										DeckListe.add(hand.get(z));
+										Deck.add(hand.get(z));
 										hand.remove(z); 
 										artiEntnommen = true;
 										break;
@@ -235,19 +236,19 @@ public class Spieler {
 		for (int z = size; z >= 0; z--)
 			{ 	if (hand.get(z).getTyp() == "Joker" && jokerEntnommen == false)	
 				{
-				DeckListe.add(hand.get(z));
+				Deck.add(hand.get(z));
 				hand.remove(z); 
 				jokerEntnommen = true;
 				}
 				else if (hand.get(z).getTyp() != "Joker" && p < 2)
 						{
-						DeckListe.add(hand.get(z));
+						Deck.add(hand.get(z));
 						hand.remove(z);
 						p++;
 						} 
 			}
 		}
-	Karten.DeckListeMischen(DeckListe);
+	Karten.DeckListeMischen(Deck);
 	return true;	
 	//eingelöste Sets hoch zählen
 	}
@@ -292,7 +293,7 @@ public class Spieler {
 						else 	{
 								if (Wuerfel.Wuerfelkampf(a,b)== true)
 									{
-									KarteZiehen(Main.DeckListe);
+									KarteZiehen(Main.Deck);
 									b.setBesitzer(this);
 									System.out.println("Neuer Besitzer von " + b.name + " ist " + b.getBesitzer());
 									laenderArray.add(b);	// erobertes Land der Liste hinzufügen

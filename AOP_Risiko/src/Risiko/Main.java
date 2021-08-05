@@ -34,7 +34,16 @@ public class Main {
 		Karten.DeckListeGenerieren(Deck);
 		Karten.DeckListeMischen(Deck);
 		//Karten.DeckListeAnzeigen(Deck);
-		
+		System.out.println(Deck);
+		Spieler spieler1 = new Spieler("pink", "Petra");
+		spieler1.KarteZiehen(Deck);
+		spieler1.KarteZiehen(Deck);
+		spieler1.KarteZiehen(Deck);
+		spieler1.KarteZiehen(Deck);
+		spieler1.KarteZiehen(Deck);
+		spieler1.KarteZiehen(Deck);
+		System.out.println(spieler1.getHand());
+		spieler1.TruppenErhalten();
 		
 		//GUI erzuegen/aufrufen
 		

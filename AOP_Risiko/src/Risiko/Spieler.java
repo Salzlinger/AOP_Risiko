@@ -87,12 +87,21 @@ public class Spieler {
 	public void TruppenErhalten() {
 		if (SetKomplett())
 		{
-			System.out.println("Spieler " + name + " hat ein komplettes Set. Möchtest du es einlösen?");
-			if (input.next().equals("ja")  )
+			if (hand.size() > 5)
 			{
+				System.out.println("Spieler " + name + " hat mehr als 5 Karten auf der Hand und muss ein Set einlösen!");
 				SetEinloesen(Main.Deck);
 				setEingeloest=true;
 				Main.eingeloesteSets++;
+			} else 
+				{
+				System.out.println("Spieler " + name + " hat ein komplettes Set auf der Hand. Möchtest du es einlösen?");
+				if (input.next().equals("ja")  )
+				{
+					SetEinloesen(Main.Deck);
+					setEingeloest=true;
+					Main.eingeloesteSets++;
+				}
 			}
 		}
 		if(setEingeloest)
@@ -250,7 +259,6 @@ public class Spieler {
 		}
 	Karten.DeckListeMischen(Deck);
 	return true;	
-	//eingelöste Sets hoch zählen
 	}
 			
 	public void berechneSetBonus() {

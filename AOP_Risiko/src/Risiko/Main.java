@@ -37,8 +37,6 @@ public class Main {
 		//Karten.DeckAnzeigen(Deck);
 		Karten.DeckMischen(Deck);
 		DeckListe = new ArrayList<Gebietskarte>(Arrays.asList(Deck)); //Deck als flexible veränderbare ArrayList
-		
-		
 			
 		//GUI erzuegen/aufrufen
 		
@@ -47,24 +45,24 @@ public class Main {
 		Aktionen akt = new Aktionen(gra, gui);
 
 		//Horst bekommt Laender zugewiesen
-		spieler1.getLaender().add(laender.get("Peru"));
-		spieler1.getLaender().add(laender.get("Argentinien"));
-		spieler1.getLaender().add(laender.get("Venezuela"));
-		spieler1.getLaender().add(laender.get("Brasilien"));
-		spieler1.getLaender().add(laender.get("Island"));
-		spieler1.getLaender().add(laender.get("Indonesien"));
-		spieler1.getLaender().add(laender.get("Nordwest-Afrika"));
-		spieler1.getLaender().add(laender.get("Gross-Britannien"));
-		spieler1.getLaender().add(laender.get("West-Europa"));
-		spieler1.getLaender().add(laender.get("Ukraine"));
-		spieler1.getLaender().add(laender.get("Skandinavien"));
-		spieler1.getLaender().add(laender.get("Weststaaten"));
-		spieler1.getLaender().add(laender.get("Alberta"));
-		spieler1.getLaender().add(laender.get("Alaska"));
-		spieler1.getLaender().add(laender.get("Kamtschatka"));
-		spieler1.getLaender().add(laender.get("Jakutien"));
-		System.out.println("Horst besitzt folgende Lï¿½nder: " + spieler1.getLaender() );
-		
+//		spieler1.getLaender().add(laender.get("Peru"));
+//		spieler1.getLaender().add(laender.get("Argentinien"));
+//		spieler1.getLaender().add(laender.get("Venezuela"));
+//		spieler1.getLaender().add(laender.get("Brasilien"));
+//		spieler1.getLaender().add(laender.get("Island"));
+//		spieler1.getLaender().add(laender.get("Indonesien"));
+//		spieler1.getLaender().add(laender.get("Nordwest-Afrika"));
+//		spieler1.getLaender().add(laender.get("Gross-Britannien"));
+//		spieler1.getLaender().add(laender.get("West-Europa"));
+//		spieler1.getLaender().add(laender.get("Ukraine"));
+//		spieler1.getLaender().add(laender.get("Skandinavien"));
+//		spieler1.getLaender().add(laender.get("Weststaaten"));
+//		spieler1.getLaender().add(laender.get("Alberta"));
+//		spieler1.getLaender().add(laender.get("Alaska"));
+//		spieler1.getLaender().add(laender.get("Kamtschatka"));
+//		spieler1.getLaender().add(laender.get("Jakutien"));
+//		System.out.println("Horst besitzt folgende Lï¿½nder: " + spieler1.getLaender() );
+//		
 		
 //		while (spieler.size() > 1) {
 //			
@@ -104,22 +102,6 @@ public class Main {
 //		}
 //		System.out.println("ENDE");
 	}				
-
-
-
-
-
-
-	public static Laender waitClick() {
-
-		
-
-	}
-
-
-
-
-
 
 	private static void iniLaender () {
 		//Laender generieren
@@ -397,15 +379,12 @@ public class Main {
 				mittelAmerika.setNachbarn(oststaaten);
 				mittelAmerika.setNachbarn(venezuela);
 				
-				 liste =  new Laender [] {nordwestTerritorium, jakutien, groenland, island, alaska, skandinavien, alberta, irkutsk, quebec, kamtschatka, ontario, sibirien, ural, grossBritannien, mittelEuropa, mongolei, japan, weststaaten,
-						oststaaten, ukraine, afghanistan, suedEuropa, westEuropa, china, mittelAmerika, venezuela, aegypten, siam, mittlererOsten, indien, nordwestAfrika,
-						neuGuinea, peru, indonesien, brasilien, kongo, ostAfrika, madagaskar, westAustralien, ostAustralien, suedAfrika, argentinien};
+				 liste =  new Laender [] {nordwestTerritorium, jakutien, groenland, island, alaska, skandinavien, alberta, irkutsk, quebec, kamtschatka, ontario, sibirien, ural, grossBritannien, mittelEuropa, mongolei, japan, weststaaten, oststaaten, ukraine, afghanistan, suedEuropa, westEuropa, china, mittelAmerika, venezuela, aegypten, siam, mittlererOsten, indien, nordwestAfrika, neuGuinea, peru, indonesien, brasilien, kongo, ostAfrika, madagaskar, westAustralien, ostAustralien, suedAfrika, argentinien};
 				
-				
-				for (int i = 0; i < 42; i++) 
-				{
-					laender.put(new String(liste[i].getName()), liste[i]);
-				}
+//				for (int i = 0; i < 42; i++) 
+//				{
+//					laender.put(new String(liste[i].getName()), liste[i]);
+//				}
 
 	}
 

@@ -34,7 +34,10 @@ public class Main {
 		Karten.DeckListeGenerieren(Deck);
 		Karten.DeckListeMischen(Deck);
 		//Karten.DeckListeAnzeigen(Deck);
-		System.out.println(Deck);
+		//System.out.println(Deck);
+		
+		
+		//Testlauf gekürzter Funktionen
 		Spieler spieler1 = new Spieler("pink", "Petra");
 		spieler1.KarteZiehen(Deck);
 		spieler1.KarteZiehen(Deck);
@@ -44,6 +47,14 @@ public class Main {
 		spieler1.KarteZiehen(Deck);
 		System.out.println(spieler1.getHand());
 		spieler1.TruppenErhalten();
+		
+		laender.get("Venezuela").setTruppen(10);
+		laender.get("Brasilien").setTruppen(5);
+		spieler1.getLaender().add(laender.get("Venezuela"));
+		spieler1.Angreifen(laender.get("Venezuela"), laender.get("Brasilien"));
+		
+		
+		
 		
 		//GUI erzuegen/aufrufen
 		
@@ -390,11 +401,12 @@ public class Main {
 				
 				 liste =  new Laender [] {nordwestTerritorium, jakutien, groenland, island, alaska, skandinavien, alberta, irkutsk, quebec, kamtschatka, ontario, sibirien, ural, grossBritannien, mittelEuropa, mongolei, japan, weststaaten, oststaaten, ukraine, afghanistan, suedEuropa, westEuropa, china, mittelAmerika, venezuela, aegypten, siam, mittlererOsten, indien, nordwestAfrika, neuGuinea, peru, indonesien, brasilien, kongo, ostAfrika, madagaskar, westAustralien, ostAustralien, suedAfrika, argentinien};
 				
-//				for (int i = 0; i < 42; i++) 
-//				{
-//					laender.put(new String(liste[i].getName()), liste[i]);
-//				}
-
+				 
+				for (int i = 0; i < 42; i++) 
+				{
+					laender.put(new String(liste[i].getName()), liste[i]);
+				}
+				
 	}
 
 }

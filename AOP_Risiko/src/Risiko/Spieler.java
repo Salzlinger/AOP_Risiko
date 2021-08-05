@@ -282,36 +282,24 @@ public class Spieler {
 	}
 	
 	public void Angreifen(Laender a, Laender b) {
-		System.out.println("Mit wie vielen Truppen möchtest du angreifen? ");
-		int angriffszahl = 3; //input.nextInt();
-		
 		setLaender(laenderArray); //Länder werden in Hashmap umgeschrieben
-			
 		if (laenderHash.get(a.getName()).getNachbarn().contains(b))
 		{
-			System.out.println("Ein Angriff ist möglich, da die angegebenen Länder Nachbarn sind");
+		System.out.println("Ein Angriff ist möglich, da die angegebenen Länder Nachbarn sind");
 			
-				
-			int ang = a.getTruppen();
-			int ver = b.getTruppen();
-			if (angriffszahl > ang-1)
-			{ System.out.println("du hast nur max " + (ang-1) + " Truppen zum Angreifen. Bitte gültige Zahl auswählen");}
-				else if (angriffszahl < 1)
-						{ System.out.println("du musst mit mindestens 1 Truppe angreifen"); }
-						else 	{
-								if (Wuerfel.Wuerfelkampf(a,b)== true)
-									{
-									KarteZiehen(Main.Deck);
-									b.setBesitzer(this);
-									System.out.println("Neuer Besitzer von " + b.name + " ist " + b.getBesitzer());
-									laenderArray.add(b);	// erobertes Land der Liste hinzufügen
-									System.out.println(a.getName() + ": " + a.getTruppen());
-									System.out.println(b.getName() + ": " +b.getTruppen());
-									TruppenBewegen(a,b);
-									System.out.println(a.getName() + ": " +a.getTruppen());
-									System.out.println(b.getName() + ": " +b.getTruppen());
+			if (Wuerfel.Wuerfelkampf(a,b)== true)
+				{
+				KarteZiehen(Main.Deck);
+				b.setBesitzer(this);
+				System.out.println("Neuer Besitzer von " + b.name + " ist " + b.getBesitzer());
+				laenderArray.add(b);	// erobertes Land der Liste hinzufügen
+				System.out.println("Stationierte Truppen in " + a.getName() + ": " + a.getTruppen());
+				System.out.println("Stationierte Truppen in " + b.getName() + ": " +b.getTruppen());
+				TruppenBewegen(a,b);
+				System.out.println("Stationierte Truppen" +a.getName() + ": " +a.getTruppen());
+				System.out.println("Stationierte Truppen" +b.getName() + ": " +b.getTruppen());
 									}
-								}
+								
 		} else { System.out.println("Angriff nicht möglich, da keine Nachbarn. Bitte anderes Land auswählen!"); }
 	}
 	

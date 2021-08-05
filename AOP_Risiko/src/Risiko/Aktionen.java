@@ -3,6 +3,7 @@ package Risiko;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Aktionen implements ActionListener{
 
@@ -10,6 +11,7 @@ public class Aktionen implements ActionListener{
 	private Graphen gra;
 	
 	static SpielerAnzahl spielerAnzahl;
+	
 	
 	public Aktionen(Graphen gra, RisikoGUI gui) {
 
@@ -98,6 +100,7 @@ class Spielereinstellungen implements ActionListener {
 	private Graphen gra;
 	private SpielereinstellungGUI gui;
 	private Spielbrett spielbrett;
+	private static Random zufall = new Random();
 
 	public Spielereinstellungen(Graphen gra, SpielereinstellungGUI gui)
 	{
@@ -113,28 +116,46 @@ class Spielereinstellungen implements ActionListener {
 		if(actionEvent.equals("startBtn"))
 		{
 			spielerNamen.add(gui.getSpielerTextField(1));
-			Main.spieler1 = new Spieler (spielerNamen.get(0), "Blau");
+			Main.spieler1 = new Spieler ("Blau", spielerNamen.get(0) );
 			Main.spieler.add(Main.spieler1);
 			spielerNamen.add(gui.getSpielerTextField(2));
-			Main.spieler2 = new Spieler (spielerNamen.get(1), "Rot");
+			Main.spieler2 = new Spieler ("Rot", spielerNamen.get(1));
 			Main.spieler.add(Main.spieler2);
 			spielerNamen.add(gui.getSpielerTextField(3));
-			Main.spieler3 = new Spieler (spielerNamen.get(2), "Gelb");
+			Main.spieler3 = new Spieler ("Gelb", spielerNamen.get(2));
 			Main.spieler.add(Main.spieler3);
 
 			if(gra.getSpielerAnzahl() == 4) 
 			{
 				spielerNamen.add(gui.getSpielerTextField(4));
-				Main.spieler4 = new Spieler (spielerNamen.get(3), "Grün");
+				Main.spieler4 = new Spieler ("Grün", spielerNamen.get(3));
 				Main.spieler.add(Main.spieler4);
 			}
 			
 			if(gra.getSpielerAnzahl() == 5) 
 			{
+				spielerNamen.add(gui.getSpielerTextField(4));
+				Main.spieler4 = new Spieler ("Grün", spielerNamen.get(3));
+				Main.spieler.add(Main.spieler4);
 				spielerNamen.add(gui.getSpielerTextField(5));
-				Main.spieler5 = new Spieler (spielerNamen.get(0), "Weiß");
+				Main.spieler5 = new Spieler ("Weiß", spielerNamen.get(4));
 				Main.spieler.add(Main.spieler5);
 			}
+			
+			
+			//Spieler randomizen
+			for(int i=0; i < 10 ; i++)
+			{
+			int a = zufall.nextInt(Main.spieler.size());
+			int b = zufall.nextInt(Main.spieler.size());
+			//System.out.print(Main.spieler.size());
+			Spieler puffer = Main.spieler.get(a);
+			Main.spieler.set(a, Main.spieler.get(b));
+			Main.spieler.set(b, puffer);
+			}
+			System.out.println("Folgende Spielerreihenfolge wurde ausgewürfelt: " +Main.spieler);
+
+			
 			
 			spielbrett = new Spielbrett();
 			gui.dispose();

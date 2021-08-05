@@ -293,7 +293,7 @@ public class Spieler {
 								if (Wuerfel.Wuerfelkampf(a,b)== true)
 									{
 									KarteZiehen(Main.DeckListe);
-									b.setBesitzer(name);
+									b.setBesitzer(this);
 									System.out.println("Neuer Besitzer von " + b.name + " ist " + b.getBesitzer());
 									laenderArray.add(b);	// erobertes Land der Liste hinzufügen
 									System.out.println(a.getName() + ": " + a.getTruppen());
@@ -442,5 +442,10 @@ public class Spieler {
 	}
 
 
+	@Override
+	public String toString () //Werte werden als String ausgegeben
+		{
+		return name;
+		}
 
 }

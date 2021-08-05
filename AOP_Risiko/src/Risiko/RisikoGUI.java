@@ -269,7 +269,7 @@ class SpielereinstellungGUI extends JDialog {
 		{
 			return spieler4TextField.getText();
 		}
-		else
+		else 
 		{
 			return spieler5TextField.getText();
 		}

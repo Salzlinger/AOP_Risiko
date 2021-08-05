@@ -44,6 +44,8 @@ public class Main {
 		RisikoGUI gui = new RisikoGUI();
 		Aktionen akt = new Aktionen(gra, gui);
 
+		
+		
 		//Horst bekommt Laender zugewiesen
 //		spieler1.getLaender().add(laender.get("Peru"));
 //		spieler1.getLaender().add(laender.get("Argentinien"));

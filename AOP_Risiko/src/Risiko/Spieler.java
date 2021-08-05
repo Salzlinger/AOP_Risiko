@@ -28,11 +28,6 @@ public class Spieler {
 	private int truppen = 0;
 	private int setBonus = 0;
 	
-	public String getName() {
-		return name;
-	}
-
-
 	public Spieler (String farbe, String name) {
 		this.farbe = farbe;
 		this.setName(name);
@@ -46,6 +41,14 @@ public class Spieler {
 		this.name = name;
 	}
 	
+	public int getTruppen() {
+		return truppen;
+	}
+
+	public void setTruppen(int truppen) {
+		this.truppen = truppen;
+	}
+
 	public void KarteZiehen(ArrayList <Gebietskarte> DeckListe){
 		hand.add(DeckListe.get(DeckListe.size()-1));
 		DeckListe.remove(DeckListe.get(DeckListe.size()-1));		}
@@ -71,7 +74,17 @@ public class Spieler {
 		}
 	}
 	
-	public int TruppenErhalten() {
+	public int TruppenBerechnen() {
+		if (SetKomplett())
+		{
+			System.out.println("Spieler " + getName() + " hat ein komplettes Set. Möchtest du es einlösen?");
+			if (input.next().equals("ja")  )
+			{
+				SetEinloesen(Main.DeckListe);
+				setEingeloest=true;
+				Main.eingeloesteSets++;
+			}
+		}
 		if(setEingeloest)
 		{
 		berechneSetBonus();
@@ -81,14 +94,24 @@ public class Spieler {
 		if (laenderArray.size() < 9)
 		{
 		System.out.println("Spieler xy erhält " + 3 + " Truppen für besetzte Länder");
-		truppen = 3  + setBonus + besitztKontinent();
-		return truppen;
+		setTruppen(3  + setBonus + besitztKontinent());
+		return getTruppen();
 		} else  {
 				System.out.println("Spieler xy erhält " + (laenderArray.size()/3) + " Truppen für besetzte Länder");
-				truppen = laenderArray.size()/3 + setBonus + besitztKontinent();
-				return truppen;
+				setTruppen(laenderArray.size()/3 + setBonus + besitztKontinent());
+				return getTruppen();
 				}		
 	}
+	//auf Aktionen auslagern?
+		public void TruppenVerteilen(Laender ziel) {
+			
+			//TruppenBerechnen();
+			System.out.println("Spieler " + getName() + " hat noch " + getTruppen() + " Truppen zum verteilen zur Verfügung.");
+			ziel.setTruppen(+1);
+			
+			
+			//<<<<<Funktion in GUI zum verteilen der Truppen
+		}
 
 	public boolean SetKomplett () {
 		
@@ -243,22 +266,7 @@ public class Spieler {
 	}
 	
 	
-	//auf Aktionen auslagern?
-	public void TruppenVerteilen() {
-		if (SetKomplett())
-		{
-			System.out.println("Spieler " + getName() + " hat ein komplettes Set. Möchtest du es einlösen?");
-			if (input.next().equals("ja")  )
-			{
-				SetEinloesen(Main.DeckListe);
-				setEingeloest=true;
-				Main.eingeloesteSets++;
-			}
-		}
-		TruppenErhalten();
-		System.out.println("Spieler " + getName() + " hat " + truppen + " Truppen zum verteilen zur Verfügung.");
-		//<<<<<Funktion in GUI zum verteilen der Truppen
-	}
+	
 	
 	public void Angreifen(Laender a, Laender b) {
 		System.out.println("Mit wie vielen Truppen möchtest du angreifen? ");

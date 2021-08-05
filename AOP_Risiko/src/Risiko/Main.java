@@ -1,29 +1,39 @@
 package Risiko;
 
-
 import java.awt.Shape;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
 import java.util.HashMap;
-
+import java.util.Random;
 
 public class Main {
-
-
-	//private static final Shape shapeList = null;
+	
 	public static Scanner input = new Scanner (System.in);
+	private static Random zufall = new Random();
 	public static int eingeloesteSets = 0;
 	public static Laender [] liste;
-	public static HashMap <String, Laender> laender = new HashMap<String, Laender>();
-
+	public static HashMap <String, Laender> laender = new HashMap<String, Laender>();	//ursprüngliche Methode um auf Länder zuzugreifen
 	public static Gebietskarte [] Deck = new Gebietskarte [44];
 	public static ArrayList <Gebietskarte> DeckListe;
-	public static Laender [] liste;
+	public static ArrayList<Spieler> spieler = new ArrayList<Spieler>();
+	
 	//Beispiel Element in Hashmap laender ("Alberta" , alberta)
 	//								var		  key		value
-
+	public static void SpielerMischen(Spieler [] spieler) {
+		
+		for(int i=0; i < 100 ; i++)
+			{
+			int a = zufall.nextInt(44);
+			int b = zufall.nextInt(44);
+			Spieler puffer = spieler[a];
+			spieler[a] = spieler[b];
+			spieler[b] = puffer;
+			}
+	}
+	
+	
 	public static void main(String[] args) {
 
 
@@ -63,14 +73,32 @@ public class Main {
 
 
 		//Spieler initialisieren
-
-		Spieler spieler1 = new Spieler("blau", "Horst");
-		Spieler spieler2 = new Spieler("blau", "Weicker");
-		Spieler spieler3 = new Spieler("blau", "Hering");
-		Spieler spieler4 = new Spieler("blau", "Krï¿½mer");
-		Spieler spieler5 = new Spieler("blau", "Dobner");
+		
+		Spieler spieler1 = new Spieler("schwarz", "Schwarz");
+		Spieler spieler2 = new Spieler("gelb", "Weicker");
+		Spieler spieler3 = new Spieler("rot", "Hering");
+		Spieler spieler4 = new Spieler("braun", "Krï¿½mer");
+		Spieler spieler5 = new Spieler("lila", "Dobner");
 		Spieler Horst = new Spieler("blau", "Horst");
 
+		spieler.add(spieler1);
+		spieler.add(spieler2);
+		spieler.add(spieler3);
+		spieler.add(spieler4);
+		spieler.add(spieler5);
+		
+		for(int i=0; i < 10 ; i++)
+		{
+		int a = zufall.nextInt(5);
+		int b = zufall.nextInt(5);
+		Spieler puffer = spieler.get(a);
+		spieler.set(a, spieler.get(b));
+		spieler.set(b, puffer);
+		}
+		for(int i=0; i < spieler.size() ; i++)
+		System.out.println(spieler.get(i).getName());
+		
+		
 		//Horst bekommt Laender zugewiesen
 		Horst.getLaender().add(laender.get("Peru"));
 		Horst.getLaender().add(laender.get("Argentinien"));
@@ -92,7 +120,7 @@ public class Main {
 
 
 		//Horst verteilt Truppen
-		Horst.TruppenVerteilen();
+		//Horst.TruppenVerteilen();
 
 		//Horst greift an
 		laender.get("Venezuela").setTruppen(10);
@@ -111,6 +139,7 @@ public class Main {
 		//Prï¿½fung ob ein Spieler ausgelï¿½scht wurde
 		//Gegebenenfalls Gebietskarten an Horst ï¿½berschreiben und erneut TruppenVerteilen + Angreifen
 
+		System.out.println("Horst bekommt " + Horst.TruppenBerechnen() + " Truppen");
 		//Horst bewegt Truppen
 		laender.get("Brasilien").setTruppen(100);
 		laender.get("Jakutien").setTruppen(10);
@@ -130,66 +159,6 @@ public class Main {
 		//if (Spieler.laender == empty)
 			//delete Spieler
 
-		ArrayList<Spieler> spieler = new ArrayList<Spieler>();
-
-		spieler.add(spieler1);
-		spieler.add(spieler2);
-		spieler.add(spieler3);
-		spieler.add(spieler4);
-		spieler.add(spieler5);
-
-		//Horst bekommt Laender zugewiesen
-		spieler1.getLaender().add(laender.get("Peru"));
-		spieler1.getLaender().add(laender.get("Argentinien"));
-		spieler1.getLaender().add(laender.get("Venezuela"));
-		spieler1.getLaender().add(laender.get("Brasilien"));
-		spieler1.getLaender().add(laender.get("Island"));
-		spieler1.getLaender().add(laender.get("Indonesien"));
-		spieler1.getLaender().add(laender.get("Nordwest-Afrika"));
-		spieler1.getLaender().add(laender.get("Gross-Britannien"));
-		spieler1.getLaender().add(laender.get("West-Europa"));
-		spieler1.getLaender().add(laender.get("Ukraine"));
-		spieler1.getLaender().add(laender.get("Skandinavien"));
-		spieler1.getLaender().add(laender.get("Weststaaten"));
-		spieler1.getLaender().add(laender.get("Alberta"));
-		spieler1.getLaender().add(laender.get("Alaska"));
-		spieler1.getLaender().add(laender.get("Kamtschatka"));
-		spieler1.getLaender().add(laender.get("Jakutien"));
-		System.out.println("Horst besitzt folgende Lï¿½nder: " + spieler1.getLaender() );
-
-		while (spieler.size() > 1) {
-
-			for (int i = 0; i < spieler.size(); i++) {
-				//spieler verteilt Truppen
-				spieler.get(i).TruppenVerteilen();
-
-				//spieler greift an
-				laender.get("Venezuela").setTruppen(100);
-				laender.get("Mittel-Amerika").setTruppen(1);
-				spieler.get(i).Angreifen(laender.get("Venezuela"), laender.get("Mittel-Amerika"));
-
-				System.out.println(spieler.get(i).getName() + " besitzt nun folgende Lï¿½nder: " + spieler.get(i).getLaender() );
-				System.out.println("Truppen in: " + laender.get("Venezuela").getName() +  ": " +laender.get("Venezuela").getTruppen());
-				System.out.println("Truppen in: " + laender.get("Mittel-Amerika").getName() + ": " +laender.get("Mittel-Amerika").getTruppen());
-
-				//Prï¿½fung ob ein Spieler ausgelï¿½scht wurde
-				//Gegebenenfalls Gebietskarten an spieler ï¿½berschreiben und erneut TruppenVerteilen + Angreifen
-
-				//Spieler scheidet aus
-				for (int k = 0; k < spieler.size(); k++) {
-					if (spieler.get(k).getLaender().isEmpty()) {
-						spieler.remove(k);
-					}
-				}
-				//spieler bewegt Truppen
-				laender.get("Brasilien").setTruppen(100);
-				laender.get("Jakutien").setTruppen(10);
-				spieler.get(i).TruppenBewegen(laender.get("Brasilien"), laender.get("Jakutien"));
-				System.out.println(laender.get("Brasilien").getName() +  ": " +laender.get("Brasilien").getTruppen());
-				System.out.println(laender.get("Jakutien").getName() + ": " +laender.get("Jakutien").getTruppen());
-
-			}
-		}
 		System.out.println("ENDE");
 	}
 

@@ -85,32 +85,32 @@ public class Weltkarte {
         String imagePath = "src\\img\\risk.png";
         bild = ImageIO.read(new File(imagePath));
 
-        wuerfel1 = new ImageIcon("src\\img\\W�rfel1.png");
+        wuerfel1 = new ImageIcon("src\\img\\Wuerfel1.png");
         image1 = wuerfel1.getImage();
         newimage1 = image1.getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
         wuerfel1 = new ImageIcon(newimage1);
 
-        wuerfel2 = new ImageIcon("src\\img\\W�rfel2.png");
+        wuerfel2 = new ImageIcon("src\\img\\Wuerfel2.png");
         image2 = wuerfel2.getImage();
         newimage2 = image2.getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
         wuerfel2 = new ImageIcon(newimage2);
 
-        wuerfel3 = new ImageIcon("src\\img\\W�rfel3.png");
+        wuerfel3 = new ImageIcon("src\\img\\Wuerfel3.png");
         image3 = wuerfel3.getImage();
         newimage3 = image3.getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
         wuerfel3 = new ImageIcon(newimage3);
 
-        wuerfel4 = new ImageIcon("src\\img\\W�rfel4.png");
+        wuerfel4 = new ImageIcon("src\\img\\Wuerfel4.png");
         image4 = wuerfel4.getImage();
         newimage4 = image4.getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
         wuerfel4 = new ImageIcon(newimage4);
 
-        wuerfel5 = new ImageIcon("src\\img\\W�rfel5.png");
+        wuerfel5 = new ImageIcon("src\\img\\Wuerfel5.png");
         image5 = wuerfel5.getImage();
         newimage5 = image5.getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
         wuerfel5 = new ImageIcon(newimage5);
 
-        wuerfel6 = new ImageIcon("src\\img\\W�rfel6.png");
+        wuerfel6 = new ImageIcon("src\\img\\Wuerfel6.png");
         image6 = wuerfel6.getImage();
         newimage6 = image6.getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
         wuerfel6 = new ImageIcon(newimage6);

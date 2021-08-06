@@ -148,15 +148,15 @@ public class Main {
 
 				//Afrika
 				Laender madagaskar = new Laender("Madagaskar");
-				Laender suedAfrika = new Laender("S�d-Afrika");
+				Laender suedAfrika = new Laender("Sued-Afrika");
 				Laender kongo = new Laender("Kongo");
 				Laender ostAfrika = new Laender("Ost-Afrika");
-				Laender aegypten = new Laender("�gypten");
+				Laender aegypten = new Laender("Aegypten");
 				Laender nordwestAfrika = new Laender("Nordwest-Afrika");
 
 				//Europa
 				Laender ukraine = new Laender("Ukraine");
-				Laender suedEuropa = new Laender("S�d-Europa");
+				Laender suedEuropa = new Laender("Sued-Europa");
 				Laender mittelEuropa = new Laender("Mittel-Europa");
 				Laender westEuropa = new Laender("West-Europa");
 				Laender grossBritannien = new Laender("Gross-Britannien");
@@ -170,7 +170,7 @@ public class Main {
 				Laender venezuela = new Laender("Venezuela");
 
 				//Nordamerika
-				Laender groenland = new Laender("Gr�nland");
+				Laender groenland = new Laender("Gruenland");
 				Laender quebec = new Laender("Quebec");
 				Laender mittelAmerika = new Laender("Mittel-Amerika");
 				Laender oststaaten = new Laender("Oststaaten");

@@ -114,10 +114,10 @@ public class Spieler {
 		}
 		if (laenderArray.size() < 9)
 		{
-		System.out.println("Spieler xy erhält " + 3 + " Truppen für besetzte Länder");
+		System.out.println("Spieler " + name + "erhält 3 Truppen für besetzte Länder");
 		truppen = 3  + setBonus + besitztKontinent();
 		} else  {
-				System.out.println("Spieler xy erhält " + (laenderArray.size()/3) + " Truppen für besetzte Länder");
+				System.out.println("Spieler " + name + " erhält " + (laenderArray.size()/3) + " Truppen für besetzte Länder");
 				truppen = laenderArray.size()/3 + setBonus + besitztKontinent();
 				}		
 	}
@@ -277,7 +277,8 @@ public class Spieler {
 	//auf Aktionen auslagern?
 	public void TruppenVerteilen(Laender land) {
 		if(laenderArray.contains(land)) {
-		land.setTruppen(+1);
+		int m = land.getTruppen();
+		land.setTruppen(m + 1);
 		truppen  -= 1;
 		} else {
 			System.out.println("Dir gehört dieses Land nicht.");
@@ -308,7 +309,7 @@ public class Spieler {
 		} else { System.out.println("Angriff nicht möglich, da keine Nachbarn. Bitte anderes Land auswählen!"); }
 	}
 	
-	public void TruppenBewegen(Laender von, Laender nach) {
+	public boolean TruppenBewegen(Laender von, Laender nach) {
 		// beliebig viele Truppen aus einem Land in ein verbundenes Land verlagern
 		wait = false;
 		setLaender(laenderArray);
@@ -336,10 +337,12 @@ public class Spieler {
 						von.setTruppen(von.getTruppen()-eingabe);
 						nach.setTruppen(nach.getTruppen()+eingabe);
 						nochmal = false;
+						return true;
 						}
 				}
-			} else { System.out.println("Horst gehören zwar die Länder, aber sie sind nicht verbunden");}
-		} else { System.out.println("Verschieben nicht möglich, da Horst eines oder beide Länder nicht gehören"); }
+			} else { System.out.println("Horst gehören zwar die Länder, aber sie sind nicht verbunden"); return false;}
+		} else { System.out.println("Verschieben nicht möglich, da Horst eines oder beide Länder nicht gehören"); return false; }
+		return false;
 	}
 
 	
@@ -439,7 +442,7 @@ public class Spieler {
 		if (indo && ngui && waus && oaus)
 		{ kontinentTruppen += 2; }
 		
-		System.out.println("Spieler xy erhält " + kontinentTruppen + " Truppen für Kontinente");
+		System.out.println("Spieler" + name + "erhält " + kontinentTruppen + " Truppen für Kontinente");
 		return kontinentTruppen;
 	}
 

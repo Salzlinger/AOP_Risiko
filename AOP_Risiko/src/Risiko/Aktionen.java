@@ -116,29 +116,29 @@ class Spielereinstellungen implements ActionListener {
 		if(actionEvent.equals("startBtn"))
 		{
 			spielerNamen.add(gui.getSpielerTextField(1));
-			Main.spieler1 = new Spieler ("Blau", spielerNamen.get(0) );
+			Main.spieler1 = new Spieler ("BLUE", spielerNamen.get(0) );
 			Main.spieler.add(Main.spieler1);
 			spielerNamen.add(gui.getSpielerTextField(2));
-			Main.spieler2 = new Spieler ("Rot", spielerNamen.get(1));
+			Main.spieler2 = new Spieler ("RED", spielerNamen.get(1));
 			Main.spieler.add(Main.spieler2);
 			spielerNamen.add(gui.getSpielerTextField(3));
-			Main.spieler3 = new Spieler ("Gelb", spielerNamen.get(2));
+			Main.spieler3 = new Spieler ("YELLOW", spielerNamen.get(2));
 			Main.spieler.add(Main.spieler3);
 
 			if(gra.getSpielerAnzahl() == 4) 
 			{
 				spielerNamen.add(gui.getSpielerTextField(4));
-				Main.spieler4 = new Spieler ("Grün", spielerNamen.get(3));
+				Main.spieler4 = new Spieler ("GREEN", spielerNamen.get(3));
 				Main.spieler.add(Main.spieler4);
 			}
 			
 			if(gra.getSpielerAnzahl() == 5) 
 			{
 				spielerNamen.add(gui.getSpielerTextField(4));
-				Main.spieler4 = new Spieler ("Grün", spielerNamen.get(3));
+				Main.spieler4 = new Spieler ("GREEN", spielerNamen.get(3));
 				Main.spieler.add(Main.spieler4);
 				spielerNamen.add(gui.getSpielerTextField(5));
-				Main.spieler5 = new Spieler ("Weiß", spielerNamen.get(4));
+				Main.spieler5 = new Spieler ("WHITE", spielerNamen.get(4));
 				Main.spieler.add(Main.spieler5);
 			}
 			
@@ -168,14 +168,16 @@ class Spielereinstellungen implements ActionListener {
 				}
 				for (int i = 0; i < Main.spieler.size(); i++) {
 					for (int j = 0; j < Main.spieler.get(i).getLaender().size(); j++) {
-						System.out.println("Länder von spieler " + Main.spieler.get(i) + " : " + Main.spieler.get(i).getLaender().get(j));
+						System.out.println("Länder von spieler " + Main.spieler.get(i) + " : " + Main.spieler.get(i).getLaender().get(j).getName());
 					}
 				}
 				//Truppen werden verteilt
 				for (int i = 0; i < Main.spieler.size(); i++) {
-					Main.spieler.get(i).startTruppen(35);
+					Main.spieler.get(i).startTruppen(10);
+					//Main.spieler.get(i).startTruppen(35);
 				}
 				Main.spieler.get(0).istDrann = true;
+				System.out.println(Main.spieler.get(0).getName() + " ist Drann mit setzten.");
 				
 			}
 			

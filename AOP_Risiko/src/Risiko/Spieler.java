@@ -109,7 +109,7 @@ public class Spieler {
 		if(setEingeloest)
 		{
 		berechneSetBonus();
-		System.out.println("Spieler xy erhält " + setBonus + " Truppen für eingeloeste Sets");
+		System.out.println("Spieler: " + name + " erhält " + setBonus + " Truppen für eingeloeste Sets");
 		setEingeloest = false;
 		}
 		if (laenderArray.size() < 9)
@@ -449,5 +449,9 @@ public class Spieler {
 		{
 		return name;
 		}
+
+	public String getFarbe() {
+		return farbe;
+	}
 
 }

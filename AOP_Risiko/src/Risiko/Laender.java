@@ -6,7 +6,7 @@ public class Laender {
 	
 	String name;
 	boolean istBekannt = true;
-	int truppen = 0;
+	int truppen = 1;
 	private static Spieler besitzer;
 	
 	public Laender (String name) {

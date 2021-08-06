@@ -22,16 +22,22 @@ public class Weltkarte {
     private JLabel w4;
     private JLabel w5;
     private JLabel w6;
-
+    private JLabel trpLabel;
+    
     private JPanel btnPanel;
     private JPanel spielerPanel;
     private JPanel wPanel;
+    private JPanel trpPanel;
 
     private JButton truppenBtn;
     private JButton nextBtn;
+    private JButton hochBtn;
+    private JButton runterBtn;
 
-    private String truppenBtnName = "TruppenBtn";
+    private String truppenBtnName = "truppenBtn";
     private String nextBtnName = "nextBtn";
+    private String hochBtnName = "hochBtn";
+    private String runterBtnName = "runterBtn";
 
     private Image image1;
     private Image newimage1;
@@ -143,6 +149,11 @@ public class Weltkarte {
         spielerPanel.setLayout(new BorderLayout(0,0));
         spielerPanel.setPreferredSize(new Dimension(0,20));
 
+        trpPanel = new JPanel(new GridBagLayout());
+        trpPanel.setBackground(new Color(0x3f47cc));
+        
+        GridBagConstraints c = new GridBagConstraints();
+        
         truppenBtn = new JButton("Gebietskarten");
         truppenBtn.setFont(new Font("Calibri", Font.PLAIN,20));
         truppenBtn.setBackground(new Color(0x2dce98));
@@ -154,6 +165,21 @@ public class Weltkarte {
         nextBtn.setBackground(new Color(0x2dce98));
         nextBtn.setForeground(Color.white);
         nextBtn.setUI(new ButtonDesign());
+        
+        hochBtn = new JButton("+");
+        hochBtn.setFont(new Font("", Font.BOLD,15));
+        hochBtn.setUI(new TruppenButtonDesign());
+        c.gridx = 1;
+        c.gridy = 0;
+        trpPanel.add(hochBtn, c);
+        
+        runterBtn = new JButton("-");
+        runterBtn.setFont(new Font("", Font.BOLD,15));
+        runterBtn.setUI(new TruppenButtonDesign());
+        c.gridx = 1;
+        c.gridy = 1;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        trpPanel.add(runterBtn, c);
 
         phase = new JLabel("Spieler 1 ist am Zug!", SwingConstants.CENTER);
         phase.setFont(new Font("Calibri",Font.PLAIN,20));
@@ -177,14 +203,25 @@ public class Weltkarte {
         w6 = new JLabel();
         w6.setIcon(wuerfel6);
 
+        trpLabel = new JLabel("5");
+        trpLabel.setForeground(Color.white);
+        trpLabel.setFont(new Font("Calibri",Font.PLAIN, 20));
+        c.gridx = 0;
+        c.gridy = 0;
+        c.gridheight = 2;
+        c.ipadx = 15;
+        trpPanel.add(trpLabel, c);
+       
         spielerPanel.add(phase);
+        
         btnPanel.add((truppenBtn),BorderLayout.WEST);
         btnPanel.add((nextBtn),BorderLayout.EAST);
         btnPanel.add((spielerPanel),BorderLayout.NORTH);
+        
         wPanel.add(w1);
         wPanel.add(w2);
         wPanel.add(w3);
-        wPanel.add(Box.createRigidArea(new Dimension(30,0)));
+        wPanel.add(trpPanel);
         wPanel.add(w4);
         wPanel.add(w5);
         wPanel.add(w6);
@@ -347,6 +384,9 @@ class MouseClickListener implements MouseListener {
         g.fill(area);
         g.setColor(Color.BLACK);
         g.draw(area);
+        
+        // Einfärben der SpielerLänder
+        
         for (int i = 0; i < Main.spieler1.getLaender().size(); i++) {
         	int j = 0;
         	for (int k = 0; k < 42; k++) {
@@ -402,6 +442,26 @@ class MouseClickListener implements MouseListener {
 	        }
         }
 
+        // Truppenanzahl in Ländern anzeigen 
+        
+//        for(int i = 0; i < shapeList.size();i++)
+//        {
+//        	g.setFont(new Font("Calibri", Font.BOLD,15));
+//            g.setColor(Color.BLACK);
+//            g.drawString(String.valueOf(i), 5, 5);
+//        }
+        
+        int i = Main.liste[1].getTruppen();
+        g.setFont(new Font("Calibri", Font.BOLD,15));
+        g.setColor(Color.BLACK);
+        g.drawString(String.valueOf(i), 100, 100);
+        
+//        for (Shape shape : shapeList) {
+//                g.setColor(Color.GREEN.darker());
+//                g.drawString(shapeList.get(i), 5, 5);
+//        }
+        
+        // Maus über Land bewegen 
         try {
             Point p = MouseInfo.getPointerInfo().getLocation();
             Point p1 = output.getLocationOnScreen();

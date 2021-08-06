@@ -22,17 +22,17 @@ public class Weltkarte {
     private JLabel w4;
     private JLabel w5;
     private JLabel w6;
-    
+
     private JPanel btnPanel;
     private JPanel spielerPanel;
     private JPanel wPanel;
-    
+
     private JButton truppenBtn;
     private JButton nextBtn;
-    
+
     private String truppenBtnName = "TruppenBtn";
     private String nextBtnName = "nextBtn";
-    
+
     private Image image1;
     private Image newimage1;
     private Image image2;
@@ -45,25 +45,37 @@ public class Weltkarte {
     private Image newimage5;
     private Image image6;
     private Image newimage6;
-    
+
     private ImageIcon wuerfel1;
     private ImageIcon wuerfel2;
     private ImageIcon wuerfel3;
     private ImageIcon wuerfel4;
     private ImageIcon wuerfel5;
     private ImageIcon wuerfel6;
-    
+
     public static final int SIZE = 550;
     BufferedImage bild;
     Area area;
-    static ArrayList<Shape> shapeList;
+    ArrayList<Shape> shapeList;
+    private static int pointer;
+    private static int z = 0;
+	private static Laender start;
+	private static Laender ziel;
+	private static Boolean erstercyclus = true;
 
-    public Weltkarte() {
+
+    public static int getPointer() {
+		return pointer;
+	}
+
+	public Weltkarte() {
         try {
             initUI();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+
+
     }
 
     public final void initUI() throws Exception {
@@ -72,96 +84,98 @@ public class Weltkarte {
         }
         String imagePath = "src\\img\\risk.png";
         bild = ImageIO.read(new File(imagePath));
-        
-        wuerfel1 = new ImageIcon("src\\img\\Würfel1.png");
+
+        wuerfel1 = new ImageIcon("src\\img\\Wï¿½rfel1.png");
         image1 = wuerfel1.getImage();
         newimage1 = image1.getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
         wuerfel1 = new ImageIcon(newimage1);
-        
-        wuerfel2 = new ImageIcon("src\\img\\Würfel2.png");
+
+        wuerfel2 = new ImageIcon("src\\img\\Wï¿½rfel2.png");
         image2 = wuerfel2.getImage();
         newimage2 = image2.getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
         wuerfel2 = new ImageIcon(newimage2);
-        
-        wuerfel3 = new ImageIcon("src\\img\\Würfel3.png");
+
+        wuerfel3 = new ImageIcon("src\\img\\Wï¿½rfel3.png");
         image3 = wuerfel3.getImage();
         newimage3 = image3.getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
         wuerfel3 = new ImageIcon(newimage3);
-        
-        wuerfel4 = new ImageIcon("src\\img\\Würfel4.png");
+
+        wuerfel4 = new ImageIcon("src\\img\\Wï¿½rfel4.png");
         image4 = wuerfel4.getImage();
         newimage4 = image4.getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
         wuerfel4 = new ImageIcon(newimage4);
-        
-        wuerfel5 = new ImageIcon("src\\img\\Würfel5.png");
+
+        wuerfel5 = new ImageIcon("src\\img\\Wï¿½rfel5.png");
         image5 = wuerfel5.getImage();
         newimage5 = image5.getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
         wuerfel5 = new ImageIcon(newimage5);
-        
-        wuerfel6 = new ImageIcon("src\\img\\Würfel6.png");
+
+        wuerfel6 = new ImageIcon("src\\img\\Wï¿½rfel6.png");
         image6 = wuerfel6.getImage();
         newimage6 = image6.getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
         wuerfel6 = new ImageIcon(newimage6);
-        
+
         area = getOutline(Color.WHITE, bild, 60);
 
         shapeList = separateShapeIntoRegions(area);
         ui = new JPanel(new BorderLayout(4, 0));
         ui.setBorder(new EmptyBorder(4, 4, 4, 4));
 
+
+
         output = new JLabel();
         output.addMouseMotionListener(new MousePositionListener());
         output.addMouseListener(new MouseClickListener());
-        
-        btnPanel = new JPanel(); 
+
+        btnPanel = new JPanel();
         btnPanel.setBackground(new Color(0x3f47cc));
         btnPanel.setLayout(new BorderLayout(10,4));
         btnPanel.setBorder(new EmptyBorder(10,10,10,10));
         btnPanel.setPreferredSize(new Dimension(0,100));
-        
+
         wPanel = new JPanel();
         wPanel.setLayout(new GridLayout(1,6));
         wPanel.setBackground(new Color(0x3f47cc));
-        
+
         spielerPanel = new JPanel();
         spielerPanel.setBackground(new Color(0x3f47cc));
         spielerPanel.setLayout(new BorderLayout(0,0));
-        spielerPanel.setPreferredSize(new Dimension(0,20));        
-        
+        spielerPanel.setPreferredSize(new Dimension(0,20));
+
         truppenBtn = new JButton("Gebietskarten");
         truppenBtn.setFont(new Font("Calibri", Font.PLAIN,20));
         truppenBtn.setBackground(new Color(0x2dce98));
         truppenBtn.setForeground(Color.white);
         truppenBtn.setUI(new ButtonDesign());
-        
+
         nextBtn = new JButton("Zug beenden");
         nextBtn.setFont(new Font("Calibri", Font.PLAIN,20));
         nextBtn.setBackground(new Color(0x2dce98));
         nextBtn.setForeground(Color.white);
         nextBtn.setUI(new ButtonDesign());
-        
+
         phase = new JLabel("Spieler 1 ist am Zug!", SwingConstants.CENTER);
         phase.setFont(new Font("Calibri",Font.PLAIN,20));
         phase.setForeground(Color.white);
-        
+
         w1 = new JLabel();
         w1.setIcon(wuerfel1);
-        
+
         w2 = new JLabel();
         w2.setIcon(wuerfel2);
-        
+
         w3 = new JLabel();
         w3.setIcon(wuerfel3);
-        
+
         w4 = new JLabel();
         w4.setIcon(wuerfel4);
-        
+
         w5 = new JLabel();
         w5.setIcon(wuerfel5);
-        
+
         w6 = new JLabel();
         w6.setIcon(wuerfel6);
-        
+
         spielerPanel.add(phase);
         btnPanel.add((truppenBtn),BorderLayout.WEST);
         btnPanel.add((nextBtn),BorderLayout.EAST);
@@ -173,14 +187,14 @@ public class Weltkarte {
         wPanel.add(w4);
         wPanel.add(w5);
         wPanel.add(w6);
-        
+
         btnPanel.add(wPanel);
         ui.add(output);
         ui.add((btnPanel),BorderLayout.SOUTH);
 
         refresh();
     }
-    
+
     public static ArrayList<Shape> getShapes() {
     	return shapeList;
     }
@@ -264,18 +278,18 @@ public class Weltkarte {
         @Override
         public void mouseMoved(MouseEvent e) {
             refresh();
-        
+
         }
     }
 class MouseClickListener implements MouseListener {
-      	
+
     	@Override
     	public void mouseClicked(MouseEvent e) {
     		if (e.getButton() == MouseEvent.BUTTON1) {
              for (int i = 0; i < shapeList.size();i++) {
             	 Shape shape = shapeList.get(i);
             	 if (shape.contains(e.getPoint())) {
-            		 System.out.println("LinksKlick auf Shape " + i);
+            		 laendHandler(i);
             	 }
               }
     		}
@@ -290,7 +304,7 @@ class MouseClickListener implements MouseListener {
          }
 
 		@Override
-		public void mousePressed(MouseEvent e) {		
+		public void mousePressed(MouseEvent e) {
 		}
 
 		@Override
@@ -298,11 +312,11 @@ class MouseClickListener implements MouseListener {
 		}
 
 		@Override
-		public void mouseEntered(MouseEvent e) {		
+		public void mouseEntered(MouseEvent e) {
 		}
 
 		@Override
-		public void mouseExited(MouseEvent e) {		
+		public void mouseExited(MouseEvent e) {
 		}
 
     }
@@ -344,7 +358,7 @@ class MouseClickListener implements MouseListener {
                     g.setColor(Color.GREEN.darker());
                     g.fill(shape);
                     break;
-               
+
                 }
             }
         } catch (Exception doNothing) {
@@ -358,4 +372,75 @@ class MouseClickListener implements MouseListener {
     public JComponent getUI() {
         return ui;
     }
+
+    public static void laendHandler (int i) {
+    	if (erstercyclus) {
+    		Main.spieler1.TruppenErhalten();
+    		Main.spieler1.istDrann = true;
+    		erstercyclus = false;
+    	}
+    	int si = 0;
+    	for (int j = 0; j < Main.spieler.size(); j++) {
+    		if (Main.spieler.get(j).istDrann) {
+    			si = j;
+    		}
+    	}
+    	// Truppen verteilen
+    	if (Main.spieler.get(si).getTruppen() > 0) {
+    		System.out.println(Main.spieler.get(si).getName() + "hat" + Main.spieler.get(si).getTruppen() + "ï¿½brig");
+    		ziel = Main.liste[i];
+    		Main.spieler.get(si).TruppenVerteilen(ziel);
+    	} else {
+			switch (z) {
+			// Angriff
+			case 0:
+				System.out.println("Angriff!");
+				int a = 0;
+				switch (a) {
+				case 0:
+					start = Main.liste [i];
+					a++;
+					break;
+				case 1:
+					ziel = Main.liste [i];
+					Main.spieler.get(si).Angreifen(start, ziel);
+					// Spieler besiegt?
+					if(ziel.getBesitzer().getLaender().size() == 0) {
+						Main.spieler.remove(ziel.getBesitzer());
+					} else if (start.getBesitzer().getLaender().size() == 0) {
+						Main.spieler.remove(start.getBesitzer());
+					}
+					// notification: attack again?
+				}
+				if (false) {
+					return;
+				} else {
+					z++;
+				}
+				break;
+			case 1:
+				start = Main.liste [i];
+				z++;
+				break;
+			case 2:
+				// Truppen versetzten
+				System.out.println("Truppen versetzten");
+				ziel = Main.liste [i];
+				Main.spieler.get(si).TruppenBewegen(start, ziel);
+				z = 0;
+			}
+			Main.spieler.get(si).istDrann = false;
+			System.out.println("nï¿½chste spieler");
+			if (Main.spieler.size() == si) {
+				si = 0;
+				Main.spieler.get(si).istDrann = true;
+				Main.spieler.get(si).TruppenErhalten();
+			} else {
+			Main.spieler.get(si + 1).istDrann = true;
+			Main.spieler.get(si + 1).TruppenErhalten();
+			}
+    	}
+    }
+
+
 }

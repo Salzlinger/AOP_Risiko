@@ -25,8 +25,28 @@ public class Spieler {
 	private boolean gemischtesSet = false;
 	private boolean jokerSet = false;
 	private boolean setEingeloest = false;
+	private boolean wait = false;
 	private int truppen = 0;
+	public boolean istDrann = false;
+	
+	
+	public int getTruppen() {
+		return truppen;
+	}
+
+
+
+
 	private int setBonus = 0;
+	
+	public boolean isWait() {
+		return wait;
+	}
+
+
+	public void setWait(boolean wait) {
+		this.wait = wait;
+	}
 	
 	public String getName() {
 		return name;
@@ -38,9 +58,10 @@ public class Spieler {
 		this.name= name;
 	}
 	
-	public void KarteZiehen(ArrayList <Gebietskarte> DeckListe){
-		hand.add(DeckListe.get(DeckListe.size()-1));
-		DeckListe.remove(DeckListe.get(DeckListe.size()-1));		}
+	public void KarteZiehen(ArrayList <Gebietskarte> Deck){
+		hand.add(Deck.get(Deck.size()-1));
+		Deck.remove(Deck.get(Deck.size()-1));		
+		}
 
 
 	//Spieler Hand getter/setter
@@ -63,7 +84,26 @@ public class Spieler {
 		}
 	}
 	
-	public int TruppenErhalten() {
+	public void TruppenErhalten() {
+		if (SetKomplett())
+		{
+			if (hand.size() > 5)
+			{
+				System.out.println("Spieler " + name + " hat mehr als 5 Karten auf der Hand und muss ein Set einlösen!");
+				SetEinloesen(Main.Deck);
+				setEingeloest=true;
+				Main.eingeloesteSets++;
+			} else 
+				{
+				System.out.println("Spieler " + name + " hat ein komplettes Set auf der Hand. Möchtest du es einlösen?");
+				if (input.next().equals("ja")  )
+				{
+					SetEinloesen(Main.Deck);
+					setEingeloest=true;
+					Main.eingeloesteSets++;
+				}
+			}
+		}
 		if(setEingeloest)
 		{
 		berechneSetBonus();
@@ -74,11 +114,9 @@ public class Spieler {
 		{
 		System.out.println("Spieler xy erhält " + 3 + " Truppen für besetzte Länder");
 		truppen = 3  + setBonus + besitztKontinent();
-		return truppen;
 		} else  {
 				System.out.println("Spieler xy erhält " + (laenderArray.size()/3) + " Truppen für besetzte Länder");
 				truppen = laenderArray.size()/3 + setBonus + besitztKontinent();
-				return truppen;
 				}		
 	}
 
@@ -119,7 +157,7 @@ public class Spieler {
 	}	
 	
 	
-	public boolean SetEinloesen (ArrayList <Gebietskarte> DeckListe) {
+	public boolean SetEinloesen (ArrayList <Gebietskarte> Deck) {
 
 		System.out.println( "Spieler " + name + "\nWir wählen für dich das bestmögliche Set aus!");
 		
@@ -132,7 +170,7 @@ public class Spieler {
 			{
 				if (hand.get(z).getTyp() == "Infanterie" && p < 3 ) 
 				{  	
-				DeckListe.add(hand.get(z));
+				Deck.add(hand.get(z));
 				hand.remove(z);
 				p++;
 				}	
@@ -145,7 +183,7 @@ public class Spieler {
 			{	
 				if (hand.get(z).getTyp() == "Kavallerie" && p < 3 ) 
 				{  	
-				DeckListe.add(hand.get(z));
+				Deck.add(hand.get(z));
 				hand.remove(z);
 				p++;
 				}	
@@ -158,7 +196,7 @@ public class Spieler {
 			{
 				if (hand.get(z).getTyp() == "Artillerie" && p < 3 ) 
 				{  
-				DeckListe.add(hand.get(z));
+				Deck.add(hand.get(z));
 				hand.remove(z);
 				p++;
 				}
@@ -178,21 +216,21 @@ public class Spieler {
 				{
 				case "Infanterie": if (infaEntnommen == false) 
 										{
-										DeckListe.add(hand.get(z));
+										Deck.add(hand.get(z));
 										hand.remove(z); 
 										infaEntnommen = true;
 										break;
 										}
 				case "Kavallerie": if (kavaEntnommen == false) 
 										{
-										DeckListe.add(hand.get(z));
+										Deck.add(hand.get(z));
 										hand.remove(z); 
 										kavaEntnommen = true;
 										break;
 										}
 				case "Artillerie": if (artiEntnommen == false) 
 										{
-										DeckListe.add(hand.get(z));
+										Deck.add(hand.get(z));
 										hand.remove(z); 
 										artiEntnommen = true;
 										break;
@@ -207,21 +245,20 @@ public class Spieler {
 		for (int z = size; z >= 0; z--)
 			{ 	if (hand.get(z).getTyp() == "Joker" && jokerEntnommen == false)	
 				{
-				DeckListe.add(hand.get(z));
+				Deck.add(hand.get(z));
 				hand.remove(z); 
 				jokerEntnommen = true;
 				}
 				else if (hand.get(z).getTyp() != "Joker" && p < 2)
 						{
-						DeckListe.add(hand.get(z));
+						Deck.add(hand.get(z));
 						hand.remove(z);
 						p++;
 						} 
 			}
 		}
-	Karten.DeckListeMischen(DeckListe);
+	Karten.DeckListeMischen(Deck);
 	return true;	
-	//eingelöste Sets hoch zählen
 	}
 			
 	public void berechneSetBonus() {
@@ -236,64 +273,46 @@ public class Spieler {
 	
 	
 	//auf Aktionen auslagern?
-	public void TruppenVerteilen() {
-		if (SetKomplett())
-		{
-			System.out.println("Spieler " + name + " hat ein komplettes Set. Möchtest du es einlösen?");
-			if (input.next().equals("ja")  )
-			{
-				SetEinloesen(Main.DeckListe);
-				setEingeloest=true;
-				Main.eingeloesteSets++;
-			}
-		}
-		TruppenErhalten();
+	public void TruppenVerteilen(Laender land) {
+		land.setTruppen(+1);
+		truppen  -= 1;
+
 		System.out.println("Spieler " + name + " hat " + truppen + " Truppen zum verteilen zur Verfügung.");
 		//<<<<<Funktion in GUI zum verteilen der Truppen
 	}
 	
 	public void Angreifen(Laender a, Laender b) {
-		System.out.println("Mit wie vielen Truppen möchtest du angreifen? ");
-		int angriffszahl = 3; //input.nextInt();
-		
 		setLaender(laenderArray); //Länder werden in Hashmap umgeschrieben
-			
 		if (laenderHash.get(a.getName()).getNachbarn().contains(b))
 		{
-			System.out.println("Ein Angriff ist möglich, da die angegebenen Länder Nachbarn sind");
+		System.out.println("Ein Angriff ist möglich, da die angegebenen Länder Nachbarn sind");
 			
-				
-			int ang = a.getTruppen();
-			int ver = b.getTruppen();
-			if (angriffszahl > ang-1)
-			{ System.out.println("du hast nur max " + (ang-1) + " Truppen zum Angreifen. Bitte gültige Zahl auswählen");}
-				else if (angriffszahl < 1)
-						{ System.out.println("du musst mit mindestens 1 Truppe angreifen"); }
-						else 	{
-								if (Wuerfel.Wuerfelkampf(a,b)== true)
-									{
-									KarteZiehen(Main.DeckListe);
-									b.setBesitzer(name);
-									System.out.println("Neuer Besitzer von " + b.name + " ist " + b.getBesitzer());
-									laenderArray.add(b);	// erobertes Land der Liste hinzufügen
-									System.out.println(a.getName() + ": " + a.getTruppen());
-									System.out.println(b.getName() + ": " +b.getTruppen());
-									TruppenBewegen(a,b);
-									System.out.println(a.getName() + ": " +a.getTruppen());
-									System.out.println(b.getName() + ": " +b.getTruppen());
+			if (Wuerfel.Wuerfelkampf(a,b)== true)
+				{
+				KarteZiehen(Main.Deck);
+				b.setBesitzer(this);
+				System.out.println("Neuer Besitzer von " + b.name + " ist " + b.getBesitzer());
+				laenderArray.add(b);	// erobertes Land der Liste hinzufügen
+				System.out.println("Stationierte Truppen in " + a.getName() + ": " + a.getTruppen());
+				System.out.println("Stationierte Truppen in " + b.getName() + ": " +b.getTruppen());
+				TruppenBewegen(a,b);
+				System.out.println("Stationierte Truppen" +a.getName() + ": " +a.getTruppen());
+				System.out.println("Stationierte Truppen" +b.getName() + ": " +b.getTruppen());
 									}
-								}
+								
 		} else { System.out.println("Angriff nicht möglich, da keine Nachbarn. Bitte anderes Land auswählen!"); }
 	}
 	
 	public void TruppenBewegen(Laender von, Laender nach) {
 		// beliebig viele Truppen aus einem Land in ein verbundenes Land verlagern
+		wait = false;
 		setLaender(laenderArray);
 		if (laenderArray.contains(von) && laenderArray.contains(nach))
 		{
 			System.out.println("Horst gehören die angebebenen Länder");
 			if (laenderVerbunden.verbunden(laenderHash,von,nach))
-			{ 
+			{
+				wait = true;
 			System.out.println("Die angegebenen Länder sind direkt verbunden oder über Länder, die ebenfalls Horst gehören");
 				boolean nochmal = true;
 				while (nochmal)
@@ -420,5 +439,10 @@ public class Spieler {
 	}
 
 
+	@Override
+	public String toString () //Werte werden als String ausgegeben
+		{
+		return name;
+		}
 
 }

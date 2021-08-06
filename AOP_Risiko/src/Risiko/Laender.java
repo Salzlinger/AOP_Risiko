@@ -7,7 +7,7 @@ public class Laender {
 	String name;
 	boolean istBekannt = true;
 	int truppen = 0;
-	private static String besitzer= "";
+	private static Spieler besitzer;
 	
 	public Laender (String name) {
 		this.name = name;
@@ -49,11 +49,11 @@ public class Laender {
 		}
 
 	
-	public String getBesitzer() {
+	public Spieler getBesitzer() {
 		return besitzer;
 	}
 
-	public void setBesitzer(String besitzer) {
+	public void setBesitzer(Spieler besitzer) {
 		Laender.besitzer = besitzer;
 	}
 	

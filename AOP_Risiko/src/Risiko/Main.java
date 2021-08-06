@@ -14,9 +14,15 @@ public class Main {
 	public static Scanner input = new Scanner (System.in);
 	public static int eingeloesteSets = 0;
 	public static HashMap <String, Laender> laender = new HashMap<String, Laender>();
-	public static Gebietskarte [] Deck = new Gebietskarte [44];
-	public static ArrayList <Gebietskarte> DeckListe;
+	public static ArrayList <Gebietskarte> Deck = new ArrayList <Gebietskarte>();;
 	public static Laender [] liste;
+	public static Spieler spieler1;
+	public static Spieler spieler2;
+	public static Spieler spieler3;
+	public static Spieler spieler4;
+	public static Spieler spieler5;
+	public static ArrayList<Spieler> spieler = new ArrayList<Spieler>();
+
 	//Beispiel Element in Hashmap laender ("Alberta" , alberta)
 	//								var		  key		value
 
@@ -25,93 +31,97 @@ public class Main {
 		iniLaender();
 
 		//Deck aus Gebietskarten erzeugen
-		Gebietskarte [] Deck = new Gebietskarte [44];
-		Karten.DeckGenerieren(Deck);
-		//Karten.DeckAnzeigen(Deck);
-		Karten.DeckMischen(Deck);
-		DeckListe = new ArrayList<Gebietskarte>(Arrays.asList(Deck)); //Deck als flexible ver�nderbare ArrayList
+		Karten.DeckListeGenerieren(Deck);
+		Karten.DeckListeMischen(Deck);
+		//Karten.DeckListeAnzeigen(Deck);
+		//System.out.println(Deck);
 
 
-		//GUI
-		
+		//Testlauf gek�rzter Funktionen
+		Spieler spieler1 = new Spieler("pink", "Petra");
+		spieler1.KarteZiehen(Deck);
+		spieler1.KarteZiehen(Deck);
+		spieler1.KarteZiehen(Deck);
+		spieler1.KarteZiehen(Deck);
+		spieler1.KarteZiehen(Deck);
+		spieler1.KarteZiehen(Deck);
+		System.out.println(spieler1.getHand());
+		spieler1.TruppenErhalten();
+
+		laender.get("Venezuela").setTruppen(10);
+		laender.get("Brasilien").setTruppen(5);
+		spieler1.getLaender().add(laender.get("Venezuela"));
+		spieler1.Angreifen(laender.get("Venezuela"), laender.get("Brasilien"));
+
+
+
+
+		//GUI erzuegen/aufrufen
+
 		Graphen gra = new Graphen();
 		RisikoGUI gui = new RisikoGUI();
 		Aktionen akt = new Aktionen(gra, gui);
 
-		//Spieler initialisieren
-		Spieler spieler1 = new Spieler("blau", "Horst");
-		Spieler spieler2 = new Spieler("blau", "Weicker");
-		Spieler spieler3 = new Spieler("blau", "Hering");
-		Spieler spieler4 = new Spieler("blau", "Kr�mer");
-		Spieler spieler5 = new Spieler("blau", "Dobner");
 
-		ArrayList<Spieler> spieler = new ArrayList<Spieler>();
-
-		spieler.add(spieler1);
-		spieler.add(spieler2);
-		spieler.add(spieler3);
-		spieler.add(spieler4);
-		spieler.add(spieler5);
 
 		//Horst bekommt Laender zugewiesen
-		spieler1.getLaender().add(laender.get("Peru"));
-		spieler1.getLaender().add(laender.get("Argentinien"));
-		spieler1.getLaender().add(laender.get("Venezuela"));
-		spieler1.getLaender().add(laender.get("Brasilien"));
-		spieler1.getLaender().add(laender.get("Island"));
-		spieler1.getLaender().add(laender.get("Indonesien"));
-		spieler1.getLaender().add(laender.get("Nordwest-Afrika"));
-		spieler1.getLaender().add(laender.get("Gross-Britannien"));
-		spieler1.getLaender().add(laender.get("West-Europa"));
-		spieler1.getLaender().add(laender.get("Ukraine"));
-		spieler1.getLaender().add(laender.get("Skandinavien"));
-		spieler1.getLaender().add(laender.get("Weststaaten"));
-		spieler1.getLaender().add(laender.get("Alberta"));
-		spieler1.getLaender().add(laender.get("Alaska"));
-		spieler1.getLaender().add(laender.get("Kamtschatka"));
-		spieler1.getLaender().add(laender.get("Jakutien"));
-		System.out.println("Horst besitzt folgende L�nder: " + spieler1.getLaender() );
+//		spieler1.getLaender().add(laender.get("Peru"));
+//		spieler1.getLaender().add(laender.get("Argentinien"));
+//		spieler1.getLaender().add(laender.get("Venezuela"));
+//		spieler1.getLaender().add(laender.get("Brasilien"));
+//		spieler1.getLaender().add(laender.get("Island"));
+//		spieler1.getLaender().add(laender.get("Indonesien"));
+//		spieler1.getLaender().add(laender.get("Nordwest-Afrika"));
+//		spieler1.getLaender().add(laender.get("Gross-Britannien"));
+//		spieler1.getLaender().add(laender.get("West-Europa"));
+//		spieler1.getLaender().add(laender.get("Ukraine"));
+//		spieler1.getLaender().add(laender.get("Skandinavien"));
+//		spieler1.getLaender().add(laender.get("Weststaaten"));
+//		spieler1.getLaender().add(laender.get("Alberta"));
+//		spieler1.getLaender().add(laender.get("Alaska"));
+//		spieler1.getLaender().add(laender.get("Kamtschatka"));
+//		spieler1.getLaender().add(laender.get("Jakutien"));
+//		System.out.println("Horst besitzt folgende L�nder: " + spieler1.getLaender() );
+//
 
-		while (spieler.size() > 1) {
-
-			for (int i = 0; i < spieler.size(); i++) {
-				//spieler verteilt Truppen
-				spieler.get(i).TruppenVerteilen();
-
-				//spieler greift an
-				laender.get("Venezuela").setTruppen(100);
-				laender.get("Mittel-Amerika").setTruppen(1);
-				spieler.get(i).Angreifen(laender.get("Venezuela"), laender.get("Mittel-Amerika"));
-
-				System.out.println(spieler.get(i).getName() + " besitzt nun folgende L�nder: " + spieler.get(i).getLaender() );
-				System.out.println("Truppen in: " + laender.get("Venezuela").getName() +  ": " +laender.get("Venezuela").getTruppen());
-				System.out.println("Truppen in: " + laender.get("Mittel-Amerika").getName() + ": " +laender.get("Mittel-Amerika").getTruppen());
-
-				//Pr�fung ob ein Spieler ausgel�scht wurde
-				//Gegebenenfalls Gebietskarten an spieler �berschreiben und erneut TruppenVerteilen + Angreifen
-
-				//Spieler scheidet aus
-				for (int k = 0; k < spieler.size(); k++) {
-					if (spieler.get(k).getLaender().isEmpty()) {
-						spieler.remove(k);
-					}
-				}
-				//spieler bewegt Truppen
-				laender.get("Brasilien").setTruppen(100);
-				laender.get("Jakutien").setTruppen(10);
-				spieler.get(i).TruppenBewegen(laender.get("Brasilien"), laender.get("Jakutien"));
-				System.out.println(laender.get("Brasilien").getName() +  ": " +laender.get("Brasilien").getTruppen());
-				System.out.println(laender.get("Jakutien").getName() + ": " +laender.get("Jakutien").getTruppen());
-
-			}
-		}
-		System.out.println("ENDE");
+//		while (spieler.size() > 1) {
+//
+//			for (int i = 0; i < spieler.size(); i++) {
+//				//spieler verteilt Truppen
+//				spieler.get(i).TruppenVerteilen();
+//
+//				//spieler greift an
+//				laender.get("Venezuela").setTruppen(100);
+//				laender.get("Mittel-Amerika").setTruppen(1);
+//				//spieler.get(i).Angreifen(laender.get("Venezuela"), laender.get("Mittel-Amerika"));
+//
+//				System.out.println(spieler.get(i).getName() + " besitzt nun folgende L�nder: " + spieler.get(i).getLaender() );
+//				System.out.println("Truppen in: " + laender.get("Venezuela").getName() +  ": " +laender.get("Venezuela").getTruppen());
+//				System.out.println("Truppen in: " + laender.get("Mittel-Amerika").getName() + ": " +laender.get("Mittel-Amerika").getTruppen());
+//
+//				//Pr�fung ob ein Spieler ausgel�scht wurde
+//				//Gegebenenfalls Gebietskarten an spieler �berschreiben und erneut TruppenVerteilen + Angreifen
+//
+//				//Spieler scheidet aus
+//				for (int k = 0; k < spieler.size(); k++) {
+//					if (spieler.get(k).getLaender().isEmpty()) {
+//						spieler.remove(k);
+//					}
+//				}
+//				//spieler bewegt Truppen
+//				laender.get("Brasilien").setTruppen(100);
+//				laender.get("Jakutien").setTruppen(10);
+//				spieler.get(i).TruppenBewegen(
+//						waitClick(),
+//						liste[Weltkarte.getPointer()]
+//						);
+//				System.out.println(laender.get("Brasilien").getName() +  ": " +laender.get("Brasilien").getTruppen());
+//				System.out.println(laender.get("Jakutien").getName() + ": " +laender.get("Jakutien").getTruppen());
+//
+//			}
+//		}
+//		System.out.println("ENDE");
 	}
-
-
-
-
-
 
 	private static void iniLaender () {
 		//Laender generieren
@@ -389,10 +399,9 @@ public class Main {
 				mittelAmerika.setNachbarn(oststaaten);
 				mittelAmerika.setNachbarn(venezuela);
 
+				 liste =  new Laender [] {nordwestTerritorium, jakutien, groenland, island, alaska, skandinavien, alberta, irkutsk, quebec, kamtschatka, ontario, sibirien, ural, grossBritannien, mittelEuropa, mongolei, japan, weststaaten, oststaaten, ukraine, afghanistan, suedEuropa, westEuropa, china, mittelAmerika, venezuela, aegypten, siam, mittlererOsten, indien, nordwestAfrika, neuGuinea, peru, indonesien, brasilien, kongo, ostAfrika, madagaskar, westAustralien, ostAustralien, suedAfrika, argentinien};
 
 
-
-				liste = new Laender[] {alaska,alberta,ontario,nordwestTerritorium,weststaaten,oststaaten,mittelAmerika,quebec,groenland,venezuela,peru,brasilien,argentinien,island,skandinavien,grossBritannien,westEuropa,mittelEuropa,suedEuropa,ukraine,nordwestAfrika,aegypten,ostAfrika,kongo,suedAfrika,madagaskar,mittlererOsten,afghanistan,indien,ural,sibirien,jakutien,kamtschatka,irkutsk,mongolei,japan,china,siam,indonesien,neuGuinea,westAustralien,ostAustralien};
 				for (int i = 0; i < 42; i++)
 				{
 					laender.put(new String(liste[i].getName()), liste[i]);

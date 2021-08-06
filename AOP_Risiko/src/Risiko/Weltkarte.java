@@ -73,11 +73,6 @@ public class Weltkarte {
         String imagePath = "src\\img\\risk.png";
         bild = ImageIO.read(new File(imagePath));
         
-        
-        for(int i=1; i < 6 ; i++)
-        {
-        	
-        }
         wuerfel1 = new ImageIcon("src\\img\\Würfel1.png");
         image1 = wuerfel1.getImage();
         newimage1 = image1.getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
@@ -128,12 +123,10 @@ public class Weltkarte {
         wPanel.setLayout(new GridLayout(1,6));
         wPanel.setBackground(new Color(0x3f47cc));
         
-        
         spielerPanel = new JPanel();
         spielerPanel.setBackground(new Color(0x3f47cc));
         spielerPanel.setLayout(new BorderLayout(0,0));
-        spielerPanel.setPreferredSize(new Dimension(0,20));
-        
+        spielerPanel.setPreferredSize(new Dimension(0,20));        
         
         truppenBtn = new JButton("Gebietskarten");
         truppenBtn.setFont(new Font("Calibri", Font.PLAIN,20));
@@ -184,7 +177,6 @@ public class Weltkarte {
         btnPanel.add(wPanel);
         ui.add(output);
         ui.add((btnPanel),BorderLayout.SOUTH);
-
 
         refresh();
     }

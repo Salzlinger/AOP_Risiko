@@ -56,7 +56,7 @@ public class Weltkarte {
     public static final int SIZE = 550;
     BufferedImage bild;
     Area area;
-    ArrayList<Shape> shapeList;
+    static ArrayList<Shape> shapeList;
     private static int pointer;
     private static int z = 0;
 	private static Laender start;

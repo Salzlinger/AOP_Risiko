@@ -343,10 +343,66 @@ class MouseClickListener implements MouseListener {
 
         Graphics2D g = bi.createGraphics();
         g.drawImage(bild, 0, 0, output);
-        g.setColor(Color.WHITE.darker());
         g.fill(area);
         g.setColor(Color.BLACK);
         g.draw(area);
+       
+        for (int i = 0; i < Main.spieler1.getLaender().size(); i++) {
+            int j = 0;
+            for (int k = 0; k < 42; k++) {
+                if (Main.liste[k] == Main.spieler1.getLaender().get(i)) {
+                    j = k;
+                }
+            }
+            g.setColor(Color.BLUE);
+            g.fill(shapeList.get(j));
+        }
+        for (int i = 0; i < Main.spieler2.getLaender().size(); i++) {
+            int j = 0;
+            for (int k = 0; k < 42; k++) {
+                if (Main.liste[k] == Main.spieler2.getLaender().get(i)) {
+                    j = k;
+                }
+            }
+            g.setColor(Color.RED);
+            g.fill(shapeList.get(j));
+        }
+        for (int i = 0; i < Main.spieler3.getLaender().size(); i++) {
+            int j = 0;
+            for (int k = 0; k < 42; k++) {
+                if (Main.liste[k] == Main.spieler3.getLaender().get(i)) {
+                    j = k;
+                }
+            }
+            g.setColor(Color.YELLOW);
+            g.fill(shapeList.get(j));
+        }
+        if(Main.spieler.size() > 3) {
+            for (int i = 0; i < Main.spieler4.getLaender().size(); i++) {
+                int j = 0;
+                for (int k = 0; k < 42; k++) {
+                    if (Main.liste[k] == Main.spieler4.getLaender().get(i)) {
+                        j = k;
+                    }
+                }
+                g.setColor(Color.GREEN);
+                g.fill(shapeList.get(j));
+            }
+        }
+        if (Main.spieler.size() > 4) {
+            for (int i = 0; i < Main.spieler5.getLaender().size(); i++) {
+                int j = 0;
+                for (int k = 0; k < 42; k++) {
+                    if (Main.liste[k] == Main.spieler5.getLaender().get(i)) {
+                        j = k;
+                    }
+                }
+                g.setColor(Color.WHITE);
+                g.fill(shapeList.get(j));
+            }
+        }
+        
+        // Maus über Land bewegen
         try {
             Point p = MouseInfo.getPointerInfo().getLocation();
             Point p1 = output.getLocationOnScreen();

@@ -59,6 +59,7 @@ public class Weltkarte {
     static ArrayList<Shape> shapeList;
     private static int pointer;
     private static int z = 0;
+	private static int a = 0;
 	private static Laender start;
 	private static Laender ziel;
 	private static Boolean erstercyclus = true;
@@ -346,63 +347,61 @@ class MouseClickListener implements MouseListener {
         g.fill(area);
         g.setColor(Color.BLACK);
         g.draw(area);
-       
         for (int i = 0; i < Main.spieler1.getLaender().size(); i++) {
-            int j = 0;
-            for (int k = 0; k < 42; k++) {
-                if (Main.liste[k] == Main.spieler1.getLaender().get(i)) {
-                    j = k;
-                }
-            }
-            g.setColor(Color.BLUE);
-            g.fill(shapeList.get(j));
+        	int j = 0;
+        	for (int k = 0; k < 42; k++) {
+        		if (Main.liste[k] == Main.spieler1.getLaender().get(i)) {
+        			j = k;
+        		}
+        	}
+        	g.setColor(Color.BLUE);
+        	g.fill(shapeList.get(j));
         }
         for (int i = 0; i < Main.spieler2.getLaender().size(); i++) {
-            int j = 0;
-            for (int k = 0; k < 42; k++) {
-                if (Main.liste[k] == Main.spieler2.getLaender().get(i)) {
-                    j = k;
-                }
-            }
-            g.setColor(Color.RED);
-            g.fill(shapeList.get(j));
+        	int j = 0;
+        	for (int k = 0; k < 42; k++) {
+        		if (Main.liste[k] == Main.spieler2.getLaender().get(i)) {
+        			j = k;
+        		}
+        	}
+        	g.setColor(Color.RED);
+        	g.fill(shapeList.get(j));
         }
         for (int i = 0; i < Main.spieler3.getLaender().size(); i++) {
-            int j = 0;
-            for (int k = 0; k < 42; k++) {
-                if (Main.liste[k] == Main.spieler3.getLaender().get(i)) {
-                    j = k;
-                }
-            }
-            g.setColor(Color.YELLOW);
-            g.fill(shapeList.get(j));
+        	int j = 0;
+        	for (int k = 0; k < 42; k++) {
+        		if (Main.liste[k] == Main.spieler3.getLaender().get(i)) {
+        			j = k;
+        		}
+        	}
+        	g.setColor(Color.YELLOW);
+        	g.fill(shapeList.get(j));
         }
         if(Main.spieler.size() > 3) {
-            for (int i = 0; i < Main.spieler4.getLaender().size(); i++) {
-                int j = 0;
-                for (int k = 0; k < 42; k++) {
-                    if (Main.liste[k] == Main.spieler4.getLaender().get(i)) {
-                        j = k;
-                    }
-                }
-                g.setColor(Color.GREEN);
-                g.fill(shapeList.get(j));
-            }
+	        for (int i = 0; i < Main.spieler4.getLaender().size(); i++) {
+	        	int j = 0;
+	        	for (int k = 0; k < 42; k++) {
+	        		if (Main.liste[k] == Main.spieler4.getLaender().get(i)) {
+	        			j = k;
+	        		}
+	        	}
+	        	g.setColor(Color.GREEN);
+	        	g.fill(shapeList.get(j));
+	        }
         }
         if (Main.spieler.size() > 4) {
-            for (int i = 0; i < Main.spieler5.getLaender().size(); i++) {
-                int j = 0;
-                for (int k = 0; k < 42; k++) {
-                    if (Main.liste[k] == Main.spieler5.getLaender().get(i)) {
-                        j = k;
-                    }
-                }
-                g.setColor(Color.WHITE);
-                g.fill(shapeList.get(j));
-            }
+	        for (int i = 0; i < Main.spieler5.getLaender().size(); i++) {
+	        	int j = 0;
+	        	for (int k = 0; k < 42; k++) {
+	        		if (Main.liste[k] == Main.spieler5.getLaender().get(i)) {
+	        			j = k;
+	        		}
+	        	}
+	        	g.setColor(Color.WHITE);
+	        	g.fill(shapeList.get(j));
+	        }
         }
-        
-        // Maus über Land bewegen
+
         try {
             Point p = MouseInfo.getPointerInfo().getLocation();
             Point p1 = output.getLocationOnScreen();
@@ -430,35 +429,59 @@ class MouseClickListener implements MouseListener {
     }
 
     public static void laendHandler (int i) {
-    	if (erstercyclus) {
-    		Main.spieler1.TruppenErhalten();
-    		Main.spieler1.istDrann = true;
-    		erstercyclus = false;
-    	}
     	int si = 0;
+    	//Spielstart phase
+    	if (erstercyclus) {
+    		for (int j = 0; j < Main.spieler.size(); j++) {
+        		if (Main.spieler.get(j).istDrann) {
+        			si = j;
+        		}
+    		}
+    		ziel = Main.liste[i];
+    		Main.spieler.get(si).TruppenVerteilen(ziel);
+    		System.out.println("Anfang: " + Main.spieler.get(si).getName() + " hat " + Main.spieler.get(si).getTruppen() + " ï¿½brig");
+    		if (si < Main.spieler.size() -1 && Main.spieler.get(si).getTruppen() == 0){
+    			Main.spieler.get(si).istDrann = false;
+    			Main.spieler.get(si + 1).istDrann = true;
+    			System.out.println(Main.spieler.get(si + 1).getName() + " ist Drann mit setzten.");
+    		} else if (si == Main.spieler.size() -1 && Main.spieler.get(si).getTruppen() == 0){
+        		System.out.print(Main.spieler.get(0) + " ist Drann.");
+        		Main.spieler.get(0).TruppenErhalten();
+        		Main.spieler.get(0).istDrann = true;
+        		erstercyclus = false;
+        		return;
+        	}
+    		 return;
+		}
+
     	for (int j = 0; j < Main.spieler.size(); j++) {
     		if (Main.spieler.get(j).istDrann) {
     			si = j;
     		}
     	}
+
     	// Truppen verteilen
     	if (Main.spieler.get(si).getTruppen() > 0) {
-    		System.out.println(Main.spieler.get(si).getName() + "hat" + Main.spieler.get(si).getTruppen() + "ï¿½brig");
+    		System.out.println(Main.spieler.get(si).getName() + " hat " + Main.spieler.get(si).getTruppen() + " ï¿½brig");
     		ziel = Main.liste[i];
     		Main.spieler.get(si).TruppenVerteilen(ziel);
+    		if(Main.spieler.get(si).getTruppen() == 0) {
+    			return;
+    		}
     	} else {
 			switch (z) {
 			// Angriff
 			case 0:
 				System.out.println("Angriff!");
-				int a = 0;
 				switch (a) {
 				case 0:
 					start = Main.liste [i];
+					System.out.println("erstes land ist " + start.getName());
 					a++;
-					break;
+					return;
 				case 1:
 					ziel = Main.liste [i];
+					System.out.println("zweites land ist " + ziel.getName());
 					Main.spieler.get(si).Angreifen(start, ziel);
 					// Spieler besiegt?
 					if(ziel.getBesitzer().getLaender().size() == 0) {
@@ -472,19 +495,22 @@ class MouseClickListener implements MouseListener {
 					return;
 				} else {
 					z++;
+					return;
 				}
-				break;
 			case 1:
+				System.out.println("Truppen versetzten");
 				start = Main.liste [i];
+				System.out.println("erstes land ist " + start.getName());
 				z++;
-				break;
+				return;
 			case 2:
 				// Truppen versetzten
-				System.out.println("Truppen versetzten");
 				ziel = Main.liste [i];
+				System.out.println("zweites land ist " + ziel.getName());
 				Main.spieler.get(si).TruppenBewegen(start, ziel);
 				z = 0;
 			}
+			//Nï¿½cster spieler ist drann.
 			Main.spieler.get(si).istDrann = false;
 			System.out.println("nï¿½chste spieler");
 			if (Main.spieler.size() == si) {
@@ -493,7 +519,9 @@ class MouseClickListener implements MouseListener {
 				Main.spieler.get(si).TruppenErhalten();
 			} else {
 			Main.spieler.get(si + 1).istDrann = true;
+			System.out.println(Main.spieler.get(si + 1).getName() + " ist Drann.");
 			Main.spieler.get(si + 1).TruppenErhalten();
+			System.out.println(Main.spieler.get(si + 1).getName() + " erhï¿½lt " + Main.spieler.get(si + 1).getTruppen());
 			}
     	}
     }

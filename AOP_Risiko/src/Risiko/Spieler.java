@@ -33,8 +33,10 @@ public class Spieler {
 	public int getTruppen() {
 		return truppen;
 	}
-
-
+	
+	public void startTruppen(int t) {
+		this.truppen = t;
+	}
 
 
 	private int setBonus = 0;
@@ -107,7 +109,7 @@ public class Spieler {
 		if(setEingeloest)
 		{
 		berechneSetBonus();
-		System.out.println("Spieler xy erhält " + setBonus + " Truppen für eingeloeste Sets");
+		System.out.println("Spieler: " + name + " erhält " + setBonus + " Truppen für eingeloeste Sets");
 		setEingeloest = false;
 		}
 		if (laenderArray.size() < 9)
@@ -274,10 +276,13 @@ public class Spieler {
 	
 	//auf Aktionen auslagern?
 	public void TruppenVerteilen(Laender land) {
+		if(laenderArray.contains(land)) {
 		land.setTruppen(+1);
 		truppen  -= 1;
+		} else {
+			System.out.println("Dir gehört dieses Land nicht.");
+		}
 
-		System.out.println("Spieler " + name + " hat " + truppen + " Truppen zum verteilen zur Verfügung.");
 		//<<<<<Funktion in GUI zum verteilen der Truppen
 	}
 	
@@ -444,5 +449,9 @@ public class Spieler {
 		{
 		return name;
 		}
+
+	public String getFarbe() {
+		return farbe;
+	}
 
 }

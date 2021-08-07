@@ -24,6 +24,7 @@ public class Wuerfel {
 		boolean normalKampf = false;
 		
 		// BlitzKampf (alle Runden mit einmal) oder NormalKampf (jede Runde einzeln auswürfeln)
+		
 		System.out.println("Möchtest du die Runden einzeln auswürfeln? Oder sollen alle Runden mit einem mal ausgewürfelt werden?");
 		if (Weltkarte.getblitz()) // hier button einfügen
 		{blitzKampf = true; 	System.out.println("Blitzkampf startet");}
@@ -35,7 +36,7 @@ public class Wuerfel {
 			{
 				while (ungueltigeEingabe)
 				{
-				System.out.println("Wähle aus ob du mit 1,2 oder 3 Truppen angreifen möchtest");
+				System.out.println("Waehle aus ob du mit 1,2 oder 3 Truppen angreifen moechtest");
 				System.out.println("3 ist standard mäßig ausgewählt");
 				
 				angreifer = Fehlersuche.eingabePruefenInt();
@@ -56,32 +57,38 @@ public class Wuerfel {
 			angreiferwuerfe = wuerfelfeld(angreifer);
 			verteidigerwuerfe = wuerfelfeld(verteidiger);
 			
-			//Ausgabe der Würfelergebnisse
+			//Ausgabe der Wuerfelergebnisse
 			if (angreifer > 2)
-				{System.out.println("Angreifer Würfe  : [ " + angreiferwuerfe[0] + " | " + angreiferwuerfe[1] + " | " + angreiferwuerfe[2] + " ] ");}
+				{System.out.println("Angreifer Wuerfe  : [ " + angreiferwuerfe[0] + " | " + angreiferwuerfe[1] + " | " + angreiferwuerfe[2] + " ] ");}
 			if (angreifer == 2)
-				{System.out.println("Angreifer Würfe  : [ " + angreiferwuerfe[0] + " | " + angreiferwuerfe[1] + " ] ");}	
+				{System.out.println("Angreifer Wuerfe  : [ " + angreiferwuerfe[0] + " | " + angreiferwuerfe[1] + " ] ");}	
 			if (angreifer == 1)
-				{System.out.println("Angreifer Würfe  : [ " + angreiferwuerfe[0] + " ] ");}	
+				{System.out.println("Angreifer Wuerfe  : [ " + angreiferwuerfe[0] + " ] ");}	
 
 			if (verteidiger > 2 && angreifer > 2)
-				{System.out.println("Verteidiger Würfe: [ " + verteidigerwuerfe[0] + " | " + verteidigerwuerfe[1] + " | " + verteidigerwuerfe[2] + " ]");}
+				{System.out.println("Verteidiger Wuerfe: [ " + verteidigerwuerfe[0] + " | " + verteidigerwuerfe[1] + " | " + verteidigerwuerfe[2] + " ]");}
 			if (verteidiger > 2 && angreifer == 2)
-				{System.out.println("Verteidiger Würfe: [ " + verteidigerwuerfe[0] + " | " + verteidigerwuerfe[1] + " ]");}
+				{System.out.println("Verteidiger Wuerfe: [ " + verteidigerwuerfe[0] + " | " + verteidigerwuerfe[1] + " ]");}
 			if (verteidiger == 2 && angreifer > 1)
-				{System.out.println("Verteidiger Würfe: [ " + verteidigerwuerfe[0] + " | " + verteidigerwuerfe[1] + " ]");}	
+				{System.out.println("Verteidiger Wuerfe: [ " + verteidigerwuerfe[0] + " | " + verteidigerwuerfe[1] + " ]");}	
 			if (verteidiger == 1 || angreifer == 1 )
-				{System.out.println("Verteidiger Würfe: [ " + verteidigerwuerfe[0] + " ]");}
+				{System.out.println("Verteidiger Wuerfe: [ " + verteidigerwuerfe[0] + " ]");}
 			
-			//Vergleich der Würfel und Abzug der Einheiten
+			//Vergleich der Wuerfel und Abzug der Einheiten
+			
 			for (int i = 0; i<3; i++)
-			{	if (angreifer >= 1 && angreiferwuerfe[i] != 0 && verteidigerwuerfe[i] != 0)
+			{	
+				if (angreifer >= 1 && angreiferwuerfe[i] != 0 && verteidigerwuerfe[i] != 0)
 				{	
-				if (angreiferwuerfe[i] <= verteidigerwuerfe[i])
+					if (angreiferwuerfe[i] <= verteidigerwuerfe[i])
+						{
+							angreifer -= 1;
+							angreiferGesamt -= 1;
+						} 
+					else
 					{
-					angreifer -= 1;
-					angreiferGesamt -= 1;
-					} else {verteidiger -= 1; }
+						verteidiger -= 1; 
+					}
 				}
 			}	
 			angreifer = angreiferGesamt;
@@ -92,12 +99,21 @@ public class Wuerfel {
 			
 			if ( angreifer > 1 && verteidiger > 0)
 			{ if (normalKampf)
-				{	System.out.println("Möchtest du weiter angreifen? ");
+				{	
+					System.out.println("Moechtest du weiter angreifen? ");
 					if (Fehlersuche.eingabeJaNein().equals("ja"))
-					{ ungueltigeEingabe = true;	} 	
-					else { weitermachen = false;}
+					{ 
+						ungueltigeEingabe = true;	
+					} 	
+					else 
+					{ 
+						weitermachen = false;
+					}
 				}  	
-			} else { weitermachen = false;}
+			} else 
+				{ 
+					weitermachen = false;
+				}
 		}
 		
 		a.setTruppen(angreifer);
@@ -107,15 +123,17 @@ public class Wuerfel {
 		System.out.println("---------------------------------");
 		if (angreifer == 1)
 		{	
-			System.out.println("Der Angreifer hat zu wenig Einheiten um angreifen zu können.\nDer Verteidiger siegt.");	
+			System.out.println("Der Angreifer hat zu wenig Einheiten um angreifen zu koennen.\nDer Verteidiger siegt.");	
 			return false;
-		} else if (verteidiger != 0 && weitermachen == false) {		
-			System.out.println("Der Angreifer hat den Angriff abgebrochen\nDer Verteidiger siegt.");	
+		} else if (verteidiger != 0 && weitermachen == false) 
+		{		
+			System.out.println("Der Angreifer hat den Angriff abgebrochen\n Der Verteidiger siegt.");	
 			return false;
-		} else 	{ 	
-			System.out.println("Der Angreifer siegt.");
-			return true;
-		}		
+		} else 	
+			{ 	
+				System.out.println("Der Angreifer siegt.");
+				return true;
+			}		
 	}
 	
 	
@@ -130,15 +148,23 @@ public class Wuerfel {
 	{
 		Integer [] feld = new Integer [3];
 		if (av > 2)
-		{	for ( int i=0; i < 3; i++)
-				{ feld [i] = wuerfeln(); }
+		{	
+			for ( int i=0; i < 3; i++)
+				{ 
+					feld [i] = wuerfeln(); 
+				}
 			Arrays.sort(feld, Collections.reverseOrder());			
 		} 
 		else 							
-		{	for ( int i=0; i < av; i++)
-				{feld [i] = wuerfeln();}
-			for (int i = av; i < 3; i++ ) // Rest auffüllen mit nullen auffüllen, damit Sort keinen Fehler wirft
-				{feld [i] = 0;}
+		{	
+			for ( int i=0; i < av; i++)
+				{
+					feld [i] = wuerfeln();
+				}
+			for (int i = av; i < 3; i++ ) // Rest auffuellen mit nullen auffuellen, damit Sort keinen Fehler wirft
+				{
+					feld [i] = 0;
+				}
 			Arrays.sort(feld, Collections.reverseOrder());
 		}
 		return feld; 

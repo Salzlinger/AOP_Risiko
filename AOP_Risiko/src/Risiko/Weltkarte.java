@@ -136,7 +136,7 @@ public class Weltkarte {
 
         btnPanel = new JPanel();
         btnPanel.setBackground(new Color(0x3f47cc));
-        btnPanel.setLayout(new BorderLayout(10,4));
+        btnPanel.setLayout(new BorderLayout(10,0));
         btnPanel.setBorder(new EmptyBorder(10,10,10,10));
         btnPanel.setPreferredSize(new Dimension(0,100));
 
@@ -146,7 +146,7 @@ public class Weltkarte {
 
         spielerPanel = new JPanel();
         spielerPanel.setBackground(new Color(0x3f47cc));
-        spielerPanel.setLayout(new BorderLayout(0,0));
+        spielerPanel.setLayout(new BorderLayout(0,30));
         spielerPanel.setPreferredSize(new Dimension(0,20));
 
         trpPanel = new JPanel(new GridBagLayout());
@@ -184,6 +184,7 @@ public class Weltkarte {
         phase = new JLabel("Spieler 1 ist am Zug!", SwingConstants.CENTER);
         phase.setFont(new Font("Calibri",Font.PLAIN,20));
         phase.setForeground(Color.white);
+        phase.setLayout(new BorderLayout(0,10));
 
         w1 = new JLabel();
         w1.setIcon(wuerfel1);
@@ -394,7 +395,7 @@ class MouseClickListener implements MouseListener {
         			j = k;
         		}
         	}
-        	g.setColor(Color.BLUE);
+        	g.setColor(Color.BLUE.darker());
         	g.fill(shapeList.get(j));
         }
         for (int i = 0; i < Main.spieler2.getLaender().size(); i++) {
@@ -404,7 +405,7 @@ class MouseClickListener implements MouseListener {
         			j = k;
         		}
         	}
-        	g.setColor(Color.RED);
+        	g.setColor(Color.RED.darker());
         	g.fill(shapeList.get(j));
         }
         for (int i = 0; i < Main.spieler3.getLaender().size(); i++) {
@@ -414,7 +415,7 @@ class MouseClickListener implements MouseListener {
         			j = k;
         		}
         	}
-        	g.setColor(Color.YELLOW);
+        	g.setColor(Color.YELLOW.darker());
         	g.fill(shapeList.get(j));
         }
         if(Main.spieler.size() > 3) {
@@ -425,7 +426,7 @@ class MouseClickListener implements MouseListener {
 	        			j = k;
 	        		}
 	        	}
-	        	g.setColor(Color.GREEN);
+	        	g.setColor(Color.GREEN.darker());
 	        	g.fill(shapeList.get(j));
 	        }
         }
@@ -437,30 +438,18 @@ class MouseClickListener implements MouseListener {
 	        			j = k;
 	        		}
 	        	}
-	        	g.setColor(Color.WHITE);
+	        	g.setColor(Color.WHITE.darker());
 	        	g.fill(shapeList.get(j));
 	        }
         }
 
-        // Truppenanzahl in Ländern anzeigen 
+        // Truppenanzahl in Ländern anzeigen  
         
-//        for(int i = 0; i < shapeList.size();i++)
-//        {
-//        	g.setFont(new Font("Calibri", Font.BOLD,15));
-//            g.setColor(Color.BLACK);
-//            g.drawString(String.valueOf(i), 5, 5);
-//        }
-        
-        int i = Main.liste[1].getTruppen();
+        int i = Main.liste[0].getTruppen();
         g.setFont(new Font("Calibri", Font.BOLD,15));
         g.setColor(Color.BLACK);
         g.drawString(String.valueOf(i), 100, 100);
-        
-//        for (Shape shape : shapeList) {
-//                g.setColor(Color.GREEN.darker());
-//                g.drawString(shapeList.get(i), 5, 5);
-//        }
-        
+
         // Maus über Land bewegen 
         try {
             Point p = MouseInfo.getPointerInfo().getLocation();

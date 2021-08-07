@@ -28,11 +28,11 @@ public class Weltkarte implements ActionListener {
     private JPanel spielerPanel;
     private JPanel waPanel;
     private JPanel wvPanel;
-    private JPanel trpPanel;
+    private static JPanel trpPanel;
     private JPanel zwPanel;
 
     private JButton truppenBtn;
-    private JButton nextBtn;
+    private static JButton nextBtn;
     private JButton hochBtn;
     private JButton runterBtn;
 
@@ -73,7 +73,13 @@ public class Weltkarte implements ActionListener {
 	private static Laender start;
 	private static Laender ziel;
 	private static Boolean erstercyclus = true;
-	private int truppen = 5;
+	private static int truppen = 1;
+	private static int si = 0;
+	private static Boolean postBattle = false;
+
+	public static int getTruppen() {
+		return truppen;
+	}
 
     public static int getPointer() 
     {
@@ -160,6 +166,7 @@ public class Weltkarte implements ActionListener {
         
         zwPanel = new JPanel();
         zwPanel.setLayout(new BorderLayout(0,0));
+        zwPanel.setVisible(false);
 
         spielerPanel = new JPanel();
         spielerPanel.setBackground(new Color(0x3f47cc));
@@ -178,7 +185,7 @@ public class Weltkarte implements ActionListener {
         truppenBtn.setUI(new ButtonDesign());
         truppenBtn.setActionCommand(truppenBtnName);
 
-        nextBtn = new JButton("Zug beenden");
+        nextBtn = new JButton("");
         nextBtn.setFont(new Font("Calibri", Font.PLAIN,20));
         nextBtn.setBackground(new Color(0x2dce98));
         nextBtn.setForeground(Color.white);
@@ -286,7 +293,42 @@ public class Weltkarte implements ActionListener {
     	}
     	else if(actionEvent.equals("nextBtn"))
     	{
-    		System.exit(0);
+    		if (z == 0 && a == 1 && Main.spieler.get(si).getTruppen() == 0) {
+    			trpPanel.setVisible(false);
+				System.out.println("Angriff!");
+				Main.spieler.get(si).Angreifen(start, ziel);
+				System.out.println("wie viele Truppen möchtest du versetzten?");
+				trpPanel.setVisible(true);
+				nextBtn.setName("OK");
+				postBattle = true;
+    		}
+    		if (postBattle && z == 0 && a == 1 && Main.spieler.get(si).getTruppen() == 0) {
+    			Main.spieler.get(si).TruppenBewegen(start, ziel);
+				System.out.println("Stationierte Truppen" +start.getName() + ": " +ziel.getTruppen());
+				System.out.println("Stationierte Truppen" +start.getName() + ": " +ziel.getTruppen());
+				postBattle = false;
+				nextBtn.setName("nächste Phase");
+    		}
+    		if (z == 0 && a == 0 && Main.spieler.get(si).getTruppen() == 0) {
+				z++;
+				System.out.println(Main.spieler.get(si) + " Truppen versetzten");
+    		}
+    		if (z == 1) {
+    			z = 0;
+    			nextBtn.setName("");
+    			Main.spieler.get(si).istDrann = false;
+    			System.out.println("naechster spieler");
+    			if (Main.spieler.size() == si) {
+    				si = 0;
+    				Main.spieler.get(si).istDrann = true;
+    				Main.spieler.get(si).TruppenErhalten();
+    			} else {
+    			Main.spieler.get(si + 1).istDrann = true;
+    			System.out.println(Main.spieler.get(si + 1).getName() + " ist Drann.");
+    			Main.spieler.get(si + 1).TruppenErhalten();
+    			System.out.println(Main.spieler.get(si + 1).getName() + " erhaelt " + Main.spieler.get(si + 1).getTruppen());
+    			}
+    		}
     	}
     	else if(actionEvent.equals("hochBtn"))
     	{
@@ -554,7 +596,7 @@ public class Weltkarte implements ActionListener {
 
     public static void laendHandler (int i) {
 		boolean cont = false;
-    	int si = 0;
+    	si = 0;
     	//Spielstart phase
     	if (erstercyclus) {
     		for (int j = 0; j < Main.spieler.size(); j++) {
@@ -564,7 +606,7 @@ public class Weltkarte implements ActionListener {
     		}
     		ziel = Main.liste[i];
     		Main.spieler.get(si).TruppenVerteilen(ziel);
-    		System.out.println("Anfang: " + Main.spieler.get(si).getName() + " hat " + Main.spieler.get(si).getTruppen() + " ï¿½brig");
+    		System.out.println("Anfang: " + Main.spieler.get(si).getName() + " hat " + Main.spieler.get(si).getTruppen() + " uebrig");
     		if (si < Main.spieler.size() -1 && Main.spieler.get(si).getTruppen() == 0){
     			Main.spieler.get(si).istDrann = false;
     			Main.spieler.get(si + 1).istDrann = true;
@@ -599,16 +641,17 @@ public class Weltkarte implements ActionListener {
     		System.out.println("Truppe danach:" + ziel.getTruppen());
     		System.out.println(Main.spieler.get(si).getName() + " hat " + Main.spieler.get(si).getTruppen() + " ï¿½brig");
     		if(Main.spieler.get(si).getTruppen() == 0) {
-    			System.out.println("gehe in Kampfphase ï¿½ber!");
+    			System.out.println("gehe in Kampfphase ueber!");
+    			System.out.println("wähle die Länder aus");
     		}
     		return;
     	} else {
 			switch (z) {
 			// Angriff
 			case 0:
+				nextBtn.setName("nächste Phase");
 				switch (a) {
 				case 0:
-					System.out.println("Angriff!");
 					start = Main.liste [i];
 					System.out.println(start.getNachbarn());
 					System.out.println("erstes land ist " + start.getName());
@@ -619,26 +662,17 @@ public class Weltkarte implements ActionListener {
 					System.out.println("zweites land ist " + ziel.getName());
 					int zielBesitzter = Main.spieler.indexOf(ziel.getBesitzer());
 					int startBesitzter = Main.spieler.indexOf(start.getBesitzer());
-					System.out.println("anzahl  davor " + start.getTruppen());
-					System.out.println("anzahl  davor " + ziel.getTruppen());
-					Main.spieler.get(si).Angreifen(start, ziel);
-					System.out.println("anzahl " + start.getTruppen());
-					System.out.println("anzahl " + ziel.getTruppen());
+					nextBtn.setName("Angriff");
 					// Spieler besiegt?
 					if(Main.spieler.get(zielBesitzter).getLaender().size() == 0) {
 						Main.spieler.remove(Main.spieler.get(zielBesitzter));
 					} else if (Main.spieler.get(startBesitzter).getLaender().size() == 0) {
 						Main.spieler.remove(Main.spieler.get(startBesitzter));
 					}
-					// notification: attack again?
+					nextBtn.setName("Verschieben");
 				}
-				if (false) {
-					return;
-				} else {
-					z++;
-					System.out.println(Main.spieler.get(si) + " Truppen versetzten");
-					return;
-				}
+				a = 0;
+				return;
 			case 1:
 				System.out.println("Truppen versetzten");
 				start = Main.liste [i];
@@ -653,6 +687,8 @@ public class Weltkarte implements ActionListener {
 				if (cont) {
 					z = 0;
 				} else {
+					System.out.println("Truppen versetzten");
+					z--;
 					return;
 				}
 			}
@@ -667,7 +703,7 @@ public class Weltkarte implements ActionListener {
 			Main.spieler.get(si + 1).istDrann = true;
 			System.out.println(Main.spieler.get(si + 1).getName() + " ist Drann.");
 			Main.spieler.get(si + 1).TruppenErhalten();
-			System.out.println(Main.spieler.get(si + 1).getName() + " erhï¿½lt " + Main.spieler.get(si + 1).getTruppen());
+			System.out.println(Main.spieler.get(si + 1).getName() + " erhaelt " + Main.spieler.get(si + 1).getTruppen());
 			}
     	}
     }

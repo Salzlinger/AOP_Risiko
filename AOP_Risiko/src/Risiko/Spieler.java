@@ -289,7 +289,7 @@ public class Spieler {
 	
 	public void Angreifen(Laender a, Laender b) {
 		setLaender(laenderArray); //Länder werden in Hashmap umgeschrieben
-		if (laenderHash.get(a.getName()).getNachbarn().contains(b))
+		if (a.getNachbarn().contains(b))
 		{
 		System.out.println("Ein Angriff ist möglich, da die angegebenen Länder Nachbarn sind");
 			
@@ -301,9 +301,6 @@ public class Spieler {
 				laenderArray.add(b);	// erobertes Land der Liste hinzufügen
 				System.out.println("Stationierte Truppen in " + a.getName() + ": " + a.getTruppen());
 				System.out.println("Stationierte Truppen in " + b.getName() + ": " +b.getTruppen());
-				TruppenBewegen(a,b);
-				System.out.println("Stationierte Truppen" +a.getName() + ": " +a.getTruppen());
-				System.out.println("Stationierte Truppen" +b.getName() + ": " +b.getTruppen());
 									}
 								
 		} else { System.out.println("Angriff nicht möglich, da keine Nachbarn. Bitte anderes Land auswählen!"); }
@@ -315,33 +312,31 @@ public class Spieler {
 		setLaender(laenderArray);
 		if (laenderArray.contains(von) && laenderArray.contains(nach))
 		{
-			System.out.println("Horst gehören die angebebenen Länder");
+			System.out.println(von.getBesitzer().getName() +  " gehören die angebebenen Länder");
 			if (laenderVerbunden.verbunden(laenderHash,von,nach))
 			{
 				wait = true;
-			System.out.println("Die angegebenen Länder sind direkt verbunden oder über Länder, die ebenfalls Horst gehören");
+			System.out.println("Die angegebenen Länder sind direkt verbunden oder über Länder, die ebenfalls " + von.getBesitzer().getName() + " gehören");
 				boolean nochmal = true;
 				while (nochmal)
-				{
-				System.out.println("Wie viele Truppen möchtest du verschieben?");			
+				{			
 				
-				int eingabe = input.nextInt();
-				if (eingabe > von.getTruppen()-1)
+				if (Weltkarte.getTruppen() > von.getTruppen()-1)
 				{
 				System.out.println("Du kannst nur maximal " + (von.getTruppen()-1) + " Truppen verschieben"); 
 				} 
-				else if (eingabe < 1)
+				else if (Weltkarte.getTruppen() < 1)
 				{
 				System.out.println("Bitte gib eine größere Zahl ein");
 				} else  { 
-						von.setTruppen(von.getTruppen()-eingabe);
-						nach.setTruppen(nach.getTruppen()+eingabe);
+						von.setTruppen(von.getTruppen()-Weltkarte.getTruppen());
+						nach.setTruppen(nach.getTruppen()+Weltkarte.getTruppen());
 						nochmal = false;
 						return true;
 						}
 				}
-			} else { System.out.println("Horst gehören zwar die Länder, aber sie sind nicht verbunden"); return false;}
-		} else { System.out.println("Verschieben nicht möglich, da Horst eines oder beide Länder nicht gehören"); return false; }
+			} else { System.out.println(von.getBesitzer().getName() + " gehören zwar die Länder, aber sie sind nicht verbunden"); return false;}
+		} else { System.out.println("Verschieben nicht möglich, da" + von.getBesitzer().getName() + " eines oder beide Länder nicht gehören"); return false; }
 		return false;
 	}
 

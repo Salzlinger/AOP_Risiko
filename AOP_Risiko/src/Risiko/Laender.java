@@ -340,4 +340,9 @@ public class Laender {
 	public void setBesitzer(Spieler besitzer) {
 		Laender.besitzer = besitzer;
 	}
+	@Override
+	public String toString () //Werte werden als String ausgegeben
+		{
+		return name;
+		}
 }

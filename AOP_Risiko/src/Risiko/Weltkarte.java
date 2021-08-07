@@ -16,7 +16,7 @@ public class Weltkarte implements ActionListener {
     private JComponent ui = null;
     
     private JLabel output;
-    static JLabel phase;
+    static 	JLabel phase;
     private JLabel w1;
     private JLabel w2;
     private JLabel w3;

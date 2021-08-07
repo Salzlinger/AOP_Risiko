@@ -313,6 +313,7 @@ public class Spieler {
 		// beliebig viele Truppen aus einem Land in ein verbundenes Land verlagern
 		wait = false;
 		setLaender(laenderArray);
+		
 		if (laenderArray.contains(von) && laenderArray.contains(nach))
 		{
 			System.out.println("Horst gehören die angebebenen Länder");

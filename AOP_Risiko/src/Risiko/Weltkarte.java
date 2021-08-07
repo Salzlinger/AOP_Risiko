@@ -540,7 +540,33 @@ public class Weltkarte implements ActionListener {
         g.drawString(String.valueOf(Main.liste[12].getTruppen()), 560, 130);
         g.drawString(String.valueOf(Main.liste[13].getTruppen()), 350, 190);
         g.drawString(String.valueOf(Main.liste[14].getTruppen()), 415, 190);
-        g.drawString(String.valueOf(Main.liste[15].getTruppen()), 650, 190);
+        g.drawString(String.valueOf(Main.liste[15].getTruppen()), 660, 195);
+        g.drawString(String.valueOf(Main.liste[16].getTruppen()), 740, 200);
+        g.drawString(String.valueOf(Main.liste[17].getTruppen()), 140, 190);
+        g.drawString(String.valueOf(Main.liste[18].getTruppen()), 200, 210);
+        g.drawString(String.valueOf(Main.liste[19].getTruppen()), 480, 150);
+        g.drawString(String.valueOf(Main.liste[20].getTruppen()), 550, 210);
+        g.drawString(String.valueOf(Main.liste[21].getTruppen()), 416, 230);
+        g.drawString(String.valueOf(Main.liste[22].getTruppen()), 370, 230);
+        g.drawString(String.valueOf(Main.liste[23].getTruppen()), 640, 240);
+        g.drawString(String.valueOf(Main.liste[24].getTruppen()), 145, 250);
+        g.drawString(String.valueOf(Main.liste[25].getTruppen()), 200, 310);
+        g.drawString(String.valueOf(Main.liste[26].getTruppen()), 440, 310);
+        g.drawString(String.valueOf(Main.liste[27].getTruppen()), 655, 305);
+        g.drawString(String.valueOf(Main.liste[28].getTruppen()), 500, 290);
+        g.drawString(String.valueOf(Main.liste[29].getTruppen()), 595, 290);
+        g.drawString(String.valueOf(Main.liste[30].getTruppen()), 385, 340);
+        g.drawString(String.valueOf(Main.liste[31].getTruppen()), 735, 375);
+        g.drawString(String.valueOf(Main.liste[32].getTruppen()), 215, 375);
+        g.drawString(String.valueOf(Main.liste[33].getTruppen()), 670, 390);
+        g.drawString(String.valueOf(Main.liste[34].getTruppen()), 260, 355);
+        g.drawString(String.valueOf(Main.liste[35].getTruppen()), 445, 400);
+        g.drawString(String.valueOf(Main.liste[36].getTruppen()), 480, 370);
+        g.drawString(String.valueOf(Main.liste[37].getTruppen()), 520, 470);
+        g.drawString(String.valueOf(Main.liste[38].getTruppen()), 710, 470);
+        g.drawString(String.valueOf(Main.liste[39].getTruppen()), 770, 470);
+        g.drawString(String.valueOf(Main.liste[40].getTruppen()), 450, 470);
+        g.drawString(String.valueOf(Main.liste[41].getTruppen()), 220, 440);
         
         // Maus ueber Land bewegen
         try {

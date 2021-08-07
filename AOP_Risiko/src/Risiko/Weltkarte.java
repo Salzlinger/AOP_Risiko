@@ -11,7 +11,7 @@ import javax.swing.border.EmptyBorder;
 
 import javax.imageio.ImageIO;
 
-public class Weltkarte {
+public class Weltkarte implements ActionListener {
 
     private JComponent ui = null;
     private JLabel output;
@@ -26,8 +26,10 @@ public class Weltkarte {
 
     private JPanel btnPanel;
     private JPanel spielerPanel;
-    private JPanel wPanel;
+    private JPanel waPanel;
+    private JPanel wvPanel;
     private JPanel trpPanel;
+    private JPanel zwPanel;
 
     private JButton truppenBtn;
     private JButton nextBtn;
@@ -69,13 +71,15 @@ public class Weltkarte {
 	private static Laender start;
 	private static Laender ziel;
 	private static Boolean erstercyclus = true;
+	private int truppen = 5;
 
-
-    public static int getPointer() {
+    public static int getPointer() 
+    {
 		return pointer;
 	}
 
-	public Weltkarte() {
+	public Weltkarte() 
+	{
         try {
             initUI();
         } catch (Exception ex) {
@@ -85,10 +89,14 @@ public class Weltkarte {
 
     }
 
-    public final void initUI() throws Exception {
+    public final void initUI() throws Exception 
+    {
         if (ui != null) {
             return;
         }
+        
+        //Laden der Würfelbilder
+        
         String imagePath = "src\\img\\risk.png";
         bild = ImageIO.read(new File(imagePath));
 
@@ -140,9 +148,18 @@ public class Weltkarte {
         btnPanel.setBorder(new EmptyBorder(10,10,10,10));
         btnPanel.setPreferredSize(new Dimension(0,100));
 
-        wPanel = new JPanel();
-        wPanel.setLayout(new GridLayout(1,6));
-        wPanel.setBackground(new Color(0x3f47cc));
+        waPanel = new JPanel();
+        waPanel.setLayout(new GridLayout(0,3));
+        waPanel.setBackground(new Color(0x3f47cc));
+        waPanel.setVisible(false);
+        
+        wvPanel = new JPanel();
+        wvPanel.setLayout(new GridLayout(0,3));
+        wvPanel.setBackground(new Color(0x3f47cc));
+        wvPanel.setVisible(false);
+        
+        zwPanel = new JPanel();
+        zwPanel.setLayout(new BorderLayout(0,0));
 
         spielerPanel = new JPanel();
         spielerPanel.setBackground(new Color(0x3f47cc));
@@ -159,16 +176,19 @@ public class Weltkarte {
         truppenBtn.setBackground(new Color(0x2dce98));
         truppenBtn.setForeground(Color.white);
         truppenBtn.setUI(new ButtonDesign());
+        truppenBtn.setActionCommand(truppenBtnName);
 
         nextBtn = new JButton("Zug beenden");
         nextBtn.setFont(new Font("Calibri", Font.PLAIN,20));
         nextBtn.setBackground(new Color(0x2dce98));
         nextBtn.setForeground(Color.white);
         nextBtn.setUI(new ButtonDesign());
-
+        nextBtn.setActionCommand(nextBtnName);
+        
         hochBtn = new JButton("+");
         hochBtn.setFont(new Font("", Font.BOLD,15));
         hochBtn.setUI(new TruppenButtonDesign());
+        hochBtn.setActionCommand(hochBtnName);
         c.gridx = 1;
         c.gridy = 0;
         trpPanel.add(hochBtn, c);
@@ -176,6 +196,7 @@ public class Weltkarte {
         runterBtn = new JButton("-");
         runterBtn.setFont(new Font("", Font.BOLD,15));
         runterBtn.setUI(new TruppenButtonDesign());
+        runterBtn.setActionCommand(runterBtnName);
         c.gridx = 1;
         c.gridy = 1;
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -186,6 +207,8 @@ public class Weltkarte {
         phase.setForeground(Color.white);
         phase.setLayout(new BorderLayout(0,10));
 
+        // Anzeigen der Würfel
+        
         w1 = new JLabel();
         w1.setIcon(wuerfel1);
 
@@ -204,7 +227,7 @@ public class Weltkarte {
         w6 = new JLabel();
         w6.setIcon(wuerfel6);
 
-        trpLabel = new JLabel("5");
+        trpLabel = new JLabel(String.valueOf(truppen));
         trpLabel.setForeground(Color.white);
         trpLabel.setFont(new Font("Calibri",Font.PLAIN, 20));
         c.gridx = 0;
@@ -219,22 +242,61 @@ public class Weltkarte {
         btnPanel.add((nextBtn),BorderLayout.EAST);
         btnPanel.add((spielerPanel),BorderLayout.NORTH);
 
-        wPanel.add(w1);
-        wPanel.add(w2);
-        wPanel.add(w3);
-        wPanel.add(trpPanel);
-        wPanel.add(w4);
-        wPanel.add(w5);
-        wPanel.add(w6);
-
-        btnPanel.add(wPanel);
+        waPanel.add(w1);
+        waPanel.add(w2);
+        waPanel.add(w3);
+        wvPanel.add(w4);
+        wvPanel.add(w5);
+        wvPanel.add(w6);
+        
+        zwPanel.add(waPanel, BorderLayout.WEST);
+        zwPanel.add(trpPanel, BorderLayout.CENTER);
+        zwPanel.add(wvPanel, BorderLayout.EAST);
+        
+        btnPanel.add(zwPanel);
         ui.add(output);
         ui.add((btnPanel),BorderLayout.SOUTH);
 
         refresh();
     }
 
-    public static ArrayList<Shape> getShapes() {
+    protected void weltkarteActionListeners(ActionListener e) 
+    {
+    	truppenBtn.addActionListener(e);
+    	nextBtn.addActionListener(e);
+    	hochBtn.addActionListener(e);
+    	runterBtn.addActionListener(e);
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e)
+    {
+    	String actionEvent = e.getActionCommand();
+    	
+    	if(actionEvent.equals("truppenBtn"))
+    	{
+    		
+    	}
+    	else if(actionEvent.equals("nextBtn"))
+    	{
+    		
+    	}
+    	else if(actionEvent.equals("hochBtn"))
+    	{
+    		truppen += 1;
+    		System.out.println(truppen);
+    	}
+    	else if(actionEvent.equals("runterBtn"))
+    	{
+    		if(truppen > 1) 
+    		{
+    			truppen -= 1;
+    		}
+    	}
+    }
+    
+    public static ArrayList<Shape> getShapes() 
+    {
     	return shapeList;
     }
 

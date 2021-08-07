@@ -15,7 +15,7 @@ public class Weltkarte implements ActionListener {
 
     private JComponent ui = null;
     private JLabel output;
-    private JLabel phase;
+    static JLabel phase;
     private JLabel w1;
     private JLabel w2;
     private JLabel w3;
@@ -655,12 +655,11 @@ public class Weltkarte implements ActionListener {
     			Main.spieler.get(si).istDrann = false;
     			Main.spieler.get(si + 1).istDrann = true;
 
-    			//funktioniert vielleicht?
-    			Spielbrett.setText(Main.spieler.get(si + 1).getName() + " ist dran mit setzten.");
-    			Spielbrett.getText();
-    			System.out.println(Main.spieler.get(si + 1).getName() + " ist Drann mit setzten.");
+    			phase.setText(Main.spieler.get(si + 1).getName() + " ist dran mit setzen!");
+    			System.out.println(Main.spieler.get(si + 1).getName() + " ist Drann mit setzen.");
     		} else if (si == Main.spieler.size() -1 && Main.spieler.get(si).getTruppen() == 0){
-        		System.out.println(Main.spieler.get(0) + " ist Drann.");
+        		System.out.println(Main.spieler.get(0) + " ist dran.");
+        		phase.setText(Main.spieler.get(0) + " ist dran.");
         		Main.spieler.get(0).TruppenErhalten();
         		System.out.println(Main.spieler.get(0).getTruppen() + "!!!!");
         		Main.spieler.get(si).istDrann = false;
@@ -683,10 +682,11 @@ public class Weltkarte implements ActionListener {
     		Main.spieler.get(si).TruppenVerteilen(ziel);
     		System.out.println("Name Land: " + ziel.getName());
     		System.out.println("Truppe danach:" + ziel.getTruppen());
-    		System.out.println(Main.spieler.get(si).getName() + " hat " + Main.spieler.get(si).getTruppen() + " ï¿½brig");
+    		System.out.println(Main.spieler.get(si).getName() + " hat " + Main.spieler.get(si).getTruppen() + " uebrig");
     		if(Main.spieler.get(si).getTruppen() == 0) {
     			System.out.println("gehe in Kampfphase ueber!");
-    			System.out.println("wï¿½hle die Lï¿½nder aus");
+    			System.out.println("waehle die Laender aus");
+    			phase.setText("Wähle die Länder für die Kampfphase aus!");
     		}
     		return;
     	} else {
@@ -699,11 +699,13 @@ public class Weltkarte implements ActionListener {
 					start = Main.liste [i];
 					System.out.println(start.getNachbarn());
 					System.out.println("erstes land ist " + start.getName());
+					phase.setText("Das erste Land ist " + start.getName());
 					a++;
 					return;
 				case 1:
 					ziel = Main.liste [i];
 					System.out.println("zweites land ist " + ziel.getName());
+					phase.setText("Das zweite Land ist " + ziel.getName());
 					int zielBesitzter = Main.spieler.indexOf(ziel.getBesitzer());
 					int startBesitzter = Main.spieler.indexOf(start.getBesitzer());
 					nextBtn.setText("Angriff");
@@ -717,8 +719,10 @@ public class Weltkarte implements ActionListener {
 				return;
 			case 1:
 				System.out.println("Truppen versetzten");
+				phase.setText("Wähle die Länder zum Truppen versetzen!");
 				start = Main.liste [i];
 				System.out.println("erstes land ist " + start.getName());
+				phase.setText("Das erste Land ist " + start.getName());
 				z++;
 				return;
 			case 2:
@@ -727,6 +731,7 @@ public class Weltkarte implements ActionListener {
     			zwPanel.setVisible(true);
 				ziel = Main.liste [i];
 				System.out.println("zweites land ist " + ziel.getName());
+				phase.setText("Das zweite Land ist " + ziel.getName());
 				if (cont) {
 					z = 0;
 				} else {
@@ -746,9 +751,10 @@ public class Weltkarte implements ActionListener {
 				Main.spieler.get(si).TruppenErhalten();
 			} else {
 			Main.spieler.get(si + 1).istDrann = true;
-			System.out.println(Main.spieler.get(si + 1).getName() + " ist Drann.");
+			System.out.println(Main.spieler.get(si + 1).getName() + " ist dran.");
 			Main.spieler.get(si + 1).TruppenErhalten();
 			System.out.println(Main.spieler.get(si + 1).getName() + " erhaelt " + Main.spieler.get(si + 1).getTruppen());
+			phase.setText(Main.spieler.get(si + 1).getName() + " ist dran und erhaelt " + Main.spieler.get(si + 1).getTruppen());
 			}
     	}
     }

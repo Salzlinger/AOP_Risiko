@@ -112,6 +112,7 @@ public class Spieler {
 		if (laenderArray.size() < 9)
 		{
 		System.out.println("Spieler " + name + "erhält 3 Truppen für besetzte Länder");
+		Weltkarte.phase.setText("Spieler " + name + "erhält 3 Truppen für besetzte Länder");
 		truppen = 3  + setBonus + besitztKontinent();
 		} else  {
 				System.out.println("Spieler " + name + " erhält " + (laenderArray.size()/3) + " Truppen für besetzte Länder");

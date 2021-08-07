@@ -336,16 +336,16 @@ public class Weltkarte implements ActionListener {
     			z = 0;
     			zwPanel.setVisible(false);
     			nextBtn.setText("");
-    			Spieler.spieler.get(si).istDrann = false;
+    			Spieler.spieler.get(si).istDran = false;
     			System.out.println("naechster spieler");
     			if (Spieler.spieler.size() == si) 
     				{
     				si = 0;
-    				Spieler.spieler.get(si).istDrann = true;
+    				Spieler.spieler.get(si).istDran = true;
     				Spieler.spieler.get(si).TruppenErhalten();
     			} else 
     				{
-    				Spieler.spieler.get(si + 1).istDrann = true;
+    				Spieler.spieler.get(si + 1).istDran = true;
     				System.out.println(Spieler.spieler.get(si + 1).getName() + " ist Drann.");
     				Spieler.spieler.get(si + 1).TruppenErhalten();
     				System.out.println(Spieler.spieler.get(si + 1).getName() + " erhaelt " + Spieler.spieler.get(si + 1).getTruppen());
@@ -365,7 +365,7 @@ public class Weltkarte implements ActionListener {
     		} else if (z == 0 && a == 1) {
     			blitz = false;
     			normal = true;
-    			System.out.println("Du hast normal gew�hlt");
+    			System.out.println("Du hast normal gewaehlt");
     		}
 
     	}
@@ -378,7 +378,7 @@ public class Weltkarte implements ActionListener {
     		} else if (z == 0 && a == 1) {
     			blitz = true;
     			normal = false;
-    			System.out.println("Du hast blitz gew�hlt");
+    			System.out.println("Du hast blitz gewaehlt");
     		}
     	}
     }
@@ -389,14 +389,14 @@ public class Weltkarte implements ActionListener {
     }
 
     public Area getOutline(Color ziel, BufferedImage bi, int toleranz) {
-        // construct the GeneralPath
+        // erstellt GeneralPath
         GeneralPath gp = new GeneralPath();
 
         boolean cont = false;
         for (int xx = 0; xx < bi.getWidth(); xx++) {
             for (int yy = 0; yy < bi.getHeight(); yy++) {
                 if (isIncluded(new Color(bi.getRGB(xx, yy)), ziel, toleranz)) {
-                    //if (bi.getRGB(xx,yy)==targetRGB) {
+                    // xy von Bild = xy von Ziel
                     if (cont) {
                         gp.lineTo(xx, yy);
                         gp.lineTo(xx, yy + 1);
@@ -415,7 +415,7 @@ public class Weltkarte implements ActionListener {
         }
         gp.closePath();
 
-        // construct the Area from the GP & return it
+        // Area von GeneralPath
         return new Area(gp);
     }
 
@@ -674,7 +674,7 @@ public class Weltkarte implements ActionListener {
     	//Spielstart phase
     	if (erstercyclus) {
     		for (int j = 0; j < Spieler.spieler.size(); j++) {
-        		if (Spieler.spieler.get(j).istDrann) {
+        		if (Spieler.spieler.get(j).istDran) {
         			si = j;
         		}
     		}
@@ -682,8 +682,8 @@ public class Weltkarte implements ActionListener {
     		Spieler.spieler.get(si).TruppenVerteilen(ziel);
     		System.out.println("Anfang: " + Spieler.spieler.get(si).getName() + " hat " + Spieler.spieler.get(si).getTruppen() + " uebrig");
     		if (si < Spieler.spieler.size() -1 && Spieler.spieler.get(si).getTruppen() == 0){
-    			Spieler.spieler.get(si).istDrann = false;
-    			Spieler.spieler.get(si + 1).istDrann = true;
+    			Spieler.spieler.get(si).istDran = false;
+    			Spieler.spieler.get(si + 1).istDran = true;
 
     			phase.setText(Spieler.spieler.get(si + 1).getName() + " ist dran mit setzen!");
     			System.out.println(Spieler.spieler.get(si + 1).getName() + " ist Drann mit setzen.");
@@ -692,8 +692,8 @@ public class Weltkarte implements ActionListener {
         		phase.setText(Spieler.spieler.get(0) + " ist dran.");
         		Spieler.spieler.get(0).TruppenErhalten();
         		System.out.println(Spieler.spieler.get(0).getTruppen() + "!!!!");
-        		Spieler.spieler.get(si).istDrann = false;
-        		Spieler.spieler.get(0).istDrann = true;
+        		Spieler.spieler.get(si).istDran = false;
+        		Spieler.spieler.get(0).istDran = true;
         		erstercyclus = false;
         		return;
         	}
@@ -701,7 +701,7 @@ public class Weltkarte implements ActionListener {
 		}
 
     	for (int j = 0; j < Spieler.spieler.size(); j++) {
-    		if (Spieler.spieler.get(j).istDrann) {
+    		if (Spieler.spieler.get(j).istDran) {
     			si = j;
     		}
     	}
@@ -780,14 +780,14 @@ public class Weltkarte implements ActionListener {
 			//Naechster spieler ist drann.
 			zwPanel.setVisible(false);
 			nextBtn.setText("");
-			Spieler.spieler.get(si).istDrann = false;
+			Spieler.spieler.get(si).istDran = false;
 			System.out.println("naechster spieler");
 			if (Spieler.spieler.size() == si) {
 				si = 0;
-				Spieler.spieler.get(si).istDrann = true;
+				Spieler.spieler.get(si).istDran = true;
 				Spieler.spieler.get(si).TruppenErhalten();
 			} else {
-			Spieler.spieler.get(si + 1).istDrann = true;
+			Spieler.spieler.get(si + 1).istDran = true;
 			System.out.println(Spieler.spieler.get(si + 1).getName() + " ist dran.");
 			Spieler.spieler.get(si + 1).TruppenErhalten();
 			System.out.println(Spieler.spieler.get(si + 1).getName() + " erhaelt " + Spieler.spieler.get(si + 1).getTruppen());

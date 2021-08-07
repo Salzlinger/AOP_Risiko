@@ -172,7 +172,7 @@ class Spielereinstellungen implements ActionListener {
 					Spieler.spieler.get(i).startTruppen(10);
 					//Main.spieler.get(i).startTruppen(34);
 				}
-				Spieler.spieler.get(0).istDrann = true;
+				Spieler.spieler.get(0).istDran = true;
 				System.out.println(Spieler.spieler.get(0).getName() + " ist Drann mit setzten.");
 				break;
 			case 4:
@@ -196,7 +196,7 @@ class Spielereinstellungen implements ActionListener {
 					Spieler.spieler.get(i).startTruppen(10);
 					//Main.spieler.get(i).startTruppen(29);
 				}
-				Spieler.spieler.get(0).istDrann = true;
+				Spieler.spieler.get(0).istDran = true;
 				System.out.println(Spieler.spieler.get(0).getName() + " ist Drann mit setzten.");
 				break;
 			case 5:
@@ -219,7 +219,7 @@ class Spielereinstellungen implements ActionListener {
 					Spieler.spieler.get(i).startTruppen(10);
 					//Main.spieler.get(i).startTruppen(24);
 				}
-				Spieler.spieler.get(0).istDrann = true;
+				Spieler.spieler.get(0).istDran = true;
 				System.out.println(Spieler.spieler.get(0).getName() + " ist Drann mit setzten.");
 				break;
 			}

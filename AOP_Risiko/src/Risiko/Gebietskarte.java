@@ -5,7 +5,7 @@ extends Karten
 {
 	private String typ; //Infanterie, Kavallerie, Artillerie
 	private String name; //Osteuropa, Westafrika, Neuseeland.....
-	
+	public static int eingeloesteSets = 0;
 	
 	public Gebietskarte(String name, String typ) {
 		this.setTyp(typ);

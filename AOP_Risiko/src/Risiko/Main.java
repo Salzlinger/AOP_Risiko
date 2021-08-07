@@ -4,8 +4,7 @@ import java.util.ArrayList;
 
 public class Main {
 
-	public static int eingeloesteSets = 0;
-	public static ArrayList <Gebietskarte> Deck = new ArrayList <Gebietskarte>();;
+	public static ArrayList <Gebietskarte> Deck = new ArrayList <Gebietskarte>();
 
 	public static void main(String[] args) {
 

@@ -353,6 +353,8 @@ class Gebietskarten extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 
+	public static int eingeloesteSets;
+
 	private JPanel menuPanel;
 	private JPanel trpPanel;
 	

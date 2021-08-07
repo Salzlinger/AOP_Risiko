@@ -24,7 +24,7 @@ public class Spieler {
 	private boolean setEingeloest = false;
 	private boolean wait = false;
 	private int truppen = 0;
-	public boolean istDrann = false;
+	public boolean istDran = false;
 	public static Spieler spieler1;
 	public static Spieler spieler2;
 	public static Spieler spieler3;
@@ -97,7 +97,7 @@ public class Spieler {
 				System.out.println("Spieler " + name + " hat mehr als 5 Karten auf der Hand und muss ein Set einlösen!");
 				SetEinloesen(Main.Deck);
 				setEingeloest=true;
-				Main.eingeloesteSets++;
+				Gebietskarten.eingeloesteSets++;
 			} else 
 				{
 				System.out.println("Spieler " + name + " hat ein komplettes Set auf der Hand. Möchtest du es einlösen?");
@@ -105,7 +105,7 @@ public class Spieler {
 				{
 					SetEinloesen(Main.Deck);
 					setEingeloest=true;
-					Main.eingeloesteSets++;
+					Gebietskarten.eingeloesteSets++;
 				}
 			}
 		}
@@ -267,7 +267,7 @@ public class Spieler {
 	}
 			
 	public void berechneSetBonus() {
-		int a = Risiko.Main.eingeloesteSets;
+		int a = Gebietskarten.eingeloesteSets;
 		if (a == 0)
 		{this.setBonus = 0;}
 		if (a > 0 && a < 6 )

@@ -37,14 +37,15 @@ public class RisikoGUI extends JFrame {
 
 	private JPanel mainPanel;
 
-	private JButton startButton;
-	private JButton exitButton;
+	private JButton startBtn;
+	private JButton exitBtn;
 	
-	private String startButtonName = "startBtn";
-	private String exitButtonName = "exitBtn";
+	private String startBtnName = "startBtn";
+	private String exitBtnName = "exitBtn";
 	
 	
-	 	// Menü
+	// Start Menü
+	
 	protected RisikoGUI()
 	{
 		setTitle("Risiko");
@@ -71,26 +72,26 @@ public class RisikoGUI extends JFrame {
 		mainPanel.setBorder(new EmptyBorder(100, 80, 40, 80));
 		
 		// Buttons
-		startButton = new JButton("Starte Spiel");
-		startButton.setFont(new Font("Calibri", Font.PLAIN, 25));
-		startButton.setBackground(new Color(0x2dce98));
-		startButton.setForeground(Color.white);
-		startButton.setUI(new ButtonDesign());
+		startBtn = new JButton("Starte Spiel");
+		startBtn.setFont(new Font("Calibri", Font.PLAIN, 25));
+		startBtn.setBackground(new Color(0x2dce98));
+		startBtn.setForeground(Color.white);
+		startBtn.setUI(new ButtonDesign());
 		
-		exitButton = new JButton("Beenden");
-		exitButton.setFont(new Font("Calibri", Font.PLAIN, 25));
-		exitButton.setBackground(new Color(0x2dce98));
-		exitButton.setForeground(Color.white);
-		exitButton.setUI(new ButtonDesign());
+		exitBtn = new JButton("Beenden");
+		exitBtn.setFont(new Font("Calibri", Font.PLAIN, 25));
+		exitBtn.setBackground(new Color(0x2dce98));
+		exitBtn.setForeground(Color.white);
+		exitBtn.setUI(new ButtonDesign());
 		
 		// Commands
-		startButton.setActionCommand(startButtonName);
-		exitButton.setActionCommand(exitButtonName);
+		startBtn.setActionCommand(startBtnName);
+		exitBtn.setActionCommand(exitBtnName);
 		
-		// Buttons hinzufügen
-		mainPanel.add(startButton);
+		// hinzufügen
+		mainPanel.add(startBtn);
 		mainPanel.add(Box.createRigidArea(new Dimension(50, 20)));
-		mainPanel.add(exitButton);
+		mainPanel.add(exitBtn);
 		
 		return mainPanel;
 	}
@@ -98,8 +99,8 @@ public class RisikoGUI extends JFrame {
 		// ActionListeners für GUI
 	protected void risikoGUIActionListeners(ActionListener e)
 	{
-		startButton.addActionListener(e);
-		exitButton.addActionListener(e);
+		startBtn.addActionListener(e);
+		exitBtn.addActionListener(e);
 	}
 
 }
@@ -122,9 +123,9 @@ class SpielerAnzahl extends JDialog {
 	private String fuenfSpielerBtnName = "fuenfSpielerBtn";
 	private String zurueckBtnName = "zurueckBtn";
 	
-	protected SpielerAnzahl(RisikoGUI bla, boolean blubb) 
+	protected SpielerAnzahl(RisikoGUI gui, boolean check) 
 	{
-		super(bla, blubb);
+		super(gui, check);
 		setTitle("Risiko");
 		setPreferredSize(new Dimension(300, 400));
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -148,6 +149,7 @@ class SpielerAnzahl extends JDialog {
 		spielerAnzahlLabel = new JLabel("Anzahl der Spieler:");
 		spielerAnzahlLabel.setFont(new Font("Calibri", Font.PLAIN, 25));
 		
+		// Button
 		dreiSpielerBtn = new JButton("Drei");
 		dreiSpielerBtn.setFont(new Font("Calibri", Font.PLAIN, 25));
 		dreiSpielerBtn.setBackground(new Color(0x2dce98));
@@ -176,6 +178,8 @@ class SpielerAnzahl extends JDialog {
 		vierSpielerBtn.setActionCommand(vierSpielerBtnName);
 		fuenfSpielerBtn.setActionCommand(fuenfSpielerBtnName);
 		zurueckBtn.setActionCommand(zurueckBtnName);
+		
+		// hinzufuegen
 		
 		spielerAnzahlPanel.add(spielerAnzahlLabel);
 		spielerAnzahlPanel.add(Box.createRigidArea(new Dimension(50, 20)));
@@ -219,9 +223,9 @@ class SpielereinstellungGUI extends JDialog {
 	
 	private int spielerZahl;
 	
-	public SpielereinstellungGUI(SpielerAnzahl bla, boolean blubb, int spielerZahl)
+	public SpielereinstellungGUI(SpielerAnzahl spa, boolean check, int spielerZahl)
 	{
-		super(bla,blubb);
+		super(spa,check);
 		setTitle("Risiko");
 		setPreferredSize(new Dimension(300, 400));
 		
@@ -238,11 +242,16 @@ class SpielereinstellungGUI extends JDialog {
 	
 	private JPanel spielerNamePanel()
 	{
+		
+		// Layout
+		
 		spielerNamePanel = new JPanel();
 		spielerNamePanel.setBackground(new Color(0xcccccc));
 		
 		spielerNamePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 		spielerNamePanel.setBorder(new EmptyBorder(20, 80, 10, 80));
+		
+		// Textfields
 		
 		spieler1TextField = new JTextFieldDesign(15);
 		spieler1TextField.setBackground(new Color(0x0b5394));
@@ -255,12 +264,17 @@ class SpielereinstellungGUI extends JDialog {
 		spieler3TextField = new JTextFieldDesign(15);
 		spieler3TextField.setBackground(new Color(0xffff00));
 		
+		// hinzufuegen
+		
 		spielerNamePanel.add(spieler1TextField);
 		spielerNamePanel.add(spieler2TextField);
 		spielerNamePanel.add(spieler3TextField);
 		spielerNamePanel.add(emptySpace);
 		
-		if (spielerZahl == 4)
+		
+		// 4 Spieler
+		
+		if (spielerZahl > 3)
 		{
 			spielerNamePanel.remove(emptySpace);
 			emptySpace = Box.createRigidArea(new Dimension(0,70));
@@ -269,19 +283,21 @@ class SpielereinstellungGUI extends JDialog {
 			spielerNamePanel.add(spieler4TextField);
 			spielerNamePanel.add(emptySpace);
 		}
-		if (spielerZahl == 5)
+		
+		// 5 Spieler
+		
+		if (spielerZahl > 4)
 		{
 			spielerNamePanel.remove(emptySpace);
-			spieler4TextField = new JTextFieldDesign(15);		
-			spieler4TextField.setBackground(new Color(0x2dce98));
 			spieler5TextField = new JTextFieldDesign(15);
 			spieler5TextField.setBackground(new Color(0xffffff));
 			
-			spielerNamePanel.add(spieler4TextField);
 			spielerNamePanel.add(spieler5TextField);
 		}
 		
 		spielerNamePanel.add(Box.createRigidArea(new Dimension(50, 40)));
+		
+		// Button 
 		
 		zurueckBtn = new JButton("Zurück");
 		zurueckBtn.setFont(new Font("Calibri", Font.PLAIN, 20));
@@ -296,6 +312,8 @@ class SpielereinstellungGUI extends JDialog {
 		startBtn.setForeground(Color.white);
 		startBtn.setUI(new ButtonDesign());
 		startBtn.setActionCommand(startBtnName);
+		
+		// hinzufuegen
 		
 		spielerNamePanel.add(startBtn);
 		spielerNamePanel.add(Box.createRigidArea(new Dimension(50, 40)));
@@ -389,6 +407,8 @@ class Gebietskarten extends JFrame implements ActionListener {
 		
 		menuPanel = new JPanel();
 		
+		// Buttom
+		
 		einloesenButton = new JButton("Einloesen");
 		einloesenButton.setFont(new Font("Calibri", Font.PLAIN, 20));
 		einloesenButton.setBackground(new Color(0x2dce98));
@@ -403,6 +423,8 @@ class Gebietskarten extends JFrame implements ActionListener {
 		schliessenButton.setUI(new ButtonDesign());
 		schliessenButton.setActionCommand(schliessenBtnName);
 
+		// Bilder
+		
 		infanterie = new ImageIcon("src\\img\\Infanterie.png");
 	    image1 = infanterie.getImage();
 	    newimage1 = image1.getScaledInstance(80, 120, java.awt.Image.SCALE_SMOOTH);
@@ -422,6 +444,8 @@ class Gebietskarten extends JFrame implements ActionListener {
 	    image4 = joker.getImage();
 	    newimage4 = image4.getScaledInstance(80, 120, java.awt.Image.SCALE_SMOOTH);
 	    joker = new ImageIcon(newimage4);
+	    
+	    // Label
 	    
 	    iLabel = new JLabel();
 	    iLabel.setIcon(infanterie);
@@ -444,10 +468,15 @@ class Gebietskarten extends JFrame implements ActionListener {
 	    j2Label= new JLabel("1x");
 	    j2Label.setFont(new Font("Calibri",Font.PLAIN,25));
 
+	    //Layout
+	    
 	    trpPanel = new JPanel();
 		trpPanel.setPreferredSize(new Dimension(400,30));
 		trpPanel.setLayout(new FlowLayout(0,32,0));
 		trpPanel.setBorder(new EmptyBorder(0,25,0,30));
+		
+		// hinzufuegen
+		
 		trpPanel.add(i2Label);
 		trpPanel.add(Box.createRigidArea(new Dimension(0,0)));
 		trpPanel.add(k2Label);
@@ -466,6 +495,8 @@ class Gebietskarten extends JFrame implements ActionListener {
 		menuPanel.add(einloesenButton);
 		menuPanel.add(schliessenButton);
 		
+		// ActionListener
+		
 		GebietskartenListeners(this);
 		
 		return menuPanel;
@@ -482,10 +513,14 @@ class Gebietskarten extends JFrame implements ActionListener {
 
 		String actionEvent = e.getActionCommand();
 		
+		// Gebietskarten einloesen
+		
 		if(actionEvent.equals("einloesenBtnName"))
 		{
 			
 		}
+		
+		// Fenster schliessen
 		
 		if(actionEvent.equals("schliessenBtnName"))
 		{

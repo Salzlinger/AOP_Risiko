@@ -57,9 +57,9 @@ class SpielerZahl implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		String actionEvent = e.getActionCommand();
+		String Klick = e.getActionCommand();
 		
-		if(actionEvent.equals("dreiSpielerBtn")) 
+		if(Klick.equals("dreiSpielerBtn")) 
 		{
 			gra.setSpielerAnzahl(3);
 			
@@ -69,7 +69,7 @@ class SpielerZahl implements ActionListener {
 			
 		}
 		
-		else if(actionEvent.equals("vierSpielerBtn"))
+		else if(Klick.equals("vierSpielerBtn"))
 		{
 			gra.setSpielerAnzahl(4);
 			einstellung = new SpielereinstellungGUI(gui, true, gra.getSpielerAnzahl());
@@ -77,7 +77,7 @@ class SpielerZahl implements ActionListener {
 			einstellung.setVisible(true);
 
 		}
-		else if(actionEvent.equals("fuenfSpielerBtn"))
+		else if(Klick.equals("fuenfSpielerBtn"))
 		{
 			gra.setSpielerAnzahl(5);
 			einstellung = new SpielereinstellungGUI(gui, true, gra.getSpielerAnzahl());
@@ -85,7 +85,7 @@ class SpielerZahl implements ActionListener {
 			einstellung.setVisible(true);
 
 		}
-		else if(actionEvent.equals("zurueckBtn"))
+		else if(Klick.equals("zurueckBtn"))
 		{
 			gui.dispose();
 		}
@@ -110,10 +110,10 @@ class Spielereinstellungen implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		String actionEvent = e.getActionCommand();
+		String Klick = e.getActionCommand();
 		spielerNamen = new ArrayList<String>();
 		
-		if(actionEvent.equals("startBtn"))
+		if(Klick.equals("startBtn"))
 		{
 			spielerNamen.add(gui.getSpielerTextField(1));
 			Main.spieler1 = new Spieler ("BLUE", spielerNamen.get(0) );
@@ -144,6 +144,7 @@ class Spielereinstellungen implements ActionListener {
 			
 			
 			//Spieler randomizen
+			
 			for(int i=0; i < 10 ; i++)
 			{
 			int a = zufall.nextInt(Main.spieler.size());
@@ -158,10 +159,11 @@ class Spielereinstellungen implements ActionListener {
 			switch (gra.getSpielerAnzahl()) {
 			case 3:			
 				//Länder werden verteilt
+				
 				int k = 0;
 				for (int i = 0; i < 42; i++) {
-					Main.spieler.get(k).getLaender().add(Main.liste[i]);
-					Main.liste[i].setBesitzer(Main.spieler.get(k));
+					Main.spieler.get(k).getLaender().add(Laender.liste[i]);
+					Laender.liste[i].setBesitzer(Main.spieler.get(k));
 					k++;
 					if(k == 3) {
 						k = 0;
@@ -173,6 +175,7 @@ class Spielereinstellungen implements ActionListener {
 					}
 				}
 				//Truppen werden verteilt
+				
 				for (int i = 0; i < Main.spieler.size(); i++) {
 					Main.spieler.get(i).startTruppen(10);
 					//Main.spieler.get(i).startTruppen(34);
@@ -183,8 +186,8 @@ class Spielereinstellungen implements ActionListener {
 			case 4:
 				k = 0;
 				for (int i = 0; i < 42; i++) {
-					Main.spieler.get(k).getLaender().add(Main.liste[i]);
-					Main.liste[i].setBesitzer(Main.spieler.get(k));
+					Main.spieler.get(k).getLaender().add(Laender.liste[i]);
+					Laender.liste[i].setBesitzer(Main.spieler.get(k));
 					k++;
 					if(k == 4) {
 						k = 0;
@@ -196,6 +199,7 @@ class Spielereinstellungen implements ActionListener {
 					}
 				}
 				//Truppen werden verteilt
+				
 				for (int i = 0; i < Main.spieler.size(); i++) {
 					Main.spieler.get(i).startTruppen(10);
 					//Main.spieler.get(i).startTruppen(29);
@@ -206,8 +210,8 @@ class Spielereinstellungen implements ActionListener {
 			case 5:
 				k = 0;
 				for (int i = 0; i < 42; i++) {
-					Main.spieler.get(k).getLaender().add(Main.liste[i]);
-					Main.liste[i].setBesitzer(Main.spieler.get(k));
+					Main.spieler.get(k).getLaender().add(Laender.liste[i]);
+					Laender.liste[i].setBesitzer(Main.spieler.get(k));
 					k++;
 					if(k == 5) {
 						k = 0;
@@ -229,14 +233,19 @@ class Spielereinstellungen implements ActionListener {
 				
 			}
 			
+			// Spielbrett erstellen
+			
 			spielbrett = new Spielbrett();
+			
+			// uebrigen Fenster verschwinden lassen
+			
 			gui.setVisible(false);
 			Aktionen.spielerAnzahl.setVisible(false);
 			Aktionen.gui.setVisible(false);
 			spielbrett.setVisible(true);
 			
 		}
-		else if(actionEvent.equals("zurueckBtn"))
+		else if(Klick.equals("zurueckBtn"))
 		{
 			gui.dispose();
 		}

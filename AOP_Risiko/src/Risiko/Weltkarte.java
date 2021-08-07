@@ -14,6 +14,7 @@ import javax.imageio.ImageIO;
 public class Weltkarte implements ActionListener {
 
     private JComponent ui = null;
+    
     private JLabel output;
     static JLabel phase;
     private JLabel w1;
@@ -64,8 +65,8 @@ public class Weltkarte implements ActionListener {
     private Gebietskarten gebietskarten;
 
     public static final int SIZE = 550;
-    BufferedImage bild;
-    Area area;
+    private BufferedImage bild;
+    private Area area;
     static ArrayList<Shape> shapeList;
     private static int pointer;
     private static int z = 0;
@@ -296,14 +297,14 @@ public class Weltkarte implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) // funktioniert noch nicht
     {
-    	String actionEvent = e.getActionCommand();
+    	String Klick = e.getActionCommand();
 
-    	if(actionEvent.equals("truppenBtn"))
+    	if(Klick.equals("truppenBtn"))
     	{
     		gebietskarten = new Gebietskarten();
     		gebietskarten.setVisible(true);
     	}
-    	else if(actionEvent.equals("nextBtn"))
+    	else if(Klick.equals("nextBtn"))
     	{
     		if (!postBattle && z == 0 && a == 1 && Main.spieler.get(si).getTruppen() == 0) {
     			trpLabel.setVisible(true);
@@ -351,7 +352,7 @@ public class Weltkarte implements ActionListener {
     			zwPanel.setVisible(false);
     		}
     	}
-    	else if(actionEvent.equals("hochBtn"))
+    	else if(Klick.equals("hochBtn"))
     	{
     		if(truppen < max - 1)
     		{
@@ -364,7 +365,7 @@ public class Weltkarte implements ActionListener {
     		}
 
     	}
-    	else if(actionEvent.equals("runterBtn"))
+    	else if(Klick.equals("runterBtn"))
     	{
     		if(truppen > 1)
     		{
@@ -538,7 +539,7 @@ public class Weltkarte implements ActionListener {
         for (int i = 0; i < Main.spieler1.getLaender().size(); i++) {
         	int j = 0;
         	for (int k = 0; k < 42; k++) {
-        		if (Main.liste[k] == Main.spieler1.getLaender().get(i)) {
+        		if (Laender.liste[k] == Main.spieler1.getLaender().get(i)) {
         			j = k;
         		}
         	}
@@ -548,7 +549,7 @@ public class Weltkarte implements ActionListener {
         for (int i = 0; i < Main.spieler2.getLaender().size(); i++) {
         	int j = 0;
         	for (int k = 0; k < 42; k++) {
-        		if (Main.liste[k] == Main.spieler2.getLaender().get(i)) {
+        		if (Laender.liste[k] == Main.spieler2.getLaender().get(i)) {
         			j = k;
         		}
         	}
@@ -558,7 +559,7 @@ public class Weltkarte implements ActionListener {
         for (int i = 0; i < Main.spieler3.getLaender().size(); i++) {
         	int j = 0;
         	for (int k = 0; k < 42; k++) {
-        		if (Main.liste[k] == Main.spieler3.getLaender().get(i)) {
+        		if (Laender.liste[k] == Main.spieler3.getLaender().get(i)) {
         			j = k;
         		}
         	}
@@ -569,7 +570,7 @@ public class Weltkarte implements ActionListener {
 	        for (int i = 0; i < Main.spieler4.getLaender().size(); i++) {
 	        	int j = 0;
 	        	for (int k = 0; k < 42; k++) {
-	        		if (Main.liste[k] == Main.spieler4.getLaender().get(i)) {
+	        		if (Laender.liste[k] == Main.spieler4.getLaender().get(i)) {
 	        			j = k;
 	        		}
 	        	}
@@ -581,7 +582,7 @@ public class Weltkarte implements ActionListener {
 	        for (int i = 0; i < Main.spieler5.getLaender().size(); i++) {
 	        	int j = 0;
 	        	for (int k = 0; k < 42; k++) {
-	        		if (Main.liste[k] == Main.spieler5.getLaender().get(i)) {
+	        		if (Laender.liste[k] == Main.spieler5.getLaender().get(i)) {
 	        			j = k;
 	        		}
 	        	}
@@ -594,48 +595,48 @@ public class Weltkarte implements ActionListener {
 
         g.setFont(new Font("Calibri", Font.BOLD,15));
         g.setColor(Color.WHITE);
-        g.drawString(String.valueOf(Main.liste[0].getTruppen()), 140, 90);
-        g.drawString(String.valueOf(Main.liste[1].getTruppen()), 660, 80);
-        g.drawString(String.valueOf(Main.liste[2].getTruppen()), 290, 65);
-        g.drawString(String.valueOf(Main.liste[3].getTruppen()), 355, 120);
-        g.drawString(String.valueOf(Main.liste[4].getTruppen()), 75, 90);
-        g.drawString(String.valueOf(Main.liste[5].getTruppen()), 410, 120);
-        g.drawString(String.valueOf(Main.liste[6].getTruppen()), 140, 135);
-        g.drawString(String.valueOf(Main.liste[7].getTruppen()), 650, 140);
-        g.drawString(String.valueOf(Main.liste[8].getTruppen()), 245, 140);
-        g.drawString(String.valueOf(Main.liste[9].getTruppen()), 725, 85);
-        g.drawString(String.valueOf(Main.liste[10].getTruppen()), 185, 140);
-        g.drawString(String.valueOf(Main.liste[11].getTruppen()), 600, 80);
-        g.drawString(String.valueOf(Main.liste[12].getTruppen()), 560, 130);
-        g.drawString(String.valueOf(Main.liste[13].getTruppen()), 350, 190);
-        g.drawString(String.valueOf(Main.liste[14].getTruppen()), 415, 190);
-        g.drawString(String.valueOf(Main.liste[15].getTruppen()), 660, 195);
-        g.drawString(String.valueOf(Main.liste[16].getTruppen()), 740, 200);
-        g.drawString(String.valueOf(Main.liste[17].getTruppen()), 140, 190);
-        g.drawString(String.valueOf(Main.liste[18].getTruppen()), 200, 210);
-        g.drawString(String.valueOf(Main.liste[19].getTruppen()), 480, 150);
-        g.drawString(String.valueOf(Main.liste[20].getTruppen()), 550, 210);
-        g.drawString(String.valueOf(Main.liste[21].getTruppen()), 416, 230);
-        g.drawString(String.valueOf(Main.liste[22].getTruppen()), 370, 230);
-        g.drawString(String.valueOf(Main.liste[23].getTruppen()), 640, 240);
-        g.drawString(String.valueOf(Main.liste[24].getTruppen()), 145, 250);
-        g.drawString(String.valueOf(Main.liste[25].getTruppen()), 200, 310);
-        g.drawString(String.valueOf(Main.liste[26].getTruppen()), 440, 310);
-        g.drawString(String.valueOf(Main.liste[27].getTruppen()), 655, 305);
-        g.drawString(String.valueOf(Main.liste[28].getTruppen()), 500, 290);
-        g.drawString(String.valueOf(Main.liste[29].getTruppen()), 595, 290);
-        g.drawString(String.valueOf(Main.liste[30].getTruppen()), 385, 340);
-        g.drawString(String.valueOf(Main.liste[31].getTruppen()), 735, 375);
-        g.drawString(String.valueOf(Main.liste[32].getTruppen()), 215, 375);
-        g.drawString(String.valueOf(Main.liste[33].getTruppen()), 670, 390);
-        g.drawString(String.valueOf(Main.liste[34].getTruppen()), 260, 355);
-        g.drawString(String.valueOf(Main.liste[35].getTruppen()), 445, 400);
-        g.drawString(String.valueOf(Main.liste[36].getTruppen()), 480, 370);
-        g.drawString(String.valueOf(Main.liste[37].getTruppen()), 520, 470);
-        g.drawString(String.valueOf(Main.liste[38].getTruppen()), 710, 470);
-        g.drawString(String.valueOf(Main.liste[39].getTruppen()), 770, 470);
-        g.drawString(String.valueOf(Main.liste[40].getTruppen()), 450, 470);
-        g.drawString(String.valueOf(Main.liste[41].getTruppen()), 220, 440);
+        g.drawString(String.valueOf(Laender.liste[0].getTruppen()), 140, 90);
+        g.drawString(String.valueOf(Laender.liste[1].getTruppen()), 660, 80);
+        g.drawString(String.valueOf(Laender.liste[2].getTruppen()), 290, 65);
+        g.drawString(String.valueOf(Laender.liste[3].getTruppen()), 355, 120);
+        g.drawString(String.valueOf(Laender.liste[4].getTruppen()), 75, 90);
+        g.drawString(String.valueOf(Laender.liste[5].getTruppen()), 410, 120);
+        g.drawString(String.valueOf(Laender.liste[6].getTruppen()), 140, 135);
+        g.drawString(String.valueOf(Laender.liste[7].getTruppen()), 650, 140);
+        g.drawString(String.valueOf(Laender.liste[8].getTruppen()), 245, 140);
+        g.drawString(String.valueOf(Laender.liste[9].getTruppen()), 725, 85);
+        g.drawString(String.valueOf(Laender.liste[10].getTruppen()), 185, 140);
+        g.drawString(String.valueOf(Laender.liste[11].getTruppen()), 600, 80);
+        g.drawString(String.valueOf(Laender.liste[12].getTruppen()), 560, 130);
+        g.drawString(String.valueOf(Laender.liste[13].getTruppen()), 350, 190);
+        g.drawString(String.valueOf(Laender.liste[14].getTruppen()), 415, 190);
+        g.drawString(String.valueOf(Laender.liste[15].getTruppen()), 660, 195);
+        g.drawString(String.valueOf(Laender.liste[16].getTruppen()), 740, 200);
+        g.drawString(String.valueOf(Laender.liste[17].getTruppen()), 140, 190);
+        g.drawString(String.valueOf(Laender.liste[18].getTruppen()), 200, 210);
+        g.drawString(String.valueOf(Laender.liste[19].getTruppen()), 480, 150);
+        g.drawString(String.valueOf(Laender.liste[20].getTruppen()), 550, 210);
+        g.drawString(String.valueOf(Laender.liste[21].getTruppen()), 416, 230);
+        g.drawString(String.valueOf(Laender.liste[22].getTruppen()), 370, 230);
+        g.drawString(String.valueOf(Laender.liste[23].getTruppen()), 640, 240);
+        g.drawString(String.valueOf(Laender.liste[24].getTruppen()), 145, 250);
+        g.drawString(String.valueOf(Laender.liste[25].getTruppen()), 200, 310);
+        g.drawString(String.valueOf(Laender.liste[26].getTruppen()), 440, 310);
+        g.drawString(String.valueOf(Laender.liste[27].getTruppen()), 655, 305);
+        g.drawString(String.valueOf(Laender.liste[28].getTruppen()), 500, 290);
+        g.drawString(String.valueOf(Laender.liste[29].getTruppen()), 595, 290);
+        g.drawString(String.valueOf(Laender.liste[30].getTruppen()), 385, 340);
+        g.drawString(String.valueOf(Laender.liste[31].getTruppen()), 735, 375);
+        g.drawString(String.valueOf(Laender.liste[32].getTruppen()), 215, 375);
+        g.drawString(String.valueOf(Laender.liste[33].getTruppen()), 670, 390);
+        g.drawString(String.valueOf(Laender.liste[34].getTruppen()), 260, 355);
+        g.drawString(String.valueOf(Laender.liste[35].getTruppen()), 445, 400);
+        g.drawString(String.valueOf(Laender.liste[36].getTruppen()), 480, 370);
+        g.drawString(String.valueOf(Laender.liste[37].getTruppen()), 520, 470);
+        g.drawString(String.valueOf(Laender.liste[38].getTruppen()), 710, 470);
+        g.drawString(String.valueOf(Laender.liste[39].getTruppen()), 770, 470);
+        g.drawString(String.valueOf(Laender.liste[40].getTruppen()), 450, 470);
+        g.drawString(String.valueOf(Laender.liste[41].getTruppen()), 220, 440);
 
         // Maus ueber Land bewegen
         try {
@@ -673,7 +674,7 @@ public class Weltkarte implements ActionListener {
         			si = j;
         		}
     		}
-    		ziel = Main.liste[i];
+    		ziel = Laender.liste[i];
     		Main.spieler.get(si).TruppenVerteilen(ziel);
     		System.out.println("Anfang: " + Main.spieler.get(si).getName() + " hat " + Main.spieler.get(si).getTruppen() + " uebrig");
     		if (si < Main.spieler.size() -1 && Main.spieler.get(si).getTruppen() == 0){
@@ -703,7 +704,7 @@ public class Weltkarte implements ActionListener {
 
     	// Truppen verteilen
     	if (Main.spieler.get(si).getTruppen() > 0) {
-    		ziel = Main.liste[i];
+    		ziel = Laender.liste[i];
     		Main.spieler.get(si).TruppenVerteilen(ziel);
     		System.out.println("Name Land: " + ziel.getName());
     		System.out.println("Truppe danach:" + ziel.getTruppen());
@@ -722,14 +723,14 @@ public class Weltkarte implements ActionListener {
 				nextBtn.setText("naechste Phase");
 				switch (a) {
 				case 0:
-					start = Main.liste [i];
+					start = Laender.liste [i];
 					System.out.println(start.getNachbarn());
 					System.out.println("erstes land ist " + start.getName());
 					phase.setText("Das erste Land ist " + start.getName());
 					a++;
 					return;
 				case 1:
-					ziel = Main.liste [i];
+					ziel = Laender.liste [i];
 					System.out.println("zweites land ist " + ziel.getName());
 					phase.setText("Das zweite Land ist " + ziel.getName());
 					int zielBesitzter = Main.spieler.indexOf(ziel.getBesitzer());
@@ -750,7 +751,7 @@ public class Weltkarte implements ActionListener {
 			case 1:
 				System.out.println("Truppen versetzten");
 				phase.setText("W�hle die L�nder zum Truppen versetzen!");
-				start = Main.liste [i];
+				start = Laender.liste [i];
 				System.out.println("erstes land ist " + start.getName());
 				phase.setText("Das erste Land ist " + start.getName());
 				z++;
@@ -761,7 +762,7 @@ public class Weltkarte implements ActionListener {
 				max = start.getTruppen();
     			trpLabel.setText(String.valueOf(max - 1));
     			zwPanel.setVisible(true);
-				ziel = Main.liste [i];
+				ziel = Laender.liste [i];
 				System.out.println("zweites land ist " + ziel.getName());
 				phase.setText("Das zweite Land ist " + ziel.getName());
 				if (cont) {

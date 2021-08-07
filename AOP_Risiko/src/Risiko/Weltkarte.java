@@ -571,7 +571,7 @@ public class Weltkarte implements ActionListener {
     			
     			//funktioniert vielleicht?
     			Spielbrett.setText(Main.spieler.get(si + 1).getName() + " ist dran mit setzten.");
-    			
+    			Spielbrett.getText();
     			System.out.println(Main.spieler.get(si + 1).getName() + " ist Drann mit setzten.");
     		} else if (si == Main.spieler.size() -1 && Main.spieler.get(si).getTruppen() == 0){
         		System.out.println(Main.spieler.get(0) + " ist Drann.");

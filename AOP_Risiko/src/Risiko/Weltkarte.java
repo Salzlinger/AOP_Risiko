@@ -259,6 +259,8 @@ public class Weltkarte implements ActionListener {
         ui.add(output);
         ui.add((btnPanel),BorderLayout.SOUTH);
 
+        weltkarteActionListeners(this);
+        
         refresh();
     }
 
@@ -281,18 +283,23 @@ public class Weltkarte implements ActionListener {
     	}
     	else if(actionEvent.equals("nextBtn"))
     	{
-    		
+    		System.exit(0);
     	}
     	else if(actionEvent.equals("hochBtn"))
     	{
-    		truppen += 1;
-    		System.out.println(truppen);
+    		if(truppen < 30)
+    		{
+    			truppen += 1;
+    			trpLabel.setText(String.valueOf(truppen));
+    		}
+
     	}
     	else if(actionEvent.equals("runterBtn"))
     	{
     		if(truppen > 1) 
     		{
     			truppen -= 1;
+        		trpLabel.setText(String.valueOf(truppen));
     		}
     	}
     }

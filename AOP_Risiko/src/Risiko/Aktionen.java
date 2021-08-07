@@ -7,7 +7,7 @@ import java.util.Random;
 
 public class Aktionen implements ActionListener{
 
-	private RisikoGUI gui;
+	static RisikoGUI gui;
 	private Graphen gra;
 	
 	static SpielerAnzahl spielerAnzahl;
@@ -230,8 +230,9 @@ class Spielereinstellungen implements ActionListener {
 			}
 			
 			spielbrett = new Spielbrett();
-			gui.dispose();
-			Aktionen.spielerAnzahl.dispose();
+			gui.setVisible(false);
+			Aktionen.spielerAnzahl.setVisible(false);
+			Aktionen.gui.setVisible(false);
 			spielbrett.setVisible(true);
 			
 		}

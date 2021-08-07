@@ -1,5 +1,6 @@
 package Risiko;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -7,6 +8,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.event.ActionEvent;
@@ -15,6 +17,7 @@ import java.awt.geom.RoundRectangle2D;
 
 import javax.swing.AbstractButton;
 import javax.swing.Box;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
@@ -338,12 +341,31 @@ class Gebietskarten extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
 	private JPanel menuPanel;
+	private JPanel trpPanel;
 	
 	private JButton einloesenButton;
 	private JButton schliessenButton;
 	
 	private String einloesenBtnName = "einloesenBtnName";
 	private String schliessenBtnName = "schliessenBtnName";
+	
+	private JLabel iLabel;
+	private JLabel kLabel;
+	private JLabel aLabel;
+	private JLabel i2Label;
+	private JLabel k2Label;
+	private JLabel a2Label;
+	
+	private Image image1;
+    private Image newimage1;
+    private Image image2;
+    private Image newimage2;
+    private Image image3;
+    private Image newimage3;
+    
+    private ImageIcon infanterie;
+    private ImageIcon kavallerie;
+    private ImageIcon artillerie;
 	
 	public Gebietskarten() {
 		setTitle("Risiko");
@@ -363,19 +385,63 @@ class Gebietskarten extends JFrame implements ActionListener {
 		menuPanel = new JPanel();
 		
 		einloesenButton = new JButton("Einloesen");
-		einloesenButton.setFont(new Font("Calibri", Font.PLAIN, 25));
+		einloesenButton.setFont(new Font("Calibri", Font.PLAIN, 20));
 		einloesenButton.setBackground(new Color(0x2dce98));
 		einloesenButton.setForeground(Color.white);
 		einloesenButton.setUI(new ButtonDesign());
 		einloesenButton.setActionCommand(einloesenBtnName);
 		
 		schliessenButton = new JButton("Schlieﬂen");
-		schliessenButton.setFont(new Font("Calibri", Font.PLAIN, 25));
+		schliessenButton.setFont(new Font("Calibri", Font.PLAIN, 20));
 		schliessenButton.setBackground(new Color(0x2dce98));
 		schliessenButton.setForeground(Color.white);
 		schliessenButton.setUI(new ButtonDesign());
 		schliessenButton.setActionCommand(schliessenBtnName);
+
+		infanterie = new ImageIcon("src\\img\\Infanterie.png");
+	    image1 = infanterie.getImage();
+	    newimage1 = image1.getScaledInstance(80, 120, java.awt.Image.SCALE_SMOOTH);
+	    infanterie = new ImageIcon(newimage1);
+
+	    kavallerie = new ImageIcon("src\\img\\Kavallerie.png");
+	    image2 = kavallerie.getImage();
+	    newimage2 = image2.getScaledInstance(80, 120, java.awt.Image.SCALE_SMOOTH);
+	    kavallerie = new ImageIcon(newimage2);
+
+	    artillerie = new ImageIcon("src\\img\\Artillerie.png");
+	    image3 = artillerie.getImage();
+	    newimage3 = image3.getScaledInstance(80, 120, java.awt.Image.SCALE_SMOOTH);
+	    artillerie = new ImageIcon(newimage3);
+	    
+	    iLabel = new JLabel();
+	    iLabel.setIcon(infanterie);
+        
+	    kLabel = new JLabel();
+	    kLabel.setIcon(kavallerie);
+        
+	    aLabel = new JLabel();
+	    aLabel.setIcon(artillerie);
+	    
+	    i2Label= new JLabel("5x");
+	    i2Label.setFont(new Font("Calibri",Font.PLAIN,25));
+	    k2Label= new JLabel("3x");
+	    k2Label.setFont(new Font("Calibri",Font.PLAIN,25));
+	    a2Label= new JLabel("2x");
+	    a2Label.setFont(new Font("Calibri",Font.PLAIN,25));
+
+	    trpPanel = new JPanel();
+		trpPanel.setPreferredSize(new Dimension(250,30));
+		trpPanel.setLayout(new BorderLayout(60,0));
+		trpPanel.setBorder(new EmptyBorder(0,25,0,30));
+		trpPanel.add(i2Label,BorderLayout.WEST);
+		trpPanel.add(k2Label,BorderLayout.CENTER);
+		trpPanel.add(a2Label,BorderLayout.EAST);
 		
+	    menuPanel.add(iLabel);
+	    menuPanel.add(kLabel);
+	    menuPanel.add(aLabel);
+	    menuPanel.add(trpPanel);
+	    menuPanel.add(Box.createRigidArea(new Dimension(250,40)));
 		menuPanel.add(einloesenButton);
 		menuPanel.add(schliessenButton);
 		

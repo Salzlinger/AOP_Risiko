@@ -9,6 +9,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.Shape;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.RoundRectangle2D;
 
@@ -332,6 +333,80 @@ class SpielereinstellungGUI extends JDialog {
 	}
 }
 
+class Gebietskarten extends JFrame implements ActionListener {
+
+	private static final long serialVersionUID = 1L;
+
+	private JPanel menuPanel;
+	
+	private JButton einloesenButton;
+	private JButton schliessenButton;
+	
+	private String einloesenBtnName = "einloesenBtnName";
+	private String schliessenBtnName = "schliessenBtnName";
+	
+	public Gebietskarten() {
+		setTitle("Risiko");
+		setPreferredSize(new Dimension(300,300));
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
+		
+		add(Menu());
+		
+		pack();
+		setLocationRelativeTo(null);
+		setVisible(false);
+	}
+
+	private JPanel Menu() {
+		
+		menuPanel = new JPanel();
+		
+		einloesenButton = new JButton("Einloesen");
+		einloesenButton.setFont(new Font("Calibri", Font.PLAIN, 25));
+		einloesenButton.setBackground(new Color(0x2dce98));
+		einloesenButton.setForeground(Color.white);
+		einloesenButton.setUI(new ButtonDesign());
+		einloesenButton.setActionCommand(einloesenBtnName);
+		
+		schliessenButton = new JButton("Schlieﬂen");
+		schliessenButton.setFont(new Font("Calibri", Font.PLAIN, 25));
+		schliessenButton.setBackground(new Color(0x2dce98));
+		schliessenButton.setForeground(Color.white);
+		schliessenButton.setUI(new ButtonDesign());
+		schliessenButton.setActionCommand(schliessenBtnName);
+		
+		menuPanel.add(einloesenButton);
+		menuPanel.add(schliessenButton);
+		
+		GebietskartenListeners(this);
+		
+		return menuPanel;
+	}
+	
+	 protected void GebietskartenListeners(ActionListener e) 
+	    {
+		 	einloesenButton.addActionListener(e);
+	    	schliessenButton.addActionListener(e);
+	    }
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+
+		String actionEvent = e.getActionCommand();
+		
+		if(actionEvent.equals("einloesenBtnName"))
+		{
+			
+		}
+		
+		if(actionEvent.equals("schliessenBtnName"))
+		{
+			setVisible(false);
+		}
+		
+	}
+}
 class Spielbrett extends JDialog {
 	
 	private static final long serialVersionUID = 1L;
@@ -448,3 +523,4 @@ class JTextFieldDesign extends JTextField {
          return shape.contains(x, y);
     }
 }
+

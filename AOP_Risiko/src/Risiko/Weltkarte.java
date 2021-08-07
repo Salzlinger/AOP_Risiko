@@ -60,6 +60,8 @@ public class Weltkarte implements ActionListener {
     private ImageIcon wuerfel4;
     private ImageIcon wuerfel5;
     private ImageIcon wuerfel6;
+    
+    private Gebietskarten gebietskarten;
 
     public static final int SIZE = 550;
     BufferedImage bild;
@@ -279,7 +281,8 @@ public class Weltkarte implements ActionListener {
     	
     	if(actionEvent.equals("truppenBtn"))
     	{
-    		
+    		gebietskarten = new Gebietskarten();
+    		gebietskarten.setVisible(true);
     	}
     	else if(actionEvent.equals("nextBtn"))
     	{

@@ -1,6 +1,7 @@
 package Risiko;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -210,6 +211,8 @@ class SpielereinstellungGUI extends JDialog {
 	private JTextField spieler4TextField;
 	private JTextField spieler5TextField;
 	
+	private Component emptySpace = Box.createRigidArea(new Dimension(0,90));
+	
 	private int spielerZahl;
 	
 	public SpielereinstellungGUI(SpielerAnzahl bla, boolean blubb, int spielerZahl)
@@ -222,9 +225,6 @@ class SpielereinstellungGUI extends JDialog {
 		
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setResizable(false);
-		
-//		mainLayout = new GridLayout(1, 1, 5, 5);
-	//	setLayout(mainLayout);
 		
 		add(spielerNamePanel());
 		
@@ -242,9 +242,11 @@ class SpielereinstellungGUI extends JDialog {
 		
 		spieler1TextField = new JTextFieldDesign(15);
 		spieler1TextField.setBackground(new Color(0x0b5394));
+		spieler1TextField.setForeground(Color.white);
 		
 		spieler2TextField = new JTextFieldDesign(15);
 		spieler2TextField.setBackground(new Color(0xcc0000));
+		spieler2TextField.setForeground(Color.white);
 		
 		spieler3TextField = new JTextFieldDesign(15);
 		spieler3TextField.setBackground(new Color(0xffff00));
@@ -252,15 +254,20 @@ class SpielereinstellungGUI extends JDialog {
 		spielerNamePanel.add(spieler1TextField);
 		spielerNamePanel.add(spieler2TextField);
 		spielerNamePanel.add(spieler3TextField);
+		spielerNamePanel.add(emptySpace);
 		
 		if (spielerZahl == 4)
 		{
+			spielerNamePanel.remove(emptySpace);
+			emptySpace = Box.createRigidArea(new Dimension(0,70));
 			spieler4TextField = new JTextFieldDesign(15);
 			spieler4TextField.setBackground(new Color(0x2dce98));
 			spielerNamePanel.add(spieler4TextField);
+			spielerNamePanel.add(emptySpace);
 		}
 		if (spielerZahl == 5)
 		{
+			spielerNamePanel.remove(emptySpace);
 			spieler4TextField = new JTextFieldDesign(15);		
 			spieler4TextField.setBackground(new Color(0x2dce98));
 			spieler5TextField = new JTextFieldDesign(15);
@@ -328,6 +335,7 @@ class SpielereinstellungGUI extends JDialog {
 class Spielbrett extends JDialog {
 	
 	private static final long serialVersionUID = 1L;
+	private static String stext;
 		
 	public Spielbrett() {
 		
@@ -352,6 +360,14 @@ class Spielbrett extends JDialog {
 	        };
 	        SwingUtilities.invokeLater(r);
 		
+	}
+	
+	public static void setText(String text) {
+		stext = text;
+	}
+	
+	public static String getText() {
+		return stext;
 	}
 }
 class ButtonDesign extends BasicButtonUI {
@@ -422,7 +438,7 @@ class JTextFieldDesign extends JTextField {
          super.paintComponent(g);
     }
     protected void paintBorder(Graphics g) {
-         g.setColor(getForeground());
+         g.setColor(Color.BLACK);
          g.drawRoundRect(0, 0, getWidth()-1, getHeight()-1, 15, 15);
     }
     public boolean contains(int x, int y) {

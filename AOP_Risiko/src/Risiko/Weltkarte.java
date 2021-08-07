@@ -95,7 +95,7 @@ public class Weltkarte implements ActionListener {
             return;
         }
         
-        //Laden der Würfelbilder
+        //Laden der Wuerfelbilder
         
         String imagePath = "src\\img\\risk.png";
         bild = ImageIO.read(new File(imagePath));
@@ -135,8 +135,6 @@ public class Weltkarte implements ActionListener {
         shapeList = separateShapeIntoRegions(area);
         ui = new JPanel(new BorderLayout(4, 0));
         ui.setBorder(new EmptyBorder(4, 4, 4, 4));
-
-
 
         output = new JLabel();
         output.addMouseMotionListener(new MousePositionListener());
@@ -202,13 +200,16 @@ public class Weltkarte implements ActionListener {
         c.fill = GridBagConstraints.HORIZONTAL;
         trpPanel.add(runterBtn, c);
 
-        phase = new JLabel("Spieler 1 ist am Zug!", SwingConstants.CENTER);
+        //funktioniert noch nicht
+        phase = new JLabel(Spielbrett.getText(), SwingConstants.CENTER);
         phase.setFont(new Font("Calibri",Font.PLAIN,20));
         phase.setForeground(Color.white);
         phase.setLayout(new BorderLayout(0,10));
+        phase.validate();
 
-        // Anzeigen der Würfel
+        // Anzeigen der Wuerfel
         
+        //Angreiferwuerfel
         w1 = new JLabel();
         w1.setIcon(wuerfel1);
 
@@ -218,6 +219,7 @@ public class Weltkarte implements ActionListener {
         w3 = new JLabel();
         w3.setIcon(wuerfel3);
 
+        //Verteidigerwuerfel
         w4 = new JLabel();
         w4.setIcon(wuerfel4);
 
@@ -269,7 +271,7 @@ public class Weltkarte implements ActionListener {
     }
     
     @Override
-    public void actionPerformed(ActionEvent e)
+    public void actionPerformed(ActionEvent e) // funktioniert noch nicht
     {
     	String actionEvent = e.getActionCommand();
     	
@@ -382,7 +384,7 @@ public class Weltkarte implements ActionListener {
 
         }
     }
-class MouseClickListener implements MouseListener {
+    class MouseClickListener implements MouseListener {
 
     	@Override
     	public void mouseClicked(MouseEvent e) {
@@ -448,7 +450,7 @@ class MouseClickListener implements MouseListener {
         g.setColor(Color.BLACK);
         g.draw(area);
 
-        // Einfï¿½rben der SpielerLï¿½nder
+        // Einfaerben der SpielerLaender
 
         for (int i = 0; i < Main.spieler1.getLaender().size(); i++) {
         	int j = 0;
@@ -505,14 +507,15 @@ class MouseClickListener implements MouseListener {
 	        }
         }
 
-        // Truppenanzahl in Lï¿½ndern anzeigen
-
+        // Truppenanzahl in Laendern anzeigen
+        
         int i = Main.liste[0].getTruppen();
+        
         g.setFont(new Font("Calibri", Font.BOLD,15));
-        g.setColor(Color.BLACK);
-        g.drawString(String.valueOf(i), 100, 100);
+        g.setColor(Color.WHITE);
+        g.drawString(String.valueOf(i), 130, 90);
 
-        // Maus ï¿½ber Land bewegen
+        // Maus ueber Land bewegen
         try {
             Point p = MouseInfo.getPointerInfo().getLocation();
             Point p1 = output.getLocationOnScreen();
@@ -521,8 +524,8 @@ class MouseClickListener implements MouseListener {
             Point pointOnImage = new Point(x, y);
             for (Shape shape : shapeList) {
                 if (shape.contains(pointOnImage)) {
-                    g.setColor(Color.GREEN.darker());
-                    g.fill(shape);
+                    g.setColor(Color.WHITE);
+                    g.draw(shape);
                     break;
 
                 }
@@ -555,6 +558,10 @@ class MouseClickListener implements MouseListener {
     		if (si < Main.spieler.size() -1 && Main.spieler.get(si).getTruppen() == 0){
     			Main.spieler.get(si).istDrann = false;
     			Main.spieler.get(si + 1).istDrann = true;
+    			
+    			//funktioniert vielleicht?
+    			Spielbrett.setText(Main.spieler.get(si + 1).getName() + " ist dran mit setzten.");
+    			
     			System.out.println(Main.spieler.get(si + 1).getName() + " ist Drann mit setzten.");
     		} else if (si == Main.spieler.size() -1 && Main.spieler.get(si).getTruppen() == 0){
         		System.out.println(Main.spieler.get(0) + " ist Drann.");
@@ -639,7 +646,7 @@ class MouseClickListener implements MouseListener {
 					return;
 				}
 			}
-			//Nï¿½cster spieler ist drann.
+			//Naechster spieler ist drann.
 			Main.spieler.get(si).istDrann = false;
 			System.out.println("nï¿½chste spieler");
 			if (Main.spieler.size() == si) {

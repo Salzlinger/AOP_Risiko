@@ -1,6 +1,6 @@
 package Risiko;
 
-import java.awt.BorderLayout;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -352,9 +352,11 @@ class Gebietskarten extends JFrame implements ActionListener {
 	private JLabel iLabel;
 	private JLabel kLabel;
 	private JLabel aLabel;
+	private JLabel jLabel;
 	private JLabel i2Label;
 	private JLabel k2Label;
 	private JLabel a2Label;
+	private JLabel j2Label;
 	
 	private Image image1;
     private Image newimage1;
@@ -362,14 +364,17 @@ class Gebietskarten extends JFrame implements ActionListener {
     private Image newimage2;
     private Image image3;
     private Image newimage3;
+    private Image image4;
+    private Image newimage4;
     
     private ImageIcon infanterie;
     private ImageIcon kavallerie;
     private ImageIcon artillerie;
+    private ImageIcon joker;
 	
 	public Gebietskarten() {
 		setTitle("Risiko");
-		setPreferredSize(new Dimension(300,300));
+		setPreferredSize(new Dimension(400,300));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		
@@ -413,6 +418,11 @@ class Gebietskarten extends JFrame implements ActionListener {
 	    newimage3 = image3.getScaledInstance(80, 120, java.awt.Image.SCALE_SMOOTH);
 	    artillerie = new ImageIcon(newimage3);
 	    
+	    joker = new ImageIcon("src\\img\\Joker.png");
+	    image4 = joker.getImage();
+	    newimage4 = image4.getScaledInstance(80, 120, java.awt.Image.SCALE_SMOOTH);
+	    joker = new ImageIcon(newimage4);
+	    
 	    iLabel = new JLabel();
 	    iLabel.setIcon(infanterie);
         
@@ -422,27 +432,37 @@ class Gebietskarten extends JFrame implements ActionListener {
 	    aLabel = new JLabel();
 	    aLabel.setIcon(artillerie);
 	    
+	    jLabel = new JLabel();
+	    jLabel.setIcon(joker);
+	    
 	    i2Label= new JLabel("5x");
 	    i2Label.setFont(new Font("Calibri",Font.PLAIN,25));
 	    k2Label= new JLabel("3x");
 	    k2Label.setFont(new Font("Calibri",Font.PLAIN,25));
 	    a2Label= new JLabel("2x");
 	    a2Label.setFont(new Font("Calibri",Font.PLAIN,25));
+	    j2Label= new JLabel("1x");
+	    j2Label.setFont(new Font("Calibri",Font.PLAIN,25));
 
 	    trpPanel = new JPanel();
-		trpPanel.setPreferredSize(new Dimension(250,30));
-		trpPanel.setLayout(new BorderLayout(60,0));
+		trpPanel.setPreferredSize(new Dimension(400,30));
+		trpPanel.setLayout(new FlowLayout(0,32,0));
 		trpPanel.setBorder(new EmptyBorder(0,25,0,30));
-		trpPanel.add(i2Label,BorderLayout.WEST);
-		trpPanel.add(k2Label,BorderLayout.CENTER);
-		trpPanel.add(a2Label,BorderLayout.EAST);
+		trpPanel.add(i2Label);
+		trpPanel.add(Box.createRigidArea(new Dimension(0,0)));
+		trpPanel.add(k2Label);
+		trpPanel.add(Box.createRigidArea(new Dimension(0,0)));
+		trpPanel.add(a2Label);
+		trpPanel.add(Box.createRigidArea(new Dimension(0,0)));
+		trpPanel.add(j2Label);
 		
-		menuPanel.add(Box.createRigidArea(new Dimension(250,20)));
+		menuPanel.add(Box.createRigidArea(new Dimension(400,10)));
 	    menuPanel.add(iLabel);
 	    menuPanel.add(kLabel);
 	    menuPanel.add(aLabel);
+	    menuPanel.add(jLabel);
 	    menuPanel.add(trpPanel);
-	    menuPanel.add(Box.createRigidArea(new Dimension(250,20)));
+	    menuPanel.add(Box.createRigidArea(new Dimension(450,20)));
 		menuPanel.add(einloesenButton);
 		menuPanel.add(schliessenButton);
 		

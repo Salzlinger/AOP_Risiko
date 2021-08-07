@@ -184,6 +184,7 @@ public class Weltkarte implements ActionListener {
         truppenBtn.setForeground(Color.white);
         truppenBtn.setUI(new ButtonDesign());
         truppenBtn.setActionCommand(truppenBtnName);
+ 
 
         nextBtn = new JButton("");
         nextBtn.setFont(new Font("Calibri", Font.PLAIN,20));
@@ -210,7 +211,7 @@ public class Weltkarte implements ActionListener {
         trpPanel.add(runterBtn, c);
 
         //funktioniert noch nicht
-        phase = new JLabel(Spielbrett.getText(), SwingConstants.CENTER);
+        phase = new JLabel("Spieler 1 ist am Zug", SwingConstants.CENTER);
         phase.setFont(new Font("Calibri",Font.PLAIN,20));
         phase.setForeground(Color.white);
         phase.setLayout(new BorderLayout(0,10));
@@ -246,7 +247,7 @@ public class Weltkarte implements ActionListener {
         c.gridheight = 2;
         c.ipadx = 15;
         trpPanel.add(trpLabel, c);
-
+        
         spielerPanel.add(phase);
 
         btnPanel.add((truppenBtn),BorderLayout.WEST);
@@ -297,7 +298,7 @@ public class Weltkarte implements ActionListener {
     			trpPanel.setVisible(false);
 				System.out.println("Angriff!");
 				Main.spieler.get(si).Angreifen(start, ziel);
-				System.out.println("wie viele Truppen möchtest du versetzten?");
+				System.out.println("wie viele Truppen mï¿½chtest du versetzten?");
 				trpPanel.setVisible(true);
 				nextBtn.setName("OK");
 				postBattle = true;
@@ -307,7 +308,7 @@ public class Weltkarte implements ActionListener {
 				System.out.println("Stationierte Truppen" +start.getName() + ": " +ziel.getTruppen());
 				System.out.println("Stationierte Truppen" +start.getName() + ": " +ziel.getTruppen());
 				postBattle = false;
-				nextBtn.setName("nächste Phase");
+				nextBtn.setName("nï¿½chste Phase");
     		}
     		if (z == 0 && a == 0 && Main.spieler.get(si).getTruppen() == 0) {
 				z++;
@@ -447,7 +448,9 @@ public class Weltkarte implements ActionListener {
             		 laendHandler(i);
             	 }
               }
+             refresh();
     		}
+    		
     		else if (e.getButton() == MouseEvent.BUTTON3) {
              for (int i = 0; i < shapeList.size();i++) {
             	 Shape shape = shapeList.get(i);
@@ -560,13 +563,52 @@ public class Weltkarte implements ActionListener {
         }
 
         // Truppenanzahl in Laendern anzeigen
-        
-        int i = Main.liste[0].getTruppen();
-        
+ 
         g.setFont(new Font("Calibri", Font.BOLD,15));
         g.setColor(Color.WHITE);
-        g.drawString(String.valueOf(i), 130, 90);
-
+        g.drawString(String.valueOf(Main.liste[0].getTruppen()), 140, 90);
+        g.drawString(String.valueOf(Main.liste[1].getTruppen()), 660, 80);
+        g.drawString(String.valueOf(Main.liste[2].getTruppen()), 290, 65);
+        g.drawString(String.valueOf(Main.liste[3].getTruppen()), 355, 120);
+        g.drawString(String.valueOf(Main.liste[4].getTruppen()), 75, 90);
+        g.drawString(String.valueOf(Main.liste[5].getTruppen()), 410, 120);
+        g.drawString(String.valueOf(Main.liste[6].getTruppen()), 140, 135);
+        g.drawString(String.valueOf(Main.liste[7].getTruppen()), 650, 140);
+        g.drawString(String.valueOf(Main.liste[8].getTruppen()), 245, 140);
+        g.drawString(String.valueOf(Main.liste[9].getTruppen()), 725, 85);
+        g.drawString(String.valueOf(Main.liste[10].getTruppen()), 185, 140);
+        g.drawString(String.valueOf(Main.liste[11].getTruppen()), 600, 80);
+        g.drawString(String.valueOf(Main.liste[12].getTruppen()), 560, 130);
+        g.drawString(String.valueOf(Main.liste[13].getTruppen()), 350, 190);
+        g.drawString(String.valueOf(Main.liste[14].getTruppen()), 415, 190);
+        g.drawString(String.valueOf(Main.liste[15].getTruppen()), 660, 195);
+        g.drawString(String.valueOf(Main.liste[16].getTruppen()), 740, 200);
+        g.drawString(String.valueOf(Main.liste[17].getTruppen()), 140, 190);
+        g.drawString(String.valueOf(Main.liste[18].getTruppen()), 200, 210);
+        g.drawString(String.valueOf(Main.liste[19].getTruppen()), 480, 150);
+        g.drawString(String.valueOf(Main.liste[20].getTruppen()), 550, 210);
+        g.drawString(String.valueOf(Main.liste[21].getTruppen()), 416, 230);
+        g.drawString(String.valueOf(Main.liste[22].getTruppen()), 370, 230);
+        g.drawString(String.valueOf(Main.liste[23].getTruppen()), 640, 240);
+        g.drawString(String.valueOf(Main.liste[24].getTruppen()), 145, 250);
+        g.drawString(String.valueOf(Main.liste[25].getTruppen()), 200, 310);
+        g.drawString(String.valueOf(Main.liste[26].getTruppen()), 440, 310);
+        g.drawString(String.valueOf(Main.liste[27].getTruppen()), 655, 305);
+        g.drawString(String.valueOf(Main.liste[28].getTruppen()), 500, 290);
+        g.drawString(String.valueOf(Main.liste[29].getTruppen()), 595, 290);
+        g.drawString(String.valueOf(Main.liste[30].getTruppen()), 385, 340);
+        g.drawString(String.valueOf(Main.liste[31].getTruppen()), 735, 375);
+        g.drawString(String.valueOf(Main.liste[32].getTruppen()), 215, 375);
+        g.drawString(String.valueOf(Main.liste[33].getTruppen()), 670, 390);
+        g.drawString(String.valueOf(Main.liste[34].getTruppen()), 260, 355);
+        g.drawString(String.valueOf(Main.liste[35].getTruppen()), 445, 400);
+        g.drawString(String.valueOf(Main.liste[36].getTruppen()), 480, 370);
+        g.drawString(String.valueOf(Main.liste[37].getTruppen()), 520, 470);
+        g.drawString(String.valueOf(Main.liste[38].getTruppen()), 710, 470);
+        g.drawString(String.valueOf(Main.liste[39].getTruppen()), 770, 470);
+        g.drawString(String.valueOf(Main.liste[40].getTruppen()), 450, 470);
+        g.drawString(String.valueOf(Main.liste[41].getTruppen()), 220, 440);
+        
         // Maus ueber Land bewegen
         try {
             Point p = MouseInfo.getPointerInfo().getLocation();
@@ -642,14 +684,14 @@ public class Weltkarte implements ActionListener {
     		System.out.println(Main.spieler.get(si).getName() + " hat " + Main.spieler.get(si).getTruppen() + " ï¿½brig");
     		if(Main.spieler.get(si).getTruppen() == 0) {
     			System.out.println("gehe in Kampfphase ueber!");
-    			System.out.println("wähle die Länder aus");
+    			System.out.println("wï¿½hle die Lï¿½nder aus");
     		}
     		return;
     	} else {
 			switch (z) {
 			// Angriff
 			case 0:
-				nextBtn.setName("nächste Phase");
+				nextBtn.setName("nï¿½chste Phase");
 				switch (a) {
 				case 0:
 					start = Main.liste [i];

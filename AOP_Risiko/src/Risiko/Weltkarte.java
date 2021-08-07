@@ -241,7 +241,7 @@ public class Weltkarte implements ActionListener {
         c.gridheight = 2;
         c.ipadx = 15;
         trpPanel.add(trpLabel, c);
-
+        
         spielerPanel.add(phase);
 
         btnPanel.add((truppenBtn),BorderLayout.WEST);

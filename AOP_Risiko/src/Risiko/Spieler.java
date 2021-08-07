@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-
 public class Spieler {
-
 
 	public static Scanner input = new Scanner (System.in);
 	
@@ -26,7 +24,6 @@ public class Spieler {
 	private int truppen = 0;
 	public boolean istDrann = false;
 	
-	
 	public int getTruppen() {
 		return truppen;
 	}
@@ -35,13 +32,11 @@ public class Spieler {
 		this.truppen = t;
 	}
 
-
 	private int setBonus = 0;
 	
 	public boolean isWait() {
 		return wait;
 	}
-
 
 	public void setWait(boolean wait) {
 		this.wait = wait;
@@ -50,7 +45,6 @@ public class Spieler {
 	public String getName() {
 		return name;
 	}
-
 
 	public Spieler (String farbe, String name) {
 		this.farbe = farbe;
@@ -62,19 +56,22 @@ public class Spieler {
 		Deck.remove(Deck.get(Deck.size()-1));		
 		}
 
-
 	//Spieler Hand getter/setter
+	
 	public ArrayList <Gebietskarte> getHand() {
 		return hand;
 	}
+	
 	public void setHand(ArrayList <Gebietskarte> hand) {
 		this.hand = hand;
 	}
 
 	//Spieler Länder getter/setter
+	
 	public ArrayList <Laender> getLaender() {
 		return laenderArray;
 	}
+	
 	public void setLaender(ArrayList<Laender> land) {
 		this.laenderArray = land;
 		for (int i = 0; i < land.size();i++)
@@ -153,9 +150,10 @@ public class Spieler {
 				return true; 
 			}
 				else 
-				{ return false; }
+				{ 
+					return false; 
+				}
 	}	
-	
 	
 	public boolean SetEinloesen (ArrayList <Gebietskarte> Deck) {
 
@@ -238,7 +236,6 @@ public class Spieler {
 				}
 			} 
 		} 
-		
 		else if (jokerSet == true)
 		{ System.out.println( name + " hat ein vollständiges Joker Set"); 
 		boolean jokerEntnommen = false;
@@ -271,8 +268,8 @@ public class Spieler {
 		{ this.setBonus = 10 + 5*(a-5); }
 	}
 	
-	
 	//auf Aktionen auslagern?
+	
 	public void TruppenVerteilen(Laender land) {
 		if(laenderArray.contains(land)) {
 		int m = land.getTruppen();
@@ -281,7 +278,6 @@ public class Spieler {
 		} else {
 			System.out.println("Dir gehört dieses Land nicht.");
 		}
-
 		//<<<<<Funktion in GUI zum verteilen der Truppen
 	}
 	
@@ -299,13 +295,14 @@ public class Spieler {
 				laenderArray.add(b);	// erobertes Land der Liste hinzufügen
 				System.out.println("Stationierte Truppen in " + a.getName() + ": " + a.getTruppen());
 				System.out.println("Stationierte Truppen in " + b.getName() + ": " +b.getTruppen());
-									}
+				}
 								
 		} else { System.out.println("Angriff nicht möglich, da keine Nachbarn. Bitte anderes Land auswählen!"); }
 	}
 	
+	// beliebig viele Truppen aus einem Land in ein verbundenes Land verlagern
+
 	public boolean TruppenBewegen(Laender von, Laender nach) {
-		// beliebig viele Truppen aus einem Land in ein verbundenes Land verlagern
 		wait = false;
 		setLaender(laenderArray);
 		
@@ -334,16 +331,25 @@ public class Spieler {
 						return true;
 						}
 				}
-			} else { System.out.println(von.getBesitzer().getName() + " gehören zwar die Länder, aber sie sind nicht verbunden"); return false;}
-		} else { System.out.println("Verschieben nicht möglich, da" + von.getBesitzer().getName() + " eines oder beide Länder nicht gehören"); return false; }
+			} 
+			else 
+			{ 
+				System.out.println(von.getBesitzer().getName() + " gehören zwar die Länder, aber sie sind nicht verbunden"); 
+				return false;
+			}
+		} 
+		else 
+			{ 
+			System.out.println("Verschieben nicht möglich, da" + von.getBesitzer().getName() + " eines oder beide Länder nicht gehören"); 
+			return false; 
+			}
 		return false;
 	}
-
 	
-	
-
 	//eventuell in Länder/Kontinent überführen?
-	public int besitztKontinent() {
+
+
+public static int besitztKontinent() {
 		
 		int kontinentTruppen = 0;
 				
@@ -360,7 +366,7 @@ public class Spieler {
 	//Australien
 		boolean indo=false, ngui=false, waus=false, oaus=false;
 		
-		for (int i = 0; i<laenderArray.size(); i++)
+		for (int i = 0; i < laenderArray.size(); i++)
 		{	
 			switch (laenderArray.get(i).getName()) 
 			{
@@ -439,7 +445,6 @@ public class Spieler {
 		System.out.println("Spieler" + name + "erhält " + kontinentTruppen + " Truppen für Kontinente");
 		return kontinentTruppen;
 	}
-
 
 	@Override
 	public String toString () //Werte werden als String ausgegeben

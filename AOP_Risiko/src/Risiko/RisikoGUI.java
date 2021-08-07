@@ -43,7 +43,6 @@ public class RisikoGUI extends JFrame {
 	private String startBtnName = "startBtn";
 	private String exitBtnName = "exitBtn";
 	
-	
 	// Start Menü
 	
 	protected RisikoGUI()
@@ -58,7 +57,6 @@ public class RisikoGUI extends JFrame {
 		pack();
 		setLocationRelativeTo(null);
 		setVisible(true);
-	
 	}
 	
 	private JPanel mainMenu()
@@ -104,7 +102,6 @@ public class RisikoGUI extends JFrame {
 	}
 
 }
-
 
 class SpielerAnzahl extends JDialog {
 	
@@ -269,8 +266,7 @@ class SpielereinstellungGUI extends JDialog {
 		spielerNamePanel.add(spieler1TextField);
 		spielerNamePanel.add(spieler2TextField);
 		spielerNamePanel.add(spieler3TextField);
-		spielerNamePanel.add(emptySpace);
-		
+		spielerNamePanel.add(emptySpace);	
 		
 		// 4 Spieler
 		
@@ -318,7 +314,6 @@ class SpielereinstellungGUI extends JDialog {
 		spielerNamePanel.add(startBtn);
 		spielerNamePanel.add(Box.createRigidArea(new Dimension(50, 40)));
 		spielerNamePanel.add(zurueckBtn);
-		
 		
 		return spielerNamePanel;
 	}
@@ -529,6 +524,7 @@ class Gebietskarten extends JFrame implements ActionListener {
 		
 	}
 }
+
 class Spielbrett extends JDialog {
 	
 	private static final long serialVersionUID = 1L;
@@ -555,8 +551,7 @@ class Spielbrett extends JDialog {
 	            f.setVisible(true);
 	            f.setTitle("Risiko");
 	        };
-	        SwingUtilities.invokeLater(r);
-		
+	        SwingUtilities.invokeLater(r);	
 	}
 	
 	public static void setText(String text) {
@@ -567,6 +562,7 @@ class Spielbrett extends JDialog {
 		return stext;
 	}
 }
+
 class ButtonDesign extends BasicButtonUI {
 	
 	@Override

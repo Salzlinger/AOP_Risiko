@@ -12,7 +12,6 @@ public class Aktionen implements ActionListener{
 	
 	static SpielerAnzahl spielerAnzahl;
 	
-	
 	public Aktionen(Graphen gra, RisikoGUI gui) {
 
 		this.gui = gui;
@@ -31,14 +30,11 @@ public class Aktionen implements ActionListener{
 			spielerAnzahl = new SpielerAnzahl(gui, true);
 			spielerAnzahl.addActionListeners(new SpielerZahl(gra, spielerAnzahl));			
 			spielerAnzahl.setVisible(true);
-			
 		} 
 		 else if (Klick.equals("exitBtn")){
-				System.exit(0);
-				
+				System.exit(0);	
 		}
 	}
-		
 }
 
 class SpielerZahl implements ActionListener {
@@ -66,7 +62,6 @@ class SpielerZahl implements ActionListener {
 			einstellung = new SpielereinstellungGUI(gui, true, gra.getSpielerAnzahl());
 			einstellung.addActionListeners(new Spielereinstellungen(gra, einstellung));
 			einstellung.setVisible(true);
-			
 		}
 		
 		else if(Klick.equals("vierSpielerBtn"))
@@ -75,7 +70,6 @@ class SpielerZahl implements ActionListener {
 			einstellung = new SpielereinstellungGUI(gui, true, gra.getSpielerAnzahl());
 			einstellung.addActionListeners(new Spielereinstellungen(gra, einstellung));
 			einstellung.setVisible(true);
-
 		}
 		else if(Klick.equals("fuenfSpielerBtn"))
 		{
@@ -83,14 +77,12 @@ class SpielerZahl implements ActionListener {
 			einstellung = new SpielereinstellungGUI(gui, true, gra.getSpielerAnzahl());
 			einstellung.addActionListeners(new Spielereinstellungen(gra, einstellung));
 			einstellung.setVisible(true);
-
 		}
 		else if(Klick.equals("zurueckBtn"))
 		{
 			gui.dispose();
 		}
 	}
-
 }
 
 class Spielereinstellungen implements ActionListener {
@@ -107,6 +99,7 @@ class Spielereinstellungen implements ActionListener {
 		this.gra = gra;
 		this.gui = gui;
 	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
@@ -141,7 +134,6 @@ class Spielereinstellungen implements ActionListener {
 				Main.spieler5 = new Spieler ("WHITE", spielerNamen.get(4));
 				Main.spieler.add(Main.spieler5);
 			}
-			
 			
 			//Spieler randomizen
 			
@@ -230,7 +222,6 @@ class Spielereinstellungen implements ActionListener {
 				Main.spieler.get(0).istDrann = true;
 				System.out.println(Main.spieler.get(0).getName() + " ist Drann mit setzten.");
 				break;
-				
 			}
 			
 			// Spielbrett erstellen
@@ -243,14 +234,11 @@ class Spielereinstellungen implements ActionListener {
 			Aktionen.spielerAnzahl.setVisible(false);
 			Aktionen.gui.setVisible(false);
 			spielbrett.setVisible(true);
-			
 		}
 		else if(Klick.equals("zurueckBtn"))
 		{
 			gui.dispose();
 		}
-		
 	}
-	
 }
 

@@ -24,7 +24,7 @@ private int spielerAnzahl;
 	}
 
 	public Boolean verbunden (HashMap<String, Laender> laender, Laender start, Laender gesucht) {
-		// alle knoten auf false
+		// alle Knoten auf false setzen
 		Iterator keyIterator = laender.keySet().iterator();
 		while (keyIterator.hasNext()) {
 			Object zeiger =  keyIterator.next();
@@ -33,13 +33,13 @@ private int spielerAnzahl;
 		start.istBekannt = true;
 		// initialisiere warteschlange
 		List<Laender> warteschlange = new LinkedList<Laender>();
-		// start element einfügen
+		// Startelement einfuegen
 		warteschlange.add(start);
 		while(warteschlange.size() != 0) {
-			// letztes element merken und löschen
+			// letztes Element merken und loeschen
 			Laender u = ((LinkedList<Laender>) warteschlange).getLast();
 			((LinkedList<Laender>) warteschlange).removeLast();
-			// alle nachbarn durchgehen und nach element suchen.
+			// alle Nachbarn durchgehen und nach Element suchen
 			for (int i = 0; i < u.getNachbarn().size(); i++) {
 				if (u.getNachbarn().get(i) == gesucht) {
 					return true;

@@ -1,13 +1,9 @@
 package Risiko;
 
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
-
 public class Main {
-
 
 	public static Scanner input = new Scanner (System.in);
 	public static int eingeloesteSets = 0;
@@ -32,7 +28,6 @@ public class Main {
 		
 		Karten.DeckListeGenerieren(Deck);
 		Karten.DeckListeMischen(Deck);
-
 
 		//GUI erzuegen/aufrufen
 

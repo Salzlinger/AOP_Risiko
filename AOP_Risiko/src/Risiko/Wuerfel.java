@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.Random;
 import java.util.Scanner;
 
-
 public class Wuerfel {
 	
 	public static Scanner input = new Scanner (System.in);
@@ -24,7 +23,7 @@ public class Wuerfel {
 		boolean blitzKampf = false;
 		boolean normalKampf = false;
 		
-		//BlitzKampf (alle Runden mit einmal) oder NormalKampf (jede Runde einzeln auswürfeln)
+		// BlitzKampf (alle Runden mit einmal) oder NormalKampf (jede Runde einzeln auswürfeln)
 		System.out.println("Möchtest du die Runden einzeln auswürfeln? Oder sollen alle Runden mit einem mal ausgewürfelt werden?");
 		if (Weltkarte.getblitz()) // hier button einfügen
 		{blitzKampf = true; 	System.out.println("Blitzkampf startet");}

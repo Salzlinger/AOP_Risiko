@@ -365,4 +365,9 @@ public class Spieler {
 	public String getFarbe() {
 		return farbe;
 	}
+	@Override
+	public String toString () //Werte werden als String ausgegeben
+		{
+		return name;
+		}
 }

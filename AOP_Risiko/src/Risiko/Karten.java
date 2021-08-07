@@ -7,7 +7,6 @@ public class Karten {
 
 	private static Random zufall = new Random();
 	private static String [] Laender = {"Alaska","Alberta","Ontario","Nordwest-Territorium","Weststaaten","Oststaaten","Mittelamerika","Quebec","Grönland","Venezuela","Peru","Brasilien","Argentinien","Island","Skandinavien","Großbritannien","Westeuropa","Mitteleuropa","Südeuropa","Ukraine","Nordwest-Afrika","Ägypten","Ost-Afrika","Kongo","Süd-Afrika","Madagaskar","Mittlerer Osten","Afghanistan","Indien","Ural","Sibirien","Jakutien","Kamtschatka","Irkutsk","Mongolei","Japan","China","Siam","Indonesien","Neu-Guinea","West-Australien","Ost-Australien","Joker","Joker"};	//42 Stück
-	//private String [] Missionskarten;
 		
 	// Deck als ArrayList aus Gebietskarten erzeugen
 	public static void DeckListeGenerieren(ArrayList <Gebietskarte> DeckListe) {

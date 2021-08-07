@@ -27,11 +27,11 @@ extends Karten
 	public void setTyp(String typ) {
 		this.typ = typ;
 	} 
-
-	@Override
-	public String toString () //Werte werden als String ausgegeben
-		{
-		return name + " " + typ;
-		}
-
 }
+//	@Override
+//	public String toString ()
+//		{
+//		return name + " " + typ;
+//		}
+//
+//}

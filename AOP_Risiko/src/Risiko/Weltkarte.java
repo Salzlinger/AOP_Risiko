@@ -177,8 +177,10 @@ public class Weltkarte implements ActionListener {
         truppenBtn.setForeground(Color.white);
         truppenBtn.setUI(new ButtonDesign());
         truppenBtn.setActionCommand(truppenBtnName);
+ 
 
         nextBtn = new JButton("Zug beenden");
+        
         nextBtn.setFont(new Font("Calibri", Font.PLAIN,20));
         nextBtn.setBackground(new Color(0x2dce98));
         nextBtn.setForeground(Color.white);
@@ -203,7 +205,7 @@ public class Weltkarte implements ActionListener {
         trpPanel.add(runterBtn, c);
 
         //funktioniert noch nicht
-        phase = new JLabel(Spielbrett.getText(), SwingConstants.CENTER);
+        phase = new JLabel("Spieler 1 ist am Zug", SwingConstants.CENTER);
         phase.setFont(new Font("Calibri",Font.PLAIN,20));
         phase.setForeground(Color.white);
         phase.setLayout(new BorderLayout(0,10));
@@ -405,7 +407,9 @@ public class Weltkarte implements ActionListener {
             		 laendHandler(i);
             	 }
               }
+             refresh();
     		}
+    		
     		else if (e.getButton() == MouseEvent.BUTTON3) {
              for (int i = 0; i < shapeList.size();i++) {
             	 Shape shape = shapeList.get(i);
@@ -518,13 +522,26 @@ public class Weltkarte implements ActionListener {
         }
 
         // Truppenanzahl in Laendern anzeigen
-        
-        int i = Main.liste[0].getTruppen();
-        
+ 
         g.setFont(new Font("Calibri", Font.BOLD,15));
         g.setColor(Color.WHITE);
-        g.drawString(String.valueOf(i), 130, 90);
-
+        g.drawString(String.valueOf(Main.liste[0].getTruppen()), 140, 90);
+        g.drawString(String.valueOf(Main.liste[1].getTruppen()), 660, 80);
+        g.drawString(String.valueOf(Main.liste[2].getTruppen()), 290, 65);
+        g.drawString(String.valueOf(Main.liste[3].getTruppen()), 355, 120);
+        g.drawString(String.valueOf(Main.liste[4].getTruppen()), 75, 90);
+        g.drawString(String.valueOf(Main.liste[5].getTruppen()), 410, 120);
+        g.drawString(String.valueOf(Main.liste[6].getTruppen()), 140, 135);
+        g.drawString(String.valueOf(Main.liste[7].getTruppen()), 650, 140);
+        g.drawString(String.valueOf(Main.liste[8].getTruppen()), 245, 140);
+        g.drawString(String.valueOf(Main.liste[9].getTruppen()), 725, 85);
+        g.drawString(String.valueOf(Main.liste[10].getTruppen()), 185, 140);
+        g.drawString(String.valueOf(Main.liste[11].getTruppen()), 600, 80);
+        g.drawString(String.valueOf(Main.liste[12].getTruppen()), 560, 130);
+        g.drawString(String.valueOf(Main.liste[13].getTruppen()), 350, 190);
+        g.drawString(String.valueOf(Main.liste[14].getTruppen()), 415, 190);
+        g.drawString(String.valueOf(Main.liste[15].getTruppen()), 650, 190);
+        
         // Maus ueber Land bewegen
         try {
             Point p = MouseInfo.getPointerInfo().getLocation();

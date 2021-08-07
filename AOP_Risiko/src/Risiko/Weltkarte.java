@@ -691,7 +691,7 @@ public class Weltkarte implements ActionListener {
 			switch (z) {
 			// Angriff
 			case 0:
-				nextBtn.setName("n�chste Phase");
+				nextBtn.setText("naechste Phase");
 				switch (a) {
 				case 0:
 					start = Main.liste [i];
@@ -704,7 +704,7 @@ public class Weltkarte implements ActionListener {
 					System.out.println("zweites land ist " + ziel.getName());
 					int zielBesitzter = Main.spieler.indexOf(ziel.getBesitzer());
 					int startBesitzter = Main.spieler.indexOf(start.getBesitzer());
-					nextBtn.setName("Angriff");
+					nextBtn.setText("Angriff");
 					// Spieler besiegt?
 					if(Main.spieler.get(zielBesitzter).getLaender().size() == 0) {
 						Main.spieler.remove(Main.spieler.get(zielBesitzter));

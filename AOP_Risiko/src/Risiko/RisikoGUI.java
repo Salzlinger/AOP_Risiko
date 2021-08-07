@@ -643,4 +643,3 @@ class JTextFieldDesign extends JTextField {
          return shape.contains(x, y);
     }
 }
-

@@ -152,13 +152,15 @@ public class Spieler {
 			{ this.gemischtesSet = true; }
 			return true; 
 		} 	
-		else if ((j==1 && (a>=1||k>=1||a>=1) && (a>=1||k>=1||a>=1)) || (j==2 && (a>=1||k>=1||a>=1))) 
+		else if ((j==1 && (a >= 1|| k >= 1|| a >= 1) && (a >=1 || k >= 1|| a >= 1)) || (j == 2 && (a >=1 || k >=1 || a >= 1))) 
 			{ 
 				this.jokerSet = true;
 				return true; 
 			}
 				else 
-				{ return false; }
+				{ 
+					return false; 
+				}
 	}	
 	
 	
@@ -248,17 +250,18 @@ public class Spieler {
 		{ System.out.println( name + " hat ein vollständiges Joker Set"); 
 		boolean jokerEntnommen = false;
 		for (int z = size; z >= 0; z--)
-			{ 	if (hand.get(z).getTyp() == "Joker" && jokerEntnommen == false)	
+			{ 	
+				if (hand.get(z).getTyp() == "Joker" && jokerEntnommen == false)	
 				{
-				Deck.add(hand.get(z));
-				hand.remove(z); 
-				jokerEntnommen = true;
+					Deck.add(hand.get(z));
+					hand.remove(z); 
+					jokerEntnommen = true;
 				}
-				else if (hand.get(z).getTyp() != "Joker" && p < 2)
+						else if (hand.get(z).getTyp() != "Joker" && p < 2)
 						{
-						Deck.add(hand.get(z));
-						hand.remove(z);
-						p++;
+							Deck.add(hand.get(z));
+							hand.remove(z);
+							p++;
 						} 
 			}
 		}
@@ -269,24 +272,31 @@ public class Spieler {
 	public void berechneSetBonus() {
 		int a = Gebietskarten.eingeloesteSets;
 		if (a == 0)
-		{this.setBonus = 0;}
+		{
+			this.setBonus = 0;
+		}
 		if (a > 0 && a < 6 )
-		{ this.setBonus = 4 + (a-1)*2; }
+		{ 
+			this.setBonus = 4 + (a-1)*2; 
+		}
 		if (a>= 6)
-		{ this.setBonus = 10 + 5*(a-5); }
+		{ 
+			this.setBonus = 10 + 5*(a-5); 
+		}
 	}
 	
 	
 	//auf Aktionen auslagern?
 	public void TruppenVerteilen(Laender land) {
-		if(laenderArray.contains(land)) {
-		int m = land.getTruppen();
-		land.setTruppen(m + 1);
-		truppen  -= 1;
-		} else {
-			System.out.println("Dir gehört dieses Land nicht.");
-		}
-
+		if(laenderArray.contains(land)) 
+		{
+			int m = land.getTruppen();
+			land.setTruppen(m + 1);
+			truppen  -= 1;
+		} else 
+			{
+				System.out.println("Dir gehört dieses Land nicht.");
+			}
 		//<<<<<Funktion in GUI zum verteilen der Truppen
 	}
 	
@@ -339,22 +349,18 @@ public class Spieler {
 						return true;
 						}
 				}
-			} else { System.out.println(von.getBesitzer().getName() + " gehören zwar die Länder, aber sie sind nicht verbunden"); return false;}
-		} else { System.out.println("Verschieben nicht möglich, da" + von.getBesitzer().getName() + " eines oder beide Länder nicht gehören"); return false; }
+			} 	else 
+				{ 
+					System.out.println(von.getBesitzer().getName() + " gehören zwar die Länder, aber sie sind nicht verbunden"); 
+					return false;
+				}
+		} 	else 
+			{ 
+				System.out.println("Verschieben nicht möglich, da" + von.getBesitzer().getName() + " eines oder beide Länder nicht gehören"); 
+				return false; 
+			}
 		return false;
 	}
-
-	
-	
-
-	//eventuell in Länder/Kontinent überführen?
-
-
-	@Override
-	public String toString () //Werte werden als String ausgegeben
-		{
-		return name;
-		}
 
 	public String getFarbe() {
 		return farbe;

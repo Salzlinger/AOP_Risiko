@@ -10,13 +10,14 @@ public class Fehlersuche {
 		while (fehler)
 		{
 			try { 	
-				System.out.println("Bitte gib eine gültige Zahl ein");
-	 			Scanner input = new Scanner (System.in);
-	 			eingabe = input.nextInt();
-	 			fehler = false;
-			} catch (Exception e) {
-			System.out.println("Deine Eingabe ist keine Zahl");
-			}
+					System.out.println("Bitte gib eine gültige Zahl ein");
+					Scanner input = new Scanner (System.in);
+					eingabe = input.nextInt();
+					fehler = false;
+				} catch (Exception e) 
+				{
+					System.out.println("Deine Eingabe ist keine Zahl");
+				}
 		}
 		return eingabe;
 	}
@@ -45,6 +46,4 @@ public class Fehlersuche {
 		}
 		return eingabe;
 	}
-
-
 }

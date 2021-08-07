@@ -243,4 +243,3 @@ class Spielereinstellungen implements ActionListener {
 		}
 	}
 }
-

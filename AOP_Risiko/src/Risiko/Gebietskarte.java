@@ -1,10 +1,9 @@
 package Risiko;
 
-public class Gebietskarte 
-extends Karten
-{
+public class Gebietskarte extends Karten {
+	
 	private String typ; //Infanterie, Kavallerie, Artillerie
-	private String name; //Osteuropa, Westafrika, Neuseeland.....
+	private String name; //Osteuropa, Westafrika, Neuseeland...
 	public static int eingeloesteSets = 0;
 	
 	public Gebietskarte(String name, String typ) {

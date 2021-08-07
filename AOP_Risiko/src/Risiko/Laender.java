@@ -340,7 +340,4 @@ public class Laender {
 	public void setBesitzer(Spieler besitzer) {
 		Laender.besitzer = besitzer;
 	}
-	
-
 }
-

@@ -28,7 +28,9 @@ public class Karten {
 	public static void DeckListeAnzeigen (ArrayList <Gebietskarte> DeckListe)
 	{
 		for (Gebietskarte k : DeckListe)
-		{ System.out.println(k); }
+		{ 
+			System.out.println(k); 
+		}
 	}
 	
 	//Deck mischen
@@ -36,14 +38,9 @@ public class Karten {
 		
 		for(int i=0; i < 1000 ; i++)
 			{
-			int a = zufall.nextInt(DeckListe.size()-1);
-			DeckListe.add(DeckListe.get(a));
-			DeckListe.remove(DeckListe.get(a));
+				int a = zufall.nextInt(DeckListe.size()-1);
+				DeckListe.add(DeckListe.get(a));
+				DeckListe.remove(DeckListe.get(a));
 			}
 	}
 }
-
-	
-	
-	
-

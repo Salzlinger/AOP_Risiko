@@ -51,16 +51,16 @@ private int spielerAnzahl;
 			
 			for (int i = 0; i < u.getNachbarn().size(); i++) 
 			{
-				if (u.getNachbarn().get(i) == gesucht) {
+				if (u.getNachbarn().get(i) == gesucht) 
+				{
 					return true;
 				} else if (!u.getNachbarn().get(i).istBekannt) 
 					{
-					u.getNachbarn().get(i).istBekannt = true;
-					warteschlange.add(u.getNachbarn().get(i));
+						u.getNachbarn().get(i).istBekannt = true;
+						warteschlange.add(u.getNachbarn().get(i));
 					}
 			}
 		}
 		return false;
 	}		
 }
-

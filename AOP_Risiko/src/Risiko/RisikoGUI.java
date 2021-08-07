@@ -437,11 +437,12 @@ class Gebietskarten extends JFrame implements ActionListener {
 		trpPanel.add(k2Label,BorderLayout.CENTER);
 		trpPanel.add(a2Label,BorderLayout.EAST);
 		
+		menuPanel.add(Box.createRigidArea(new Dimension(250,20)));
 	    menuPanel.add(iLabel);
 	    menuPanel.add(kLabel);
 	    menuPanel.add(aLabel);
 	    menuPanel.add(trpPanel);
-	    menuPanel.add(Box.createRigidArea(new Dimension(250,40)));
+	    menuPanel.add(Box.createRigidArea(new Dimension(250,20)));
 		menuPanel.add(einloesenButton);
 		menuPanel.add(schliessenButton);
 		

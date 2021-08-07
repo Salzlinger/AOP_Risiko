@@ -11,8 +11,8 @@ public class Laender {
 	private static Spieler besitzer;
 	public static Laender [] liste;
 	public static HashMap <String, Laender> laender = new HashMap<String, Laender>();
-
-
+	//Beispiel Element in Hashmap laender ("Alberta" , alberta)
+	//								var		  key		value
 	
 	static void iniLaender () {
 		//Laender generieren
@@ -72,7 +72,7 @@ public class Laender {
 				Laender alaska = new Laender("Alaska");
 
 
-				//Nachbarn einf�gen
+				//Nachbarn einfuegen
 
 				//Australien
 				indonesien.setNachbarn(neuGuinea);
@@ -227,7 +227,7 @@ public class Laender {
 				suedEuropa.setNachbarn(aegypten);
 				suedEuropa.setNachbarn(mittlererOsten);
 
-				//S�damerika
+				//Suedamerika
 				venezuela.setNachbarn(mittelAmerika);
 				venezuela.setNachbarn(brasilien);
 				venezuela.setNachbarn(peru);
@@ -329,16 +329,9 @@ public class Laender {
 	public ArrayList<Laender> getNachbarn() {
 		return nachbarn;
 	}
-	public void setNachbarn (Laender newNachbar) {
-	nachbarn.add(newNachbar);
+	public void setNachbarn (Laender neuerNachbar) {
+	nachbarn.add(neuerNachbar);
 	}
-	
-	@Override
-	public String toString () //Werte werden als String ausgegeben
-		{
-		return name;
-		}
-
 	
 	public Spieler getBesitzer() {
 		return besitzer;

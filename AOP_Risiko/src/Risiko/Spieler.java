@@ -25,6 +25,12 @@ public class Spieler {
 	private boolean wait = false;
 	private int truppen = 0;
 	public boolean istDrann = false;
+	public static Spieler spieler1;
+	public static Spieler spieler2;
+	public static Spieler spieler3;
+	public static Spieler spieler4;
+	public static Spieler spieler5;
+	public static ArrayList<Spieler> spieler = new ArrayList<Spieler>();
 	
 	
 	public int getTruppen() {

@@ -31,10 +31,17 @@ public class Fehlersuche {
  			eingabe = input.nextLine();
  				
  			if(eingabe.equals("ja"))
-			{fehler = false;}
- 			else if(eingabe.equals("nein"))
- 			{fehler = false;}
- 			else {System.out.println("Bitte tätige eine gültige Eingabe");}
+ 				{
+ 					fehler = false;
+ 				}
+ 					else if(eingabe.equals("nein"))
+ 					{
+ 						fehler = false;
+ 					}
+ 						else 
+ 						{
+ 							System.out.println("Bitte tätige eine gültige Eingabe");
+ 						}
 		}
 		return eingabe;
 	}

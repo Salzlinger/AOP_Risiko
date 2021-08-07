@@ -109,44 +109,44 @@ class Spielereinstellungen implements ActionListener {
 		if(Klick.equals("startBtn"))
 		{
 			spielerNamen.add(gui.getSpielerTextField(1));
-			Main.spieler1 = new Spieler ("BLUE", spielerNamen.get(0) );
-			Main.spieler.add(Main.spieler1);
+			Spieler.spieler1 = new Spieler ("BLUE", spielerNamen.get(0) );
+			Spieler.spieler.add(Spieler.spieler1);
 			spielerNamen.add(gui.getSpielerTextField(2));
-			Main.spieler2 = new Spieler ("RED", spielerNamen.get(1));
-			Main.spieler.add(Main.spieler2);
+			Spieler.spieler2 = new Spieler ("RED", spielerNamen.get(1));
+			Spieler.spieler.add(Spieler.spieler2);
 			spielerNamen.add(gui.getSpielerTextField(3));
-			Main.spieler3 = new Spieler ("YELLOW", spielerNamen.get(2));
-			Main.spieler.add(Main.spieler3);
+			Spieler.spieler3 = new Spieler ("YELLOW", spielerNamen.get(2));
+			Spieler.spieler.add(Spieler.spieler3);
 
 			if(gra.getSpielerAnzahl() == 4) 
 			{
 				spielerNamen.add(gui.getSpielerTextField(4));
-				Main.spieler4 = new Spieler ("GREEN", spielerNamen.get(3));
-				Main.spieler.add(Main.spieler4);
+				Spieler.spieler4 = new Spieler ("GREEN", spielerNamen.get(3));
+				Spieler.spieler.add(Spieler.spieler4);
 			}
 			
 			if(gra.getSpielerAnzahl() == 5) 
 			{
 				spielerNamen.add(gui.getSpielerTextField(4));
-				Main.spieler4 = new Spieler ("GREEN", spielerNamen.get(3));
-				Main.spieler.add(Main.spieler4);
+				Spieler.spieler4 = new Spieler ("GREEN", spielerNamen.get(3));
+				Spieler.spieler.add(Spieler.spieler4);
 				spielerNamen.add(gui.getSpielerTextField(5));
-				Main.spieler5 = new Spieler ("WHITE", spielerNamen.get(4));
-				Main.spieler.add(Main.spieler5);
+				Spieler.spieler5 = new Spieler ("WHITE", spielerNamen.get(4));
+				Spieler.spieler.add(Spieler.spieler5);
 			}
 			
 			//Spieler randomizen
 			
 			for(int i=0; i < 10 ; i++)
 			{
-			int a = zufall.nextInt(Main.spieler.size());
-			int b = zufall.nextInt(Main.spieler.size());
-			//System.out.print(Main.spieler.size());
-			Spieler puffer = Main.spieler.get(a);
-			Main.spieler.set(a, Main.spieler.get(b));
-			Main.spieler.set(b, puffer);
+			int a = zufall.nextInt(Spieler.spieler.size());
+			int b = zufall.nextInt(Spieler.spieler.size());
+			//System.out.print(Spieler.spieler.size());
+			Spieler puffer = Spieler.spieler.get(a);
+			Spieler.spieler.set(a, Spieler.spieler.get(b));
+			Spieler.spieler.set(b, puffer);
 			}
-			System.out.println("Folgende Spielerreihenfolge wurde ausgewürfelt: " +Main.spieler);
+			System.out.println("Folgende Spielerreihenfolge wurde ausgewürfelt: " + Spieler.spieler);
 
 			switch (gra.getSpielerAnzahl()) {
 			case 3:			
@@ -154,73 +154,73 @@ class Spielereinstellungen implements ActionListener {
 				
 				int k = 0;
 				for (int i = 0; i < 42; i++) {
-					Main.spieler.get(k).getLaender().add(Laender.liste[i]);
-					Laender.liste[i].setBesitzer(Main.spieler.get(k));
+					Spieler.spieler.get(k).getLaender().add(Laender.liste[i]);
+					Laender.liste[i].setBesitzer(Spieler.spieler.get(k));
 					k++;
 					if(k == 3) {
 						k = 0;
 					}
 				}
-				for (int i = 0; i < Main.spieler.size(); i++) {
-					for (int j = 0; j < Main.spieler.get(i).getLaender().size(); j++) {
-						System.out.println("Länder von spieler " + Main.spieler.get(i) + " : " + Main.spieler.get(i).getLaender().get(j).getName());
+				for (int i = 0; i < Spieler.spieler.size(); i++) {
+					for (int j = 0; j < Spieler.spieler.get(i).getLaender().size(); j++) {
+						System.out.println("Länder von spieler " + Spieler.spieler.get(i) + " : " + Spieler.spieler.get(i).getLaender().get(j).getName());
 					}
 				}
 				//Truppen werden verteilt
 				
-				for (int i = 0; i < Main.spieler.size(); i++) {
-					Main.spieler.get(i).startTruppen(10);
+				for (int i = 0; i < Spieler.spieler.size(); i++) {
+					Spieler.spieler.get(i).startTruppen(10);
 					//Main.spieler.get(i).startTruppen(34);
 				}
-				Main.spieler.get(0).istDrann = true;
-				System.out.println(Main.spieler.get(0).getName() + " ist Drann mit setzten.");
+				Spieler.spieler.get(0).istDrann = true;
+				System.out.println(Spieler.spieler.get(0).getName() + " ist Drann mit setzten.");
 				break;
 			case 4:
 				k = 0;
 				for (int i = 0; i < 42; i++) {
-					Main.spieler.get(k).getLaender().add(Laender.liste[i]);
-					Laender.liste[i].setBesitzer(Main.spieler.get(k));
+					Spieler.spieler.get(k).getLaender().add(Laender.liste[i]);
+					Laender.liste[i].setBesitzer(Spieler.spieler.get(k));
 					k++;
 					if(k == 4) {
 						k = 0;
 					}
 				}
-				for (int i = 0; i < Main.spieler.size(); i++) {
-					for (int j = 0; j < Main.spieler.get(i).getLaender().size(); j++) {
-						System.out.println("Länder von spieler " + Main.spieler.get(i) + " : " + Main.spieler.get(i).getLaender().get(j).getName());
+				for (int i = 0; i < Spieler.spieler.size(); i++) {
+					for (int j = 0; j < Spieler.spieler.get(i).getLaender().size(); j++) {
+						System.out.println("Länder von spieler " + Spieler.spieler.get(i) + " : " + Spieler.spieler.get(i).getLaender().get(j).getName());
 					}
 				}
 				//Truppen werden verteilt
 				
-				for (int i = 0; i < Main.spieler.size(); i++) {
-					Main.spieler.get(i).startTruppen(10);
+				for (int i = 0; i < Spieler.spieler.size(); i++) {
+					Spieler.spieler.get(i).startTruppen(10);
 					//Main.spieler.get(i).startTruppen(29);
 				}
-				Main.spieler.get(0).istDrann = true;
-				System.out.println(Main.spieler.get(0).getName() + " ist Drann mit setzten.");
+				Spieler.spieler.get(0).istDrann = true;
+				System.out.println(Spieler.spieler.get(0).getName() + " ist Drann mit setzten.");
 				break;
 			case 5:
 				k = 0;
 				for (int i = 0; i < 42; i++) {
-					Main.spieler.get(k).getLaender().add(Laender.liste[i]);
-					Laender.liste[i].setBesitzer(Main.spieler.get(k));
+					Spieler.spieler.get(k).getLaender().add(Laender.liste[i]);
+					Laender.liste[i].setBesitzer(Spieler.spieler.get(k));
 					k++;
 					if(k == 5) {
 						k = 0;
 					}
 				}
-				for (int i = 0; i < Main.spieler.size(); i++) {
-					for (int j = 0; j < Main.spieler.get(i).getLaender().size(); j++) {
-						System.out.println("Länder von spieler " + Main.spieler.get(i) + " : " + Main.spieler.get(i).getLaender().get(j).getName());
+				for (int i = 0; i < Spieler.spieler.size(); i++) {
+					for (int j = 0; j < Spieler.spieler.get(i).getLaender().size(); j++) {
+						System.out.println("Länder von spieler " + Spieler.spieler.get(i) + " : " + Spieler.spieler.get(i).getLaender().get(j).getName());
 					}
 				}
 				//Truppen werden verteilt
-				for (int i = 0; i < Main.spieler.size(); i++) {
-					Main.spieler.get(i).startTruppen(10);
+				for (int i = 0; i < Spieler.spieler.size(); i++) {
+					Spieler.spieler.get(i).startTruppen(10);
 					//Main.spieler.get(i).startTruppen(24);
 				}
-				Main.spieler.get(0).istDrann = true;
-				System.out.println(Main.spieler.get(0).getName() + " ist Drann mit setzten.");
+				Spieler.spieler.get(0).istDrann = true;
+				System.out.println(Spieler.spieler.get(0).getName() + " ist Drann mit setzten.");
 				break;
 			}
 			

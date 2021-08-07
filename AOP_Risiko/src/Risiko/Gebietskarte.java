@@ -28,10 +28,3 @@ extends Karten
 		this.typ = typ;
 	} 
 }
-//	@Override
-//	public String toString ()
-//		{
-//		return name + " " + typ;
-//		}
-//
-//}

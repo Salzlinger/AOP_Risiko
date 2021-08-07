@@ -215,7 +215,9 @@ class Spielereinstellungen implements ActionListener {
 					}
 				}
 				//Truppen werden verteilt
-				for (int i = 0; i < Spieler.spieler.size(); i++) {
+				
+				for (int i = 0; i < Spieler.spieler.size(); i++) 
+				{
 					Spieler.spieler.get(i).startTruppen(10);
 					//Main.spieler.get(i).startTruppen(24);
 				}

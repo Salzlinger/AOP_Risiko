@@ -26,7 +26,7 @@ public class Wuerfel {
 		
 		//BlitzKampf (alle Runden mit einmal) oder NormalKampf (jede Runde einzeln auswürfeln)
 		System.out.println("Möchtest du die Runden einzeln auswürfeln? Oder sollen alle Runden mit einem mal ausgewürfelt werden?");
-		if (input.next().equals("blitz")) // hier button einfügen
+		if (Weltkarte.getblitz()) // hier button einfügen
 		{blitzKampf = true; 	System.out.println("Blitzkampf startet");}
 		else { normalKampf = true; 		System.out.println("Normalkampf startet");}
 		

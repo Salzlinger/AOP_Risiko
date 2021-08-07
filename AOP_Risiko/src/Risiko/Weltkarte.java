@@ -22,7 +22,7 @@ public class Weltkarte implements ActionListener {
     private JLabel w4;
     private JLabel w5;
     private JLabel w6;
-    private JLabel trpLabel;
+    private static JLabel trpLabel;
 
     private JPanel btnPanel;
     private JPanel spielerPanel;
@@ -33,8 +33,8 @@ public class Weltkarte implements ActionListener {
 
     private JButton truppenBtn;
     private static JButton nextBtn;
-    private JButton hochBtn;
-    private JButton runterBtn;
+    private static JButton hochBtn;
+    private static JButton runterBtn;
 
     private String truppenBtnName = "truppenBtn";
     private String nextBtnName = "nextBtn";
@@ -77,6 +77,17 @@ public class Weltkarte implements ActionListener {
 	private static int si = 0;
 	private static Boolean postBattle = false;
 	private static Boolean cont = false;
+	private static int max = 1;
+	private static Boolean blitz = false;
+	private static Boolean normal = false;
+
+	public static Boolean getblitz() {
+		return blitz;
+	}
+
+	public static Boolean getnormal() {
+		return normal;
+	}
 
 	public static int getTruppen() {
 		return truppen;
@@ -295,9 +306,14 @@ public class Weltkarte implements ActionListener {
     	else if(actionEvent.equals("nextBtn"))
     	{
     		if (!postBattle && z == 0 && a == 1 && Main.spieler.get(si).getTruppen() == 0) {
+    			trpLabel.setVisible(true);
+    			hochBtn.setText("+");
+    			runterBtn.setText("-");
 				System.out.println("Angriff!");
 				Main.spieler.get(si).Angreifen(start, ziel);
 				System.out.println("wie viele Truppen mï¿½chtest du versetzten?");
+				max = start.getTruppen();
+    			trpLabel.setText(String.valueOf(max - 1));
 				zwPanel.setVisible(true);
 				nextBtn.setText("OK");
 				postBattle = true;
@@ -315,6 +331,7 @@ public class Weltkarte implements ActionListener {
 				System.out.println(Main.spieler.get(si) + " Truppen versetzten");
     		} else if (z == 1 && Main.spieler.get(si).getTruppen() == 0) {
     			z = 0;
+    			zwPanel.setVisible(false);
     			nextBtn.setText("");
     			Main.spieler.get(si).istDrann = false;
     			System.out.println("naechster spieler");
@@ -336,10 +353,14 @@ public class Weltkarte implements ActionListener {
     	}
     	else if(actionEvent.equals("hochBtn"))
     	{
-    		if(truppen < 30)
+    		if(truppen < max - 1)
     		{
     			truppen += 1;
     			trpLabel.setText(String.valueOf(truppen));
+    		} else if (z == 0 && a == 1) {
+    			blitz = false;
+    			normal = true;
+    			System.out.println("Du hast normal gewï¿½hlt");
     		}
 
     	}
@@ -349,6 +370,10 @@ public class Weltkarte implements ActionListener {
     		{
     			truppen -= 1;
         		trpLabel.setText(String.valueOf(truppen));
+    		} else if (z == 0 && a == 1) {
+    			blitz = true;
+    			normal = false;
+    			System.out.println("Du hast blitz gewï¿½hlt");
     		}
     	}
     }
@@ -684,9 +709,10 @@ public class Weltkarte implements ActionListener {
     		System.out.println("Truppe danach:" + ziel.getTruppen());
     		System.out.println(Main.spieler.get(si).getName() + " hat " + Main.spieler.get(si).getTruppen() + " uebrig");
     		if(Main.spieler.get(si).getTruppen() == 0) {
+				nextBtn.setText("naechste Phase");
     			System.out.println("gehe in Kampfphase ueber!");
     			System.out.println("waehle die Laender aus");
-    			phase.setText("Wähle die Länder für die Kampfphase aus!");
+    			phase.setText("Wï¿½hle die Lï¿½nder fï¿½r die Kampfphase aus!");
     		}
     		return;
     	} else {
@@ -708,7 +734,11 @@ public class Weltkarte implements ActionListener {
 					phase.setText("Das zweite Land ist " + ziel.getName());
 					int zielBesitzter = Main.spieler.indexOf(ziel.getBesitzer());
 					int startBesitzter = Main.spieler.indexOf(start.getBesitzer());
+					trpLabel.setVisible(false);
 					nextBtn.setText("Angriff");
+					hochBtn.setText("Normal");
+					runterBtn.setText("Blitz");
+					zwPanel.setVisible(true);
 					// Spieler besiegt?
 					if(Main.spieler.get(zielBesitzter).getLaender().size() == 0) {
 						Main.spieler.remove(Main.spieler.get(zielBesitzter));
@@ -719,7 +749,7 @@ public class Weltkarte implements ActionListener {
 				return;
 			case 1:
 				System.out.println("Truppen versetzten");
-				phase.setText("Wähle die Länder zum Truppen versetzen!");
+				phase.setText("Wï¿½hle die Lï¿½nder zum Truppen versetzen!");
 				start = Main.liste [i];
 				System.out.println("erstes land ist " + start.getName());
 				phase.setText("Das erste Land ist " + start.getName());
@@ -728,6 +758,8 @@ public class Weltkarte implements ActionListener {
 			case 2:
 				// Truppen versetzten
 				nextBtn.setText("Verschieben");
+				max = start.getTruppen();
+    			trpLabel.setText(String.valueOf(max - 1));
     			zwPanel.setVisible(true);
 				ziel = Main.liste [i];
 				System.out.println("zweites land ist " + ziel.getName());
@@ -758,6 +790,4 @@ public class Weltkarte implements ActionListener {
 			}
     	}
     }
-
-
 }

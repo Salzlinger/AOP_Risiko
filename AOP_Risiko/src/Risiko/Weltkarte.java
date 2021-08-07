@@ -23,7 +23,7 @@ public class Weltkarte {
     private JLabel w5;
     private JLabel w6;
     private JLabel trpLabel;
-    
+
     private JPanel btnPanel;
     private JPanel spielerPanel;
     private JPanel wPanel;
@@ -151,9 +151,9 @@ public class Weltkarte {
 
         trpPanel = new JPanel(new GridBagLayout());
         trpPanel.setBackground(new Color(0x3f47cc));
-        
+
         GridBagConstraints c = new GridBagConstraints();
-        
+
         truppenBtn = new JButton("Gebietskarten");
         truppenBtn.setFont(new Font("Calibri", Font.PLAIN,20));
         truppenBtn.setBackground(new Color(0x2dce98));
@@ -165,14 +165,14 @@ public class Weltkarte {
         nextBtn.setBackground(new Color(0x2dce98));
         nextBtn.setForeground(Color.white);
         nextBtn.setUI(new ButtonDesign());
-        
+
         hochBtn = new JButton("+");
         hochBtn.setFont(new Font("", Font.BOLD,15));
         hochBtn.setUI(new TruppenButtonDesign());
         c.gridx = 1;
         c.gridy = 0;
         trpPanel.add(hochBtn, c);
-        
+
         runterBtn = new JButton("-");
         runterBtn.setFont(new Font("", Font.BOLD,15));
         runterBtn.setUI(new TruppenButtonDesign());
@@ -212,13 +212,13 @@ public class Weltkarte {
         c.gridheight = 2;
         c.ipadx = 15;
         trpPanel.add(trpLabel, c);
-       
+
         spielerPanel.add(phase);
-        
+
         btnPanel.add((truppenBtn),BorderLayout.WEST);
         btnPanel.add((nextBtn),BorderLayout.EAST);
         btnPanel.add((spielerPanel),BorderLayout.NORTH);
-        
+
         wPanel.add(w1);
         wPanel.add(w2);
         wPanel.add(w3);
@@ -385,9 +385,9 @@ class MouseClickListener implements MouseListener {
         g.fill(area);
         g.setColor(Color.BLACK);
         g.draw(area);
-        
-        // Einfärben der SpielerLänder
-        
+
+        // Einfï¿½rben der SpielerLï¿½nder
+
         for (int i = 0; i < Main.spieler1.getLaender().size(); i++) {
         	int j = 0;
         	for (int k = 0; k < 42; k++) {
@@ -443,14 +443,14 @@ class MouseClickListener implements MouseListener {
 	        }
         }
 
-        // Truppenanzahl in Ländern anzeigen  
-        
+        // Truppenanzahl in Lï¿½ndern anzeigen
+
         int i = Main.liste[0].getTruppen();
         g.setFont(new Font("Calibri", Font.BOLD,15));
         g.setColor(Color.BLACK);
         g.drawString(String.valueOf(i), 100, 100);
 
-        // Maus über Land bewegen 
+        // Maus ï¿½ber Land bewegen
         try {
             Point p = MouseInfo.getPointerInfo().getLocation();
             Point p1 = output.getLocationOnScreen();
@@ -478,6 +478,7 @@ class MouseClickListener implements MouseListener {
     }
 
     public static void laendHandler (int i) {
+		boolean cont = false;
     	int si = 0;
     	//Spielstart phase
     	if (erstercyclus) {
@@ -494,8 +495,10 @@ class MouseClickListener implements MouseListener {
     			Main.spieler.get(si + 1).istDrann = true;
     			System.out.println(Main.spieler.get(si + 1).getName() + " ist Drann mit setzten.");
     		} else if (si == Main.spieler.size() -1 && Main.spieler.get(si).getTruppen() == 0){
-        		System.out.print(Main.spieler.get(0) + " ist Drann.");
+        		System.out.println(Main.spieler.get(0) + " ist Drann.");
         		Main.spieler.get(0).TruppenErhalten();
+        		System.out.println(Main.spieler.get(0).getTruppen() + "!!!!");
+        		Main.spieler.get(si).istDrann = false;
         		Main.spieler.get(0).istDrann = true;
         		erstercyclus = false;
         		return;
@@ -511,32 +514,42 @@ class MouseClickListener implements MouseListener {
 
     	// Truppen verteilen
     	if (Main.spieler.get(si).getTruppen() > 0) {
-    		System.out.println(Main.spieler.get(si).getName() + " hat " + Main.spieler.get(si).getTruppen() + " ï¿½brig");
     		ziel = Main.liste[i];
     		Main.spieler.get(si).TruppenVerteilen(ziel);
+    		System.out.println("Name Land: " + ziel.getName());
+    		System.out.println("Truppe danach:" + ziel.getTruppen());
+    		System.out.println(Main.spieler.get(si).getName() + " hat " + Main.spieler.get(si).getTruppen() + " ï¿½brig");
     		if(Main.spieler.get(si).getTruppen() == 0) {
-    			return;
+    			System.out.println("gehe in Kampfphase ï¿½ber!");
     		}
+    		return;
     	} else {
 			switch (z) {
 			// Angriff
 			case 0:
-				System.out.println("Angriff!");
 				switch (a) {
 				case 0:
+					System.out.println("Angriff!");
 					start = Main.liste [i];
+					System.out.println(start.getNachbarn());
 					System.out.println("erstes land ist " + start.getName());
 					a++;
 					return;
 				case 1:
 					ziel = Main.liste [i];
 					System.out.println("zweites land ist " + ziel.getName());
+					int zielBesitzter = Main.spieler.indexOf(ziel.getBesitzer());
+					int startBesitzter = Main.spieler.indexOf(start.getBesitzer());
+					System.out.println("anzahl  davor " + start.getTruppen());
+					System.out.println("anzahl  davor " + ziel.getTruppen());
 					Main.spieler.get(si).Angreifen(start, ziel);
+					System.out.println("anzahl " + start.getTruppen());
+					System.out.println("anzahl " + ziel.getTruppen());
 					// Spieler besiegt?
-					if(ziel.getBesitzer().getLaender().size() == 0) {
-						Main.spieler.remove(ziel.getBesitzer());
-					} else if (start.getBesitzer().getLaender().size() == 0) {
-						Main.spieler.remove(start.getBesitzer());
+					if(Main.spieler.get(zielBesitzter).getLaender().size() == 0) {
+						Main.spieler.remove(Main.spieler.get(zielBesitzter));
+					} else if (Main.spieler.get(startBesitzter).getLaender().size() == 0) {
+						Main.spieler.remove(Main.spieler.get(startBesitzter));
 					}
 					// notification: attack again?
 				}
@@ -544,6 +557,7 @@ class MouseClickListener implements MouseListener {
 					return;
 				} else {
 					z++;
+					System.out.println(Main.spieler.get(si) + " Truppen versetzten");
 					return;
 				}
 			case 1:
@@ -556,8 +570,12 @@ class MouseClickListener implements MouseListener {
 				// Truppen versetzten
 				ziel = Main.liste [i];
 				System.out.println("zweites land ist " + ziel.getName());
-				Main.spieler.get(si).TruppenBewegen(start, ziel);
-				z = 0;
+				cont = Main.spieler.get(si).TruppenBewegen(start, ziel);
+				if (cont) {
+					z = 0;
+				} else {
+					return;
+				}
 			}
 			//Nï¿½cster spieler ist drann.
 			Main.spieler.get(si).istDrann = false;

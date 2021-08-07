@@ -161,6 +161,7 @@ class Spielereinstellungen implements ActionListener {
 				int k = 0;
 				for (int i = 0; i < 42; i++) {
 					Main.spieler.get(k).getLaender().add(Main.liste[i]);
+					Main.liste[i].setBesitzer(Main.spieler.get(k));
 					k++;
 					if(k == 3) {
 						k = 0;
@@ -174,15 +175,59 @@ class Spielereinstellungen implements ActionListener {
 				//Truppen werden verteilt
 				for (int i = 0; i < Main.spieler.size(); i++) {
 					Main.spieler.get(i).startTruppen(10);
-					//Main.spieler.get(i).startTruppen(35);
+					//Main.spieler.get(i).startTruppen(34);
 				}
 				Main.spieler.get(0).istDrann = true;
 				System.out.println(Main.spieler.get(0).getName() + " ist Drann mit setzten.");
+				break;
+			case 4:
+				k = 0;
+				for (int i = 0; i < 42; i++) {
+					Main.spieler.get(k).getLaender().add(Main.liste[i]);
+					Main.liste[i].setBesitzer(Main.spieler.get(k));
+					k++;
+					if(k == 4) {
+						k = 0;
+					}
+				}
+				for (int i = 0; i < Main.spieler.size(); i++) {
+					for (int j = 0; j < Main.spieler.get(i).getLaender().size(); j++) {
+						System.out.println("Länder von spieler " + Main.spieler.get(i) + " : " + Main.spieler.get(i).getLaender().get(j).getName());
+					}
+				}
+				//Truppen werden verteilt
+				for (int i = 0; i < Main.spieler.size(); i++) {
+					Main.spieler.get(i).startTruppen(10);
+					//Main.spieler.get(i).startTruppen(29);
+				}
+				Main.spieler.get(0).istDrann = true;
+				System.out.println(Main.spieler.get(0).getName() + " ist Drann mit setzten.");
+				break;
+			case 5:
+				k = 0;
+				for (int i = 0; i < 42; i++) {
+					Main.spieler.get(k).getLaender().add(Main.liste[i]);
+					Main.liste[i].setBesitzer(Main.spieler.get(k));
+					k++;
+					if(k == 5) {
+						k = 0;
+					}
+				}
+				for (int i = 0; i < Main.spieler.size(); i++) {
+					for (int j = 0; j < Main.spieler.get(i).getLaender().size(); j++) {
+						System.out.println("Länder von spieler " + Main.spieler.get(i) + " : " + Main.spieler.get(i).getLaender().get(j).getName());
+					}
+				}
+				//Truppen werden verteilt
+				for (int i = 0; i < Main.spieler.size(); i++) {
+					Main.spieler.get(i).startTruppen(10);
+					//Main.spieler.get(i).startTruppen(24);
+				}
+				Main.spieler.get(0).istDrann = true;
+				System.out.println(Main.spieler.get(0).getName() + " ist Drann mit setzten.");
+				break;
 				
 			}
-			
-			
-			
 			
 			spielbrett = new Spielbrett();
 			gui.dispose();

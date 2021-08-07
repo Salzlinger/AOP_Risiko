@@ -1,5 +1,7 @@
 package Risiko;
 
+import java.util.ArrayList;
+
 public class Gebietskarte extends Karten {
 	
 	private String typ; //Infanterie, Kavallerie, Artillerie

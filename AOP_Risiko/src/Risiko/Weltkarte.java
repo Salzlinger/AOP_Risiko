@@ -313,7 +313,7 @@ public class Weltkarte implements ActionListener {
     			runterBtn.setText("-");
 				System.out.println("Angriff!");
 				Spieler.spieler.get(si).Angreifen(start, ziel);
-				System.out.println("wie viele Truppen m�chtest du versetzten?");
+				System.out.println("wie viele Truppen moechtest du versetzten?");
 				max = start.getTruppen();
     			trpLabel.setText(String.valueOf(max - 1));
 				zwPanel.setVisible(true);
@@ -731,16 +731,16 @@ public class Weltkarte implements ActionListener {
     			phase.setText(Spieler.spieler.get(si + 1).getName() + " ist dran mit setzen!");
     			System.out.println(Spieler.spieler.get(si + 1).getName() + " ist Drann mit setzen.");
     		} else if (si == Spieler.spieler.size() -1 && Spieler.spieler.get(si).getTruppen() == 0)
-    		{
-        		System.out.println(Spieler.spieler.get(0) + " ist dran.");
-        		phase.setText(Spieler.spieler.get(0) + " ist dran.");
-        		Spieler.spieler.get(0).TruppenErhalten();
-        		System.out.println(Spieler.spieler.get(0).getTruppen() + "!!!!");
-        		Spieler.spieler.get(si).istDran = false;
-        		Spieler.spieler.get(0).istDran = true;
-        		erstercyclus = false;
-        		return;
-        	}
+    			{
+        			System.out.println(Spieler.spieler.get(0) + " ist dran.");
+        			phase.setText(Spieler.spieler.get(0) + " ist dran.");
+        			Spieler.spieler.get(0).TruppenErhalten();
+        			System.out.println(Spieler.spieler.get(0).getTruppen() + "!!!!");
+        			Spieler.spieler.get(si).istDran = false;
+        			Spieler.spieler.get(0).istDran = true;
+        			erstercyclus = false;
+        			return;
+    			}
     		 return;
 		}
 
@@ -754,7 +754,8 @@ public class Weltkarte implements ActionListener {
 
     	// Truppen verteilen
     	
-    	if (Spieler.spieler.get(si).getTruppen() > 0) {
+    	if (Spieler.spieler.get(si).getTruppen() > 0) 
+    	{
     		ziel = Laender.liste[i];
     		Spieler.spieler.get(si).TruppenVerteilen(ziel);
     		System.out.println("Name Land: " + ziel.getName());
@@ -805,7 +806,7 @@ public class Weltkarte implements ActionListener {
 				return;
 			case 1:
 				System.out.println("Truppen versetzten");
-				phase.setText("W�hle die L�nder zum Truppen versetzen!");
+				phase.setText("Waehle die Laender zum Truppen versetzen!");
 				start = Laender.liste [i];
 				System.out.println("erstes land ist " + start.getName());
 				phase.setText("Das erste Land ist " + start.getName());

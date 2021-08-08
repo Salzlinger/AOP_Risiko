@@ -310,6 +310,7 @@ public class Weltkarte implements ActionListener {
     				Spieler.spieler.get(si).TruppenBewegen(start, ziel);
     				waPanel.setVisible(false);
     				wvPanel.setVisible(false);
+    				phase.setText("Du kannst erneut angreifen oder in die naechste Phase wechseln.");
 	    			System.out.println("Stationierte Truppen" + start.getName() + ": " + ziel.getTruppen());
 					System.out.println("Stationierte Truppen" + start.getName() + ": " + ziel.getTruppen());
 					postBattle = false;
@@ -320,6 +321,7 @@ public class Weltkarte implements ActionListener {
     			{
 					z++;
 					nextBtn.setText("Zug Beenden");
+					phase.setText("Du darfst 1x Truppen verschieben. Wähle die Laender aus oder beende deinen Zug.");
 					System.out.println(Spieler.spieler.get(si) + " Truppen versetzten");
     		} else if (z == 1 && Spieler.spieler.get(si).getTruppen() == 0) 
     			{
@@ -328,17 +330,22 @@ public class Weltkarte implements ActionListener {
     				nextBtn.setText("");
     				Spieler.spieler.get(si).istDran = false;
     				System.out.println("naechster spieler");
+
     			if (Spieler.spieler.size() == si) 
     				{
     					si = 0;
     					Spieler.spieler.get(si).istDran = true;
     					Spieler.spieler.get(si).TruppenErhalten();
+    					phase.setText(Spieler.spieler.get(si) + " ist dran und erhaelt " + Spieler.spieler.get(si).getTruppen() + " Truppen zum verteilen.");
+
     			} else 
     				{
     					Spieler.spieler.get(si + 1).istDran = true;
     					System.out.println(Spieler.spieler.get(si + 1).getName() + " ist dran.");
     					Spieler.spieler.get(si + 1).TruppenErhalten();
     					System.out.println(Spieler.spieler.get(si + 1).getName() + " erhaelt " + Spieler.spieler.get(si + 1).getTruppen());
+    					phase.setText(Spieler.spieler.get(si + 1) + " ist dran und erhaelt " + Spieler.spieler.get(si + 1).getTruppen() + " Truppen zum verteilen.");
+
     				}
     		} else if (z == 2 && Spieler.spieler.get(si).getTruppen() == 0) 
     			{
@@ -724,13 +731,13 @@ public class Weltkarte implements ActionListener {
     		ziel = Laender.liste[i];
     		Spieler.spieler.get(si).TruppenVerteilen(ziel);
     		System.out.println("Anfang: " + Spieler.spieler.get(si).getName() + " hat " + Spieler.spieler.get(si).getTruppen() + " uebrig");
-    		phase.setText("Du hast noch " + Spieler.spieler.get(si).getTruppen() + " uebrig.");
+    		phase.setText(Spieler.spieler.get(si).getName() + " ist dran mit setzen! Du hast noch " + Spieler.spieler.get(si).getTruppen() + " uebrig.");
     		if (si < Spieler.spieler.size() -1 && Spieler.spieler.get(si).getTruppen() == 0)
     		{
     			Spieler.spieler.get(si).istDran = false;
     			Spieler.spieler.get(si + 1).istDran = true;
 
-    			phase.setText(Spieler.spieler.get(si + 1).getName() + " ist dran mit setzen! Du kannst " + Spieler.spieler.get(si).getTruppen() + " Truppen versetzen.");
+    			//phase.setText(Spieler.spieler.get(si + 1).getName() + " ist dran mit setzen! Du kannst " + Spieler.spieler.get(si).getTruppen() + " Truppen versetzen.");
     			System.out.println(Spieler.spieler.get(si + 1).getName() + " ist dran mit setzen.");
     		} else if (si == Spieler.spieler.size() -1 && Spieler.spieler.get(si).getTruppen() == 0)
     			{
@@ -841,12 +848,14 @@ public class Weltkarte implements ActionListener {
 			zwPanel.setVisible(false);
 			nextBtn.setText("");
 			Spieler.spieler.get(si).istDran = false;
+
 			System.out.println("naechster spieler");
 			if (Spieler.spieler.size() == si) 
 			{
 				si = 0;
 				Spieler.spieler.get(si).istDran = true;
 				Spieler.spieler.get(si).TruppenErhalten();
+
 			} else 
 				{
 					Spieler.spieler.get(si + 1).istDran = true;

@@ -325,7 +325,6 @@ public class Spieler {
 				b.setBesitzer(this);
 				System.out.println("Neuer Besitzer von " + b.name + " ist " + b.getBesitzer());
 				laenderArray.add(b);	// erobertes Land der Liste hinzufügen
-				Weltkarte.refresh();
 				System.out.println("Stationierte Truppen in " + a.getName() + ": " + a.getTruppen());
 				System.out.println("Stationierte Truppen in " + b.getName() + ": " +b.getTruppen());
 				return true;

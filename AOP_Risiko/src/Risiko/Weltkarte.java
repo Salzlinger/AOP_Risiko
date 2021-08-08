@@ -308,6 +308,7 @@ public class Weltkarte implements ActionListener {
     			blitzBtn.setVisible(false);
 				System.out.println("Angriff!");
 				Spieler.spieler.get(si).Angreifen(start, ziel);
+				player0 = Spieler.spieler.get(si);
 				max = start.getTruppen();
 				boolean test = Spieler.spieler.get(si).Angreifen(start, ziel);
 				if( test == true)
@@ -317,7 +318,10 @@ public class Weltkarte implements ActionListener {
 
 					if(ziel.getTruppen() == 0)
 					{
-						player0 = Spieler.spieler.get(si);
+						//player0 = Spieler.spieler.get(si);
+						ziel.setBesitzer(Spieler.spieler.get(si));
+						System.out.println(ziel.getBesitzer());
+						refresh();
 						phase.setText("Der Angreifer hat gewonnen! W�hle die Truppen zum verschieben.");
 						System.out.println("wie viele Truppen moechtest du versetzten?");
 						max = start.getTruppen();

@@ -8,6 +8,7 @@ public class Laender {
 	String name;
 	boolean istBekannt = true;
 	int truppen = 1;
+	private static int currentTruppen = 1;
 	private static Spieler besitzer;
 	public static Laender [] liste;
 	public static HashMap <String, Laender> laender = new HashMap<String, Laender>();
@@ -345,4 +346,15 @@ public class Laender {
 		{
 		return name;
 		}
+
+	public int getCurrentTruppen() {
+		return currentTruppen;
+	}
+
+	public void setCurrentTruppen(int currentTruppen) {
+		System.out.println("setCurrentTruppen");
+		Laender.currentTruppen = currentTruppen;
+		System.out.println("currentTruppen danach: " + currentTruppen);
+		System.out.println("Truupen auf land" + truppen);
+	}
 }

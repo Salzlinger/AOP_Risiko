@@ -515,9 +515,15 @@ class Gebietskarten extends JFrame implements ActionListener {
 		
 		// Gebietskarten einloesen
 		
+		String hintergrund = einloesenButton.getBackground().toString();
+		String colorId = "0x2dce98";
+		
 		if(actionEvent.equals("einloesenBtnName"))
 		{
-			
+			if(hintergrund == colorId)
+			{
+		//		Spieler.SetEinloesen(Main.Deck);
+			}
 		}
 		
 		// Fenster schliessen

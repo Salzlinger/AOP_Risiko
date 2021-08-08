@@ -16,11 +16,11 @@ public class Spieler {
 	private HashMap <String, Laender> laenderHash = new HashMap <String, Laender>();
 	private ArrayList <Laender> laenderArray = new ArrayList <Laender>();
 	private static ArrayList <Gebietskarte> hand = new ArrayList <Gebietskarte>();
-	private boolean infanterieSet = false;
-	private boolean kavallerieSet = false;
-	private boolean artillerieSet = false;
-	private boolean gemischtesSet = false;
-	private boolean jokerSet = false;
+	private static boolean infanterieSet = false;
+	private static boolean kavallerieSet = false;
+	private static boolean artillerieSet = false;
+	private static boolean gemischtesSet = false;
+	private static boolean jokerSet = false;
 	private boolean setEingeloest = false;
 	private boolean wait = false;
 	private int truppen = 0;
@@ -98,25 +98,25 @@ public class Spieler {
 	}
 	
 	public void TruppenErhalten() {
-		if (SetKomplett())
-		{
-			if (hand.size() > 5)
-			{
-				System.out.println("Spieler " + name + " hat mehr als 5 Karten auf der Hand und muss ein Set einlösen!");
-				SetEinloesen(Main.Deck);
-				setEingeloest=true;
-				Gebietskarten.eingeloesteSets++;
-			} else 
-				{
-				System.out.println("Spieler " + name + " hat ein komplettes Set auf der Hand. Möchtest du es einlösen?");
-				if (input.next().equals("ja")  )
-				{
-					SetEinloesen(Main.Deck);
-					setEingeloest=true;
-					Gebietskarten.eingeloesteSets++;
-				}
-			}
-		}
+//		if (SetKomplett())
+//		{
+//			if (hand.size() > 5)
+//			{
+//				System.out.println("Spieler " + name + " hat mehr als 5 Karten auf der Hand und muss ein Set einlösen!");
+//				SetEinloesen(Main.Deck);
+//				setEingeloest=true;
+//				Gebietskarten.eingeloesteSets++;
+//			} else 
+//				{
+//				System.out.println("Spieler " + name + " hat ein komplettes Set auf der Hand. Möchtest du es einlösen?");
+//				if (input.next().equals("ja")  )
+//				{
+//					SetEinloesen(Main.Deck);
+//					setEingeloest=true;
+//					Gebietskarten.eingeloesteSets++;
+//				}
+//			}
+//		}
 		if(setEingeloest)
 		{
 		berechneSetBonus();

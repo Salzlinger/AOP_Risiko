@@ -697,58 +697,58 @@ public class Weltkarte implements ActionListener {
         	}
         }
         
-        for (int b = 0; b < Spieler.spieler.size(); b++) {
-        	if (Spieler.spieler.get(b) != player) {
-        		for (int i = 0; i < Spieler.spieler.get(b).getLaender().size(); i++)
-                {
-                	int t = 0;
-                	for (int k = 0; k < 42; k++) 
-                	{
-                		if (Laender.liste[k] == Spieler.spieler.get(b).getLaender().get(i))
-                		{
-                			t = k;
-                		}
-                	}
-                	if (Spieler.spieler.get(b) == Spieler.spieler1) {
-                    	g.setColor(Color.BLUE.darker());
-                	} else if (Spieler.spieler.get(b) == Spieler.spieler2) {
-                    	g.setColor(Color.RED.darker());
-                	} else if (Spieler.spieler.get(b) == Spieler.spieler3) {
-                    	g.setColor(Color.YELLOW.darker());
-                	} else if (Spieler.spieler.get(b) == Spieler.spieler4) {
-                    	g.setColor(Color.GREEN.darker());
-                	} else if (Spieler.spieler.get(b) == Spieler.spieler5) {
-                    	g.setColor(Color.WHITE.darker());
-                	}
-                	g.fill(shapeList.get(t));
-                }
-        	}
-    	}
-
-        for (int i = 0; i < player.getLaender().size(); i++)
-        {
-        	int j = 0;
-
-        	for (int k = 0; k < 42; k++)
-        	{
-        		if (Laender.liste[k] == player.getLaender().get(i))
-        		{
-        			j = k;
-        		}
-        	}
-        	if (player == Spieler.spieler1) {
-            	g.setColor(Color.BLUE.darker());
-        	} else if (player == Spieler.spieler2) {
-            	g.setColor(Color.RED.darker());
-        	} else if (player == Spieler.spieler3) {
-            	g.setColor(Color.YELLOW.darker());
-        	} else if (player == Spieler.spieler4) {
-            	g.setColor(Color.GREEN.darker());
-        	} else if (player == Spieler.spieler5) {
-            	g.setColor(Color.WHITE.darker());
-        	}
-        	g.fill(shapeList.get(j));
-        }
+//        for (int b = 0; b < Spieler.spieler.size(); b++) {
+//        	if (Spieler.spieler.get(b) != player) {
+//        		for (int i = 0; i < Spieler.spieler.get(b).getLaender().size(); i++)
+//                {
+//                	int t = 0;
+//                	for (int k = 0; k < 42; k++) 
+//                	{
+//                		if (Laender.liste[k] == Spieler.spieler.get(b).getLaender().get(i))
+//                		{
+//                			t = k;
+//                		}
+//                	}
+//                	if (Spieler.spieler.get(b) == Spieler.spieler1) {
+//                    	g.setColor(Color.BLUE.darker());
+//                	} else if (Spieler.spieler.get(b) == Spieler.spieler2) {
+//                    	g.setColor(Color.RED.darker());
+//                	} else if (Spieler.spieler.get(b) == Spieler.spieler3) {
+//                    	g.setColor(Color.YELLOW.darker());
+//                	} else if (Spieler.spieler.get(b) == Spieler.spieler4) {
+//                    	g.setColor(Color.GREEN.darker());
+//                	} else if (Spieler.spieler.get(b) == Spieler.spieler5) {
+//                    	g.setColor(Color.WHITE.darker());
+//                	}
+//                	g.fill(shapeList.get(t));
+//                }
+//        	}
+//    	}
+//
+//        for (int i = 0; i < player.getLaender().size(); i++)
+//        {
+//        	int j = 0;
+//
+//        	for (int k = 0; k < 42; k++)
+//        	{
+//        		if (Laender.liste[k] == player.getLaender().get(i))
+//        		{
+//        			j = k;
+//        		}
+//        	}
+//        	if (player == Spieler.spieler1) {
+//            	g.setColor(Color.BLUE.darker());
+//        	} else if (player == Spieler.spieler2) {
+//            	g.setColor(Color.RED.darker());
+//        	} else if (player == Spieler.spieler3) {
+//            	g.setColor(Color.YELLOW.darker());
+//        	} else if (player == Spieler.spieler4) {
+//            	g.setColor(Color.GREEN.darker());
+//        	} else if (player == Spieler.spieler5) {
+//            	g.setColor(Color.WHITE.darker());
+//        	}
+//        	g.fill(shapeList.get(j));
+//        }
 
         // Spieler links ausgeben
 

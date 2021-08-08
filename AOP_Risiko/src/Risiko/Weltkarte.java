@@ -16,7 +16,7 @@ public class Weltkarte implements ActionListener {
     private JComponent ui = null;
     
     private JLabel output;
-    static 	JLabel phase;
+    static JLabel phase;
     static JLabel w1;
     static JLabel w2;
     static JLabel w3;
@@ -158,7 +158,7 @@ public class Weltkarte implements ActionListener {
 
         nextBtn = new JButton("");
         nextBtn.setFont(new Font("Calibri", Font.PLAIN,20));
-        nextBtn.setPreferredSize(new Dimension(150,0));
+        nextBtn.setPreferredSize(new Dimension(160,0));
         nextBtn.setBackground(new Color(0x2dce98));
         nextBtn.setForeground(Color.white);
         nextBtn.setUI(new ButtonDesign());
@@ -175,7 +175,7 @@ public class Weltkarte implements ActionListener {
         
         verschBtn = new JButton("Verschieben");
         verschBtn.setFont(new Font("Calibri", Font.PLAIN,20));
-        verschBtn.setPreferredSize(new Dimension(150,0));
+        verschBtn.setPreferredSize(new Dimension(180,0));
         verschBtn.setBackground(new Color(0x2dce98));
         verschBtn.setForeground(Color.white);
         verschBtn.setUI(new ButtonDesign());
@@ -316,17 +316,24 @@ public class Weltkarte implements ActionListener {
 					if(ziel.getTruppen() == 0)
 					{
 						phase.setText("Der Angreifer hat gewonnen! Wähle die Truppen zum verschieben.");
+						System.out.println("wie viele Truppen moechtest du versetzten?");
+						max = start.getTruppen();
+						truppen = 1;
+		    			trpLabel.setText(String.valueOf(truppen));
+						zwPanel.setVisible(true);
+						nextBtn.setText("OK");
 					}
-					else
+					else if(start.getTruppen() < 2)
 					{
 						phase.setText("Der Verteidiger hat gewonnen!");
+						zwPanel.setVisible(false);
 					}
 				}
-				System.out.println("wie viele Truppen moechtest du versetzten?");
-				max = start.getTruppen();
-    			trpLabel.setText(String.valueOf(max - 1));
-				zwPanel.setVisible(true);
-				nextBtn.setText("OK");
+//				System.out.println("wie viele Truppen moechtest du versetzten?");
+//				max = start.getTruppen();
+//    			trpLabel.setText(String.valueOf(truppen));
+//				zwPanel.setVisible(true);
+//				nextBtn.setText("OK");
 				postBattle = true;
     		} else if (postBattle && z == 0 && a == 1 && Spieler.spieler.get(si).getTruppen() == 0) 
     			{
@@ -672,6 +679,29 @@ public class Weltkarte implements ActionListener {
 	        }
         }
 
+        
+        // Spieler links ausgeben
+        
+        g.setFont(new Font("Calibri", Font.PLAIN, 20));
+        g.setColor(Color.BLUE.darker());
+        g.drawString(Spieler.spieler1.getName(), 10, 400);
+        g.setColor(Color.RED.darker());
+        g.drawString(Spieler.spieler2.getName(), 10, 420);
+        g.setColor(Color.YELLOW.darker());
+        g.drawString(Spieler.spieler3.getName(), 10, 440);
+        
+        if(Spieler.spieler.size() > 3)
+        {
+        	g.setColor(Color.GREEN.darker());
+        	g.drawString(Spieler.spieler4.getName(), 10, 460);
+        }
+        
+        if(Spieler.spieler.size() > 4)
+        {
+        	g.setColor(Color.WHITE.darker());
+        	g.drawString(Spieler.spieler5.getName(), 10, 480);
+        }
+        
         // Truppenanzahl in Laendern anzeigen
 
         g.setFont(new Font("Calibri", Font.BOLD,15));

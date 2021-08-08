@@ -98,22 +98,6 @@ public class Wuerfel {
 		{	
 			if (normalKampf)	//Wenn ein NormalKampf ausgewählt wird, kann vor jeder Runde entschieden werden ob mit 1,2, oder 3 Truppen angegriffen wird
 			{
-//				while (ungueltigeEingabe)
-//				{
-//				System.out.println("Waehle aus ob du mit 1,2 oder 3 Truppen angreifen moechtest");
-//				System.out.println("3 ist standard mäßig ausgewählt");
-//				
-//				angreifer = Fehlersuche.eingabePruefenInt();
-//				
-//				if (angreifer > 3)
-//					{System.out.println("Du kannst nur mit max 3 Truppen angreifen");}
-//				else if (angreiferGesamt == 3 && angreifer > 2)
-//					{System.out.println("Du kannst nur noch mit max 2 Truppen angreifen");}
-//				else if (angreiferGesamt == 2 && angreifer > 1)
-//					{System.out.println("Du kannst nur noch mit max 1 Truppe angreifen");}
-//				else	
-//					{ungueltigeEingabe = false;}
-//				}
 			}
 			System.out.println("---------------------------------\nRunde: " + runde);
 			runde += 1;
@@ -260,24 +244,8 @@ public class Wuerfel {
 			System.out.println("des Angreifers  : " + angreifer); 
 			System.out.println("des Verteidigers: " + verteidiger);
 			
-			
-			if ( angreifer > 1 && verteidiger > 0)
-			{ if (normalKampf)
-				{	
-					System.out.println("Moechtest du weiter angreifen? ");
-					if (Fehlersuche.eingabeJaNein().equals("ja"))
-					{ 
-						ungueltigeEingabe = true;	
-					} 	
-					else 
-					{ 
-						weitermachen = false;
-					}
-				}  	
-			} else 
-				{ 
-					weitermachen = false;
-				}
+		
+			weitermachen = false;
 		}
 		
 		a.setTruppen(angreifer);

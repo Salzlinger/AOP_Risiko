@@ -286,7 +286,6 @@ public class Spieler {
 	}
 	
 	
-	//auf Aktionen auslagern?
 	public void TruppenVerteilen(Laender land) {
 		if(laenderArray.contains(land)) 
 		{
@@ -297,7 +296,6 @@ public class Spieler {
 			{
 				System.out.println("Dir gehört dieses Land nicht.");
 			}
-		//<<<<<Funktion in GUI zum verteilen der Truppen
 	}
 	
 	public void TruppenEntfernen(Laender land) {
@@ -310,7 +308,6 @@ public class Spieler {
 			{
 				System.out.println("Dir gehört dieses Land nicht.");
 			}
-		//<<<<<Funktion in GUI zum verteilen der Truppen
 	}
 	
 	public boolean Angreifen(Laender a, Laender b) {
@@ -322,9 +319,7 @@ public class Spieler {
 			if (Wuerfel.Wuerfelkampf(a,b)== true)
 				{
 				KarteZiehen(Main.Deck);
-//				b.setBesitzer(this);
 				System.out.println("Neuer Besitzer von " + b.name + " ist " + b.getBesitzer());
-				//laenderArray.add(b);	// erobertes Land der Liste hinzufügen
 				System.out.println("Stationierte Truppen in " + a.getName() + ": " + a.getTruppen());
 				System.out.println("Stationierte Truppen in " + b.getName() + ": " +b.getTruppen());
 				return true;
@@ -333,7 +328,6 @@ public class Spieler {
 		} else 
 			{ 
 			return false;
-			//System.out.println("Angriff nicht möglich, da keine Nachbarn. Bitte anderes Land auswählen!"); 
 			}
 		return false;
 	}
@@ -362,8 +356,6 @@ public class Spieler {
 				{
 				System.out.println("Bitte gib eine größere Zahl ein");
 				} else  { 
-//						von.setTruppen(von.getTruppen()-Weltkarte.getTruppen());
-//						nach.setTruppen(nach.getTruppen()+Weltkarte.getTruppen());
 						nochmal = false;
 						}
 				}

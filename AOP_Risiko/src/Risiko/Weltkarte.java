@@ -38,8 +38,6 @@ public class Weltkarte implements ActionListener {
     private static JButton runterBtn;
     private static JButton normalBtn;
     private static JButton blitzBtn;
-    private static JButton angriffBtn;
-    private static JButton verschBtn;
 
     private String truppenBtnName = "truppenBtn";
     private String nextBtnName = "nextBtn";
@@ -47,8 +45,6 @@ public class Weltkarte implements ActionListener {
     private String runterBtnName = "runterBtn";
     private String normalBtnName = "normalBtn";
     private String blitzBtnName = "blitzBtn";
-    private String angriffBtnName = "angriffBtn";
-    private String verschBtnName = "verschBtn";
 
     private Gebietskarten gebietskarten;
 
@@ -163,24 +159,6 @@ public class Weltkarte implements ActionListener {
         nextBtn.setForeground(Color.white);
         nextBtn.setUI(new ButtonDesign());
         nextBtn.setActionCommand(nextBtnName);
-
-        angriffBtn = new JButton("Angriff");
-        angriffBtn.setFont(new Font("Calibri", Font.PLAIN,20));
-        angriffBtn.setPreferredSize(new Dimension(150,0));
-        angriffBtn.setBackground(new Color(0x2dce98));
-        angriffBtn.setForeground(Color.white);
-        angriffBtn.setUI(new ButtonDesign());
-        angriffBtn.setActionCommand(nextBtnName);
-        angriffBtn.setVisible(false);
-
-        verschBtn = new JButton("Verschieben");
-        verschBtn.setFont(new Font("Calibri", Font.PLAIN,20));
-        verschBtn.setPreferredSize(new Dimension(180,0));
-        verschBtn.setBackground(new Color(0x2dce98));
-        verschBtn.setForeground(Color.white);
-        verschBtn.setUI(new ButtonDesign());
-        verschBtn.setActionCommand(nextBtnName);
-        verschBtn.setVisible(false);
 
         hochBtn = new JButton("+");
         hochBtn.setFont(new Font("", Font.BOLD,15));
@@ -306,14 +284,8 @@ public class Weltkarte implements ActionListener {
     			normalBtn.setVisible(false);
     			blitzBtn.setVisible(false);
 				System.out.println("Angriff!");
-				System.out.println("before " + Spieler.spieler.get(0).getLaender());
-				System.out.println("before " + Spieler.spieler.get(1).getLaender());
-				System.out.println("before " + Spieler.spieler.get(2).getLaender());
-//				Laender angriffsziel = ziel;
 				Spieler zielspieler = ziel.getBesitzer();
 				Spieler.spieler.get(si).Angreifen(start, ziel);
-				
-//				System.out.println("!!!!!" + zielspieler.getLaender().contains(angriffsziel));
 				player0 = Spieler.spieler.get(si);
 				max = start.getTruppen();
 				boolean test = Spieler.spieler.get(si).Angreifen(start, ziel);
@@ -329,17 +301,11 @@ public class Weltkarte implements ActionListener {
 							if (zielspieler.getLaender().get(g) == ziel) {
 								for (int t = 0; t < Spieler.spieler.size(); t++) {
 									if (zielspieler.getName() == Spieler.spieler.get(t).getName()) {
-										System.out.println("inside before " + Spieler.spieler.get(t).getLaender());
 										Spieler.spieler.get(t).getLaender().remove(g);
-										System.out.println("inside after " + Spieler.spieler.get(t).getLaender());
 									}
 								}
 							}
 						}
-						System.out.println("after " + Spieler.spieler.get(0).getLaender());
-						System.out.println("after " + Spieler.spieler.get(1).getLaender());
-						System.out.println("after " + Spieler.spieler.get(2).getLaender());
-						//player0 = Spieler.spieler.get(si);
 						ziel.setBesitzer(Spieler.spieler.get(si));
 						System.out.println(ziel.getBesitzer());
 						refresh();
@@ -358,11 +324,6 @@ public class Weltkarte implements ActionListener {
 						zwPanel.setVisible(false);
 					}
 				}
-//				System.out.println("wie viele Truppen moechtest du versetzten?");
-//				max = start.getTruppen();
-//    			trpLabel.setText(String.valueOf(truppen));
-//				zwPanel.setVisible(true);
-//				nextBtn.setText("OK");
 				postBattle = true;
     		} else if (postBattle && z == 0 && a == 1 && Spieler.spieler.get(si).getTruppen() == 0)
     			{
@@ -370,8 +331,6 @@ public class Weltkarte implements ActionListener {
     				ziel.setTruppen(ziel.getTruppen() + truppen);
     				start.setTruppen(start.getTruppen() - truppen);
     				refresh();
-    				System.out.println(ziel.getBesitzer().getName() + "HAAALLOOOOO");
-    				System.out.println(ziel.getTruppen() + "TRUUUPENS");
     				waPanel.setVisible(false);
     				wvPanel.setVisible(false);
     				phase.setText("Du kannst erneut angreifen oder in die naechste Phase wechseln.");
@@ -389,9 +348,6 @@ public class Weltkarte implements ActionListener {
 					System.out.println(Spieler.spieler.get(si) + " Truppen versetzten");
     		} else if (z == 1 && z != 2 && Spieler.spieler.get(si).getTruppen() == 0)
     			{
-//    			for (int g = 0; g < 42; g++) {
-//					Laender.liste[g].setCurrentTruppen(Laender.liste[g].truppen);
-//				}
     				z = 0;
     				zwPanel.setVisible(false);
     				nextBtn.setText("");
@@ -432,9 +388,7 @@ public class Weltkarte implements ActionListener {
     				Spieler.spieler.get(si).istDran = false;
 
     				System.out.println("naechster spieler");
-//    				for (int g = 0; g < 42; g++) {
-//    					Laender.liste[g].setCurrentTruppen(Laender.liste[g].getTruppen());
-//    				}
+    				z = 0;
     				if (Spieler.spieler.size() == si + 1)
     				{
     					si = 0;
@@ -452,14 +406,6 @@ public class Weltkarte implements ActionListener {
     				player0 = Spieler.spieler.get(si);
     			}
     	}
-    	else if(Klick.equals("angriffBtn"))
-    			{
-    				// do Angriff
-    			}
-    	else if(Klick.equals("verschBtn"))
-    			{
-    				// do Verschieben
-    			}
     	else if(Klick.equals("hochBtn"))
     	{
     		if(truppen < max - 1)
@@ -596,7 +542,6 @@ public class Weltkarte implements ActionListener {
 
         @Override
         public void mouseMoved(MouseEvent e) {
-            //refresh();
 
         }
     }
@@ -696,59 +641,6 @@ public class Weltkarte implements ActionListener {
             	g.fill(shapeList.get(w));
         	}
         }
-        
-//        for (int b = 0; b < Spieler.spieler.size(); b++) {
-//        	if (Spieler.spieler.get(b) != player) {
-//        		for (int i = 0; i < Spieler.spieler.get(b).getLaender().size(); i++)
-//                {
-//                	int t = 0;
-//                	for (int k = 0; k < 42; k++) 
-//                	{
-//                		if (Laender.liste[k] == Spieler.spieler.get(b).getLaender().get(i))
-//                		{
-//                			t = k;
-//                		}
-//                	}
-//                	if (Spieler.spieler.get(b) == Spieler.spieler1) {
-//                    	g.setColor(Color.BLUE.darker());
-//                	} else if (Spieler.spieler.get(b) == Spieler.spieler2) {
-//                    	g.setColor(Color.RED.darker());
-//                	} else if (Spieler.spieler.get(b) == Spieler.spieler3) {
-//                    	g.setColor(Color.YELLOW.darker());
-//                	} else if (Spieler.spieler.get(b) == Spieler.spieler4) {
-//                    	g.setColor(Color.GREEN.darker());
-//                	} else if (Spieler.spieler.get(b) == Spieler.spieler5) {
-//                    	g.setColor(Color.WHITE.darker());
-//                	}
-//                	g.fill(shapeList.get(t));
-//                }
-//        	}
-//    	}
-//
-//        for (int i = 0; i < player.getLaender().size(); i++)
-//        {
-//        	int j = 0;
-//
-//        	for (int k = 0; k < 42; k++)
-//        	{
-//        		if (Laender.liste[k] == player.getLaender().get(i))
-//        		{
-//        			j = k;
-//        		}
-//        	}
-//        	if (player == Spieler.spieler1) {
-//            	g.setColor(Color.BLUE.darker());
-//        	} else if (player == Spieler.spieler2) {
-//            	g.setColor(Color.RED.darker());
-//        	} else if (player == Spieler.spieler3) {
-//            	g.setColor(Color.YELLOW.darker());
-//        	} else if (player == Spieler.spieler4) {
-//            	g.setColor(Color.GREEN.darker());
-//        	} else if (player == Spieler.spieler5) {
-//            	g.setColor(Color.WHITE.darker());
-//        	}
-//        	g.fill(shapeList.get(j));
-//        }
 
         // Spieler links ausgeben
 
@@ -867,8 +759,6 @@ public class Weltkarte implements ActionListener {
     		{
     			Spieler.spieler.get(si).istDran = false;
     			Spieler.spieler.get(si + 1).istDran = true;
-
-    			//phase.setText(Spieler.spieler.get(si + 1).getName() + " ist dran mit setzen! Du kannst " + Spieler.spieler.get(si).getTruppen() + " Truppen versetzen.");
     			System.out.println(Spieler.spieler.get(si + 1).getName() + " ist dran mit setzen.");
     		} else if (si == Spieler.spieler.size() -1 && Spieler.spieler.get(si).getTruppen() == 0)
     			{
@@ -879,9 +769,6 @@ public class Weltkarte implements ActionListener {
         			Spieler.spieler.get(si).istDran = false;
         			Spieler.spieler.get(0).istDran = true;
         			erstercyclus = false;
-//        			for (int g = 0; g < 42; g++) {
-//    					Laender.liste[g].setCurrentTruppen(Laender.liste[g].truppen);
-//    				}
         			return;
     			}
     		 return;
@@ -934,7 +821,7 @@ public class Weltkarte implements ActionListener {
 					if (!Spieler.spieler.get(si).getLaender().contains(Laender.liste[i])) {
 						ziel = Laender.liste [i];
 						System.out.println("zweites land ist " + ziel.getName());
-						phase.setText("Das zweite Land ist " + ziel.getName() + ". W�hle Blitz oder Normalkampf.");
+						phase.setText("Das zweite Land ist " + ziel.getName() + ". Waehle Blitz oder Normalkampf.");
 						int zielBesitzter = Spieler.spieler.indexOf(ziel.getBesitzer());
 						int startBesitzter = Spieler.spieler.indexOf(start.getBesitzer());
 						trpLabel.setVisible(false);
@@ -987,15 +874,4 @@ public class Weltkarte implements ActionListener {
 			}
     	}
     }
-
-//    public static void entfernenHandler (int i) {
-//    	if (Spieler.spieler.get(si).getTruppen() > 1)
-//    	{
-//    		ziel = Laender.liste[i];
-//    		System.out.println("ziel ist: " + ziel.getName());
-//    		System.out.println("current Truppen: " + ziel.getCurrentTruppen());
-//    		if (ziel.getCurrentTruppen() < ziel.getTruppen())
-//    		Spieler.spieler.get(si).TruppenEntfernen(ziel);
-//		}
-//    }
 }

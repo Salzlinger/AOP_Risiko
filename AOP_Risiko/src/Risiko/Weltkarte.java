@@ -17,12 +17,12 @@ public class Weltkarte implements ActionListener {
     
     private JLabel output;
     static 	JLabel phase;
-    private JLabel w1;
-    private JLabel w2;
-    private JLabel w3;
-    private JLabel w4;
-    private JLabel w5;
-    private JLabel w6;
+    static JLabel w1;
+    static JLabel w2;
+    static JLabel w3;
+    static JLabel w4;
+    static JLabel w5;
+    static JLabel w6;
     private static JLabel trpLabel;
 
     private JPanel btnPanel;
@@ -45,26 +45,6 @@ public class Weltkarte implements ActionListener {
     private String runterBtnName = "runterBtn";
     private String normalBtnName = "normalBtn";
     private String blitzBtnName = "blitzBtn";
-
-    private Image image1;
-    private Image newimage1;
-    private Image image2;
-    private Image newimage2;
-    private Image image3;
-    private Image newimage3;
-    private Image image4;
-    private Image newimage4;
-    private Image image5;
-    private Image newimage5;
-    private Image image6;
-    private Image newimage6;
-
-    private ImageIcon wuerfel1;
-    private ImageIcon wuerfel2;
-    private ImageIcon wuerfel3;
-    private ImageIcon wuerfel4;
-    private ImageIcon wuerfel5;
-    private ImageIcon wuerfel6;
 
     private Gebietskarten gebietskarten;
 
@@ -124,36 +104,6 @@ public class Weltkarte implements ActionListener {
 
         String imagePath = "src\\img\\risk.png";
         bild = ImageIO.read(new File(imagePath));
-
-        wuerfel1 = new ImageIcon("src\\img\\Wuerfel1.png");
-        image1 = wuerfel1.getImage();
-        newimage1 = image1.getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
-        wuerfel1 = new ImageIcon(newimage1);
-
-        wuerfel2 = new ImageIcon("src\\img\\Wuerfel2.png");
-        image2 = wuerfel2.getImage();
-        newimage2 = image2.getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
-        wuerfel2 = new ImageIcon(newimage2);
-
-        wuerfel3 = new ImageIcon("src\\img\\Wuerfel3.png");
-        image3 = wuerfel3.getImage();
-        newimage3 = image3.getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
-        wuerfel3 = new ImageIcon(newimage3);
-
-        wuerfel4 = new ImageIcon("src\\img\\Wuerfel4.png");
-        image4 = wuerfel4.getImage();
-        newimage4 = image4.getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
-        wuerfel4 = new ImageIcon(newimage4);
-
-        wuerfel5 = new ImageIcon("src\\img\\Wuerfel5.png");
-        image5 = wuerfel5.getImage();
-        newimage5 = image5.getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
-        wuerfel5 = new ImageIcon(newimage5);
-
-        wuerfel6 = new ImageIcon("src\\img\\Wuerfel6.png");
-        image6 = wuerfel6.getImage();
-        newimage6 = image6.getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
-        wuerfel6 = new ImageIcon(newimage6);
 
         area = getOutline(Color.WHITE, bild, 60);
 
@@ -256,23 +206,17 @@ public class Weltkarte implements ActionListener {
 
         //Angreiferwuerfel
         w1 = new JLabel();
-        w1.setIcon(wuerfel1);
 
         w2 = new JLabel();
-        w2.setIcon(wuerfel2);
 
         w3 = new JLabel();
-        w3.setIcon(wuerfel3);
 
         //Verteidigerwuerfel
         w4 = new JLabel();
-        w4.setIcon(wuerfel4);
 
         w5 = new JLabel();
-        w5.setIcon(wuerfel5);
 
         w6 = new JLabel();
-        w6.setIcon(wuerfel6);
 
         trpLabel = new JLabel(String.valueOf(truppen));
         trpLabel.setForeground(Color.white);
@@ -343,17 +287,9 @@ public class Weltkarte implements ActionListener {
 				boolean test = Spieler.spieler.get(si).Angreifen(start, ziel);
 				if( test == true)
 				{
-					int i = 0;
-					int u = Wuerfel.angreiferwuerfe[0];
-					if(u == 6)
-					{
-						w1.setIcon(wuerfel6);
 						waPanel.setVisible(true);
-					}
-					else 
-					{
 						wvPanel.setVisible(true);
-					}
+
 					if(ziel.getTruppen() == 0)
 					{
 						phase.setText("Der Angreifer hat gewonnen! Wähle die Truppen zum verschieben.");
@@ -372,6 +308,8 @@ public class Weltkarte implements ActionListener {
     		} else if (postBattle && z == 0 && a == 1 && Spieler.spieler.get(si).getTruppen() == 0) 
     			{
     				Spieler.spieler.get(si).TruppenBewegen(start, ziel);
+    				waPanel.setVisible(false);
+    				wvPanel.setVisible(false);
 	    			System.out.println("Stationierte Truppen" + start.getName() + ": " + ziel.getTruppen());
 					System.out.println("Stationierte Truppen" + start.getName() + ": " + ziel.getTruppen());
 					postBattle = false;

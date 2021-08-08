@@ -343,6 +343,17 @@ public class Weltkarte implements ActionListener {
 				boolean test = Spieler.spieler.get(si).Angreifen(start, ziel);
 				if( test == true)
 				{
+					int i = 0;
+					int u = Wuerfel.angreiferwuerfe[0];
+					if(u == 6)
+					{
+						w1.setIcon(wuerfel6);
+						waPanel.setVisible(true);
+					}
+					else 
+					{
+						wvPanel.setVisible(true);
+					}
 					if(ziel.getTruppen() == 0)
 					{
 						phase.setText("Der Angreifer hat gewonnen! Wähle die Truppen zum verschieben.");

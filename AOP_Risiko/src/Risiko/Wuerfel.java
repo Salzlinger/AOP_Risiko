@@ -7,12 +7,15 @@ import java.util.Scanner;
 
 public class Wuerfel {
 	
+	static Integer [] angreiferwuerfe = new Integer [3];
+	static Integer [] verteidigerwuerfe = new Integer [3];	
+	
 	public static Scanner input = new Scanner (System.in);
 	
 	public static boolean Wuerfelkampf(Laender a, Laender b)//int angreifer, int verteidiger) 
 	{
-		Integer [] angreiferwuerfe = new Integer [3];
-		Integer [] verteidigerwuerfe = new Integer [3];	
+		angreiferwuerfe = new Integer [3];
+		verteidigerwuerfe = new Integer [3];	
 				
 		int angreifer = a.getTruppen();
 		int angreiferGesamt = angreifer;
@@ -59,20 +62,33 @@ public class Wuerfel {
 			
 			//Ausgabe der Wuerfelergebnisse
 			if (angreifer > 2)
-				{System.out.println("Angreifer Wuerfe  : [ " + angreiferwuerfe[0] + " | " + angreiferwuerfe[1] + " | " + angreiferwuerfe[2] + " ] ");}
+				{
+				System.out.println("Angreifer Wuerfe  : [ " + angreiferwuerfe[0] + " | " + angreiferwuerfe[1] + " | " + angreiferwuerfe[2] + " ] ");
+				}
 			if (angreifer == 2)
-				{System.out.println("Angreifer Wuerfe  : [ " + angreiferwuerfe[0] + " | " + angreiferwuerfe[1] + " ] ");}	
+				{
+				System.out.println("Angreifer Wuerfe  : [ " + angreiferwuerfe[0] + " | " + angreiferwuerfe[1] + " ] ");
+				}	
 			if (angreifer == 1)
-				{System.out.println("Angreifer Wuerfe  : [ " + angreiferwuerfe[0] + " ] ");}	
+				{
+				System.out.println("Angreifer Wuerfe  : [ " + angreiferwuerfe[0] + " ] ");
+				}	
 
 			if (verteidiger > 2 && angreifer > 2)
-				{System.out.println("Verteidiger Wuerfe: [ " + verteidigerwuerfe[0] + " | " + verteidigerwuerfe[1] + " | " + verteidigerwuerfe[2] + " ]");}
+				{
+				System.out.println("Verteidiger Wuerfe: [ " + verteidigerwuerfe[0] + " | " + verteidigerwuerfe[1] + " | " + verteidigerwuerfe[2] + " ]");}
 			if (verteidiger > 2 && angreifer == 2)
-				{System.out.println("Verteidiger Wuerfe: [ " + verteidigerwuerfe[0] + " | " + verteidigerwuerfe[1] + " ]");}
+				{
+				System.out.println("Verteidiger Wuerfe: [ " + verteidigerwuerfe[0] + " | " + verteidigerwuerfe[1] + " ]");
+				}
 			if (verteidiger == 2 && angreifer > 1)
-				{System.out.println("Verteidiger Wuerfe: [ " + verteidigerwuerfe[0] + " | " + verteidigerwuerfe[1] + " ]");}	
+				{
+				System.out.println("Verteidiger Wuerfe: [ " + verteidigerwuerfe[0] + " | " + verteidigerwuerfe[1] + " ]");
+				}	
 			if (verteidiger == 1 || angreifer == 1 )
-				{System.out.println("Verteidiger Wuerfe: [ " + verteidigerwuerfe[0] + " ]");}
+				{
+				System.out.println("Verteidiger Wuerfe: [ " + verteidigerwuerfe[0] + " ]");
+				}
 			
 			//Vergleich der Wuerfel und Abzug der Einheiten
 			

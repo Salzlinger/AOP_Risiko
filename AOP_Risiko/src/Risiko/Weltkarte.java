@@ -306,16 +306,13 @@ public class Weltkarte implements ActionListener {
     			normalBtn.setVisible(false);
     			blitzBtn.setVisible(false);
 				System.out.println("Angriff!");
-				
+				System.out.println("before " + Spieler.spieler.get(0).getLaender());
+				System.out.println("before " + Spieler.spieler.get(1).getLaender());
+				System.out.println("before " + Spieler.spieler.get(2).getLaender());
 //				Laender angriffsziel = ziel;
 				Spieler zielspieler = ziel.getBesitzer();
-				for (int v = 0; v < zielspieler.getLaender().size(); v++) {
-				System.out.println("!!!!!" + zielspieler.getLaender().get(v));
-				}
 				Spieler.spieler.get(si).Angreifen(start, ziel);
-				for (int v = 0; v < zielspieler.getLaender().size(); v++) {
-				System.out.println("!!!!! danach" + zielspieler.getLaender().get(v));
-				}
+				
 //				System.out.println("!!!!!" + zielspieler.getLaender().contains(angriffsziel));
 				player0 = Spieler.spieler.get(si);
 				max = start.getTruppen();
@@ -327,6 +324,21 @@ public class Weltkarte implements ActionListener {
 
 					if(ziel.getTruppen() == 0)
 					{
+						ziel.setBesitzer(Spieler.spieler.get(si));
+						for (int g = 0; g < zielspieler.getLaender().size(); g++) {
+							if (zielspieler.getLaender().get(g) == ziel) {
+								for (int t = 0; t < Spieler.spieler.size(); t++) {
+									if (zielspieler.getName() == Spieler.spieler.get(t).getName()) {
+										System.out.println("inside before " + Spieler.spieler.get(t).getLaender());
+										Spieler.spieler.get(t).getLaender().remove(g);
+										System.out.println("inside after " + Spieler.spieler.get(t).getLaender());
+									}
+								}
+							}
+						}
+						System.out.println("after " + Spieler.spieler.get(0).getLaender());
+						System.out.println("after " + Spieler.spieler.get(1).getLaender());
+						System.out.println("after " + Spieler.spieler.get(2).getLaender());
 						//player0 = Spieler.spieler.get(si);
 						ziel.setBesitzer(Spieler.spieler.get(si));
 						System.out.println(ziel.getBesitzer());
@@ -341,6 +353,7 @@ public class Weltkarte implements ActionListener {
 					}
 					else if(start.getTruppen() < 2)
 					{
+						refresh();
 						phase.setText("Der Verteidiger hat gewonnen!");
 						zwPanel.setVisible(false);
 					}
@@ -354,6 +367,11 @@ public class Weltkarte implements ActionListener {
     		} else if (postBattle && z == 0 && a == 1 && Spieler.spieler.get(si).getTruppen() == 0)
     			{
     				Spieler.spieler.get(si).TruppenBewegen(start, ziel);
+    				ziel.setTruppen(ziel.getTruppen() + truppen);
+    				start.setTruppen(start.getTruppen() - truppen);
+    				refresh();
+    				System.out.println(ziel.getBesitzer().getName() + "HAAALLOOOOO");
+    				System.out.println(ziel.getTruppen() + "TRUUUPENS");
     				waPanel.setVisible(false);
     				wvPanel.setVisible(false);
     				phase.setText("Du kannst erneut angreifen oder in die naechste Phase wechseln.");
@@ -401,6 +419,9 @@ public class Weltkarte implements ActionListener {
     		} else if (z == 2 && Spieler.spieler.get(si).getTruppen() == 0)
     			{
     				Spieler.spieler.get(si).TruppenBewegen(start, ziel);
+    				ziel.setTruppen(ziel.getTruppen() + truppen);
+    				start.setTruppen(start.getTruppen() - truppen);
+    				refresh();
     				nextBtn.setText("Zug Beenden");
     				zwPanel.setVisible(false);
     				refresh();
@@ -575,7 +596,7 @@ public class Weltkarte implements ActionListener {
 
         @Override
         public void mouseMoved(MouseEvent e) {
-            refresh();
+            //refresh();
 
         }
     }
@@ -657,6 +678,25 @@ public class Weltkarte implements ActionListener {
 
         // Einfaerben der SpielerLaender
 
+        for (int w = 0; w < 42; w++) {
+        	if (Laender.liste[w].getBesitzer() == Spieler.spieler1) {
+            	g.setColor(Color.BLUE.darker());
+            	g.fill(shapeList.get(w));
+        	} else if (Laender.liste[w].getBesitzer() == Spieler.spieler2) {
+            	g.setColor(Color.RED.darker());
+            	g.fill(shapeList.get(w));
+        	} else if (Laender.liste[w].getBesitzer() == Spieler.spieler3) {
+            	g.setColor(Color.YELLOW.darker());
+            	g.fill(shapeList.get(w));
+        	} else if (Laender.liste[w].getBesitzer() == Spieler.spieler4) {
+            	g.setColor(Color.GREEN.darker());
+            	g.fill(shapeList.get(w));
+        	} else if (Laender.liste[w].getBesitzer() == Spieler.spieler5) {
+            	g.setColor(Color.WHITE.darker());
+            	g.fill(shapeList.get(w));
+        	}
+        }
+        
         for (int b = 0; b < Spieler.spieler.size(); b++) {
         	if (Spieler.spieler.get(b) != player) {
         		for (int i = 0; i < Spieler.spieler.get(b).getLaender().size(); i++)

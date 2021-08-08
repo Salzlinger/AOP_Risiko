@@ -9,7 +9,7 @@ public class Laender {
 	boolean istBekannt = true;
 	int truppen = 1;
 	private static int currentTruppen = 1;
-	private static Spieler besitzer;
+	private Spieler besitzer;
 	public static Laender [] liste;
 	public static HashMap <String, Laender> laender = new HashMap<String, Laender>();
 	//Beispiel Element in Hashmap laender ("Alberta" , alberta)
@@ -339,7 +339,7 @@ public class Laender {
 	}
 
 	public void setBesitzer(Spieler besitzer) {
-		Laender.besitzer = besitzer;
+		this.besitzer = besitzer;
 	}
 	@Override
 	public String toString () //Werte werden als String ausgegeben

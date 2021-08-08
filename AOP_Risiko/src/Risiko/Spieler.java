@@ -322,10 +322,9 @@ public class Spieler {
 			if (Wuerfel.Wuerfelkampf(a,b)== true)
 				{
 				KarteZiehen(Main.Deck);
-				b.getBesitzer().getLaender().remove(b);
-				b.setBesitzer(this);
+//				b.setBesitzer(this);
 				System.out.println("Neuer Besitzer von " + b.name + " ist " + b.getBesitzer());
-				laenderArray.add(b);	// erobertes Land der Liste hinzufügen
+				//laenderArray.add(b);	// erobertes Land der Liste hinzufügen
 				System.out.println("Stationierte Truppen in " + a.getName() + ": " + a.getTruppen());
 				System.out.println("Stationierte Truppen in " + b.getName() + ": " +b.getTruppen());
 				return true;
@@ -363,8 +362,8 @@ public class Spieler {
 				{
 				System.out.println("Bitte gib eine größere Zahl ein");
 				} else  { 
-						von.setTruppen(von.getTruppen()-Weltkarte.getTruppen());
-						nach.setTruppen(nach.getTruppen()+Weltkarte.getTruppen());
+//						von.setTruppen(von.getTruppen()-Weltkarte.getTruppen());
+//						nach.setTruppen(nach.getTruppen()+Weltkarte.getTruppen());
 						nochmal = false;
 						}
 				}

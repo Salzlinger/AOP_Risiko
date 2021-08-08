@@ -290,9 +290,22 @@ public class Spieler {
 	public void TruppenVerteilen(Laender land) {
 		if(laenderArray.contains(land)) 
 		{
+			truppen  -= 1;
 			int m = land.getTruppen();
 			land.setTruppen(m + 1);
-			truppen  -= 1;
+		} else 
+			{
+				System.out.println("Dir gehört dieses Land nicht.");
+			}
+		//<<<<<Funktion in GUI zum verteilen der Truppen
+	}
+	
+	public void TruppenEntfernen(Laender land) {
+		if(laenderArray.contains(land)) 
+		{
+			truppen  += 1;
+			int m = land.getTruppen();
+			land.setTruppen(m - 1);
 		} else 
 			{
 				System.out.println("Dir gehört dieses Land nicht.");

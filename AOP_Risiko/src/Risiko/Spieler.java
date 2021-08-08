@@ -338,7 +338,7 @@ public class Spieler {
 		return false;
 	}
 	
-	public boolean TruppenBewegen(Laender von, Laender nach) {
+	public void TruppenBewegen(Laender von, Laender nach) {
 		// beliebig viele Truppen aus einem Land in ein verbundenes Land verlagern
 		wait = false;
 		setLaender(laenderArray);
@@ -365,20 +365,16 @@ public class Spieler {
 						von.setTruppen(von.getTruppen()-Weltkarte.getTruppen());
 						nach.setTruppen(nach.getTruppen()+Weltkarte.getTruppen());
 						nochmal = false;
-						return true;
 						}
 				}
 			} 	else 
 				{ 
 					System.out.println(von.getBesitzer().getName() + " gehören zwar die Länder, aber sie sind nicht verbunden"); 
-					return false;
 				}
 		} 	else 
 			{ 
 				System.out.println("Verschieben nicht möglich, da" + von.getBesitzer().getName() + " eines oder beide Länder nicht gehören"); 
-				return false; 
 			}
-		return false;
 	}
 
 	public String getFarbe() {

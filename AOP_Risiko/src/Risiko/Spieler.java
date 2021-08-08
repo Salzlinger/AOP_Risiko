@@ -15,7 +15,7 @@ public class Spieler {
 	private Graphen laenderVerbunden = new Graphen();
 	private HashMap <String, Laender> laenderHash = new HashMap <String, Laender>();
 	private ArrayList <Laender> laenderArray = new ArrayList <Laender>();
-	private ArrayList <Gebietskarte> hand = new ArrayList <Gebietskarte>();
+	private static ArrayList <Gebietskarte> hand = new ArrayList <Gebietskarte>();
 	private boolean infanterieSet = false;
 	private boolean kavallerieSet = false;
 	private boolean artillerieSet = false;
@@ -24,6 +24,7 @@ public class Spieler {
 	private boolean setEingeloest = false;
 	private boolean wait = false;
 	private int truppen = 0;
+	static int gebiet = 0;
 	public boolean istDran = false;
 	public static Spieler spieler1;
 	public static Spieler spieler2;
@@ -33,6 +34,13 @@ public class Spieler {
 	public static ArrayList<Spieler> spieler = new ArrayList<Spieler>();
 	
 	
+	public int getGebiet() {
+		return gebiet;
+	}
+	
+	public void setGebiet(int g) {
+		this.gebiet = g;
+	}
 	public int getTruppen() {
 		return truppen;
 	}
@@ -63,7 +71,7 @@ public class Spieler {
 		this.name= name;
 	}
 	
-	public void KarteZiehen(ArrayList <Gebietskarte> Deck){
+	public static void KarteZiehen(ArrayList <Gebietskarte> Deck){
 		hand.add(Deck.get(Deck.size()-1));
 		Deck.remove(Deck.get(Deck.size()-1));		
 		}
@@ -321,7 +329,6 @@ public class Spieler {
 			
 			if (Wuerfel.Wuerfelkampf(a,b)== true)
 				{
-				KarteZiehen(Main.Deck);
 				b.setBesitzer(this);
 				System.out.println("Neuer Besitzer von " + b.name + " ist " + b.getBesitzer());
 				laenderArray.add(b);	// erobertes Land der Liste hinzufügen

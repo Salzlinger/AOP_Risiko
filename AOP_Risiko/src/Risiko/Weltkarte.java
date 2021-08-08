@@ -62,6 +62,10 @@ public class Weltkarte implements ActionListener {
 	private static Laender start;
 	private static Laender ziel;
 	private static Boolean erstercyclus = true;
+	static int inf = 0;
+	static int kav = 0;
+	static int art = 0;
+	static int jok = 0;
 	private static int truppen = 1;
 	private static int si = 0;
 	private static Boolean postBattle = false;
@@ -173,7 +177,6 @@ public class Weltkarte implements ActionListener {
         angriffBtn.setUI(new ButtonDesign());
         angriffBtn.setActionCommand(nextBtnName);
         angriffBtn.setVisible(false);
-
         verschBtn = new JButton("Verschieben");
         verschBtn.setFont(new Font("Calibri", Font.PLAIN,20));
         verschBtn.setPreferredSize(new Dimension(180,0));
@@ -322,7 +325,7 @@ public class Weltkarte implements ActionListener {
 						ziel.setBesitzer(Spieler.spieler.get(si));
 						System.out.println(ziel.getBesitzer());
 						refresh();
-						phase.setText("Der Angreifer hat gewonnen! W�hle die Truppen zum verschieben.");
+						phase.setText("Der Angreifer hat gewonnen! Waehle die Truppen zum verschieben.");
 						System.out.println("wie viele Truppen moechtest du versetzten?");
 						max = start.getTruppen();
 						truppen = 1;
@@ -358,7 +361,9 @@ public class Weltkarte implements ActionListener {
     			{
 					z++;
 					nextBtn.setText("Zug Beenden");
-					phase.setText("Du darfst 1x Truppen verschieben. W�hle die Laender aus oder beende deinen Zug.");
+					Spieler.spieler.get(si).KarteZiehen(Main.Deck);
+					System.out.println(Spieler.spieler.get(si).getHand().toString());
+					phase.setText("Du darfst 1x Truppen verschieben. Waehle die Laender aus oder beende deinen Zug.");
 					System.out.println(Spieler.spieler.get(si) + " Truppen versetzten");
     		} else if (z == 1 && z != 2 && Spieler.spieler.get(si).getTruppen() == 0)
     			{
@@ -389,7 +394,7 @@ public class Weltkarte implements ActionListener {
     				}
     		} else if (z == 2 && Spieler.spieler.get(si).getTruppen() == 0)
     			{
-    				cont = Spieler.spieler.get(si).TruppenBewegen(start, ziel);
+    				Spieler.spieler.get(si).TruppenBewegen(start, ziel);
     				nextBtn.setText("Zug Beenden");
     				zwPanel.setVisible(false);
     			}
@@ -644,11 +649,14 @@ public class Weltkarte implements ActionListener {
                     	g.setColor(Color.WHITE.darker());
                 	}
                 	g.fill(shapeList.get(j));
+                	
                 }
         	}
     	}
+    	
 
         for (int i = 0; i < player.getLaender().size(); i++)
+      //  	if (Spieler.spieler.get(i) == player) {
         {
         	int j = 0;
 
@@ -672,8 +680,8 @@ public class Weltkarte implements ActionListener {
         	}
         	g.fill(shapeList.get(j));
         }
-
-        // Spieler links ausgeben
+//}
+       // Spieler links ausgeben
 
         g.setFont(new Font("Calibri", Font.PLAIN, 20));
         g.setColor(Color.BLUE.darker());

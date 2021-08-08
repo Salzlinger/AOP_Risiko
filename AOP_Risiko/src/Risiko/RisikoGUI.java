@@ -408,6 +408,9 @@ class Gebietskarten extends JFrame implements ActionListener {
 		
 		einloesenButton = new JButton("Einloesen");
 		einloesenButton.setFont(new Font("Calibri", Font.PLAIN, 20));
+		if(Weltkarte.inf + Weltkarte.kav + Weltkarte.art + Weltkarte.jok < 3)
+		einloesenButton.setBackground(new Color(0x808080));
+		else
 		einloesenButton.setBackground(new Color(0x2dce98));
 		einloesenButton.setForeground(Color.white);
 		einloesenButton.setUI(new ButtonDesign());
@@ -456,13 +459,13 @@ class Gebietskarten extends JFrame implements ActionListener {
 	    jLabel = new JLabel();
 	    jLabel.setIcon(joker);
 	    
-	    i2Label= new JLabel("5x");
+	    i2Label= new JLabel(Weltkarte.inf + "x");
 	    i2Label.setFont(new Font("Calibri",Font.PLAIN,25));
-	    k2Label= new JLabel("3x");
+	    k2Label= new JLabel(Weltkarte.kav + "x");
 	    k2Label.setFont(new Font("Calibri",Font.PLAIN,25));
-	    a2Label= new JLabel("2x");
+	    a2Label= new JLabel(Weltkarte.art + "x");
 	    a2Label.setFont(new Font("Calibri",Font.PLAIN,25));
-	    j2Label= new JLabel("1x");
+	    j2Label= new JLabel(Weltkarte.jok + "x");
 	    j2Label.setFont(new Font("Calibri",Font.PLAIN,25));
 
 	    //Layout

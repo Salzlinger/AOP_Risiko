@@ -306,7 +306,17 @@ public class Weltkarte implements ActionListener {
     			normalBtn.setVisible(false);
     			blitzBtn.setVisible(false);
 				System.out.println("Angriff!");
+				
+//				Laender angriffsziel = ziel;
+				Spieler zielspieler = ziel.getBesitzer();
+				for (int v = 0; v < zielspieler.getLaender().size(); v++) {
+				System.out.println("!!!!!" + zielspieler.getLaender().get(v));
+				}
 				Spieler.spieler.get(si).Angreifen(start, ziel);
+				for (int v = 0; v < zielspieler.getLaender().size(); v++) {
+				System.out.println("!!!!! danach" + zielspieler.getLaender().get(v));
+				}
+//				System.out.println("!!!!!" + zielspieler.getLaender().contains(angriffsziel));
 				player0 = Spieler.spieler.get(si);
 				max = start.getTruppen();
 				boolean test = Spieler.spieler.get(si).Angreifen(start, ziel);

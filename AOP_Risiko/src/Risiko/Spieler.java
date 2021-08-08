@@ -322,6 +322,7 @@ public class Spieler {
 			if (Wuerfel.Wuerfelkampf(a,b)== true)
 				{
 				KarteZiehen(Main.Deck);
+				b.getBesitzer().getLaender().remove(b);
 				b.setBesitzer(this);
 				System.out.println("Neuer Besitzer von " + b.name + " ist " + b.getBesitzer());
 				laenderArray.add(b);	// erobertes Land der Liste hinzufügen

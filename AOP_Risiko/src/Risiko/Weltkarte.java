@@ -15,7 +15,7 @@ public class Weltkarte implements ActionListener {
 
     private JComponent ui = null;
     
-    private JLabel output;
+    private static JLabel output;
     static JLabel phase;
     static JLabel w1;
     static JLabel w2;
@@ -53,8 +53,8 @@ public class Weltkarte implements ActionListener {
     private Gebietskarten gebietskarten;
 
     public static final int SIZE = 550;
-    private BufferedImage bild;
-    private Area area;
+    private static BufferedImage bild;
+    private static Area area;
     static ArrayList<Shape> shapeList;
     private static int pointer;
     private static int z = 0;
@@ -307,6 +307,7 @@ public class Weltkarte implements ActionListener {
     			blitzBtn.setVisible(false);
 				System.out.println("Angriff!");
 				Spieler.spieler.get(si).Angreifen(start, ziel);
+			
 				boolean test = Spieler.spieler.get(si).Angreifen(start, ziel);
 				if( test == true)
 				{
@@ -315,6 +316,9 @@ public class Weltkarte implements ActionListener {
 
 					if(ziel.getTruppen() == 0)
 					{
+						ziel.setBesitzer(Spieler.spieler.get(si));
+						System.out.println(ziel.getBesitzer());
+						refresh();
 						phase.setText("Der Angreifer hat gewonnen! Wähle die Truppen zum verschieben.");
 						System.out.println("wie viele Truppen moechtest du versetzten?");
 						max = start.getTruppen();
@@ -361,7 +365,7 @@ public class Weltkarte implements ActionListener {
     				Spieler.spieler.get(si).istDran = false;
     				System.out.println("naechster spieler");
 
-    			if (Spieler.spieler.size() == si) 
+    			if (Spieler.spieler.size() == si + 1) 
     				{
     					si = 0;
     					Spieler.spieler.get(si).istDran = true;
@@ -592,11 +596,12 @@ public class Weltkarte implements ActionListener {
                 && (bP - toleranz <= bT) && (bT <= bP + toleranz));
     }
 
-    private void refresh() {
+    static void refresh() {
         output.setIcon(new ImageIcon(getImage()));
     }
 
-    private BufferedImage getImage() {
+    
+    private static BufferedImage getImage() {
         BufferedImage bi = new BufferedImage(
                 2 * SIZE, SIZE, BufferedImage.TYPE_INT_RGB);
 
@@ -607,9 +612,10 @@ public class Weltkarte implements ActionListener {
         g.draw(area);
 
         // Einfaerben der SpielerLaender
-
+         
         for (int i = 0; i < Spieler.spieler1.getLaender().size(); i++) 
         {
+        	
         	int j = 0;
         	for (int k = 0; k < 42; k++) 
         	{
@@ -621,9 +627,11 @@ public class Weltkarte implements ActionListener {
         	g.setColor(Color.BLUE.darker());
         	g.fill(shapeList.get(j));
         }
+
         for (int i = 0; i < Spieler.spieler2.getLaender().size(); i++) 
         {
         	int j = 0;
+        
         	for (int k = 0; k < 42; k++) 
         	{
         		if (Laender.liste[k] == Spieler.spieler2.getLaender().get(i)) 
@@ -634,19 +642,8 @@ public class Weltkarte implements ActionListener {
         	g.setColor(Color.RED.darker());
         	g.fill(shapeList.get(j));
         }
-        for (int i = 0; i < Spieler.spieler3.getLaender().size(); i++) 
-        {
-        	int j = 0;
-        	for (int k = 0; k < 42; k++) 
-        	{
-        		if (Laender.liste[k] == Spieler.spieler3.getLaender().get(i)) 
-        		{
-        			j = k;
-        		}
-        	}
-        	g.setColor(Color.YELLOW.darker());
-        	g.fill(shapeList.get(j));
-        }
+       
+     
         if(Spieler.spieler.size() > 3) 
         {
 	        for (int i = 0; i < Spieler.spieler4.getLaender().size(); i++) 
@@ -677,9 +674,9 @@ public class Weltkarte implements ActionListener {
 	        	g.setColor(Color.WHITE.darker());
 	        	g.fill(shapeList.get(j));
 	        }
-        }
+          }
+    
 
-        
         // Spieler links ausgeben
         
         g.setFont(new Font("Calibri", Font.PLAIN, 20));

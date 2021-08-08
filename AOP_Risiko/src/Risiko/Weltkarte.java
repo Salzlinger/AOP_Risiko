@@ -154,6 +154,7 @@ public class Weltkarte implements ActionListener {
 
         nextBtn = new JButton("");
         nextBtn.setFont(new Font("Calibri", Font.PLAIN,20));
+        nextBtn.setPreferredSize(new Dimension(150,0));
         nextBtn.setBackground(new Color(0x2dce98));
         nextBtn.setForeground(Color.white);
         nextBtn.setUI(new ButtonDesign());

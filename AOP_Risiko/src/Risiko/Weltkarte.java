@@ -317,6 +317,7 @@ public class Weltkarte implements ActionListener {
 
 					if(ziel.getTruppen() == 0)
 					{
+						System.out.println("new land " + Spieler.spieler.get(si).getLaender().contains(ziel));
 						player0 = Spieler.spieler.get(si);
 						phase.setText("Der Angreifer hat gewonnen! Wähle die Truppen zum verschieben.");
 					}
@@ -365,6 +366,7 @@ public class Weltkarte implements ActionListener {
     					Spieler.spieler.get(si).istDran = true;
     					Spieler.spieler.get(si).TruppenErhalten();
     					phase.setText(Spieler.spieler.get(si) + " ist dran und erhaelt " + Spieler.spieler.get(si).getTruppen() + " Truppen zum verteilen.");
+    					player0 = Spieler.spieler.get(si);
 
     			} else 
     				{
@@ -373,6 +375,7 @@ public class Weltkarte implements ActionListener {
     					Spieler.spieler.get(si + 1).TruppenErhalten();
     					System.out.println(Spieler.spieler.get(si + 1).getName() + " erhaelt " + Spieler.spieler.get(si + 1).getTruppen());
     					phase.setText(Spieler.spieler.get(si + 1) + " ist dran und erhaelt " + Spieler.spieler.get(si + 1).getTruppen() + " Truppen zum verteilen.");
+    					player0 = Spieler.spieler.get(si);
 
     				}
     		} else if (z == 2 && Spieler.spieler.get(si).getTruppen() == 0) 
@@ -612,12 +615,12 @@ public class Weltkarte implements ActionListener {
         	if (Spieler.spieler.get(b) != player) {
         		for (int i = 0; i < Spieler.spieler.get(b).getLaender().size(); i++) 
                 {
-                	int j = 0;
+                	int t = 0;
                 	for (int k = 0; k < 42; k++) 
                 	{
                 		if (Laender.liste[k] == Spieler.spieler.get(b).getLaender().get(i))
                 		{
-                			j = k;
+                			t = k;
                 		}
                 	}
                 	if (Spieler.spieler.get(b) == Spieler.spieler1) {
@@ -631,7 +634,7 @@ public class Weltkarte implements ActionListener {
                 	} else if (Spieler.spieler.get(b) == Spieler.spieler5) {
                     	g.setColor(Color.WHITE.darker());
                 	}
-                	g.fill(shapeList.get(j));
+                	g.fill(shapeList.get(t));
                 }
         	}
     	}
@@ -889,6 +892,7 @@ public class Weltkarte implements ActionListener {
 					System.out.println(Spieler.spieler.get(si + 1).getName() + " erhaelt " + Spieler.spieler.get(si + 1).getTruppen());
 					phase.setText(Spieler.spieler.get(si + 1).getName() + " ist dran und erhaelt " + Spieler.spieler.get(si + 1).getTruppen());
 				}
+			player0 = Spieler.spieler.get(si);
     	}
     }
     

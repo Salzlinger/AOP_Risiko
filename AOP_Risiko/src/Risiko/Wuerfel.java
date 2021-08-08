@@ -261,23 +261,23 @@ public class Wuerfel {
 			System.out.println("des Verteidigers: " + verteidiger);
 			
 			
-			if ( angreifer > 1 && verteidiger > 0)
-			{ if (normalKampf)
-				{	
-					System.out.println("Moechtest du weiter angreifen? ");
-					if (Fehlersuche.eingabeJaNein().equals("ja"))
-					{ 
-						ungueltigeEingabe = true;	
-					} 	
-					else 
-					{ 
-						weitermachen = false;
-					}
-				}  	
-			} else 
-				{ 
+//			if ( angreifer > 1 && verteidiger > 0)
+//			{ if (normalKampf)
+//				{	
+//					System.out.println("Moechtest du weiter angreifen? ");
+//					if (Fehlersuche.eingabeJaNein().equals("ja"))
+//					{ 
+//						ungueltigeEingabe = true;	
+//					} 	
+//					else 
+//					{ 
+//						weitermachen = false;
+//					}
+//				}  	
+//			} else 
+//				{ 
 					weitermachen = false;
-				}
+//				}
 		}
 		
 		a.setTruppen(angreifer);

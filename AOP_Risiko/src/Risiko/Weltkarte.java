@@ -38,6 +38,8 @@ public class Weltkarte implements ActionListener {
     private static JButton runterBtn;
     private static JButton normalBtn;
     private static JButton blitzBtn;
+    private static JButton angriffBtn;
+    private static JButton verschBtn;
 
     private String truppenBtnName = "truppenBtn";
     private String nextBtnName = "nextBtn";
@@ -45,6 +47,8 @@ public class Weltkarte implements ActionListener {
     private String runterBtnName = "runterBtn";
     private String normalBtnName = "normalBtn";
     private String blitzBtnName = "blitzBtn";
+    private String angriffBtnName = "angriffBtn";
+    private String verschBtnName = "verschBtn";
 
     private Gebietskarten gebietskarten;
 
@@ -159,6 +163,24 @@ public class Weltkarte implements ActionListener {
         nextBtn.setForeground(Color.white);
         nextBtn.setUI(new ButtonDesign());
         nextBtn.setActionCommand(nextBtnName);
+        
+        angriffBtn = new JButton("Angriff");
+        angriffBtn.setFont(new Font("Calibri", Font.PLAIN,20));
+        angriffBtn.setPreferredSize(new Dimension(150,0));
+        angriffBtn.setBackground(new Color(0x2dce98));
+        angriffBtn.setForeground(Color.white);
+        angriffBtn.setUI(new ButtonDesign());
+        angriffBtn.setActionCommand(nextBtnName);
+        angriffBtn.setVisible(false);
+        
+        verschBtn = new JButton("Verschieben");
+        verschBtn.setFont(new Font("Calibri", Font.PLAIN,20));
+        verschBtn.setPreferredSize(new Dimension(150,0));
+        verschBtn.setBackground(new Color(0x2dce98));
+        verschBtn.setForeground(Color.white);
+        verschBtn.setUI(new ButtonDesign());
+        verschBtn.setActionCommand(nextBtnName);
+        verschBtn.setVisible(false);
 
         hochBtn = new JButton("+");
         hochBtn.setFont(new Font("", Font.BOLD,15));
@@ -355,6 +377,14 @@ public class Weltkarte implements ActionListener {
     				zwPanel.setVisible(false);
     			}
     	}
+    	else if(Klick.equals("angriffBtn"))
+    			{
+    				// do Angriff
+    			}
+    	else if(Klick.equals("verschBtn"))
+    			{
+    				// do Verschieben
+    			}
     	else if(Klick.equals("hochBtn"))
     	{
     		if(truppen < max - 1)

@@ -300,7 +300,7 @@ public class Spieler {
 		//<<<<<Funktion in GUI zum verteilen der Truppen
 	}
 	
-	public void Angreifen(Laender a, Laender b) {
+	public boolean Angreifen(Laender a, Laender b) {
 		setLaender(laenderArray); //Länder werden in Hashmap umgeschrieben
 		if (a.getNachbarn().contains(b))
 		{
@@ -314,9 +314,15 @@ public class Spieler {
 				laenderArray.add(b);	// erobertes Land der Liste hinzufügen
 				System.out.println("Stationierte Truppen in " + a.getName() + ": " + a.getTruppen());
 				System.out.println("Stationierte Truppen in " + b.getName() + ": " +b.getTruppen());
-									}
+				return true;
+				}
 								
-		} else { System.out.println("Angriff nicht möglich, da keine Nachbarn. Bitte anderes Land auswählen!"); }
+		} else 
+			{ 
+			return false;
+			//System.out.println("Angriff nicht möglich, da keine Nachbarn. Bitte anderes Land auswählen!"); 
+			}
+		return false;
 	}
 	
 	public boolean TruppenBewegen(Laender von, Laender nach) {
